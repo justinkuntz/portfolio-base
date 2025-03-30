@@ -11,6 +11,11 @@ export type Metadata = {
   DESCRIPTION: string;
 };
 
+export type Links = {
+  TEXT: string
+  HREF: string
+}[]
+
 export type Socials = {
   NAME: string;
   HREF: string;

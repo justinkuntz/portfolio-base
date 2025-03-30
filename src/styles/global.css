@@ -19,13 +19,26 @@ body {
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-stone-100 dark:bg-stone-900;
-  @apply text-black/50 dark:text-white/75;
+  @apply bg-surface;
+  @apply text-main;
 }
 
-header {
+/* header {
   @apply fixed top-0 left-0 right-0 z-50 py-5;
   @apply bg-stone-100/75 dark:bg-stone-900/25;
+  @apply backdrop-blur-sm saturate-200;
+} */
+
+header {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+header:not(.scrolled) {
+  @apply bg-transparent;
+}
+
+header.scrolled {
+  @apply bg-white/75 dark:bg-black/30;
   @apply backdrop-blur-sm saturate-200;
 }
 
@@ -52,6 +65,43 @@ article {
   article a:hover {
     @apply text-black dark:text-white;
     @apply decoration-black/25 dark:decoration-white/50;
+  }
+}
+
+@layer base {
+  :root {
+    --color-main: #263846;
+    --color-primary: #263846;
+    --color-secondary: #576e81;
+    --color-surface-50: #f8fafa;
+    --color-surface-100: #f1f5f6;
+    --color-surface-200: #e6edee;
+    --color-surface-300: #d1dde1;
+    --color-surface-400: #b6c8cf;
+    --color-surface-500: #99afbb;
+    --color-surface-600: #8097a7;
+    --color-surface-700: #6d8394;
+    --color-surface-800: #576e81;
+    --color-surface-900: #435a6b;
+    --color-surface-950: #263846;
+    --color-basebg: #263846;
+  }
+  html.dark {
+    --color-main: #b6c8cf;
+    --color-primary: #b6c8cf;
+    --color-secondary: #6d8394;
+    --color-surface-50: #263846;
+    --color-surface-100: #435a6b;
+    --color-surface-200: #576e81;
+    --color-surface-300: #6d8394;
+    --color-surface-400: #8097a7;
+    --color-surface-500: #99afbb;
+    --color-surface-600: #b6c8cf;
+    --color-surface-700: #d1dde1;
+    --color-surface-800: #e6edee;
+    --color-surface-900: #f1f5f6;
+    --color-surface-950: #f8fafa;
+    --color-basebg: #435a6b;
   }
 }
 

@@ -1,4 +1,4 @@
-import type { Site, Metadata, Socials } from "@types";
+import type { Site, Links, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
   NAME: "Astro Nano",
@@ -27,6 +27,26 @@ export const PROJECTS: Metadata = {
   TITLE: "Projects",
   DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
 };
+
+// Links
+export const LINKS: Links = [
+  { 
+    TEXT: "Home", 
+    HREF: "/", 
+  },
+  { 
+    TEXT: "Work", 
+    HREF: "/work", 
+  },
+  { 
+    TEXT: "Blog", 
+    HREF: "/blog", 
+  },
+  { 
+    TEXT: "Projects", 
+    HREF: "/projects", 
+  },
+];
 
 export const SOCIALS: Socials = [
   { 
