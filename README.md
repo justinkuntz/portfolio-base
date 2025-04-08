@@ -8,7 +8,7 @@ It was designed as an even more minimal theme than my popular theme [Astro Spher
 
 ## 🚀 Deploy your own
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=git@github.com:justinkuntz/portfolio-base)
+[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=git@github.com:justinkuntz/portfolio-base.git)
 
 ## 📋 Features
 
