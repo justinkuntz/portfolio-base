@@ -7,15 +7,15 @@ const subpath = pathname.match(/[^/]+/g);
 
 <div
   id="drawer"
-  class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden bg-surface4 transition-[height] duration-300 ease-in-out"
+  class="fixed inset-0 h-0 z-40 overflow-hidden flex flex-col items-center justify-center md:hidden bg-surface1 transition-[height] duration-300 ease-in-out"
 >
-  <nav class="flex flex-col items-center space-y-2">
+  <nav class="flex flex-col items-center space-y-8">
     {
       LINKS.map((LINK) => (
         <a
           href={LINK.HREF}
           class={cn(
-            "flex items-center justify-center px-3 py-1 rounded-full",
+            "flex items-center justify-center px-3 py-1 rounded-full text-xl",
             "text-current hover:text-surface10",
             "hover:bg-surface10/5",
             "transition-colors duration-300 ease-in-out",
@@ -30,12 +30,12 @@ const subpath = pathname.match(/[^/]+/g);
     }
   </nav>
 
-  <div class="flex gap-1 mt-5">
+  <div class="flex gap-4 mt-8">
     <a
       href="/search"
       aria-label={`Search blog posts and projects on ${SITE.NAME}`}
       class={cn(
-        "size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-surface10/5 stroke-current hover:stroke-surface10 border border-surface10/10 transition-colors duration-300 ease-in-out",
+        "size-11 rounded-full p-2 items-center justify-center bg-transparent hover:bg-surface10/5 stroke-current hover:stroke-surface10 transition-colors duration-300 ease-in-out",
         pathname === "/search" || "/" + subpath?.[0] === "search"
           ? "pointer-events-none bg-surface10 text-surface"
           : ""
@@ -50,7 +50,7 @@ const subpath = pathname.match(/[^/]+/g);
       href="/rss.xml"
       target="_blank"
       aria-label={`Rss feed for ${SITE.NAME}`}
-      class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-surface10/5 stroke-current hover:stroke-surface10 border border-surface10/10 transition-colors duration-300 ease-in-out"
+      class="size-11 rounded-full p-2 items-center justify-center bg-transparent hover:bg-surface10/5 stroke-current hover:stroke-surface10 transition-colors duration-300 ease-in-out"
     >
       <svg class="size-full">
         <use href="/ui.svg#rss"></use>
@@ -60,7 +60,7 @@ const subpath = pathname.match(/[^/]+/g);
     <button
       id="drawer-theme-button"
       aria-label={`Toggle light and dark theme`}
-      class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-surface10/5 stroke-current hover:stroke-surface10 border border-surface10/10 transition-colors duration-300 ease-in-out"
+      class="size-11 rounded-full p-2 items-center justify-center bg-transparent hover:bg-surface10/5 stroke-current hover:stroke-surface10 transition-colors duration-300 ease-in-out"
     >
       <svg class="block dark:hidden size-full">
         <use href="/ui.svg#sun"></use>
