@@ -34,8 +34,8 @@ const work = await Promise.all(
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
+  <Container size="2xl">
+    <h4 class="animate font-semibold text-surface10">
       Hi, I'm Nano <span class="text-xl">👋🏻</span>
     </h4>
     <div class="space-y-16">
@@ -77,7 +77,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
+          <h5 class="font-semibold text-surface10">Latest posts</h5>
           <Link href="/blog"> See all posts </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -93,9 +93,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
+          <h5 class="font-semibold text-surface10">Work Experience</h5>
           <Link href="/work"> See all work </Link>
         </div>
         <ul class="flex flex-col space-y-4">
@@ -105,7 +103,7 @@ const work = await Promise.all(
                 <div class="text-sm opacity-75">
                   {dateRange(entry.data.dateStart, entry.data.dateEnd)}
                 </div>
-                <div class="font-semibold text-black dark:text-white">
+                <div class="font-semibold text-surface10">
                   {entry.data.company}
                 </div>
                 <div class="text-sm opacity-75">{entry.data.role}</div>
@@ -120,9 +118,7 @@ const work = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
+          <h5 class="font-semibold text-surface10">Recent projects</h5>
           <Link href="/projects"> See all projects </Link>
         </div>
         <ul class="flex flex-col gap-4">
@@ -137,7 +133,7 @@ const work = await Promise.all(
       </section>
 
       <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
+        <h5 class="font-semibold text-surface10">Let's Connect</h5>
         <article>
           <p>
             If you want to get in touch with me about something or just to say
