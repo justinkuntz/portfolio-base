@@ -5,6 +5,7 @@ date: "Mar 18 2024"
 draft: false
 tags:
   - Brand
+  - WebApp
 demoURL: "https://astro-sphere-demo.vercel.app"
 repoURL: "https://github.com/markhorn-dev/astro-sphere"
 ---

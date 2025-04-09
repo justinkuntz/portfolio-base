@@ -5,6 +5,7 @@ date: "Mar 22 2024"
 draft: false
 tags:
   - Tutorial
+  - Design
 ---
 
 The basic configuration of Nano is pretty simple.

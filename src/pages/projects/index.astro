@@ -3,26 +3,25 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard";
+import Projects from "@components/Projects";
 import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const tags = [
+  ...new Set(projects.flatMap((project) => project.data.tags)),
+].sort((a, b) => a.localeCompare(b));
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container size="2xl">
     <div class="space-y-10">
       <div class="animate font-semibold text-surface10">Projects</div>
-      <ul class="animate flex flex-col gap-4">
-        {
-          projects.map((project) => (
-            <li>
-              <ArrowCard entry={project} pill={true} />
-            </li>
-          ))
-        }
-      </ul>
+      <div class="animate">
+        <Projects client:load tags={tags} data={projects} />
+      </div>
     </div>
   </Container>
 </PageLayout>

@@ -17,8 +17,18 @@ export async function getStaticPaths() {
 }
 type Props = CollectionEntry<"blog">;
 
+// Get the requested entry
 const post = Astro.props;
+const { collection } = post;
 const { Content } = await post.render();
+
+// Get the next and prev entries (modulo to wrap index)
+const items = (await getCollection(collection))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const index = items.findIndex((x) => x.slug === post.slug);
+const prev = items[(index - 1 + items.length) % items.length];
+const next = items[(index + 1) % items.length];
 ---
 
 <PageLayout title={post.data.title} description={post.data.description}>
@@ -26,13 +36,19 @@ const { Content } = await post.render();
     <div class="animate">
       <BackToPrev href="/blog"> Back to blog </BackToPrev>
     </div>
+
     <div class="space-y-1 my-10">
-      <div class="animate flex items-center gap-1.5">
-        <div class="font-base text-sm">
+      <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
+        <div class="flex items-center gap-2">
+          <svg class="size-5 stroke-current">
+            <use href="/ui.svg#calendar"></use>
+          </svg>
           <FormattedDate date={post.data.date} />
         </div>
-        &bull;
-        <div class="font-base text-sm">
+        <div class="flex items-center gap-2">
+          <svg class="size-5 stroke-current">
+            <use href="/ui.svg#book-open"></use>
+          </svg>
           {readingTime(post.body)}
         </div>
       </div>
@@ -43,5 +59,77 @@ const { Content } = await post.render();
     <article class="animate">
       <Content />
     </article>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <a
+        href={`/${prev.collection}/${prev.slug}`}
+        class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-surface10/5 border-surface10/15 blend"
+      >
+        <div class="order-2 w-full h-full group-hover:text-surface10 blend">
+          <div class="flex flex-wrap gap-2">
+            <div class="text-sm uppercase">Prev</div>
+          </div>
+          <div class="font-semibold mt-3 text-surface10">
+            {prev.data.title}
+          </div>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="order-1 stroke-current group-hover:stroke-surface10 rotate-180"
+        >
+          <line
+            x1="5"
+            y1="12"
+            x2="19"
+            y2="12"
+            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></line>
+          <polyline
+            points="12 5 19 12 12 19"
+            class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></polyline>
+        </svg>
+      </a>
+      <a
+        href={`/${next.collection}/${next.slug}`}
+        class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-surface10/5 border-surface10/15 transition-colors duration-300 ease-in-out"
+      >
+        <div class="w-full h-full text-right group-hover:text-surface10 blend">
+          <div class="text-sm uppercase">Next</div>
+          <div class="font-semibold mt-3 text-surface10">
+            {next.data.title}
+          </div>
+        </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="stroke-current group-hover:stroke-surface10"
+        >
+          <line
+            x1="5"
+            y1="12"
+            x2="19"
+            y2="12"
+            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></line>
+          <polyline
+            points="12 5 19 12 12 19"
+            class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></polyline>
+        </svg>
+      </a>
+    </div>
   </Container>
 </PageLayout>
