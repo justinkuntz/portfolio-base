@@ -1,8 +1,8 @@
 import type { Site, Page, Links, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Astro Nano",
-  EMAIL: "markhorn.dev@gmail.com",
+  NAME: "Popeye the Sailor",
+  EMAIL: "popeyethesailor234@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
@@ -37,34 +37,37 @@ export const SEARCH: Page = {
 // Links
 export const LINKS: Links = [
   { 
-    TEXT: "Home", 
-    HREF: "/", 
-  },
-  { 
-    TEXT: "Work", 
-    HREF: "/work", 
-  },
-  { 
-    TEXT: "Blog", 
-    HREF: "/blog", 
+    TEXT: "About", 
+    HREF: "/about", 
   },
   { 
     TEXT: "Projects", 
     HREF: "/projects", 
+  },
+  { 
+    TEXT: "Blog", 
+    HREF: "/blog", 
   },
 ];
 
 export const SOCIALS: Socials = [
   { 
     NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
+    ICON: "twitter-x",
+    TEXT: "pope_the_sailor",
+    HREF: "https://twitter.com/pope_the_sailor",
   },
   { 
     NAME: "github",
-    HREF: "https://github.com/markhorn-dev"
+    ICON: "github",
+    TEXT: "popeye-the-sailor",
+    HREF: "https://github.com/popeyeTheSailor",
   },
   { 
     NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
+    ICON: "linkedin",
+    TEXT: "popeye-the-sailor",
+    HREF: "https://www.linkedin.com/in/popeye-the-sailor/",
+    
   }
 ];

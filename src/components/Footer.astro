@@ -1,92 +1,56 @@
 ---
 import Container from "@components/Container.astro";
-import { SITE } from "@consts";
+import { SITE, SOCIALS } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
 ---
 
-<footer class="animate">
+<footer class="animate bg-surface1">
   <Container size="2xl">
-    <div class="relative">
-      <div class="absolute right-0 -top-20">
+    <div class="relative pb-6 pt-4">
+      <div class="flex items-center justify-center sm:justify-end">
         <BackToTop />
       </div>
     </div>
-    <div class="flex justify-between items-center">
+    <div class="items-center grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
-        &copy; 2024 {`|`}
-        {SITE.NAME}
+        &copy; {new Date().getFullYear()}
+        {SITE.NAME}. All rights reserved. <a
+          href="/legal/terms"
+          class="text-current hover:text-surface10 transition-colors duration-300 ease-in-out"
+        >
+          Terms
+        </a>,
+        <a
+          href="/legal/cookies"
+          class="text-current hover:text-surface10 transition-colors duration-300 ease-in-out"
+        >
+          Cookies
+        </a>, and
+        <a
+          href="/legal/privacy"
+          class="text-current hover:text-surface10 transition-colors duration-300 ease-in-out"
+        >
+          Privacy
+        </a>
       </div>
-      <div class="flex flex-wrap gap-1 items-center">
-        <button
-          id="light-theme-button"
-          aria-label="Light theme"
-          class="group size-8 flex items-center justify-center rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="group-hover:stroke-surface10 transition-colors duration-300 ease-in-out"
-          >
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-        <button
-          id="dark-theme-button"
-          aria-label="Dark theme"
-          class="group size-8 flex items-center justify-center rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="group-hover:stroke-surface10 transition-colors duration-300 ease-in-out"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-        </button>
-        <button
-          id="system-theme-button"
-          aria-label="System theme"
-          class="group size-8 flex items-center justify-center rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="group-hover:stroke-surface10 transition-colors duration-300 ease-in-out"
-          >
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-            <line x1="8" y1="21" x2="16" y2="21"></line>
-            <line x1="12" y1="17" x2="12" y2="21"></line>
-          </svg>
-        </button>
+
+      <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
+        <div class="flex flex-wrap gap-1 items-center">
+          {
+            SOCIALS.map((SOCIAL) => (
+              <a
+                href={SOCIAL.HREF}
+                target="_blank"
+                aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+                class="group size-10 rounded-full p-2 items-center justify-center hover:bg-surface10/5 blend"
+              >
+                <svg class="size-full fill-current group-hover:fill-surface10 blend">
+                  <use href={`/social.svg#${SOCIAL.ICON}`} />
+                </svg>
+              </a>
+            ))
+          }
+        </div>
       </div>
     </div>
   </Container>

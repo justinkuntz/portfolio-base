@@ -18,6 +18,8 @@ export type Links = {
 
 export type Socials = {
   NAME: string;
+  ICON: string;
+  TEXT: string
   HREF: string;
 }[];
 
