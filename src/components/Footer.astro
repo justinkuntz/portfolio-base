@@ -1,11 +1,13 @@
 ---
 import Container from "@components/Container.astro";
+import { cn } from "@lib/utils";
+
 import { SITE, SOCIALS } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
 ---
 
 <footer class="animate bg-surface1">
-  <Container size="2xl">
+  <Container size="xl">
     <div class="relative pb-6 pt-4">
       <div class="flex items-center justify-center sm:justify-end">
         <BackToTop />
@@ -36,6 +38,22 @@ import BackToTop from "@components/BackToTop.astro";
 
       <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
         <div class="flex flex-wrap gap-1 items-center">
+          <a
+            href="/rss.xml"
+            target="_blank"
+            aria-label={`Rss feed for ${SITE.NAME}`}
+            class={cn(
+              "hidden md:flex",
+              "size-10 rounded-full p-2 items-center justify-center",
+              "bg-transparent hover:bg-surface10/5",
+              "stroke-current hover:stroke-surface10",
+              "transition-colors duration-300 ease-in-out"
+            )}
+          >
+            <svg class="size-full">
+              <use href="/ui.svg#rss"></use>
+            </svg>
+          </a>
           {
             SOCIALS.map((SOCIAL) => (
               <a

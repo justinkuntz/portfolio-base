@@ -19,61 +19,58 @@ const projects = (await getCollection("projects"))
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container size="2xl">
-    <h4 class="animate font-semibold text-surface10">
-      Hi, I'm Nano <span class="text-xl">👋🏻</span>
-    </h4>
+  <Container size="xl">
     <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for
-            developers. I am an even more lightweight version of my popular
-            theme
-            <Link
-              href="https://github.com/markhorn-dev/astro-sphere"
-              aria-label="Astro Sphere on Github"
-              external
+      <section class="grid md:grid-cols-12 gap-10">
+        <article class="md:col-span-7 space-y-4 max-h-fit">
+          <div class="flex flex-col-reverse">
+            <h1
+              class="animate font-bold text-surface10 text-5xl md:text-6xl lg:text-7xl tracking-tight mb-4"
             >
-              Astro Sphere
-            </Link>. I have a lighthouse scores of 100 across the board for
-            performance, accesibility, best practices and SEO.
+              An illustrator, engineer, and designer from Oregon.
+            </h1>
+            <h2 class="animate font-normal text-surface10 mt-0">I'm Popeye,</h2>
+          </div>
+          <p class="animate text-xl md:text-2xl">
+            I am passionate about creativity and technology. I love to create
+            things that are not only functional but also beautiful.
           </p>
-          <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed,
-            markdown and mdx support (use components in your markdown) through
-            astro integrations. I am styled with tailwind and come preconfigured
-            with light, dark and system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link
-              href="https://github.com/markhorn-dev/astro-nano"
-              aria-label="Astro Nano on Github"
-              external
+          <div class="animate pt-6 flex gap-4 h-fit">
+            <a
+              href="#"
+              class="inline-flex items-center justify-center rounded-md bg-surface2 px-5 py-3 text-lg font-medium text-surface10 shadow-xs hover:bg-surface1 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or
-            Netlify.
-          </p>
+              See my work
+              <svg
+                class="w-5 h-5 ml-2 -mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+                ><path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path></svg
+              >
+            </a>
+            <a
+              href="#"
+              class="inline-flex items-center justify-center px-5 py-3 text-lg font-medium no-underline text-center text-surface10 border border-surface2 rounded-md hover:bg-surface1 focus:ring-4 focus:ring-secondary"
+            >
+              About me
+            </a>
+          </div>
         </article>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-surface10">Latest posts</h5>
-          <Link href="/blog"> See all posts </Link>
+        <div
+          class="md:col-span-5 relative order-first md:order-last items-center"
+        >
+          <!-- xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0 flex-1 w-full bg-muted -->
+          <img
+            class="object-cover w-full rounded-md h-96 md:h-auto"
+            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=3161&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+          <!-- object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full -->
         </div>
-        <ul class="flex flex-col gap-4">
-          {
-            blog.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))
-          }
-        </ul>
       </section>
 
       <section class="animate space-y-6">
@@ -86,6 +83,22 @@ const projects = (await getCollection("projects"))
             projects.map((project) => (
               <li>
                 <ArrowCard entry={project} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-surface10">Latest posts</h5>
+          <Link href="/blog"> See all posts </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
               </li>
             ))
           }
