@@ -1,12 +1,17 @@
 ---
-title: "Astro Nano"
+accentColor: "a61d00"
+title: "Rocket Ship Prototype"
 description: "Minimal portfolio and blog build with astro and no frameworks."
-date: "Mar 26 2024"
+date: "April 01 2022"
 draft: false
 tags:
   - Brand
-demoURL: "https://astro-nano-demo.vercel.app"
-repoURL: "https://github.com/markhorn-dev/astro-nano"
+demoText: "astro.com"
+demoURL: "https://astro-sphere-demo.vercel.app"
+repoText: "github.com"
+repoURL: "https://github.com/markhorn-dev/astro-sphere"
+thumbNail: "illustration-02.png"
+thumbNailAlt: "Astro"
 ---
 
 ![Astro Nano](/astro-nano.png)

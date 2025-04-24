@@ -23,14 +23,19 @@ const work = defineCollection({
 
 const projects = defineCollection({
   type: "content",
-  schema: z.object({
+  schema: ({ image }) => z.object({
+    accentColor: z.string().optional(),
     title: z.string(),
-    description: z.string(),
+    description: z.string().optional(),
     date: z.coerce.date(),
     tags: z.array(z.string()),
     draft: z.boolean().optional(),
+    demoText: z.string().optional(),
     demoURL: z.string().optional(),
-    repoURL: z.string().optional()
+    repoText: z.string().optional(),
+    repoURL: z.string().optional(),
+    thumbNail: image(),
+    thumbNailAlt: z.string(),
   }),
 });
 

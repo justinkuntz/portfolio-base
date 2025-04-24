@@ -6,6 +6,9 @@ import ArrowCard from "@components/ArrowCard";
 import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
+import { Image } from "astro:assets";
+import profileImage from "@assets/temp-profile.avif";
+import ProjectsWaterfall from "@components/ProjectsWaterfall";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -31,14 +34,14 @@ const projects = (await getCollection("projects"))
             </h1>
             <h2 class="animate font-normal text-surface10 mt-0">I'm Popeye,</h2>
           </div>
-          <p class="animate text-xl md:text-2xl">
+          <p class="animate text-lg md:text-xl">
             I am passionate about creativity and technology. I love to create
             things that are not only functional but also beautiful.
           </p>
           <div class="animate pt-6 flex gap-4 h-fit">
             <a
               href="#"
-              class="inline-flex items-center justify-center rounded-md bg-surface2 px-5 py-3 text-lg font-medium text-surface10 shadow-xs hover:bg-surface1 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              class="inline-flex items-center justify-center rounded-md bg-surface1 px-5 py-3 text-lg font-medium text-surface10 shadow-xs hover:bg-surface10/10 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
               See my work
               <svg
@@ -54,7 +57,7 @@ const projects = (await getCollection("projects"))
             </a>
             <a
               href="#"
-              class="inline-flex items-center justify-center px-5 py-3 text-lg font-medium no-underline text-center text-surface10 border border-surface2 rounded-md hover:bg-surface1 focus:ring-4 focus:ring-secondary"
+              class="inline-flex items-center justify-center px-5 py-3 text-lg font-medium no-underline text-center text-surface10 border border-surface2 rounded-md hover:bg-surface10/10 focus:ring-4 focus:ring-secondary"
             >
               About me
             </a>
@@ -63,30 +66,32 @@ const projects = (await getCollection("projects"))
         <div
           class="md:col-span-5 relative order-first md:order-last items-center"
         >
-          <!-- xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0 flex-1 w-full bg-muted -->
-          <img
-            class="object-cover w-full rounded-md h-96 md:h-auto"
-            src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=3161&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt=""
+          <Image
+            class="object-cover w-full rounded-md h-96 md:h-auto bg-surface6"
+            src={profileImage}
+            alt="Popeye the Sailor"
+            width={800}
+            height={800}
+            quality={"high"}
+            densities={[1, 2]}
           />
-          <!-- object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full -->
         </div>
       </section>
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-surface10">Recent projects</h5>
-          <Link href="/projects"> See all projects </Link>
+          <h5 class="text-sm uppercase font-semibold text-surface10">
+            My Latest Projects
+          </h5>
+          <Link href="/projects">View All</Link>
         </div>
-        <ul class="flex flex-col gap-4">
+        <div class="mx-auto flex flex-col gap-6">
           {
             projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
+              <ProjectsWaterfall entry={project} client:load />
             ))
           }
-        </ul>
+        </div>
       </section>
 
       <section class="animate space-y-6">

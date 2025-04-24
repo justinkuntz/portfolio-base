@@ -1,13 +1,18 @@
 ---
-title: "Astro Sphere"
+accentColor: "c1410b"
+title: "Gigantic Company Brand"
 description: "Portfolio and blog build with astro."
 date: "Mar 18 2024"
 draft: false
 tags:
   - Brand
   - WebApp
+demoText: "astro.com"
 demoURL: "https://astro-sphere-demo.vercel.app"
+repoText: "github.com"
 repoURL: "https://github.com/markhorn-dev/astro-sphere"
+thumbNail: "./illustration-01.png"
+thumbNailAlt: "Astro"
 ---
 
 ![Astro Sphere Lighthouse Score](/astro-sphere.jpg)

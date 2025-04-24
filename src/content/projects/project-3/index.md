@@ -1,12 +1,17 @@
 ---
-title: "Astro Nano"
+accentColor: "006cc6"
+title: "NASA Illustration & Design"
 description: "Minimal portfolio and blog build with astro and no frameworks."
-date: "Mar 26 2024"
+date: "January 15 2023"
 draft: false
 tags:
   - Brand
-demoURL: "https://astro-nano-demo.vercel.app"
-repoURL: "https://github.com/markhorn-dev/astro-nano"
+demoText: "astro.com"
+demoURL: "https://astro-sphere-demo.vercel.app"
+repoText: "github.com"
+repoURL: "https://github.com/markhorn-dev/astro-sphere"
+thumbNail: "illustration-03.png"
+thumbNailAlt: "Astro"
 ---
 
 ![Astro Nano](/astro-nano.png)
