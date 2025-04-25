@@ -3,9 +3,7 @@ import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard";
-import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
-import { SITE, HOME, SOCIALS } from "@consts";
+import { SITE, HOME } from "@consts";
 import { Image } from "astro:assets";
 import profileImage from "@assets/temp-profile.avif";
 import ProjectsWaterfall from "@components/ProjectsWaterfall";
@@ -40,7 +38,7 @@ const projects = (await getCollection("projects"))
           </p>
           <div class="animate pt-6 flex gap-4 h-fit">
             <a
-              href="#"
+              href="/projects"
               class="inline-flex items-center justify-center rounded-md bg-surface1 px-5 py-3 text-lg font-medium text-surface10 shadow-xs hover:bg-surface10/10 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
               See my work
@@ -56,7 +54,7 @@ const projects = (await getCollection("projects"))
               >
             </a>
             <a
-              href="#"
+              href="/about"
               class="inline-flex items-center justify-center px-5 py-3 text-lg font-medium no-underline text-center text-surface10 border border-surface2 rounded-md hover:bg-surface10/10 focus:ring-4 focus:ring-secondary"
             >
               About me
@@ -79,11 +77,25 @@ const projects = (await getCollection("projects"))
       </section>
 
       <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="text-sm uppercase font-semibold text-surface10">
-            My Latest Projects
-          </h5>
-          <Link href="/projects">View All</Link>
+        <div class="animate pt-6 flex h-fit">
+          <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
+            <a
+              href="/projects"
+              class="inline-flex gap-1 items-center hover:text-surface10/60"
+            >
+              Projects<svg
+                class="w-5 h-5 ml-2 -mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path></svg
+              >
+            </a>
+          </h2>
         </div>
         <div class="mx-auto flex flex-col gap-6">
           {
@@ -94,12 +106,30 @@ const projects = (await getCollection("projects"))
         </div>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-surface10">Latest posts</h5>
-          <Link href="/blog"> See all posts </Link>
+      <section class="animate mt-8 space-y-6">
+        <div class="animate pt-6 flex h-fit">
+          <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
+            <a
+              href="/blog"
+              class="inline-flex gap-1 items-center hover:text-surface10/60"
+            >
+              Writing<svg
+                class="w-5 h-5 ml-2 -mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd"></path></svg
+              >
+            </a>
+          </h2>
         </div>
-        <ul class="flex flex-col gap-4">
+        <ul
+          class="mt-16 grid grid-cols-1 gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+        >
           {
             blog.map((post) => (
               <li>
@@ -107,40 +137,6 @@ const projects = (await getCollection("projects"))
               </li>
             ))
           }
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-surface10">Let's Connect</h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say
-            hi, reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {
-            SOCIALS.map((SOCIAL) => (
-              <li class="flex gap-x-2 text-nowrap">
-                <Link
-                  href={SOCIAL.HREF}
-                  external
-                  aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-                >
-                  {SOCIAL.NAME}
-                </Link>
-                {"/"}
-              </li>
-            ))
-          }
-          <li class="line-clamp-1">
-            <Link
-              href={`mailto:${SITE.EMAIL}`}
-              aria-label={`Email ${SITE.NAME}`}
-            >
-              {SITE.EMAIL}
-            </Link>
-          </li>
         </ul>
       </section>
     </div>

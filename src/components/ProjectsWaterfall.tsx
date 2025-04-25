@@ -23,9 +23,9 @@ export default function ProjectsWaterfall({ entry }: Props) {
             </div>
           </div>
           <div class="flex items-center justify-between gap-x-4">
-            <h2 class="text-3xl sm:text-5xl font-bold text-surface10">
+            <h3 class="text-3xl sm:text-5xl font-bold text-surface10">
             {entry.data.title}
-            </h2>
+            </h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="48"
