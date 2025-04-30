@@ -1,6 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 import { createEffect, createSignal, For } from "solid-js";
 import ArrowCard from "@components/ArrowCard";
+import ProjectsWaterfall from "@components/ProjectsWaterfall";
 import { cn } from "@lib/utils";
 
 type Props = {
@@ -33,9 +34,9 @@ export default function Projects({ data, tags }: Props) {
 
   return (
     <div class="grid grid-cols-1 gap-6">
-      <div class="col-span-3 sm:col-span-1">
-        <div class="sticky top-24">
-          <div class="text-sm font-semibold uppercase mb-2 text-surface10">Filter</div>
+      <div class="col-span-3 w-full mt-12 md:mt-24">
+        <div class="flex items-center justify-end gap-3">
+          <div class="text-sm font-semibold uppercase text-surface10">Filter:</div>
           <ul class="flex flex-wrap gap-1.5">
             <For each={tags}>
               {(tag) => (
@@ -53,18 +54,11 @@ export default function Projects({ data, tags }: Props) {
           </ul>
         </div>
       </div>
-      <div class="col-span-3 sm:col-span-2">
-        <div class="flex flex-col">
-          <div class="text-sm uppercase mb-2">
-            SHOWING {projects().length} OF {data.length} PROJECTS
-          </div>
-          <ul class="flex flex-col gap-3">
-            {projects().map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))}
-          </ul>
+      <div class="col-span-3">
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {projects().map((project) => (
+            <ProjectsWaterfall entry={project} />
+          ))}
         </div>
       </div>
     </div>
