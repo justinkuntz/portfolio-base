@@ -13,7 +13,8 @@ export default {
         serif: ["Lora", ...defaultTheme.fontFamily.serif],
       },
       maxWidth: {
-                "8xl": "124rem"
+                "8xl": "124rem",
+                "readable": "65ch"
       },
       textColor: {
         primary: "rgb(from var(--color-primary) r g b / <alpha-value>)",
