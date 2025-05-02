@@ -1,6 +1,5 @@
 import type { CollectionEntry } from "astro:content";
 import { createEffect, createSignal, For } from "solid-js";
-import ArrowCard from "@components/ArrowCard";
 import ProjectsWaterfall from "@components/ProjectsWaterfall";
 import { cn } from "@lib/utils";
 

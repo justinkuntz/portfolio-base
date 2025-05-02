@@ -8,7 +8,7 @@ type Props = {
 export default function ProjectsWaterfall({ entry }: Props) {
   return (
     <div class="relative z-0 space-y-4">
-      <a href={`/projects/${entry.slug}`} class="group flex flex-col items-center border rounded-md hover:bg-surface10/5 border-surface10/15 transition-colors duration-300 ease-in-out">
+      <a href={`/projects/${entry.slug}`} class="group flex flex-col flex-1 items-center border rounded-md hover:bg-surface10/5 border-surface10/15 transition-colors duration-300 ease-in-out">
         <div class="w-full p-6 group-hover:text-surface10 blend">
           <div class="flex items-center justify-between gap-x-4 border-b border-surface10/25 pb-2 mb-6">
             <div class="text-xs uppercase">
@@ -22,7 +22,7 @@ export default function ProjectsWaterfall({ entry }: Props) {
               ))}
             </div>
           </div>
-          <div class="flex items-center justify-between gap-x-4">
+          <div class="flex flex-1 items-center justify-between gap-x-4">
             <h3 class="text-3xl sm:text-5xl font-bold text-surface10">
             {entry.data.title}
             </h3>
@@ -52,7 +52,7 @@ export default function ProjectsWaterfall({ entry }: Props) {
           </div>
         </div>
         <img
-          class="mx-auto max-md:-translate-x-[5%]"
+          class="mx-auto w-full h-[36rem] object-cover rounded-b-md"
           src={entry.data.thumbNail.src}
           width="519"
           height="490"

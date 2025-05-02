@@ -43,7 +43,7 @@ header.scrolled {
 }
 
 main {
-  @apply flex-1 py-32;
+  @apply flex-1 pt-32 pb-16;
 }
 
 footer {

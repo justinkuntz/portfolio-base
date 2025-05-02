@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { optional } from "astro:schema";
 
 const blog = defineCollection({
   type: "content",
@@ -36,6 +37,11 @@ const projects = defineCollection({
     repoURL: z.string().optional(),
     thumbNail: image(),
     thumbNailAlt: z.string(),
+    heroImage: image(),
+    heroImageAlt: z.string(),
+    challenge: z.string().optional(),
+    solution: z.string().optional(),
+    results: z.string().optional(),
   }),
 });
 

@@ -3,9 +3,9 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
-import { readingTime } from "@lib/utils";
 import BackToPrev from "@components/BackToPrev.astro";
 import Link from "@components/Link.astro";
+import Image from "astro/components/Image.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
@@ -37,49 +37,104 @@ const next = items[(index + 1) % items.length];
   description={project.data.description || ""}
 >
   <Container size="xl">
-    <div class="animate">
-      <BackToPrev href="/projects"> Back to projects </BackToPrev>
+    <div
+      class="w-full mx-auto mt-4 lg:mt-16 mb-12 lg:mb-16 grid grid-cols-1 lg:grid-cols-2 gap-4"
+    >
+      <div>
+        <h1 class="animate text-5xl lg:text-6xl font-semibold text-surface10">
+          {project.data.title}
+        </h1>
+        {
+          (project.data.demoURL || project.data.repoURL) && (
+            <nav class="mt-4 animate flex gap-1">
+              {project.data.demoURL && (
+                <Link href={project.data.demoURL} external>
+                  {project.data.demoText}
+                </Link>
+              )}
+              {project.data.demoURL && project.data.repoURL && (
+                <span>&nbsp;/&nbsp;</span>
+              )}
+              {project.data.repoURL && (
+                <Link href={project.data.repoURL} external>
+                  {project.data.repoText}
+                </Link>
+              )}
+            </nav>
+          )
+        }
+      </div>
+      <div class="mt-4 lg:mt-0">
+        <h2 class="animate text-xl lg:text-2xl font-light text-surface10">
+          {project.data.description}
+        </h2>
+      </div>
     </div>
-    <div class="space-y-1 my-10">
-      <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
-        <div class="flex items-center gap-2">
-          <svg class="size-5 stroke-current">
-            <use href="/ui.svg#calendar"></use>
-          </svg>
-          <FormattedDate date={project.data.date} />
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="size-5 stroke-current">
-            <use href="/ui.svg#book-open"></use>
-          </svg>
-          {readingTime(project.body)}
-        </div>
-      </div>
-      <div class="animate text-2xl font-semibold text-surface10">
-        {project.data.title}
-      </div>
+    <div>
+      <Image
+        class="object-cover w-full h-72 md:h-[36rem] lg:h-[48rem] bg-surface6"
+        src={project.data.heroImage}
+        alt={project.data.heroImageAlt}
+        width={1200}
+        height={800}
+        quality={"high"}
+        densities={[1, 2]}
+      />
+    </div>
+    <article
+      class="grid grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))] gap-8 mt-16 mb-24"
+    >
       {
-        (project.data.demoURL || project.data.repoURL) && (
-          <nav class="animate flex gap-1">
-            {project.data.demoURL && (
-              <Link href={project.data.demoURL} external>
-                demo
-              </Link>
-            )}
-            {project.data.demoURL && project.data.repoURL && <span>/</span>}
-            {project.data.repoURL && (
-              <Link href={project.data.repoURL} external>
-                repo
-              </Link>
-            )}
-          </nav>
+        project.data.challenge && (
+          <div class="animate w-full">
+            <h3 class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20">
+              Challenge
+            </h3>
+            <p class="m-0">{project.data.challenge}</p>
+          </div>
         )
       }
-    </div>
+      {
+        project.data.solution && (
+          <div class="animate w-full">
+            <h3 class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20">
+              Solution
+            </h3>
+            <p class="m-0">{project.data.solution}</p>
+          </div>
+        )
+      }
+      {
+        project.data.results && (
+          <div class="animate w-full">
+            <h3 class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20">
+              Results
+            </h3>
+            <p class="m-0">{project.data.results}</p>
+          </div>
+        )
+      }
+      <div class="animate w-full">
+        <h3
+          class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20"
+        >
+          Areas of Expertise
+        </h3>
+        <ul class="flex flex-wrap gap-3 p-0 m-0">
+          {
+            project.data.tags.map((tag) => (
+              <li class="px-3 py-1 rounded whitespace-nowrap overflow-hidden overflow-ellipsis flex gap-2 items-center bg-surface10/10 m-0">
+                {tag}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </article>
     <article class="animate">
       <Content />
     </article>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
       <a
         href={`/${prev.collection}/${prev.slug}`}
         class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-surface10/5 border-surface10/15 blend"
