@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Search from "@components/Search";
 import { SEARCH } from "@consts";
+import Container from "@components/Container.astro";
 
 const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
 
@@ -14,10 +15,12 @@ const data = [...posts, ...projects] as CollectionEntry<"blog">[];
 ---
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
-  <div class="animate page-heading">
-    {SEARCH.TITLE}
-  </div>
-  <div class="animate">
-    <Search client:load data={data} />
-  </div>
+  <Container size="xl">
+    <div class="animate page-heading">
+      {SEARCH.TITLE}
+    </div>
+    <div class="animate">
+      <Search client:load data={data} />
+    </div>
+  </Container>
 </PageLayout>
