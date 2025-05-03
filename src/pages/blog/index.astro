@@ -20,11 +20,13 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
     <div class="space-y-10 md:mt-16 lg:mt-24">
       <div class="grid md:grid-cols-12 gap-10 w-full">
         <h1
-          class="col-span-4 animate font-semibold text-surface10 text-4xl md:text-5xl"
+          class="col-span-4 animate text-5xl lg:text-6xl font-semibold text-surface10"
         >
           Blog
         </h1>
-        <p class="col-span-8 animate text-lg md:text-xl">
+        <p
+          class="col-span-8 animate text-xl lg:text-2xl font-light text-surface10"
+        >
           A collection of my thoughts, ideas, and experiences. From design to
           development, I share my journey and insights in the world of
           technology and creativity.
