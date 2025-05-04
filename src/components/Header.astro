@@ -8,10 +8,9 @@ import { SITE, LINKS } from "@consts";
 
 <header id="header" class="fixed top-0 w-full h-20 z-50">
   <Container size="xl">
-    <div class="relative h-full w-full">
-      <div
-        class="absolute left-0 top-1/2 -translate-y-1/2 flex gap-1 font-semibold"
-      >
+    <div class="relative h-full w-full flex items-center justify-between">
+      <!-- Logo -->
+      <div class="font-semibold">
         <a
           href="/"
           class="flex gap-2 items-center text-current hover:text-surface10 transition-colors duration-300 ease-in-out text-xl"
@@ -24,8 +23,8 @@ import { SITE, LINKS } from "@consts";
           </div>
         </a>
       </div>
-
-      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <!-- Nav -->
+      <div class="flex gap-5">
         <nav class="hidden md:flex items-center justify-center text-lg gap-3">
           {
             LINKS.map((LINK) => (
@@ -45,65 +44,65 @@ import { SITE, LINKS } from "@consts";
             ))
           }
         </nav>
-      </div>
-
-      <div class="buttons absolute right-0 top-1/2 -translate-y-1/2 flex gap-3">
-        <a
-          href="/search"
-          aria-label={`Search blog posts and projects on ${SITE.NAME}`}
-          class={cn(
-            "hidden md:flex",
-            "size-10 rounded-full p-2 items-center justify-center",
-            "bg-transparent hover:bg-surface10/5",
-            "stroke-current hover:stroke-surface10",
-            "transition-colors duration-300 ease-in-out",
-            pathname === "/search" || "/" + subpath?.[0] === "/search"
-              ? "pointer-events-none bg-surface10 text-surface"
-              : ""
-          )}
-        >
-          <svg class="size-full">
-            <use href="/ui.svg#search"></use>
-          </svg>
-        </a>
-
-        <button
-          id="header-theme-button"
-          aria-label={`Toggle light and dark theme`}
-          class={cn(
-            "hidden md:flex",
-            "size-10 rounded-full p-2 items-center justify-center",
-            "bg-transparent hover:bg-surface10/5",
-            "stroke-current hover:stroke-surface10",
-            "transition-colors duration-300 ease-in-out"
-          )}
-        >
-          <svg class="size-full block dark:hidden">
-            <use href="/ui.svg#sun"></use>
-          </svg>
-          <svg class="size-full hidden dark:block">
-            <use href="/ui.svg#moon"></use>
-          </svg>
-        </button>
-
-        <button
-          id="header-drawer-button"
-          aria-label={`Toggle drawer open and closed`}
-          class={cn(
-            "flex md:hidden",
-            "size-10 rounded-full p-2 items-center justify-center",
-            "bg-transparent hover:bg-surface10/5",
-            "stroke-current hover:stroke-surface10",
-            "transition-colors duration-300 ease-in-out"
-          )}
-        >
-          <svg id="drawer-open" class="size-full">
-            <use href="/ui.svg#menu"></use>
-          </svg>
-          <svg id="drawer-close" class="size-full">
-            <use href="/ui.svg#x"></use>
-          </svg>
-        </button>
+        <div class="buttons flex gap-3">
+          <!-- Search -->
+          <a
+            href="/search"
+            aria-label={`Search blog posts and projects on ${SITE.NAME}`}
+            class={cn(
+              "hidden md:flex",
+              "size-10 rounded-full p-2 items-center justify-center",
+              "bg-transparent hover:bg-surface10/5",
+              "stroke-current hover:stroke-surface10",
+              "transition-colors duration-300 ease-in-out",
+              pathname === "/search" || "/" + subpath?.[0] === "/search"
+                ? "pointer-events-none bg-surface10 text-surface"
+                : ""
+            )}
+          >
+            <svg class="size-full">
+              <use href="/ui.svg#search"></use>
+            </svg>
+          </a>
+          <!-- Dark/Light Mode -->
+          <button
+            id="header-theme-button"
+            aria-label={`Toggle light and dark theme`}
+            class={cn(
+              "hidden md:flex",
+              "size-10 rounded-full p-2 items-center justify-center",
+              "bg-transparent hover:bg-surface10/5",
+              "stroke-current hover:stroke-surface10",
+              "transition-colors duration-300 ease-in-out"
+            )}
+          >
+            <svg class="size-full block dark:hidden">
+              <use href="/ui.svg#sun"></use>
+            </svg>
+            <svg class="size-full hidden dark:block">
+              <use href="/ui.svg#moon"></use>
+            </svg>
+          </button>
+          <!-- Drawer Button -->
+          <button
+            id="header-drawer-button"
+            aria-label={`Toggle drawer open and closed`}
+            class={cn(
+              "flex md:hidden",
+              "size-10 rounded-full p-2 items-center justify-center",
+              "bg-transparent hover:bg-surface10/5",
+              "stroke-current hover:stroke-surface10",
+              "transition-colors duration-300 ease-in-out"
+            )}
+          >
+            <svg id="drawer-open" class="size-full">
+              <use href="/ui.svg#menu"></use>
+            </svg>
+            <svg id="drawer-close" class="size-full">
+              <use href="/ui.svg#x"></use>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </Container>
