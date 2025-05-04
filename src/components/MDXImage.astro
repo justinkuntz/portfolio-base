@@ -1,0 +1,25 @@
+---
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Image } from "astro:assets";
+
+const { src, alt, ...rest } = Astro.props as any;
+---
+
+<Image
+  src={src}
+  alt={alt ?? ""}
+  widths={[
+    375, // mobile @1×
+    750, // mobile @2×
+    768, // tablet @1×
+    1536, // tablet @2×
+    1024, // small desktop @1×
+    2048, // small desktop @2×
+    1500, // large desktop @1×
+    3000, // large desktop @2×
+  ]}
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 1500px"
+  loading="lazy"
+  decoding="async"
+  {...rest}
+/>
