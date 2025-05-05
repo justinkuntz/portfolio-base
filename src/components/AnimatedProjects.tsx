@@ -94,7 +94,7 @@ export default function AnimatedProjects({ projects }: Props): JSX.Element {
                   </div>
                   <div class="overflow-hidden w-full">
                   <img
-                    class="mx-auto w-full h-[32rem] object-cover rounded-b-md scale-110 transition-all duration-300 hover:scale-100"
+                    class="mx-auto w-full h-[32rem] object-cover rounded-b-md transition-all duration-300 hover:scale-110"
                     src={entry.data.thumbNail.src}
                     width={entry.data.thumbNail.width}
                     height={entry.data.thumbNail.height}
