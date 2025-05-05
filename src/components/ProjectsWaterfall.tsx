@@ -1,3 +1,11 @@
+// To use this component add this code to the page you want to embed. Don't forget to imprt the component at the top of the file.
+// <div class="mx-auto flex flex-col gap-6">
+//   {
+//     projects.map((project) => (
+//       <ProjectsWaterfall entry={project} client:load />
+//     ))
+//   }
+// </div>
 import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
 

@@ -6,7 +6,7 @@ import ArrowCard from "@components/ArrowCard";
 import { SITE, HOME } from "@consts";
 import { Image } from "astro:assets";
 import profileImage from "@assets/temp-profile.avif";
-import ProjectsWaterfall from "@components/ProjectsWaterfall";
+import AnimatedProjects from "@components/AnimatedProjects.tsx";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -77,7 +77,7 @@ const projects = (await getCollection("projects"))
       </section>
 
       <section class="animate space-y-6">
-        <div class="animate pt-6 flex h-fit">
+        <div class="animate pt-6 flex h-fit mb-12">
           <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
             <a
               href="/projects"
@@ -97,13 +97,7 @@ const projects = (await getCollection("projects"))
             </a>
           </h2>
         </div>
-        <div class="mx-auto flex flex-col gap-6">
-          {
-            projects.map((project) => (
-              <ProjectsWaterfall entry={project} client:load />
-            ))
-          }
-        </div>
+        <AnimatedProjects projects={projects} client:load />
       </section>
 
       <section class="animate mt-8 space-y-6">
