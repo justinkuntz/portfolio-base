@@ -81,9 +81,9 @@ const { title, description, image = "/nano.png" } = Astro.props;
   document.addEventListener("astro:before-swap", (e) =>
     [
       ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        'link[as="font"]'
+        'link[as="font"]',
       ),
-    ].forEach((link) => link.remove())
+    ].forEach((link) => link.remove()),
   );
 </script>
 
@@ -166,8 +166,8 @@ const { title, description, image = "/nano.png" } = Astro.props;
              -ms-transition: none !important;
              transition: none !important;
           }
-        `
-      )
+        `,
+      ),
     );
 
     document.head.appendChild(css);
@@ -178,7 +178,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
       document.documentElement.classList.remove("dark");
     }
 
-    window.getComputedStyle(css).opacity;
+    void window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
   }
 
