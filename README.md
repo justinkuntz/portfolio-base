@@ -42,6 +42,22 @@ Rendered in ~40ms on localhost
 
 The blog posts on the demo serve as the documentation and configuration.
 
+## ✉️ Contact form
+
+1. Create a [Resend](https://resend.com) API key and verify the domain you want to send from.
+2. Add the following environment variables locally (e.g. in `.env`) and on Vercel:
+   - `RESEND_API_KEY`
+   - `CONTACT_FROM_EMAIL` (formatted like `Portfolio <hello@example.com>`)
+   - `CONTACT_TO_EMAIL` (where submissions should arrive)
+3. Deploy/restart so the new environment variables are picked up.
+
+The `/contact` page posts to `/api/contact`, which performs:
+
+- Honeypot and 2-second minimum typing window
+- Form validation (name, email, message length)
+- Lightweight IP rate limiting
+- Email delivery via Resend (with the visitor's email set as `reply_to`)
+
 ## 💻 Commands
 
 All commands are run from the root of the project, from a terminal:
