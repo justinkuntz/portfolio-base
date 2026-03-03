@@ -28,6 +28,11 @@ export const PROJECTS: Metadata = {
   DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
 };
 
+export const CONTACT: Metadata = {
+  TITLE: "Contact",
+  DESCRIPTION: "Reach out about new work, collaborations, or speaking gigs.",
+};
+
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
@@ -47,6 +52,10 @@ export const LINKS: Links = [
   { 
     TEXT: "Blog", 
     HREF: "/blog", 
+  },
+  {
+    TEXT: "Contact",
+    HREF: "/contact",
   },
 ];
 

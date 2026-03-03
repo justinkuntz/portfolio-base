@@ -1,0 +1,280 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import { CONTACT } from "@consts";
+
+const searchParams = Astro.url.searchParams;
+const statusParam = searchParams.get("status");
+const reasonParam = searchParams.get("reason");
+
+const statusCopy = (() => {
+  if (statusParam === "success") {
+    return {
+      tone: "success",
+      text: "Thanks for reaching out! We'll reply as soon as possible.",
+    };
+  }
+  if (statusParam === "error") {
+    const text =
+      reasonParam === "rate-limit"
+        ? "You're sending messages a bit too quickly. Please wait a moment and try again."
+        : "We couldn't send your message. Please try again in a moment.";
+    return { tone: "error", text };
+  }
+  return null;
+})();
+---
+
+<PageLayout title={CONTACT.TITLE} description={CONTACT.DESCRIPTION}>
+  <Container size="lg">
+    <section class="py-24">
+      <div class="grid gap-12 lg:gap-20 lg:grid-cols-2">
+        <div class="space-y-6">
+          <p
+            class="text-sm font-semibold uppercase tracking-[0.2em] text-surface10/60"
+          >
+            {CONTACT.TITLE}
+          </p>
+          <h1
+            class="text-4xl md:text-5xl font-semibold text-surface10 tracking-tight"
+          >
+            Let's build something together
+          </h1>
+          <p class="text-lg text-surface10/80">
+            Tell me about your project, collaboration idea, or speaking request
+            and I will get back to you within two business days.
+          </p>
+          <ul class="space-y-4 text-surface10/70">
+            <li class="flex gap-3">
+              <span class="font-medium text-surface10">Availability</span>
+              <span>Accepting new work for Q3–Q4.</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="font-medium text-surface10">Response time</span>
+              <span>Typically within 48 hours.</span>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="bg-surface rounded-md border border-surface3 shadow-sm p-6 sm:p-8"
+        >
+          {
+            statusCopy && (
+              <div
+                class={`mb-6 rounded-md border px-4 py-3 text-sm ${
+                  statusCopy.tone === "success"
+                    ? "border-emerald-500/60 bg-emerald-500/10 text-emerald-900 dark:text-emerald-200"
+                    : "border-rose-500/60 bg-rose-500/10 text-rose-900 dark:text-rose-200"
+                }`}
+              >
+                {statusCopy.text}
+              </div>
+            )
+          }
+          <form
+            id="contact-form"
+            action="/api/contact"
+            method="post"
+            class="space-y-5"
+            novalidate
+          >
+            <input type="hidden" name="startedAt" id="contact-started" />
+            <label class="sr-only" for="contact-company">Company</label>
+            <input
+              id="contact-company"
+              name="company"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              class="absolute opacity-0 pointer-events-none"
+            />
+
+            <div class="space-y-2">
+              <label
+                class="text-sm font-medium text-surface10"
+                for="contact-name"
+              >
+                Name
+              </label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                required
+                minlength="2"
+                placeholder="Olive Oyl"
+                class="w-full rounded-md border border-surface3 bg-surface px-4 py-3 text-base text-surface10 outline-none focus-visible:border-surface10/70 focus-visible:ring-2 focus-visible:ring-surface10/20"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <label
+                class="text-sm font-medium text-surface10"
+                for="contact-email"
+              >
+                Email
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                placeholder="olive@oyl.studio"
+                class="w-full rounded-md border border-surface3 bg-surface px-4 py-3 text-base text-surface10 outline-none focus-visible:border-surface10/70 focus-visible:ring-2 focus-visible:ring-surface10/20"
+              />
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-sm">
+                <label class="font-medium text-surface10" for="contact-message">
+                  Message
+                </label>
+                <span class="text-surface10/60">Minimum 20 characters</span>
+              </div>
+              <textarea
+                id="contact-message"
+                name="message"
+                required
+                minlength="20"
+                rows="6"
+                placeholder="Share what you're working on, timelines, and anything else that's helpful."
+                class="w-full rounded-md border border-surface3 bg-surface px-4 py-3 text-base text-surface10 outline-none focus-visible:border-surface10/70 focus-visible:ring-2 focus-visible:ring-surface10/20"
+              ></textarea>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-sm text-surface10/60">
+                By submitting you agree to receive a reply at the email address
+                you provided.
+              </p>
+              <button
+                type="submit"
+                class="inline-flex w-full items-center justify-center rounded-md bg-surface10 px-4 py-3 text-base font-semibold text-surface shadow-sm transition hover:bg-surface10/90 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <span class="inline" data-submit-text>Send message</span>
+              </button>
+              <p
+                id="contact-status"
+                role="status"
+                aria-live="polite"
+                class="text-sm"
+                hidden
+              >
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </Container>
+</PageLayout>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  #contact-status[data-variant="success"] {
+    color: rgb(16 185 129 / 0.95);
+  }
+  #contact-status[data-variant="error"] {
+    color: rgb(244 63 94 / 0.95);
+  }
+</style>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("contact-status");
+  const submitButton = form?.querySelector("button[type=submit]");
+  const startedAtInput = document.getElementById("contact-started");
+
+  function setTimestamp() {
+    if (startedAtInput) {
+      startedAtInput.value = Date.now().toString();
+    }
+  }
+
+  function setStatus(message, variant) {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.variant = variant;
+    status.hidden = false;
+  }
+
+  function clearStatus() {
+    if (!status) return;
+    status.textContent = "";
+    status.removeAttribute("data-variant");
+    status.hidden = true;
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (!form || !submitButton) return;
+
+    clearStatus();
+
+    const formData = new FormData(form);
+    const message = (formData.get("message") || "").toString().trim();
+
+    if (message.length < 20) {
+      setStatus(
+        "Please include at least 20 characters so I have context.",
+        "error",
+      );
+      return;
+    }
+
+    submitButton.disabled = true;
+
+    formData.set("startedAt", startedAtInput?.value || Date.now().toString());
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: {
+          "X-Requested-With": "contact-form",
+        },
+        body: formData,
+      });
+
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          payload?.message ||
+            "We couldn't send your message. Please try again.",
+        );
+      }
+
+      form.reset();
+      setTimestamp();
+      setStatus(payload?.message || "Thanks for reaching out!", "success");
+    } catch (error) {
+      const fallback =
+        "We couldn't send your message. Please try again in a moment.";
+      setStatus(error instanceof Error ? error.message : fallback, "error");
+    } finally {
+      submitButton.disabled = false;
+    }
+  }
+
+  function init() {
+    setTimestamp();
+    form?.addEventListener("submit", handleSubmit);
+  }
+
+  init();
+  document.addEventListener("astro:after-swap", () => {
+    clearStatus();
+    setTimestamp();
+  });
+</script>
