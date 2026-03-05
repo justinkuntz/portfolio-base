@@ -10,7 +10,7 @@ type Props = {
 
 export default function Blog({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>());
-  const [posts, setPosts] = createSignal<CollectionEntry<"blog">[]>([]);
+  const [posts, setPosts] = createSignal<CollectionEntry<"blog">[]>(data);
 
   createEffect(() => {
     setPosts(data.filter((entry) =>

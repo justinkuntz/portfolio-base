@@ -191,10 +191,10 @@ const statusCopy = (() => {
 </style>
 
 <script>
-  const form = document.getElementById("contact-form");
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
   const status = document.getElementById("contact-status");
-  const submitButton = form?.querySelector("button[type=submit]");
-  const startedAtInput = document.getElementById("contact-started");
+  const submitButton = form?.querySelector("button[type=submit]") as HTMLButtonElement | null | undefined;
+  const startedAtInput = document.getElementById("contact-started") as HTMLInputElement | null;
 
   function setTimestamp() {
     if (startedAtInput) {
@@ -202,7 +202,7 @@ const statusCopy = (() => {
     }
   }
 
-  function setStatus(message, variant) {
+  function setStatus(message: string, variant: string) {
     if (!status) return;
     status.textContent = message;
     status.dataset.variant = variant;
@@ -216,7 +216,7 @@ const statusCopy = (() => {
     status.hidden = true;
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: Event) {
     event.preventDefault();
     if (!form || !submitButton) return;
 

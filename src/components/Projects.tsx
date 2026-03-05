@@ -10,7 +10,7 @@ type Props = {
 
 export default function Projects({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>());
-  const [projects, setProjects] = createSignal<CollectionEntry<"projects">[]>([]);
+  const [projects, setProjects] = createSignal<CollectionEntry<"projects">[]>(data);
 
   createEffect(() => {
     setProjects(data.filter((entry) =>
