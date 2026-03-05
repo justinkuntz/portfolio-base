@@ -9,6 +9,7 @@ import aboutImageOne from "@assets/about-photo-1559136555.avif";
 import aboutImageTwo from "@assets/about-photo-1670272505284.avif";
 import aboutImageThree from "@assets/about-photo-1670272504528.avif";
 import oliveOyl from "@assets/olive-oyl.jpeg";
+import "./about.css";
 
 const collection = (await getCollection("work")).sort(
   (a, b) =>
@@ -25,33 +26,29 @@ const work = await Promise.all(
 
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <Container size="xl">
-    <div class="relative isolate">
-      <div class="mx-auto">
-        <div class="mx-auto gap-8 md:gap-12 lg:flex md:items-center">
-          <div class="relative lg:w-1/2">
-            <h1
-              class="animate text-5xl font-bold tracking-tight text-pretty text-surface10 md:text-6xl lg:text-7xl mb-8"
-            >
+    <div class="about">
+      <div class="about__container">
+        <div class="about__hero">
+          <div class="about__hero-content">
+            <h1 class="about__hero-title animate">
               I yam wot I yam, and that's all wot I yam, I'm Popeye the Sailor
               Man
             </h1>
-            <p
-              class="animate mt-8 mb-4 text-lg font-medium text-pretty text-surface10/80 sm:text-xl/8 max-w-readable"
-            >
+            <p class="about__hero-description animate">
               Popeye is a one-of-a-kind hybrid creative: part designer, part
               illustrator, part engineer. Fueled by equal parts ingenuity and a
-              secret stash of “spinach” inspiration, he tackles challenges
+              secret stash of "spinach" inspiration, he tackles challenges
               others deem impossible. Whether sketching bold concepts,
               prototyping mechanical marvels, or crafting pixel-perfect
               interfaces, Popeye turns every problem into an opportunity to flex
               his creative muscles.
             </p>
           </div>
-          <div class="flex justify-end gap-6 lg:w-1/2 py-8">
-            <div class="w-1/2 md:w-1/3 lg:w-3/5 space-y-6 lg:pt-24">
-              <div class="relative">
+          <div class="about__gallery">
+            <div class="about__gallery-column about__gallery-column--1">
+              <div class="about__gallery-item">
                 <Image
-                  class="object-cover w-full rounded-md h-64 md:h-96 lg:h-auto bg-surface6"
+                  class="about__gallery-image"
                   src={aboutImageOne}
                   alt="Popeye the Sailor"
                   width={800}
@@ -59,18 +56,13 @@ const work = await Promise.all(
                   quality={"high"}
                   densities={[1, 2]}
                 />
-                <div
-                  class="pointer-events-none absolute inset-0 rounded-md ring-1 ring-gray-900/10 ring-inset"
-                >
-                </div>
+                <div class="about__gallery-ring"></div>
               </div>
             </div>
-            <div
-              class="w-1/2 md:w-2/3 flex flew-row gap-6 lg:flex-col lg:w-2/5 pt-0"
-            >
-              <div class="relative flex-1 pt-12 lg:pt-0">
+            <div class="about__gallery-column about__gallery-column--2">
+              <div class="about__gallery-item about__gallery-item--offset">
                 <Image
-                  class="object-cover w-full rounded-md h-64 md:h-96 lg:h-auto bg-surface6"
+                  class="about__gallery-image"
                   src={aboutImageTwo}
                   alt="Popeye the Sailor"
                   width={800}
@@ -78,14 +70,11 @@ const work = await Promise.all(
                   quality={"high"}
                   densities={[1, 2]}
                 />
-                <div
-                  class="pointer-events-none absolute inset-0 rounded-md ring-1 ring-gray-900/10 ring-inset"
-                >
-                </div>
+                <div class="about__gallery-ring"></div>
               </div>
-              <div class="relative flex-1 hidden md:block">
+              <div class="about__gallery-item about__gallery-item--hidden-mobile">
                 <Image
-                  class="object-cover w-full rounded-md h-64 md:h-96 lg:h-auto bg-surface6"
+                  class="about__gallery-image"
                   src={aboutImageThree}
                   alt="Popeye the Sailor"
                   width={800}
@@ -93,21 +82,18 @@ const work = await Promise.all(
                   quality={"high"}
                   densities={[1, 2]}
                 />
-                <div
-                  class="pointer-events-none absolute inset-0 rounded-md ring-1 ring-gray-900/10 ring-inset"
-                >
-                </div>
+                <div class="about__gallery-ring"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="flex-col md:grid md:grid-cols-12 gap-10">
-      <div class="relative col-span-7">
-        <p class="animate text-lg mb-4">
+    <div class="about__content">
+      <div class="about__main">
+        <p class="about__text animate">
           Born with an uncanny knack for solving puzzles, Popeye first
-          discovered his design “luck” in an unlikely way—by rubbing the feather
+          discovered his design "luck" in an unlikely way—by rubbing the feather
           of a legendary bird that granted him boundless endurance and a
           fearless sense of experimentation. Early in his career, he was known
           to survive fifteen simultaneous branding crises, emerging each time
@@ -115,46 +101,44 @@ const work = await Promise.all(
           mystical feather for something more reliable: a steady diet of
           spinach-like curiosity and relentless self-study.
         </p>
-        <p class="animate text-lg mb-4">
-          As an illustrator, Popeye’s bold, expressive lines capture both whimsy
-          and precision. He’s spent countless nights refining characters that
+        <p class="about__text animate">
+          As an illustrator, Popeye's bold, expressive lines capture both whimsy
+          and precision. He's spent countless nights refining characters that
           dance off the page, from sleek product mockups to vibrant storyboards.
-          His portfolio spans children’s books, branding campaigns, and public
+          His portfolio spans children's books, branding campaigns, and public
           installations—each infused with his signature blend of humor and
           meticulous detail.
         </p>
-        <p class="animate text-lg mb-4">
+        <p class="about__text animate">
           On the engineering side, Popeye earns his reputation for building
           ingenious prototypes. His trusty pipe doubles as a micro CNC cutter,
           3D filament extruder, and even a makeshift periscope when deadlines
-          loom. He’s reverse-engineered complex gears, developed custom
+          loom. He's reverse-engineered complex gears, developed custom
           Arduino-driven interfaces, and seamlessly integrated digital and
           physical systems. When others see a wall, Popeye sees a lever and
           pulley waiting to be designed.
         </p>
-        <p class="animate text-lg">
+        <p class="about__text animate">
           Despite occasional tussles in the classic love triangle of form,
-          function, and feasibility—his version of Olive Oyl and Bluto—Popeye’s
+          function, and feasibility—his version of Olive Oyl and Bluto—Popeye's
           near-saintly perseverance always prevails. He advocates that great
           design must serve real people, not just impress the scientific
           community. With every project, he proves that a blend of creative
           vision, technical rigor, and a can-do attitude can conquer any
           obstacle—no spinach required.
         </p>
-        <div class="mt-12 mb-12 md:mt-24">
-          <figure class="border-l-2 border-surface10/30 pl-8 py-2">
-            <blockquote
-              class="text-xl/8 font-semibold tracking-tight text-surface10"
-            >
+        <div class="about__quote-wrapper">
+          <figure class="about__quote">
+            <blockquote class="about__quote-text">
               <p>
-                “I heard that a camel can go 9 days without water. -A trivial
+                "I heard that a camel can go 9 days without water. -A trivial
                 thing. Going 9 days without a hamburgers, would be an
-                accomplishment worthy of my admiration.”
+                accomplishment worthy of my admiration."
               </p>
             </blockquote>
-            <figcaption class="mt-8 flex gap-x-4">
+            <figcaption class="about__quote-attribution">
               <Image
-                class="mt-1 size-10 flex-none rounded-full bg-surface1"
+                class="about__quote-avatar"
                 src={oliveOyl}
                 alt="Olive Oyl"
                 width={400}
@@ -162,33 +146,33 @@ const work = await Promise.all(
                 quality={"high"}
                 densities={[1, 2]}
               />
-              <div class="text-base/6">
-                <div class="font-semibold text-surface10/60">Olive Oyl</div>
-                <div class="text-surface10/30">@oliveoyl</div>
+              <div class="about__quote-author">
+                <div class="about__quote-name">Olive Oyl</div>
+                <div class="about__quote-handle">@oliveoyl</div>
               </div>
             </figcaption>
           </figure>
         </div>
       </div>
-      <div class="relative col-span-5 pt-12 lg:pt-0">
-        <h2 class="animate text-2xl font-normal text-surface10/40 pl-8">
+      <div class="about__experience">
+        <h2 class="about__experience-title animate">
           Experience
         </h2>
         {
           work.map((entry) => (
-            <div class="relative pl-8 py-6 group">
-              <div class="animate font-medium text-xl text-surface10 mb-0">
+            <div class="about__experience-item">
+              <div class="about__experience-role animate">
                 {entry.data.role}
               </div>
-              <div class="animate text-lg font-bold text-surface10/60 mb-4">
+              <div class="about__experience-company animate">
                 {entry.data.company}
               </div>
-              <div class="flex flex-col items-start mb-1 group-last:before:hidden before:absolute before:left-2 before:h-full before:px-px before:bg-surface2 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 after:w-2 after:h-2 after:bg-surface7 after:border-4 after:box-content after:border-surface4 after:rounded-full after:-translate-x-1/2 after:translate-y-1.5">
-                <time class="animate text-xs font-semibold uppercase p-1 px-2 mb-3 text-surface bg-surface10/50 rounded-full">
+              <div class="about__experience-timeline">
+                <time class="about__experience-date animate">
                   {dateRange(entry.data.dateStart, entry.data.dateEnd)}
                 </time>
               </div>
-              <div class="animate text-surface10/50">
+              <div class="about__experience-description animate">
                 <entry.Content />
               </div>
             </div>

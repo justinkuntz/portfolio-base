@@ -16,16 +16,12 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container size="xl">
-    <div class="space-y-10 md:mt-16 lg:mt-24">
-      <div class="grid md:grid-cols-12 gap-10 w-full">
-        <h1
-          class="col-span-4 animate text-5xl lg:text-6xl font-semibold text-surface10"
-        >
+    <div class="page-section">
+      <div class="page-intro">
+        <h1 class="page-intro__title animate">
           Blog
         </h1>
-        <p
-          class="col-span-8 animate text-xl lg:text-2xl font-light text-surface10"
-        >
+        <p class="page-intro__description animate">
           A collection of my thoughts, ideas, and experiences. From design to
           development, I share my journey and insights in the world of
           technology and creativity.

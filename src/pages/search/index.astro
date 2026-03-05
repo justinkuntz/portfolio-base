@@ -16,9 +16,9 @@ const data = [...posts, ...projects] as CollectionEntry<"blog">[];
 
 <PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
   <Container size="xl">
-    <div class="animate page-heading">
+    <h1 class="page-heading animate">
       {SEARCH.TITLE}
-    </div>
+    </h1>
     <div class="animate">
       <Search client:load data={data} />
     </div>
