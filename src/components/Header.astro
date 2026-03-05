@@ -33,21 +33,21 @@ import { SITE, LINKS } from "@consts";
           }
         </nav>
         <div class="header__actions">
-          <!-- Search -->
+          <!-- Search - Hidden on mobile -->
           <a
             href="/search"
             aria-label={`Search blog posts and projects on ${SITE.NAME}`}
-            class:list={["action-button", { "action-button--active": pathname === "/search" }]}
+            class:list={["action-button", "action-button--search", { "action-button--active": pathname === "/search" }]}
           >
             <svg class="action-icon">
               <use href="/ui.svg#search"></use>
             </svg>
           </a>
-          <!-- Dark/Light Mode -->
+          <!-- Dark/Light Mode - Always visible -->
           <button
             id="header-theme-button"
             aria-label={`Toggle light and dark theme`}
-            class="action-button"
+            class="action-button action-button--theme"
           >
             <svg class="action-icon theme-icon theme-icon--light">
               <use href="/ui.svg#sun"></use>
@@ -56,7 +56,7 @@ import { SITE, LINKS } from "@consts";
               <use href="/ui.svg#moon"></use>
             </svg>
           </button>
-          <!-- Drawer Button -->
+          <!-- Drawer Button - Mobile only -->
           <button
             id="header-drawer-button"
             aria-label={`Toggle drawer open and closed`}
@@ -197,15 +197,28 @@ import { SITE, LINKS } from "@consts";
     color: var(--surface-1);
   }
 
+  /* Search button - Hidden on mobile, visible on desktop */
+  .action-button--search {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .action-button--search {
+      display: flex;
+    }
+  }
+
+  /* Theme button - Always visible */
+  .action-button--theme {
+    display: flex;
+  }
+
+  /* Drawer button - Visible on mobile, hidden on desktop */
   .action-button--drawer {
     display: flex;
   }
 
   @media (min-width: 768px) {
-    .action-button {
-      display: flex;
-    }
-
     .action-button--drawer {
       display: none;
     }
@@ -253,6 +266,38 @@ import { SITE, LINKS } from "@consts";
 </style>
 
 <script is:inline>
+  // Theme Toggle
+  function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    if (newTheme === 'dark') {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
+    }
+
+    localStorage.setItem('theme', newTheme);
+  }
+
+  function initializeTheme() {
+    const themeButton = document.getElementById('header-theme-button');
+    const drawerThemeButton = document.getElementById('drawer-theme-button');
+
+    themeButton?.addEventListener('click', toggleTheme);
+    drawerThemeButton?.addEventListener('click', toggleTheme);
+
+    // Set initial theme from localStorage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  }
+
+  // Drawer Toggle
   function toggleDrawer() {
     const drawer = document.getElementById("drawer");
     const drawerButton = document.getElementById("header-drawer-button");
@@ -265,6 +310,7 @@ import { SITE, LINKS } from "@consts";
     drawerButton?.addEventListener("click", toggleDrawer);
   }
 
+  // Scroll Handler
   function handleScroll() {
     const header = document.getElementById("header");
     if (window.scrollY > 0) {
@@ -274,7 +320,9 @@ import { SITE, LINKS } from "@consts";
     }
   }
 
+  // Initialize Everything
   function initializeHeader() {
+    initializeTheme();
     initializeDrawerButton();
     handleScroll();
     window.addEventListener("scroll", handleScroll);

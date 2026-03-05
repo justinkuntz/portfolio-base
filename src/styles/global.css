@@ -25,6 +25,8 @@ html.dark {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -34,6 +36,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+main {
+  flex: 1;
+  padding-top: 8rem;
+  padding-bottom: var(--space-4xl);
+}
+
+footer {
+  margin-top: auto;
 }
 
 /* ==========================================================================
