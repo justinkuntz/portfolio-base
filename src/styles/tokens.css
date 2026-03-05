@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Design Tokens - Custom Token System
+   Layer on top of Open Props for easy theming
+   ========================================================================== */
+
+:root {
+  /* ==========================================================================
+     Brand Colors
+     ========================================================================== */
+
+  --brand-primary: hsl(16, 80%, 52%);
+  --brand-secondary: hsl(38, 84%, 81%);
+  --brand-accent: hsl(16, 80%, 52%);
+
+  /* ==========================================================================
+     Semantic Color Tokens - Light Theme
+     Map to Open Props where appropriate, custom where needed
+     ========================================================================== */
+
+  /* Surface & Background */
+  --surface-1: var(--stone-0);
+  --surface-2: var(--stone-1);
+  --surface-3: var(--stone-2);
+  --surface-4: var(--stone-3);
+
+  /* Text Colors */
+  --text-1: var(--stone-12);
+  --text-2: var(--stone-11);
+  --text-3: var(--stone-10);
+  --text-muted: var(--stone-9);
+
+  /* Border Colors */
+  --border-1: var(--stone-4);
+  --border-2: var(--stone-5);
+  --border-3: var(--stone-6);
+
+  /* Brand Semantic */
+  --color-primary: var(--brand-primary);
+  --color-secondary: var(--brand-secondary);
+  --color-accent: var(--brand-accent);
+
+  /* ==========================================================================
+     Typography Tokens
+     ========================================================================== */
+
+  /* Font Families */
+  --font-sans: 'Public Sans', var(--font-sans);
+  --font-serif: 'Lora', var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  /* Font Sizes - Using Open Props scale */
+  --text-xs: var(--font-size-00);
+  --text-sm: var(--font-size-0);
+  --text-base: var(--font-size-1);
+  --text-lg: var(--font-size-2);
+  --text-xl: var(--font-size-3);
+  --text-2xl: var(--font-size-4);
+  --text-3xl: var(--font-size-5);
+  --text-4xl: var(--font-size-6);
+  --text-5xl: var(--font-size-7);
+
+  /* Font Weights */
+  --font-normal: var(--font-weight-4);
+  --font-medium: var(--font-weight-5);
+  --font-semibold: var(--font-weight-6);
+  --font-bold: var(--font-weight-7);
+
+  /* ==========================================================================
+     Spacing Tokens
+     Using Open Props size scale
+     ========================================================================== */
+
+  --space-xs: var(--size-1);
+  --space-sm: var(--size-2);
+  --space-md: var(--size-3);
+  --space-lg: var(--size-4);
+  --space-xl: var(--size-5);
+  --space-2xl: var(--size-6);
+  --space-3xl: var(--size-7);
+  --space-4xl: var(--size-8);
+
+  /* ==========================================================================
+     Border Radius Tokens
+     ========================================================================== */
+
+  --radius-sm: var(--radius-2);
+  --radius-md: var(--radius-3);
+  --radius-lg: var(--radius-4);
+  --radius-xl: var(--radius-5);
+  --radius-full: var(--radius-round);
+
+  /* ==========================================================================
+     Shadow Tokens
+     ========================================================================== */
+
+  --shadow-sm: var(--shadow-2);
+  --shadow-md: var(--shadow-3);
+  --shadow-lg: var(--shadow-4);
+  --shadow-xl: var(--shadow-5);
+
+  /* ==========================================================================
+     Animation/Transition Tokens
+     ========================================================================== */
+
+  --transition-fast: 150ms var(--ease-3);
+  --transition-base: 300ms var(--ease-3);
+  --transition-slow: 500ms var(--ease-3);
+  --transition-slower: 700ms var(--ease-3);
+
+  /* ==========================================================================
+     Layout Tokens
+     ========================================================================== */
+
+  --container-xs: 640px;
+  --container-sm: 768px;
+  --container-md: 1024px;
+  --container-lg: 1280px;
+  --container-xl: 1536px;
+  --container-2xl: 1920px;
+
+  /* Z-index scale */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 30;
+  --z-modal: 40;
+  --z-popover: 50;
+  --z-tooltip: 60;
+}
+
+/* ==========================================================================
+   Dark Theme Overrides
+   ========================================================================== */
+
+html.dark {
+  /* Surface & Background - Inverted */
+  --surface-1: var(--stone-12);
+  --surface-2: var(--stone-11);
+  --surface-3: var(--stone-10);
+  --surface-4: var(--stone-9);
+
+  /* Text Colors - Inverted */
+  --text-1: var(--stone-0);
+  --text-2: var(--stone-2);
+  --text-3: var(--stone-3);
+  --text-muted: var(--stone-5);
+
+  /* Border Colors - Adjusted for dark mode */
+  --border-1: var(--stone-8);
+  --border-2: var(--stone-7);
+  --border-3: var(--stone-6);
+
+  /* Brand colors remain the same */
+  --color-primary: var(--brand-primary);
+  --color-secondary: var(--brand-secondary);
+  --color-accent: var(--brand-accent);
+}

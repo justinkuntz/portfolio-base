@@ -8,53 +8,11 @@
 /* Import Open Props core tokens */
 @import "open-props/style";
 
-/* ==========================================================================
-   Custom Properties - Design Tokens Layer
-   ========================================================================== */
-
-:root {
-  /* Preserved from original design */
-  --copy-btn-margin: 10px;
-
-  /* Brand Colors - to be refined with token system */
-  --color-primary: #de6826;
-  --color-secondary: #f6daa6;
-
-  /* Surface colors - light theme */
-  --color-surface-50: #f6f6f5;
-  --color-surface-100: #d1d1d0;
-  --color-surface-200: #d5d9e2;
-  --color-surface-300: #b1b0af;
-  --color-surface-400: #8a8a86;
-  --color-surface-500: #6f6f6b;
-  --color-surface-600: #5e5d5c;
-  --color-surface-700: #504f4e;
-  --color-surface-800: #464644;
-  --color-surface-900: #3c3b3f;
-  --color-surface-950: #302f32;
-}
-
-html.dark {
-  /* Brand Colors - same in dark mode */
-  --color-primary: #de6826;
-  --color-secondary: #f6daa6;
-
-  /* Surface colors - dark theme (inverted) */
-  --color-surface-50: #302f32;
-  --color-surface-100: #3c3b3f;
-  --color-surface-200: #464644;
-  --color-surface-300: #504f4e;
-  --color-surface-400: #5e5d5c;
-  --color-surface-500: #6f6f6b;
-  --color-surface-600: #8a8a86;
-  --color-surface-700: #b1b0af;
-  --color-surface-800: #d1d1d0;
-  --color-surface-900: #e7e7e6;
-  --color-surface-950: #f6f6f5;
-}
+/* Import our custom design token system */
+@import "./tokens.css";
 
 /* ==========================================================================
-   Base Styles
+   Base Styles - Using Design Tokens
    ========================================================================== */
 
 html {
@@ -68,20 +26,24 @@ html.dark {
 
 body {
   min-height: 100vh;
-  font-family: 'Public Sans', system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--font-lineheight-3);
+  color: var(--text-1);
+  background-color: var(--surface-1);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 /* ==========================================================================
-   Animation Utilities
+   Animation Utilities - Using Design Tokens
    ========================================================================== */
 
 .animate {
   opacity: 0;
-  transform: translateY(0.75rem);
-  transition: all 700ms ease-out;
+  transform: translateY(var(--space-md));
+  transition: opacity var(--transition-slower), transform var(--transition-slower);
 }
 
 .animate.show {
