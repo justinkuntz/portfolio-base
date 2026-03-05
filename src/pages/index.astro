@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard";
+import Button from "@components/Button.astro";
 import { SITE, HOME } from "@consts";
 import { Image } from "astro:assets";
 import profileImage from "@assets/temp-profile.avif";
@@ -21,51 +22,31 @@ const projects = (await getCollection("projects"))
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container size="xl">
-    <div class="space-y-16">
-      <section class="grid md:grid-cols-12 gap-10">
-        <article class="md:col-span-7 space-y-4 max-h-fit">
-          <div class="flex flex-col-reverse">
-            <h1
-              class="animate font-bold text-surface10 text-5xl md:text-6xl lg:text-7xl tracking-tight mb-4"
-            >
+    <div class="home-content">
+      <section class="hero">
+        <article class="hero__content">
+          <div class="hero__text">
+            <h2 class="hero__greeting animate">I'm Popeye,</h2>
+            <h1 class="hero__headline animate">
               An illustrator, engineer, and designer from Oregon.
             </h1>
-            <h2 class="animate font-normal text-surface10 mt-0">I'm Popeye,</h2>
           </div>
-          <p class="animate text-lg md:text-xl">
+          <p class="hero__description animate">
             I am passionate about creativity and technology. I love to create
             things that are not only functional but also beautiful.
           </p>
-          <div class="animate pt-6 flex gap-4 h-fit">
-            <a
-              href="/projects"
-              class="inline-flex items-center justify-center rounded-md bg-surface1 px-5 py-3 text-lg font-medium text-surface10 shadow-xs hover:bg-surface10/10 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-            >
+          <div class="hero__actions animate">
+            <Button href="/projects" variant="primary" size="lg" iconRight="arrow">
               See my work
-              <svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                ><path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
-            </a>
-            <a
-              href="/about"
-              class="inline-flex items-center justify-center px-5 py-3 text-lg font-medium no-underline text-center text-surface10 border border-surface2 rounded-md hover:bg-surface10/10 focus:ring-4 focus:ring-secondary"
-            >
+            </Button>
+            <Button href="/about" variant="outline" size="lg">
               About me
-            </a>
+            </Button>
           </div>
         </article>
-        <div
-          class="md:col-span-5 relative order-first md:order-last items-center"
-        >
+        <div class="hero__image">
           <Image
-            class="object-cover w-full rounded-md h-96 md:h-auto bg-surface6"
+            class="hero__image-element animate"
             src={profileImage}
             alt="Popeye the Sailor"
             width={800}
@@ -76,54 +57,32 @@ const projects = (await getCollection("projects"))
         </div>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="animate pt-6 flex h-fit mb-12">
-          <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
-            <a
-              href="/projects"
-              class="inline-flex gap-1 items-center hover:text-surface10/60"
-            >
-              Projects<svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
+      <section class="section animate">
+        <div class="section__header animate">
+          <h2 class="section__title">
+            <a href="/projects" class="section__link">
+              Projects
+              <svg class="section__icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
             </a>
           </h2>
         </div>
         <AnimatedProjects projects={projects} client:load />
       </section>
 
-      <section class="animate mt-8 space-y-6">
-        <div class="animate pt-6 flex h-fit">
-          <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
-            <a
-              href="/blog"
-              class="inline-flex gap-1 items-center hover:text-surface10/60"
-            >
-              Writing<svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
+      <section class="section animate">
+        <div class="section__header animate">
+          <h2 class="section__title">
+            <a href="/blog" class="section__link">
+              Writing
+              <svg class="section__icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
             </a>
           </h2>
         </div>
-        <ul
-          class="mt-16 grid grid-cols-1 gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-        >
+        <ul class="blog-grid">
           {
             blog.map((post) => (
               <li>
@@ -136,3 +95,186 @@ const projects = (await getCollection("projects"))
     </div>
   </Container>
 </PageLayout>
+
+<style>
+  .home-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4xl);
+  }
+
+  /* ==========================================================================
+     Hero Section
+     ========================================================================== */
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4xl);
+    }
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    order: 2;
+  }
+
+  @media (min-width: 768px) {
+    .hero__content {
+      order: 1;
+    }
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--space-md);
+  }
+
+  .hero__greeting {
+    font-size: var(--text-lg);
+    font-weight: var(--font-normal);
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  .hero__headline {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-1);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .hero__headline {
+      font-size: var(--text-5xl);
+    }
+  }
+
+  .hero__description {
+    font-size: var(--text-lg);
+    color: var(--text-2);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero__description {
+      font-size: var(--text-xl);
+    }
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-top: var(--space-md);
+  }
+
+  .hero__image {
+    order: 1;
+  }
+
+  @media (min-width: 768px) {
+    .hero__image {
+      order: 2;
+    }
+  }
+
+  .hero__image-element {
+    width: 100%;
+    height: 24rem;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    background-color: var(--surface-3);
+  }
+
+  @media (min-width: 768px) {
+    .hero__image-element {
+      height: auto;
+      aspect-ratio: 1;
+    }
+  }
+
+  /* ==========================================================================
+     Section Styles
+     ========================================================================== */
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .section__header {
+    padding-top: var(--space-lg);
+  }
+
+  .section__title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-normal);
+    color: color-mix(in srgb, var(--text-1) 40%, transparent);
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .section__title {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  .section__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .section__link:hover {
+    color: color-mix(in srgb, var(--text-1) 60%, transparent);
+  }
+
+  .section__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: var(--space-sm);
+    margin-right: calc(var(--space-sm) * -1);
+    transition: transform var(--transition-base);
+  }
+
+  .section__link:hover .section__icon {
+    transform: translateX(4px);
+  }
+
+  /* ==========================================================================
+     Blog Grid
+     ========================================================================== */
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
