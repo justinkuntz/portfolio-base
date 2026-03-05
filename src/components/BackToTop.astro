@@ -1,23 +1,107 @@
-<button
-  id="back-to-top"
-  class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded border border-surface10/15 hover:bg-surface10/5 hover:text-surface10 transition-colors duration-300 ease-in-out"
->
+---
+/**
+ * BackToTop Component
+ *
+ * A button that appears when the user scrolls down and scrolls
+ * the page back to the top when clicked.
+ */
+---
+
+<button id="back-to-top" class="back-to-top" aria-label="Back to top">
   <svg
+    class="back-to-top__icon"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"
   >
     <line
       x1="5"
       y1="12"
       x2="19"
       y2="12"
-      class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+      class="back-to-top__icon-line"
     ></line>
     <polyline
       points="12 5 5 12 12 19"
-      class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+      class="back-to-top__icon-arrow"
     ></polyline>
   </svg>
-  <div class="text-sm">Back to top</div>
+  <span class="back-to-top__text">Back to top</span>
 </button>
+
+<style>
+  .back-to-top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: fit-content;
+    padding: var(--space-xs) var(--space-md);
+    padding-left: var(--space-xl);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-2);
+    background-color: transparent;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .back-to-top:hover {
+    background-color: color-mix(in srgb, var(--text-1) 5%, transparent);
+    color: var(--text-1);
+    border-color: var(--text-1);
+  }
+
+  .back-to-top__icon {
+    position: absolute;
+    top: 50%;
+    left: var(--space-sm);
+    transform: translateY(-50%) rotate(90deg);
+    width: 1rem;
+    height: 1rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .back-to-top__icon-line {
+    transform: translateX(0.5rem) scaleX(0);
+    transition: transform var(--transition-base);
+  }
+
+  .back-to-top:hover .back-to-top__icon-line {
+    transform: translateX(0) scaleX(1);
+  }
+
+  .back-to-top__icon-arrow {
+    transform: translateX(0.25rem);
+    transition: transform var(--transition-base);
+  }
+
+  .back-to-top:hover .back-to-top__icon-arrow {
+    transform: translateX(0);
+  }
+
+  .back-to-top__text {
+    display: inline-block;
+  }
+</style>
+
+<script>
+  function initializeBackToTop() {
+    const backToTopButton = document.getElementById('back-to-top');
+
+    if (!backToTopButton) return;
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  document.addEventListener('astro:after-swap', initializeBackToTop);
+  initializeBackToTop();
+</script>

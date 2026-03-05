@@ -1,4 +1,9 @@
 ---
+/**
+ * BackToPrev Component
+ *
+ * A link that navigates to a previous page with an animated arrow.
+ */
 type Props = {
   href: string;
 };
@@ -6,28 +11,85 @@ type Props = {
 const { href } = Astro.props;
 ---
 
-<a
-  href={href}
-  class="relative group w-fit flex pl-7 pr-3 py-1.5 flex-nowrap rounded border border-surface10/15 hover:bg-surface10/5 hover:text-surface10 transition-colors duration-300 ease-in-out"
->
+<a href={href} class="back-to-prev">
   <svg
+    class="back-to-prev__icon"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current"
   >
     <line
       x1="5"
       y1="12"
       x2="19"
       y2="12"
-      class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+      class="back-to-prev__icon-line"
     ></line>
     <polyline
       points="12 5 5 12 12 19"
-      class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+      class="back-to-prev__icon-arrow"
     ></polyline>
   </svg>
-  <div class="text-sm">
+  <span class="back-to-prev__text">
     <slot />
-  </div>
+  </span>
 </a>
+
+<style>
+  .back-to-prev {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    width: fit-content;
+    padding: var(--space-xs) var(--space-md);
+    padding-left: var(--space-xl);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-2);
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+  }
+
+  .back-to-prev:hover {
+    background-color: color-mix(in srgb, var(--text-1) 5%, transparent);
+    color: var(--text-1);
+    border-color: var(--text-1);
+  }
+
+  .back-to-prev__icon {
+    position: absolute;
+    top: 50%;
+    left: var(--space-sm);
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+  }
+
+  .back-to-prev__icon-line {
+    transform: translateX(0.5rem) scaleX(0);
+    transition: transform var(--transition-base);
+  }
+
+  .back-to-prev:hover .back-to-prev__icon-line {
+    transform: translateX(0) scaleX(1);
+  }
+
+  .back-to-prev__icon-arrow {
+    transform: translateX(0.25rem);
+    transition: transform var(--transition-base);
+  }
+
+  .back-to-prev:hover .back-to-prev__icon-arrow {
+    transform: translateX(0);
+  }
+
+  .back-to-prev__text {
+    display: inline-block;
+  }
+</style>
