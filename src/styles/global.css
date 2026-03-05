@@ -1,10 +1,61 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ==========================================================================
+   Open Props Foundation
+   ========================================================================== */
+
+/* Import Open Props Normalize - provides modern CSS reset */
+@import "open-props/normalize";
+
+/* Import Open Props core tokens */
+@import "open-props/style";
+
+/* ==========================================================================
+   Custom Properties - Design Tokens Layer
+   ========================================================================== */
 
 :root {
+  /* Preserved from original design */
   --copy-btn-margin: 10px;
+
+  /* Brand Colors - to be refined with token system */
+  --color-primary: #de6826;
+  --color-secondary: #f6daa6;
+
+  /* Surface colors - light theme */
+  --color-surface-50: #f6f6f5;
+  --color-surface-100: #d1d1d0;
+  --color-surface-200: #d5d9e2;
+  --color-surface-300: #b1b0af;
+  --color-surface-400: #8a8a86;
+  --color-surface-500: #6f6f6b;
+  --color-surface-600: #5e5d5c;
+  --color-surface-700: #504f4e;
+  --color-surface-800: #464644;
+  --color-surface-900: #3c3b3f;
+  --color-surface-950: #302f32;
 }
+
+html.dark {
+  /* Brand Colors - same in dark mode */
+  --color-primary: #de6826;
+  --color-secondary: #f6daa6;
+
+  /* Surface colors - dark theme (inverted) */
+  --color-surface-50: #302f32;
+  --color-surface-100: #3c3b3f;
+  --color-surface-200: #464644;
+  --color-surface-300: #504f4e;
+  --color-surface-400: #5e5d5c;
+  --color-surface-500: #6f6f6b;
+  --color-surface-600: #8a8a86;
+  --color-surface-700: #b1b0af;
+  --color-surface-800: #d1d1d0;
+  --color-surface-900: #e7e7e6;
+  --color-surface-950: #f6f6f5;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 
 html {
   overflow-y: scroll;
@@ -15,124 +66,25 @@ html.dark {
   color-scheme: dark;
 }
 
-html,
 body {
-  @apply size-full;
-  @apply font-sans;
+  min-height: 100vh;
+  font-family: 'Public Sans', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  @apply font-sans antialiased;
-  @apply flex flex-col;
-  @apply bg-surface;
-  @apply text-surface10;
-}
-
-/* header {
-  @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-stone-100/75 dark:bg-stone-900/25;
-  @apply backdrop-blur-sm saturate-200;
-} */
-
-header {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-header:not(.scrolled) {
-  @apply bg-transparent;
-}
-
-header.scrolled {
-  @apply bg-surface/75;
-  @apply backdrop-blur-sm saturate-200;
-}
-
-main {
-  @apply flex-1 pt-32 pb-16;
-}
-
-footer {
-  @apply py-5 text-sm;
-}
-
-article {
-  @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-sans prose-headings:font-sans;
-  @apply prose-headings:text-surface10;
-}
-
-@layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-2;
-    @apply decoration-surface10/15;
-    @apply transition-colors duration-300 ease-in-out;
-  }
-  article a:hover {
-    @apply text-surface10;
-    @apply decoration-surface10/25;
-  }
-}
-
-@layer base {
-  :root {
-    --color-primary: #de6826;
-    --color-secondary: #f6daa6;
-    --color-surface-50: #f6f6f5;
-    --color-surface-100: #d1d1d0;
-    --color-surface-200: #d5d9e2;
-    --color-surface-300: #b1b0af;
-    --color-surface-400: #8a8a86;
-    --color-surface-500: #6f6f6b;
-    --color-surface-600: #5e5d5c;
-    --color-surface-700: #504f4e;
-    --color-surface-800: #464644;
-    --color-surface-900: #3c3b3f;
-    --color-surface-950: #302f32;
-  }
-  html.dark {
-    --color-primary: #de6826;
-    --color-secondary: #f6daa6;
-    --color-surface-50: #302f32;
-    --color-surface-100: #3c3b3f;
-    --color-surface-200: #464644;
-    --color-surface-300: #504f4e;
-    --color-surface-400: #5e5d5c;
-    --color-surface-500: #6f6f6b;
-    --color-surface-600: #8a8a86;
-    --color-surface-700: #b1b0af;
-    --color-surface-800: #d1d1d0;
-    --color-surface-900: #e7e7e6;
-    --color-surface-950: #f6f6f5;
-  }
-}
+/* ==========================================================================
+   Animation Utilities
+   ========================================================================== */
 
 .animate {
-  @apply opacity-0 translate-y-3;
-  @apply transition-all duration-700 ease-out;
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: all 700ms ease-out;
 }
 
 .animate.show {
-  @apply opacity-100 translate-y-0;
-}
-
-html #back-to-top {
-  @apply opacity-0 pointer-events-none;
-}
-
-html.scrolled #back-to-top {
-  @apply opacity-100 pointer-events-auto;
-}
-
-.copy-cnt {
-  @apply absolute w-full;
-  top: var(--copy-btn-margin);
-}
-.copy-btn {
-  @apply w-[30px] fixed;
-  left: calc(100% - var(--copy-btn-margin));
-  transform: translateX(-100%);
-}
-
-.copy-svg {
-  @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
+  opacity: 1;
+  transform: translateY(0);
 }
