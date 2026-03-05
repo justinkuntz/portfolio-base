@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Search Component Styles
+   ========================================================================== */
+
+.search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Search Input
+   ========================================================================== */
+
+.search__input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.search__input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  padding-left: 2.75rem;
+  font-size: var(--text-base);
+  color: var(--text-1);
+  background-color: color-mix(in srgb, var(--text-1) 5%, transparent);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all var(--transition-base);
+}
+
+.search__input::placeholder {
+  color: var(--text-3);
+}
+
+.search__input:focus {
+  border-color: var(--brand-primary);
+  background-color: var(--surface-1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-primary) 10%, transparent);
+}
+
+.search__icon {
+  position: absolute;
+  left: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  color: var(--text-2);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Search Results
+   ========================================================================== */
+
+.search__results {
+  margin-top: var(--space-3xl);
+}
+
+.search__results-header {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-2);
+  margin-bottom: var(--space-md);
+}
+
+.search__results-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search__results-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-sm));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

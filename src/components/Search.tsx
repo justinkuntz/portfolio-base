@@ -2,6 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import { createEffect, createSignal } from "solid-js";
 import Fuse from "fuse.js";
 import ArrowCard from "./ArrowCard";
+import "./Search.css";
 
 type Props = {
   data: CollectionEntry<"blog">[]
@@ -32,21 +33,30 @@ export default function Search({data}: Props) {
   };
 
   return (
-    <div class="flex flex-col">
-      <div class="relative">
-        <input name="search" type="text" value={query()} onInput={onInput} autocomplete="off" spellcheck={false} placeholder="What are you looking for?" class="w-full px-2.5 py-1.5 pl-10 rounded outline-none text-surface10 bg-surface10/5 border border-surface10/10 focus:border-surface10"/>
-        <svg class="absolute size-6 left-1.5 top-1/2 -translate-y-1/2 stroke-current">
+    <div class="search">
+      <div class="search__input-wrapper">
+        <input
+          name="search"
+          type="text"
+          value={query()}
+          onInput={onInput}
+          autocomplete="off"
+          spellcheck={false}
+          placeholder="What are you looking for?"
+          class="search__input"
+        />
+        <svg class="search__icon">
           <use href={`/ui.svg#search`}/>
         </svg>
       </div>
       {(query().length >= 2 && results().length >= 1) && (
-        <div class="mt-12">
-          <div class="text-sm uppercase mb-2">
+        <div class="search__results">
+          <div class="search__results-header">
             Found {results().length} results for {`'${query()}'`}
           </div>
-          <ul class="flex flex-col gap-3">
+          <ul class="search__results-list">
             {results().map(result => (
-              <li>
+              <li class="search__results-item">
                 <ArrowCard entry={result} pill={true} />
               </li>
             ))}

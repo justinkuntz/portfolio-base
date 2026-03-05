@@ -1,7 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 import { createEffect, createSignal, For } from "solid-js";
 import ProjectsWaterfall from "@components/ProjectsWaterfall";
-import { cn } from "@lib/utils";
+import "./Projects.css";
 
 type Props = {
   tags: string[]
@@ -13,9 +13,9 @@ export default function Projects({ data, tags }: Props) {
   const [projects, setProjects] = createSignal<CollectionEntry<"projects">[]>([]);
 
   createEffect(() => {
-    setProjects(data.filter((entry) => 
-      Array.from(filter()).every((value) => 
-        entry.data.tags.some((tag:string) => 
+    setProjects(data.filter((entry) =>
+      Array.from(filter()).every((value) =>
+        entry.data.tags.some((tag:string) =>
           tag.toLowerCase() === String(value).toLowerCase()
         )
       )
@@ -23,27 +23,31 @@ export default function Projects({ data, tags }: Props) {
   });
 
   function toggleTag(tag: string) {
-    setFilter((prev) => 
-      new Set(prev.has(tag) 
-        ? [...prev].filter((t) => t !== tag) 
+    setFilter((prev) =>
+      new Set(prev.has(tag)
+        ? [...prev].filter((t) => t !== tag)
         : [...prev, tag]
       )
     );
   }
 
   return (
-    <div class="grid grid-cols-1 gap-6">
-      <div class="col-span-3 w-full mt-12 md:mt-24">
-        <div class="flex items-center justify-end gap-3">
-          <div class="text-sm font-semibold uppercase text-surface10">Filter:</div>
-          <ul class="flex flex-wrap gap-1.5">
+    <div class="projects">
+      <div class="projects__filter-section">
+        <div class="projects__filter">
+          <div class="projects__filter-label">Filter:</div>
+          <ul class="projects__filter-list">
             <For each={tags}>
               {(tag) => (
-                <li>
-                  <button onClick={() => toggleTag(tag)} class={cn("w-full px-2 py-1 rounded", "whitespace-nowrap overflow-hidden overflow-ellipsis", "flex gap-2 items-center", "bg-surface10/5", "hover:bg-surface10/10", "transition-colors duration-300 ease-in-out", filter().has(tag) && "text-surface10")}>
-                    <svg class={cn("size-5 fill-surface10/50", "transition-colors duration-300 ease-in-out", filter().has(tag) && "fill-surface10")}>
-                      <use href={`/ui.svg#square`} class={cn(!filter().has(tag) ? "block" : "hidden")} />
-                      <use href={`/ui.svg#square-check`} class={cn(filter().has(tag) ? "block" : "hidden")} />
+                <li class="projects__filter-item">
+                  <button
+                    class="projects__filter-button"
+                    classList={{ "projects__filter-button--active": filter().has(tag) }}
+                    onClick={() => toggleTag(tag)}
+                  >
+                    <svg class="projects__filter-icon">
+                      <use href={`/ui.svg#square`} style={{ display: !filter().has(tag) ? "block" : "none" }} />
+                      <use href={`/ui.svg#square-check`} style={{ display: filter().has(tag) ? "block" : "none" }} />
                     </svg>
                     {tag}
                   </button>
@@ -53,8 +57,8 @@ export default function Projects({ data, tags }: Props) {
           </ul>
         </div>
       </div>
-      <div class="col-span-3">
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div class="projects__list-section">
+        <div class="projects__list">
           {projects().map((project) => (
             <ProjectsWaterfall entry={project} />
           ))}

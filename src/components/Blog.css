@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Blog Component Styles
+   ========================================================================== */
+
+.blog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+  width: 100%;
+}
+
+/* ==========================================================================
+   Filter Section
+   ========================================================================== */
+
+.blog__filter-section {
+  width: 100%;
+}
+
+.blog__filter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.blog__filter-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-2);
+}
+
+.blog__filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog__filter-item {
+  display: inline-flex;
+}
+
+.blog__filter-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  text-transform: capitalize;
+  color: var(--text-2);
+  background-color: transparent;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.blog__filter-button:hover {
+  background-color: color-mix(in srgb, var(--text-1) 5%, transparent);
+  border-color: var(--text-1);
+  color: var(--text-1);
+}
+
+.blog__filter-button--active {
+  background-color: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: white;
+}
+
+.blog__filter-button--active:hover {
+  background-color: color-mix(in srgb, var(--brand-primary) 90%, black);
+  border-color: color-mix(in srgb, var(--brand-primary) 90%, black);
+}
+
+.blog__filter-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: currentColor;
+}
+
+/* ==========================================================================
+   Posts Section
+   ========================================================================== */
+
+.blog__posts-section {
+  width: 100%;
+}
+
+.blog__posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog__posts-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-sm));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
