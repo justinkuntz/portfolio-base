@@ -374,9 +374,27 @@ const work = await Promise.all(
   .about__quote {
     margin-top: var(--space-12);
     margin-bottom: var(--space-12);
-    border-left: 2px solid rgb(from var(--color-surface-950) r g b / 0.3);
-    padding-left: var(--space-8);
-    padding-block: var(--space-2);
+    /* margin-left: calc(-1 * var(--space-4)); */
+    padding-left: var(--space-6);
+    padding-block: var(--space-4);
+    border-left: 4px solid rgb(from var(--color-surface-950) r g b / 0.3);
+  }
+
+  .about__quote blockquote {
+    border: none;
+    padding: 0;
+    padding-inline: 0;
+    margin: 0;
+    max-inline-size: none;
+    width: 100%;
+    display: block;
+  }
+
+  .about__quote blockquote p {
+    padding-left: 0;
+    padding-inline-start: 0;
+    margin: 0;
+    max-width: none;
   }
 
   @media (min-width: 768px) {
@@ -395,10 +413,18 @@ const work = await Promise.all(
   }
 
   .about__quote-caption {
-    margin-top: var(--space-8);
+    margin-top: var(--space-4);
+    margin-left: auto;
+    margin-right: var(--space-4);
+    width: fit-content;
     display: flex;
     gap: var(--space-4);
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .about__quote-meta {
+    text-align: right;
   }
 
   .about__quote-avatar {
