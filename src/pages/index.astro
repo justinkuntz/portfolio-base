@@ -256,7 +256,12 @@ const projects = (await getCollection("projects"))
     gap: var(--space-6);
     list-style: none;
     padding: 0;
+    padding-inline-start: 0;
     margin: 0;
+  }
+
+  .home__blog-list > li {
+    padding-inline-start: 0;
   }
 
   @media (min-width: 1024px) {

@@ -19,6 +19,7 @@
 html {
   overflow-y: scroll;
   color-scheme: light;
+  background-color: var(--color-surface-100);
 }
 
 html.dark {
@@ -38,7 +39,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface-50);
+  background-color: var(--color-surface-100);
   color: var(--color-surface-950);
 }
 
@@ -59,6 +60,7 @@ main {
   flex: 1;
   padding-top: var(--space-32);
   padding-bottom: var(--space-16);
+  background-color: var(--color-surface-50);
 }
 
 footer {
