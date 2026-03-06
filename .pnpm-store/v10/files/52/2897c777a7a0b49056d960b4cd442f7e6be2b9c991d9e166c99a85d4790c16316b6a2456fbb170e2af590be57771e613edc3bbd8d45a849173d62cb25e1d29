@@ -1,0 +1,29 @@
+import { CheerioAPI, Cheerio } from 'cheerio';
+import { FuseIndexOptions } from 'fuse.js';
+
+type SourceBaseSearchable = {
+    content: string;
+    fileUrl: string;
+    frontmatter: Record<string, any>;
+};
+type OutputBaseSearchable = {
+    content: string;
+    frontmatter: Record<string, any>;
+    pathname: string;
+};
+type Searchable = OutputBaseSearchable | SourceBaseSearchable;
+type BaseAstroFuseOptions = {
+    filename?: string;
+    filter?: (pathname: string) => boolean;
+};
+type SourceBaseAstroFuseOptions = {
+    basedOn?: 'source';
+} & BaseAstroFuseOptions & Partial<FuseIndexOptions<SourceBaseSearchable>>;
+type OutputBaseAstroFuseOptions = {
+    basedOn?: 'output';
+    extractContentFromHTML?: (($: CheerioAPI) => Cheerio<any>) | string;
+    extractFrontmatterFromHTML?: ($: CheerioAPI, pathname: string) => any;
+} & BaseAstroFuseOptions & Partial<FuseIndexOptions<OutputBaseSearchable>>;
+type AstroFuseOptions = OutputBaseAstroFuseOptions | SourceBaseAstroFuseOptions;
+
+export { AstroFuseOptions as A, OutputBaseAstroFuseOptions as O, Searchable as S, OutputBaseSearchable as a, SourceBaseAstroFuseOptions as b, SourceBaseSearchable as c };

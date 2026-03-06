@@ -1,0 +1,220 @@
+---
+/**
+ * Button component: primary, secondary, ghost, outline, icon-only.
+ * Renders <a> when href is set, otherwise <button>.
+ */
+type Props = {
+  variant?: "primary" | "secondary" | "ghost" | "outline";
+  size?: "sm" | "md" | "lg";
+  href?: string;
+  iconLeft?: "arrow" | "arrow-left";
+  iconRight?: "arrow" | "arrow-left";
+  iconOnly?: boolean;
+  external?: boolean;
+  class?: string;
+  type?: "button" | "submit" | "reset";
+  [key: string]: unknown;
+};
+
+const {
+  variant = "primary",
+  size = "md",
+  href,
+  iconLeft,
+  iconRight,
+  iconOnly = false,
+  external = false,
+  class: className,
+  type,
+  ...rest
+} = Astro.props;
+
+const isLink = !!href;
+const hasContent = Astro.slots.has("default");
+const showText = hasContent && !iconOnly;
+const showSlotAsIcon = iconOnly && hasContent;
+---
+
+{isLink ? (
+  <a
+    href={href}
+    target={external ? "_blank" : undefined}
+    rel={external ? "noopener noreferrer" : undefined}
+    class:list={["btn", `btn--${variant}`, `btn--${size}`, iconOnly && "btn--icon-only", className]}
+    {...rest}
+  >
+    {iconLeft && (
+      <svg class="btn__icon arrow-animated btn__icon--left" class:list={[iconLeft === "arrow-left" && "arrow-animated--left"]} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line" />
+        <polyline points={iconLeft === "arrow-left" ? "12 5 5 12 12 19" : "12 5 19 12 12 19"} class="arrow-animated__poly" />
+      </svg>
+    )}
+    {showText ? <span class="btn__content"><slot /></span> : showSlotAsIcon ? <span class="btn__content"><slot /></span> : null}
+    {iconRight && (
+      <svg class="btn__icon arrow-animated btn__icon--right" class:list={[iconRight === "arrow-left" && "arrow-animated--left"]} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line" />
+        <polyline points={iconRight === "arrow-left" ? "12 5 5 12 12 19" : "12 5 19 12 12 19"} class="arrow-animated__poly" />
+      </svg>
+    )}
+  </a>
+) : (
+  <button
+    type={type === "submit" || type === "reset" ? type : "button"}
+    class:list={["btn", `btn--${variant}`, `btn--${size}`, iconOnly && "btn--icon-only", className]}
+    {...rest}
+  >
+    {iconLeft && (
+      <svg class="btn__icon arrow-animated btn__icon--left" class:list={[iconLeft === "arrow-left" && "arrow-animated--left"]} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line" />
+        <polyline points={iconLeft === "arrow-left" ? "12 5 5 12 12 19" : "12 5 19 12 12 19"} class="arrow-animated__poly" />
+      </svg>
+    )}
+    {showText ? <span class="btn__content"><slot /></span> : showSlotAsIcon ? <span class="btn__content"><slot /></span> : null}
+    {iconRight && (
+      <svg class="btn__icon arrow-animated btn__icon--right" class:list={[iconRight === "arrow-left" && "arrow-animated--left"]} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line" />
+        <polyline points={iconRight === "arrow-left" ? "12 5 5 12 12 19" : "12 5 19 12 12 19"} class="arrow-animated__poly" />
+      </svg>
+    )}
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-sans);
+    font-weight: var(--font-medium);
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    white-space: nowrap;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .btn--sm {
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-sm);
+    gap: var(--space-1);
+  }
+
+  .btn--md {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-base);
+  }
+
+  .btn--lg {
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-lg);
+  }
+
+  .btn--primary {
+    background-color: var(--color-surface-900);
+    color: var(--color-surface-50);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn--primary:hover {
+    background-color: var(--color-surface-800);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn--primary:active {
+    box-shadow: var(--shadow-sm);
+  }
+
+  html.dark .btn--primary {
+    background-color: var(--color-surface-100);
+    color: var(--color-surface-950);
+  }
+
+  html.dark .btn--primary:hover {
+    background-color: var(--color-surface-200);
+  }
+
+  .btn--secondary {
+    background-color: var(--color-surface-200);
+    color: var(--color-surface-950);
+    border: 1px solid var(--color-surface-400);
+  }
+
+  .btn--secondary:hover {
+    background-color: var(--color-surface-300);
+    border-color: var(--color-surface-500);
+  }
+
+  .btn--outline {
+    background-color: transparent;
+    color: var(--color-surface-950);
+    border: 1px solid rgb(from var(--color-surface-950) r g b / 0.15);
+  }
+
+  .btn--outline:hover {
+    background-color: rgb(from var(--color-surface-950) r g b / 0.05);
+    border-color: rgb(from var(--color-surface-950) r g b / 0.25);
+  }
+
+  .btn--ghost {
+    background-color: transparent;
+    color: currentColor;
+    border: none;
+  }
+
+  .btn--ghost:hover {
+    background-color: rgb(from var(--color-surface-950) r g b / 0.05);
+    color: var(--color-surface-950);
+  }
+
+  .btn--icon-only {
+    padding: var(--space-2);
+    border-radius: var(--radius-full);
+  }
+
+  .btn--icon-only.btn--sm {
+    padding: var(--space-1);
+  }
+
+  .btn--icon-only.btn--lg {
+    padding: var(--space-3);
+  }
+
+  .btn__icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .btn--sm .btn__icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .btn--lg .btn__icon {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .btn__icon--left {
+    margin-right: calc(var(--space-1) * -1);
+  }
+
+  .btn__icon--right {
+    margin-left: calc(var(--space-1) * -1);
+  }
+
+  .btn__icon {
+    transition: transform var(--transition-base);
+  }
+
+  .btn__content {
+    display: inline-block;
+  }
+</style>

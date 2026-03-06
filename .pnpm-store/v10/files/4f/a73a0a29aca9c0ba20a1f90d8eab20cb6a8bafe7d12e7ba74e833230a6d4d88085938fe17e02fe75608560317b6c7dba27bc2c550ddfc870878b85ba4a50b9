@@ -1,0 +1,15 @@
+import Fuse, { IFuseOptions } from 'fuse.js';
+import { S as Searchable } from './types-bb14ef6d.js';
+import 'cheerio';
+
+interface ILoadFuseFn {
+    (opts?: {
+        init?: RequestInit;
+        options?: IFuseOptions<Searchable>;
+        url?: string;
+    }): Promise<Fuse<Searchable>>;
+    index?: any;
+}
+declare const loadFuse: ILoadFuseFn;
+
+export { ILoadFuseFn, Searchable, loadFuse };

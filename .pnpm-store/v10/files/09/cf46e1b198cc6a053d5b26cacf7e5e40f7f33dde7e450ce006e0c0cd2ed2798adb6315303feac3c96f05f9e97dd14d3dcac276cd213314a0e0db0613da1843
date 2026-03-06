@@ -1,0 +1,330 @@
+// src/index.ts
+import { existsSync as existsSync3 } from "fs";
+import { join as join3, relative as relative2 } from "path";
+
+// src/basedOnOutput.ts
+import * as cheerio from "cheerio";
+import Fuse from "fuse.js";
+import { convert } from "html-to-text";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { readFile } from "fs/promises";
+import { dirname, join, relative } from "path";
+function basedOnOutput({
+  config,
+  filename
+}) {
+  const outDir = config.outDir.pathname;
+  const outputPath = join(outDir, filename);
+  return {
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url?.endsWith(`/${filename}`)) {
+          const file = await readFile(outputPath);
+          return res.setHeader("Content-Type", "application/json").end(file);
+        }
+        return next();
+      });
+    },
+    name: PLUGIN_NAME
+  };
+}
+function writeFuseIndex({
+  buildDoneEvent,
+  config,
+  filename,
+  keys,
+  options
+}) {
+  const { logger, pages, routes } = buildDoneEvent;
+  let finalSiteBasePath;
+  if (config.site) {
+    finalSiteBasePath = new URL(config.base, config.site).pathname;
+  } else {
+    console.warn(
+      "The astro-fuse integration requires the `site` astro.config option when source mode. Skipping."
+    );
+    return;
+  }
+  let pagePaths = pages.map(({ pathname }) => {
+    if (pathname !== "" && !finalSiteBasePath.endsWith("/")) {
+      finalSiteBasePath += "/";
+    }
+    return finalSiteBasePath + pathname;
+  });
+  const routePaths = routes.reduce((urls, r) => {
+    if (r.type !== "page") {
+      return urls;
+    }
+    if (r.pathname) {
+      if (isStatusCodePage(r.pathname ?? r.route)) {
+        return urls;
+      }
+      const path = finalSiteBasePath + r.generate(r.pathname).substring(1);
+      if (config.trailingSlash === "never") {
+        urls.push(path);
+      } else if (config.build.format === "directory" && !path.endsWith("/")) {
+        urls.push(`${path}/`);
+      } else {
+        urls.push(path);
+      }
+    }
+    return urls;
+  }, []);
+  pagePaths = Array.from(/* @__PURE__ */ new Set([...pagePaths, ...routePaths]));
+  try {
+    if (options?.filter) {
+      pagePaths = pagePaths.filter(options.filter);
+    }
+  } catch (err) {
+    logger.error(`Error filtering pages
+${String(err)}`);
+    return;
+  }
+  if (pagePaths.length === 0) {
+    logger.warn(`No pages found!
+\`${filename}\` not created.`);
+    return;
+  }
+  const outDir = config.outDir.pathname;
+  const outputPath = join(outDir, filename);
+  if (!existsSync(outDir)) {
+    mkdirSync(dirname(outputPath));
+  }
+  const list = [];
+  for (const path of pagePaths) {
+    const filePath = path.endsWith("/") ? `${path}index.html` : `${path}.html`;
+    let content = "";
+    try {
+      content = readFileSync(join(config.outDir.pathname, filePath), {
+        encoding: "utf8"
+      }).toString();
+    } catch (err) {
+      logger.warn(`Skipped!
+No output found! ${filePath}`);
+      continue;
+    }
+    const $ = cheerio.load(content);
+    if (options?.extractContentFromHTML) {
+      if (typeof options.extractContentFromHTML === "string") {
+        content = $(options.extractContentFromHTML).html() ?? "";
+      } else {
+        content = options.extractContentFromHTML($).html() ?? "";
+      }
+    }
+    if (!content) {
+      logger.warn(`Skipped!
+No content! ${filePath}`);
+      continue;
+    }
+    let frontmatter = {};
+    if (options?.extractFrontmatterFromHTML) {
+      frontmatter = options.extractFrontmatterFromHTML($, path);
+    } else {
+      let title = $('meta[property="og:title"]').first().text();
+      if (!title) {
+        title = $("h1").first().text();
+      }
+      frontmatter = { title };
+    }
+    list.push({ content: convert(content), frontmatter, pathname: path });
+  }
+  const index = Fuse.createIndex(
+    keys,
+    list,
+    options?.getFn ? { getFn: options.getFn } : void 0
+  );
+  writeFileSync(outputPath, JSON.stringify({ index: index.toJSON(), list }));
+  logger.info(
+    `\`${filename}\` created at \`${relative(process.cwd(), dirname(outputPath))}\``
+  );
+}
+var STATUS_CODE_PAGES = /* @__PURE__ */ new Set(["404", "500"]);
+function isStatusCodePage(pathname) {
+  if (pathname.endsWith("/")) {
+    pathname = pathname.slice(0, -1);
+  }
+  const end = pathname.split("/").pop() ?? "";
+  return STATUS_CODE_PAGES.has(end);
+}
+
+// src/basedOnSource.ts
+import Fuse2 from "fuse.js";
+import { load as load2 } from "js-yaml";
+import debounce from "lodash.debounce";
+import { createHmac } from "crypto";
+import { existsSync as existsSync2, mkdirSync as mkdirSync2, writeFileSync as writeFileSync2 } from "fs";
+import { readFile as readFile2, writeFile } from "fs/promises";
+import { dirname as dirname2, join as join2 } from "path";
+function basedOnSource({
+  config,
+  filename,
+  keys,
+  options
+}) {
+  const outDir = config.outDir.pathname;
+  const outputPath = join2(outDir, filename);
+  if (!existsSync2(outDir)) {
+    mkdirSync2(dirname2(outputPath));
+    writeFileSync2(outputPath, "{}");
+  }
+  const result = /* @__PURE__ */ new Map();
+  const buffer = /* @__PURE__ */ new Map();
+  const writeFuseIndex2 = debounce(
+    () => {
+      let diff = false;
+      buffer.forEach(([hash, searchable], fileId) => {
+        const doc = result.get(fileId);
+        if (!doc || doc[0] !== hash) {
+          diff = true;
+          result.set(fileId, [hash, searchable]);
+        }
+      });
+      if (diff) {
+        const list = Array.from(result.values()).map(
+          ([, searchable]) => searchable
+        );
+        const index = Fuse2.createIndex(
+          keys,
+          list,
+          options?.getFn ? { getFn: options.getFn } : void 0
+        );
+        writeFile(outputPath, JSON.stringify({ index: index.toJSON(), list }));
+      }
+    },
+    process.env.NODE_ENV === "production" ? 0 : 500
+  );
+  return {
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        if (req.url?.endsWith(`/${filename}`)) {
+          const file = await readFile2(outputPath);
+          return res.setHeader("Content-Type", "application/json").end(file);
+        }
+        return next();
+      });
+    },
+    name: PLUGIN_NAME,
+    async transform(_, id) {
+      if (!id.match(/\.mdx?/)) {
+        return;
+      }
+      const path = `/${id.replace(new RegExp(`^${config.root.pathname}`), "")}`;
+      if (!path.startsWith("/src/content")) {
+        return;
+      }
+      if (options?.filter?.(path) === false) {
+        return;
+      }
+      const { fileId, fileUrl } = getFileInfo(id, config);
+      const content = await readFile2(fileId, "utf-8");
+      const hash = createHmac("sha256", content).digest("hex").substring(0, 8);
+      const frontmatter = getFrontmatter(content);
+      buffer.set(fileId, [hash, { content, fileUrl, frontmatter }]);
+      writeFuseIndex2();
+    }
+  };
+}
+function appendForwardSlash(path) {
+  return path.endsWith("/") ? path : `${path}/`;
+}
+function getFileInfo(id, config) {
+  const sitePathname = appendForwardSlash(
+    config.site ? new URL(config.base, config.site).pathname : config.base
+  );
+  let url;
+  try {
+    url = new URL(`file://${id}`);
+  } catch {
+  }
+  const fileId = id.split("?")[0];
+  let fileUrl;
+  const isPage = fileId.includes("/pages/");
+  if (isPage) {
+    fileUrl = fileId.replace(/^.*?\/pages\//, sitePathname).replace(/(\/index)?\.mdx$/, "");
+  } else if (url && url.pathname.startsWith(config.root.pathname)) {
+    fileUrl = url.pathname.slice(config.root.pathname.length);
+  } else {
+    fileUrl = fileId;
+  }
+  if (fileUrl && config.trailingSlash === "always") {
+    fileUrl = appendForwardSlash(fileUrl);
+  }
+  return { fileId, fileUrl };
+}
+var FRONTMATTER_REGEX = /^---\s*([\s\S]*?)\s*---/;
+function getFrontmatter(source) {
+  const match = FRONTMATTER_REGEX.exec(source);
+  if (!match) {
+    return {};
+  }
+  const [, value] = match;
+  if (!value) {
+    return {};
+  }
+  return load2(value);
+}
+
+// src/index.ts
+var PLUGIN_NAME = "astro-fuse";
+function astroFuse(keys, options) {
+  let config;
+  let outDir = "";
+  const _keys = keys ?? ["content"];
+  const basedOn = options?.basedOn ?? "output";
+  const filename = options?.filename ?? "fuse.json";
+  return {
+    hooks: {
+      "astro:build:done": (buildDoneEvent) => {
+        if (basedOn === "source") {
+          if (existsSync3(join3(outDir, filename))) {
+            buildDoneEvent.logger.info(
+              `\`${filename}\` created at \`${relative2(process.cwd(), outDir)}\``
+            );
+          }
+          return;
+        }
+        if (basedOn !== "output") {
+          return;
+        }
+        writeFuseIndex({
+          buildDoneEvent,
+          config,
+          filename,
+          keys: _keys,
+          options
+        });
+      },
+      "astro:config:done": ({ config: cfg }) => {
+        config = cfg;
+      },
+      "astro:config:setup": ({ config: config2, updateConfig }) => {
+        outDir = config2.outDir.pathname;
+        if (basedOn === "source") {
+          updateConfig({
+            vite: {
+              plugins: [
+                basedOnSource({
+                  config: config2,
+                  filename,
+                  keys: _keys,
+                  options
+                })
+              ]
+            }
+          });
+        } else if (basedOn === "output") {
+          updateConfig({
+            vite: {
+              plugins: [basedOnOutput({ config: config2, filename })]
+            }
+          });
+        }
+      }
+    },
+    name: PLUGIN_NAME
+  };
+}
+export {
+  PLUGIN_NAME,
+  astroFuse as default
+};

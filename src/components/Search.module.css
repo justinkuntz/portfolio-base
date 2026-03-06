@@ -1,0 +1,60 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding-inline: 0.625rem;
+  padding-block: 0.375rem;
+  padding-left: 2.5rem;
+  border-radius: var(--radius-md);
+  outline: none;
+  border: 1px solid rgb(from var(--color-surface-950) r g b / 0.1);
+  background-color: rgb(from var(--color-surface-950) r g b / 0.05);
+  color: var(--color-surface-950);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+}
+
+.input:focus {
+  border-color: var(--color-surface-950);
+}
+
+.input::placeholder {
+  color: var(--color-surface-500);
+}
+
+.inputIcon {
+  position: absolute;
+  left: 0.375rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: currentColor;
+  pointer-events: none;
+}
+
+.results {
+  margin-top: var(--space-12);
+}
+
+.resultsLabel {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.resultsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

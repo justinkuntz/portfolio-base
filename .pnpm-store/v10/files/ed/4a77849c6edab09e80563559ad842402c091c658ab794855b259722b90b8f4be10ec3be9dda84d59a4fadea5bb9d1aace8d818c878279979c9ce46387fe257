@@ -1,0 +1,10 @@
+import { AstroIntegration } from 'astro';
+import { FuseOptionKey } from 'fuse.js';
+import { S as Searchable, A as AstroFuseOptions } from './types-bb14ef6d.js';
+export { O as OutputBaseAstroFuseOptions, a as OutputBaseSearchable, b as SourceBaseAstroFuseOptions, c as SourceBaseSearchable } from './types-bb14ef6d.js';
+import 'cheerio';
+
+declare const PLUGIN_NAME = "astro-fuse";
+declare function astroFuse(keys: FuseOptionKey<Searchable>[], options?: AstroFuseOptions): AstroIntegration;
+
+export { AstroFuseOptions, PLUGIN_NAME, Searchable, astroFuse as default };

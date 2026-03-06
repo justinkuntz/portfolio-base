@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard";
+import Button from "@components/Button.astro";
 import { SITE, HOME } from "@consts";
 import { Image } from "astro:assets";
 import profileImage from "@assets/temp-profile.avif";
@@ -21,51 +22,31 @@ const projects = (await getCollection("projects"))
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container size="xl">
-    <div class="space-y-16">
-      <section class="grid md:grid-cols-12 gap-10">
-        <article class="md:col-span-7 space-y-4 max-h-fit">
-          <div class="flex flex-col-reverse">
-            <h1
-              class="animate font-bold text-surface10 text-5xl md:text-6xl lg:text-7xl tracking-tight mb-4"
-            >
+    <div class="home">
+      <section class="home__hero">
+        <article class="home__hero-content">
+          <div class="home__hero-text">
+            <h1 class="home__headline animate">
               An illustrator, engineer, and designer from Oregon.
             </h1>
-            <h2 class="animate font-normal text-surface10 mt-0">I'm Popeye,</h2>
+            <h2 class="home__greeting animate">I'm Popeye,</h2>
           </div>
-          <p class="animate text-lg md:text-xl">
+          <p class="home__description animate">
             I am passionate about creativity and technology. I love to create
             things that are not only functional but also beautiful.
           </p>
-          <div class="animate pt-6 flex gap-4 h-fit">
-            <a
-              href="/projects"
-              class="inline-flex items-center justify-center rounded-md bg-surface1 px-5 py-3 text-lg font-medium text-surface10 shadow-xs hover:bg-surface10/10 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
-            >
+          <div class="home__actions animate">
+            <Button href="/projects" variant="primary" size="lg" iconRight="arrow">
               See my work
-              <svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-                ><path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
-            </a>
-            <a
-              href="/about"
-              class="inline-flex items-center justify-center px-5 py-3 text-lg font-medium no-underline text-center text-surface10 border border-surface2 rounded-md hover:bg-surface10/10 focus:ring-4 focus:ring-secondary"
-            >
+            </Button>
+            <Button href="/about" variant="outline" size="lg">
               About me
-            </a>
+            </Button>
           </div>
         </article>
-        <div
-          class="md:col-span-5 relative order-first md:order-last items-center"
-        >
+        <div class="home__image-wrap">
           <Image
-            class="object-cover w-full rounded-md h-96 md:h-auto bg-surface6"
+            class="home__image animate"
             src={profileImage}
             alt="Popeye the Sailor"
             width={800}
@@ -76,54 +57,34 @@ const projects = (await getCollection("projects"))
         </div>
       </section>
 
-      <section class="animate space-y-6">
-        <div class="animate pt-6 flex h-fit mb-12">
-          <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
-            <a
-              href="/projects"
-              class="inline-flex gap-1 items-center hover:text-surface10/60"
-            >
-              Projects<svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
+      <section class="home__section animate">
+        <div class="home__section-head">
+          <h2 class="home__section-title">
+            <a href="/projects" class="home__section-link">
+              Projects
+              <svg class="home__section-icon arrow-animated" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line" />
+                <polyline points="12 5 19 12 12 19" class="arrow-animated__poly" />
+              </svg>
             </a>
           </h2>
         </div>
         <AnimatedProjects projects={projects} client:load />
       </section>
 
-      <section class="animate mt-8 space-y-6">
-        <div class="animate pt-6 flex h-fit">
-          <h2 class="text-2xl sm:text-3xl font-normal text-surface10/40">
-            <a
-              href="/blog"
-              class="inline-flex gap-1 items-center hover:text-surface10/60"
-            >
-              Writing<svg
-                class="w-5 h-5 ml-2 -mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                  clip-rule="evenodd"></path></svg
-              >
+      <section class="home__section animate">
+        <div class="home__section-head">
+          <h2 class="home__section-title">
+            <a href="/blog" class="home__section-link">
+              Writing
+              <svg class="home__section-icon arrow-animated" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line" />
+                <polyline points="12 5 19 12 12 19" class="arrow-animated__poly" />
+              </svg>
             </a>
           </h2>
         </div>
-        <ul
-          class="mt-16 grid grid-cols-1 gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-3"
-        >
+        <ul class="home__blog-list">
           {
             blog.map((post) => (
               <li>
@@ -136,3 +97,172 @@ const projects = (await getCollection("projects"))
     </div>
   </Container>
 </PageLayout>
+
+<style>
+  .home {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  .home__hero {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .home__hero {
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+
+  .home__hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-height: fit-content;
+  }
+
+  @media (min-width: 768px) {
+    .home__hero-content {
+      grid-column: span 7;
+    }
+  }
+
+  .home__hero-text {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .home__greeting {
+    font-weight: 400;
+    color: var(--color-surface-950);
+    margin-top: 0;
+  }
+
+  .home__headline {
+    font-weight: var(--font-bold);
+    color: var(--color-surface-950);
+    font-size: var(--text-5xl);
+    letter-spacing: -0.025em;
+    margin-bottom: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .home__headline {
+      font-size: var(--text-6xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home__headline {
+      font-size: var(--text-7xl);
+    }
+  }
+
+  .home__description {
+    font-size: var(--text-lg);
+  }
+
+  @media (min-width: 768px) {
+    .home__description {
+      font-size: var(--text-xl);
+    }
+  }
+
+  .home__actions {
+    padding-top: var(--space-6);
+    display: flex;
+    gap: var(--space-4);
+    height: fit-content;
+  }
+
+  .home__image-wrap {
+    position: relative;
+    order: -1;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .home__image-wrap {
+      grid-column: span 5;
+      order: unset;
+    }
+  }
+
+  .home__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-600);
+  }
+
+  @media (min-width: 768px) {
+    .home__image {
+      height: auto;
+    }
+  }
+
+  .home__section {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .home__section-head {
+    padding-top: var(--space-6);
+    height: fit-content;
+  }
+
+  .home__section-title {
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    color: rgb(from var(--color-surface-950) r g b / 0.4);
+  }
+
+  @media (min-width: 640px) {
+    .home__section-title {
+      font-size: var(--text-3xl);
+    }
+  }
+
+  .home__section-link {
+    display: inline-flex;
+    gap: var(--space-1);
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-base);
+  }
+
+  .home__section-link:hover {
+    color: rgb(from var(--color-surface-950) r g b / 0.6);
+  }
+
+  .home__section-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-left: var(--space-0.5);
+    margin-right: -0.25rem;
+    transform: translateY(0.05em);
+  }
+
+  .home__blog-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .home__blog-list {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: none;
+    }
+  }
+</style>

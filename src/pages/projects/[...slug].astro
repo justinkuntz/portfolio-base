@@ -16,12 +16,10 @@ export async function getStaticPaths() {
 }
 type Props = CollectionEntry<"projects">;
 
-// Get the requested entry
 const project = Astro.props;
 const { collection } = project;
 const { Content } = await project.render();
 
-// Get the next and prev entries (modulo to wrap index)
 const items = (await getCollection(collection))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -35,16 +33,14 @@ const next = items[(index + 1) % items.length];
   description={project.data.description || ""}
 >
   <Container size="xl">
-    <div
-      class="w-full mx-auto mt-4 lg:mt-16 mb-12 lg:mb-16 grid grid-cols-1 lg:grid-cols-2 gap-4"
-    >
-      <div>
-        <h1 class="animate text-5xl lg:text-6xl font-semibold text-surface10">
+    <div class="project-hero">
+      <div class="project-hero__main">
+        <h1 class="project-hero__title animate">
           {project.data.title}
         </h1>
         {
           (project.data.demoURL || project.data.repoURL) && (
-            <nav class="mt-4 animate flex gap-1">
+            <nav class="project-hero__links animate">
               {project.data.demoURL && (
                 <Link href={project.data.demoURL} external>
                   {project.data.demoText}
@@ -62,15 +58,15 @@ const next = items[(index + 1) % items.length];
           )
         }
       </div>
-      <div class="mt-4 lg:mt-0">
-        <h2 class="animate text-xl lg:text-2xl font-light text-surface10">
+      <div class="project-hero__desc">
+        <h2 class="project-hero__desc-title animate">
           {project.data.description}
         </h2>
       </div>
     </div>
-    <div>
+    <div class="project-hero-image">
       <Image
-        class="object-cover w-full h-72 md:h-[36rem] lg:h-[48rem] bg-surface6"
+        class="project-hero-image__img"
         src={project.data.heroImage}
         alt={project.data.heroImageAlt}
         width={1200}
@@ -80,130 +76,268 @@ const next = items[(index + 1) % items.length];
         loading="eager"
       />
     </div>
-    <article
-      class="grid grid-cols-[repeat(auto-fit,_minmax(220px,_1fr))] gap-8 mt-16 mb-24"
-    >
+    <article class="project-article">
       {
         project.data.challenge && (
-          <div class="animate w-full">
-            <h3 class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20">
-              Challenge
-            </h3>
-            <p class="m-0">{project.data.challenge}</p>
+          <div class="project-article__block animate">
+            <h3 class="project-article__heading">Challenge</h3>
+            <p class="project-article__p">{project.data.challenge}</p>
           </div>
         )
       }
       {
         project.data.solution && (
-          <div class="animate w-full">
-            <h3 class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20">
-              Solution
-            </h3>
-            <p class="m-0">{project.data.solution}</p>
+          <div class="project-article__block animate">
+            <h3 class="project-article__heading">Solution</h3>
+            <p class="project-article__p">{project.data.solution}</p>
           </div>
         )
       }
       {
         project.data.results && (
-          <div class="animate w-full">
-            <h3 class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20">
-              Results
-            </h3>
-            <p class="m-0">{project.data.results}</p>
+          <div class="project-article__block animate">
+            <h3 class="project-article__heading">Results</h3>
+            <p class="project-article__p">{project.data.results}</p>
           </div>
         )
       }
-      <div class="animate w-full">
-        <h3
-          class="text-sm tracking-widest uppercase font-normal pt-4 md:pt-6 mb-4 md:mb-6 mt-0 border-t border-surface10/20"
-        >
-          Areas of Expertise
-        </h3>
-        <ul class="flex flex-wrap gap-3 p-0 m-0">
+      <div class="project-article__block animate">
+        <h3 class="project-article__heading">Areas of Expertise</h3>
+        <ul class="project-article__tags">
           {
             project.data.tags.map((tag) => (
-              <li class="px-3 py-1 rounded whitespace-nowrap overflow-hidden overflow-ellipsis flex gap-2 items-center bg-surface10/10 m-0">
-                {tag}
-              </li>
+              <li class="project-article__tag">{tag}</li>
             ))
           }
         </ul>
       </div>
     </article>
-    <article class="animate">
+    <article class="project-content animate">
       <Content />
     </article>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
-      <a
-        href={`/${prev.collection}/${prev.slug}`}
-        class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-surface10/5 border-surface10/15 blend"
-      >
-        <div class="order-2 w-full h-full group-hover:text-surface10 blend">
-          <div class="flex flex-wrap gap-2">
-            <div class="text-sm uppercase">Prev</div>
-          </div>
-          <div class="font-semibold mt-3 text-surface10">
-            {prev.data.title}
-          </div>
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="order-1 stroke-current group-hover:stroke-surface10 rotate-180"
-        >
-          <line
-            x1="5"
-            y1="12"
-            x2="19"
-            y2="12"
-            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-          ></line>
-          <polyline
-            points="12 5 19 12 12 19"
-            class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-          ></polyline>
+    <div class="post-nav">
+      <Link href={`/${prev.collection}/${prev.slug}`} class="post-nav__card post-nav__card--prev">
+        <span class="post-nav__body">
+          <span class="post-nav__label">Prev</span>
+          <span class="post-nav__title">{prev.data.title}</span>
+        </span>
+        <svg class="post-nav__arrow arrow-animated arrow-animated--left post-nav__arrow--left" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
+          <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"></polyline>
         </svg>
-      </a>
-      <a
-        href={`/${next.collection}/${next.slug}`}
-        class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-surface10/5 border-surface10/15 transition-colors duration-300 ease-in-out"
-      >
-        <div class="w-full h-full text-right group-hover:text-surface10 blend">
-          <div class="text-sm uppercase">Next</div>
-          <div class="font-semibold mt-3 text-surface10">
-            {next.data.title}
-          </div>
-        </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="stroke-current group-hover:stroke-surface10"
-        >
-          <line
-            x1="5"
-            y1="12"
-            x2="19"
-            y2="12"
-            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-          ></line>
-          <polyline
-            points="12 5 19 12 12 19"
-            class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-          ></polyline>
+      </Link>
+      <Link href={`/${next.collection}/${next.slug}`} class="post-nav__card post-nav__card--next">
+        <span class="post-nav__body post-nav__body--right">
+          <span class="post-nav__label">Next</span>
+          <span class="post-nav__title">{next.data.title}</span>
+        </span>
+        <svg class="post-nav__arrow arrow-animated" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
+          <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"></polyline>
         </svg>
-      </a>
+      </Link>
     </div>
   </Container>
 </PageLayout>
+
+<style>
+  .project-hero {
+    width: 100%;
+    margin-inline: auto;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-12);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  @media (min-width: 1024px) {
+    .project-hero {
+      margin-top: var(--space-16);
+      margin-bottom: var(--space-16);
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+  }
+
+  .project-hero__title {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-semibold);
+    color: var(--color-surface-950);
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .project-hero__title {
+      font-size: var(--text-6xl);
+    }
+  }
+
+  .project-hero__links {
+    margin-top: var(--space-4);
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .project-hero__desc {
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 1024px) {
+    .project-hero__desc {
+      margin-top: 0;
+    }
+  }
+
+  .project-hero__desc-title {
+    font-size: var(--text-xl);
+    font-weight: 300;
+    color: var(--color-surface-950);
+    margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .project-hero__desc-title {
+      font-size: var(--text-2xl);
+    }
+  }
+
+  .project-hero-image {
+    margin-bottom: var(--space-8);
+  }
+
+  .project-hero-image__img {
+    width: 100%;
+    height: 18rem;
+    object-fit: cover;
+    background-color: var(--color-surface-600);
+  }
+
+  @media (min-width: 768px) {
+    .project-hero-image__img {
+      height: 36rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-hero-image__img {
+      height: 48rem;
+    }
+  }
+
+  .project-article {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-8);
+    margin-top: var(--space-16);
+    margin-bottom: var(--space-24);
+  }
+
+  .project-article__heading {
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-4);
+    margin-top: 0;
+    border-top: 1px solid rgb(from var(--color-surface-950) r g b / 0.2);
+  }
+
+  @media (min-width: 768px) {
+    .project-article__heading {
+      padding-top: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+  }
+
+  .project-article__p {
+    margin: 0;
+  }
+
+  .project-article__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .project-article__tag {
+    padding-inline: var(--space-3);
+    padding-block: var(--space-1);
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: rgb(from var(--color-surface-950) r g b / 0.1);
+    margin: 0;
+  }
+
+  .project-content {
+    margin-top: var(--space-12);
+  }
+
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-12);
+  }
+
+  .post-nav__card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid rgb(from var(--color-surface-950) r g b / 0.15);
+    border-radius: var(--radius-lg);
+    color: currentColor;
+    text-decoration: none;
+    transition: background-color var(--transition-base), color var(--transition-base);
+  }
+
+  .post-nav__card:hover {
+    background-color: rgb(from var(--color-surface-950) r g b / 0.05);
+  }
+
+  .post-nav__card:hover .post-nav__title,
+  .post-nav__card:hover .post-nav__arrow {
+    color: var(--color-surface-950);
+    stroke: var(--color-surface-950);
+  }
+
+  .post-nav__card--prev .post-nav__arrow--left {
+    order: -1;
+    transform: rotate(180deg);
+  }
+
+  .post-nav__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .post-nav__body--right {
+    text-align: right;
+  }
+
+  .post-nav__label {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+  }
+
+  .post-nav__title {
+    display: block;
+    font-weight: var(--font-semibold);
+    margin-top: var(--space-3);
+    color: var(--color-surface-950);
+    transition: color var(--transition-base);
+  }
+
+  .post-nav__arrow {
+    flex-shrink: 0;
+    stroke: currentColor;
+    transition: stroke var(--transition-base);
+  }
+</style>

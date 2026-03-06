@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Default color theme (main branch palette)
+   Swap this file or override these variables to change the site palette.
+   ========================================================================== */
+
+:root {
+  --color-primary: #de6826;
+  --color-secondary: #f6daa6;
+  --color-surface-50: #f6f6f5;
+  --color-surface-100: #d1d1d0;
+  --color-surface-200: #d5d9e2;
+  --color-surface-300: #b1b0af;
+  --color-surface-400: #8a8a86;
+  --color-surface-500: #6f6f6b;
+  --color-surface-600: #5e5d5c;
+  --color-surface-700: #504f4e;
+  --color-surface-800: #464644;
+  --color-surface-900: #3c3b3f;
+  --color-surface-950: #302f32;
+}
+
+html.dark {
+  --color-primary: #de6826;
+  --color-secondary: #f6daa6;
+  --color-surface-50: #302f32;
+  --color-surface-100: #3c3b3f;
+  --color-surface-200: #464644;
+  --color-surface-300: #504f4e;
+  --color-surface-400: #5e5d5c;
+  --color-surface-500: #6f6f6b;
+  --color-surface-600: #8a8a86;
+  --color-surface-700: #b1b0af;
+  --color-surface-800: #d1d1d0;
+  --color-surface-900: #e7e7e6;
+  --color-surface-950: #f6f6f5;
+}

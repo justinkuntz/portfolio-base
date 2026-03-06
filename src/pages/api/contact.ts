@@ -167,7 +167,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: contactFrom,
       to: [contactTo],
       subject: `Portfolio contact from ${safeName}`,
-      reply_to: email,
+      replyTo: email,
       text: `Name: ${safeName}\nEmail: ${safeEmail}\n\n${message}`,
       html: `
         <h2>New contact form submission</h2>

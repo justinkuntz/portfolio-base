@@ -1,13 +1,6 @@
-// To use this component add this code to the page you want to embed. Don't forget to imprt the component at the top of the file.
-// <div class="mx-auto flex flex-col gap-6">
-//   {
-//     projects.map((project) => (
-//       <ProjectsWaterfall entry={project} client:load />
-//     ))
-//   }
-// </div>
 import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
+import styles from "./ProjectsWaterfall.module.css";
 
 type Props = {
   entry: CollectionEntry<"projects">;
@@ -15,52 +8,44 @@ type Props = {
 
 export default function ProjectsWaterfall({ entry }: Props) {
   return (
-    <div class="relative z-0 space-y-4">
-      <a href={`/projects/${entry.slug}`} class="group flex flex-col flex-1 items-center border rounded-md hover:bg-surface10/5 border-surface10/15 transition-colors duration-300 ease-in-out">
-        <div class="w-full p-6 group-hover:text-surface10 blend">
-          <div class="flex items-center justify-between gap-x-4 border-b border-surface10/25 pb-2 mb-6">
-            <div class="text-xs uppercase">
+    <div class={styles.root}>
+      <a href={`/projects/${entry.slug}`} class={styles.card}>
+        <div class={styles.card__body}>
+          <div class={styles.card__meta}>
+            <span class={styles.card__date}>
               {formatDate(entry.data.date)}
-            </div>
-            <div class="flex flew-row gap-2">
+            </span>
+            <div class={styles.card__tags}>
               {entry.data.tags.map((tag: string) => (
-              <div class="text-xs uppercase tracking-wider py-0.5 px-1 rounded bg-surface10/10 text-surface10/75">
-                {tag}
-              </div>
+                <span class={styles.card__tag}>
+                  {tag}
+                </span>
               ))}
             </div>
           </div>
-          <div class="flex flex-1 items-center justify-between gap-x-4">
-            <h3 class="text-3xl sm:text-5xl font-bold text-surface10">
-            {entry.data.title}
+          <div class={styles.card__titleRow}>
+            <h3 class={styles.card__title}>
+              {entry.data.title}
             </h3>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="stroke-current group-hover:stroke-surface10"
-              >
-                <line
-                  x1="5"
-                  y1="12"
-                  x2="19"
-                  y2="12"
-                  class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-                ></line>
-                <polyline
-                  points="12 5 19 12 12 19"
-                  class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-                ></polyline>
-              </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class={styles.card__arrow}
+              aria-hidden="true"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" class={styles.card__arrowLine} />
+              <polyline points="12 5 19 12 12 19" class={styles.card__arrowPoly} />
+            </svg>
           </div>
         </div>
         <img
-          class="mx-auto w-full h-[36rem] object-cover rounded-b-md"
+          class={styles.card__img}
           src={entry.data.thumbNail.src}
           width="519"
           height="490"
