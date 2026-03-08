@@ -181,6 +181,7 @@ const next = items[(index + 1) % items.length];
 
   .project-hero__desc {
     margin-top: var(--space-4);
+    min-width: 0;
   }
 
   @media (min-width: 1024px) {
@@ -194,6 +195,9 @@ const next = items[(index + 1) % items.length];
     font-weight: 300;
     color: var(--color-surface-950);
     margin: 0;
+    max-inline-size: none;
+    width: 100%;
+    text-wrap: wrap;
   }
 
   @media (min-width: 1024px) {
@@ -273,10 +277,95 @@ const next = items[(index + 1) % items.length];
     text-overflow: ellipsis;
     background-color: rgb(from var(--color-surface-950) r g b / 0.1);
     margin: 0;
+    font-size: var(--text-base);
   }
 
   .project-content {
     margin-top: var(--space-12);
+  }
+
+  .project-content :global(.text-pretty) {
+    text-wrap: pretty;
+  }
+
+  .project-content :global(.text-4xl) {
+    font-size: var(--text-3xl);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  @media (min-width: 768px) {
+    .project-content :global(.text-4xl) {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .project-content :global(.font-normal) {
+    font-weight: var(--font-normal);
+  }
+
+  .project-content :global(.max-w-readable) {
+    max-width: var(--container-readable);
+  }
+
+  .project-content :global(.text-lg) {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+  }
+
+  .project-content :global(.w-full) {
+    width: 100%;
+  }
+
+  .project-content :global(.mb-16) {
+    margin-bottom: var(--space-16);
+  }
+
+  .project-content :global(.mt-0) {
+    margin-top: 0;
+  }
+
+  .project-content :global(.pt-0) {
+    padding-top: 0;
+  }
+
+  .project-content :global(.gap-10) {
+    gap: var(--space-10);
+  }
+
+  .project-content :global(.gap-6) {
+    gap: var(--space-6);
+  }
+
+  .project-content :global(.md\:columns-2) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .project-content :global(.md\:columns-2) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-10);
+      align-items: start;
+    }
+  }
+
+  .project-content :global(.md\:columns-2 > *) {
+    min-width: 0;
+    break-inside: avoid;
+  }
+
+  .project-content :global(.grid) {
+    display: grid;
+  }
+
+  .project-content :global(.grid-cols-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-content :global(.col-span-2) {
+    grid-column: span 2 / span 2;
   }
 
   .post-nav {
