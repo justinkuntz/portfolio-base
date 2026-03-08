@@ -1,6 +1,7 @@
 import type { CollectionEntry } from "astro:content";
-import { createEffect, createSignal, For } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import ArrowCard from "@components/ArrowCard";
+import FilterBar from "@components/FilterBar";
 import styles from "./Blog.module.css";
 
 type Props = {
@@ -35,31 +36,11 @@ export default function Blog({ data, tags }: Props) {
 
   return (
     <div class={styles.root}>
-      <div class={styles.filters}>
-        <div class={styles.filtersInner}>
-          <span class={styles.filtersLabel}>Filter:</span>
-          <ul class={styles.filtersList}>
-            <For each={tags}>
-              {(tag) => (
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => toggleTag(tag)}
-                    class={styles.filterBtn}
-                    classList={{ [styles.filterBtnActive]: filter().has(tag) }}
-                  >
-                    <svg class={styles.filterIcon} aria-hidden="true">
-                      <use href="/ui.svg#square" class={styles.filterIconUnchecked} />
-                      <use href="/ui.svg#square-check" class={styles.filterIconChecked} />
-                    </svg>
-                    {tag}
-                  </button>
-                </li>
-              )}
-            </For>
-          </ul>
-        </div>
-      </div>
+      <FilterBar
+        tags={tags}
+        selectedTags={filter()}
+        onToggleTag={toggleTag}
+      />
       <div class={styles.grid}>
         <ul class={styles.gridList}>
           {posts().map((post) => (
