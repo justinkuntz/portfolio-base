@@ -4,16 +4,27 @@ import Fuse from "fuse.js";
 import ArrowCard from "./ArrowCard";
 import styles from "./Search.module.css";
 
+type SearchEntry = CollectionEntry<"blog"> | CollectionEntry<"projects">;
+
 type Props = {
-  data: CollectionEntry<"blog">[];
+  data: SearchEntry[];
 };
 
 export default function Search({ data }: Props) {
   const [query, setQuery] = createSignal("");
-  const [results, setResults] = createSignal<CollectionEntry<"blog">[]>([]);
+  const [results, setResults] = createSignal<SearchEntry[]>([]);
 
-  const fuse = new Fuse(data, {
-    keys: ["slug", "data.title", "data.summary", "data.tags"],
+  const fuse = new Fuse<SearchEntry>(data, {
+    keys: [
+      "slug",
+      "data.title",
+      "data.description",
+      "data.tags",
+      "data.challenge",
+      "data.solution",
+      "data.results",
+      "body",
+    ],
     includeMatches: true,
     minMatchCharLength: 2,
     threshold: 0.4,

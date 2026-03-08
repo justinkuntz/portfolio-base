@@ -19,6 +19,7 @@
   --text-2xl: var(--font-size-4, 1.5rem);
   --text-3xl: var(--font-size-5, 1.875rem);
   --text-4xl: var(--font-size-6, 2.25rem);
+  --text-4_5xl: 2.75rem;
   --text-5xl: var(--font-size-7, 3rem);
   --text-6xl: var(--font-size-8, 3.75rem);
   --text-7xl: 4.5rem;
