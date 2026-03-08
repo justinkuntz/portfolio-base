@@ -52,6 +52,7 @@
   border: none;
   color: inherit;
   font: inherit;
+  font-size: var(--text-sm);
   cursor: pointer;
   transition: background-color var(--transition-base), color var(--transition-base);
 }
