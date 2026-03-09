@@ -16,21 +16,35 @@ const tags = [
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
   <Container size="xl">
-    <div class="space-y-10 md:mt-16 lg:mt-24">
-      <div class="grid md:grid-cols-12 gap-10 w-full">
-        <h1
-          class="col-span-4 animate text-5xl lg:text-6xl font-semibold text-surface10"
-        >
-          Projects
-        </h1>
-        <p class="col-span-8 text-xl lg:text-2xl font-light text-surface10">
-          A collection of my projects, showcasing my skills and creativity. From
-          design to development, I take pride in every aspect of my work.
-        </p>
-      </div>
-      <div class="animate">
-        <Projects client:load tags={tags} data={projects} />
-      </div>
+    <div class="page-intro page-intro--projects">
+      <h1 class="page-intro__title animate">
+        Projects
+      </h1>
+      <p class="page-intro__description">
+        Sample case studies that demonstrate the project collection, tag
+        filtering, and image-heavy MDX layouts.
+      </p>
+    </div>
+    <div class="animate">
+      <Projects client:load tags={tags} data={projects} />
     </div>
   </Container>
 </PageLayout>
+
+<style>
+  .page-intro--projects {
+    margin-top: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .page-intro--projects {
+      margin-top: var(--space-16);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-intro--projects {
+      margin-top: var(--space-24);
+    }
+  }
+</style>

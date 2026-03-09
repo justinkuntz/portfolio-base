@@ -1,0 +1,15 @@
+// src/loadFuse.ts
+var loadFuse = async (opts) => {
+  const { init, options, url = "/fuse.json" } = opts ?? {};
+  const [Fuse, { index, list }] = await Promise.all([
+    import("fuse.js"),
+    loadFuse.index ? Promise.resolve(loadFuse.index) : fetch(url, init).then((res) => res.json()).then((_index) => {
+      loadFuse.index = _index;
+      return _index;
+    })
+  ]);
+  return new Fuse.default(list, options, Fuse.default.parseIndex(index));
+};
+export {
+  loadFuse
+};

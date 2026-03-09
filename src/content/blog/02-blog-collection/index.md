@@ -1,62 +1,53 @@
 ---
-title: "Blog Collection"
-description: "How to add posts to your blog."
-date: "Mar 21 2024"
+title: "Blog collection"
+description: "How to add notes, essays, and field reports to the blog."
+date: "2026-03-02"
 draft: false
 tags:
   - Tutorial
+  - Content
 ---
 
-The `blog` collections is found in `src/content/blog`.
+The `blog` collection lives in `src/content/blog`.
 
-Working with the `blog` collection:
+Each post gets its own folder:
 
+```text
+src/content/blog
+├── 01-getting-started
+│   └── index.md
+└── 02-blog-collection
+    └── index.md
 ```
-📁 /src/content/blog
-└── 📁 post-1
-      └── 📄 index.md
-└── 📁 post-2
-      └── 📄 index.mdx
-```
 
-In the above example, two static pages will be generated, based on the existence of a classic markdown `.md` file or a jsx compatible markdown `.mdx` file. The folder name represents the slug:
+The folder name becomes the slug, so `src/content/blog/field-notes/index.md` becomes:
 
-- `https://example.com/blog/post-1`
-- `https://example.com/blog/post-2`
+- `/blog/field-notes`
 
-All content must be preceded by required metadata in the markdown file in `yaml` format, and be enclosed by triple dashes. --- ---
+Blog entries are validated by the schema in `src/content/config.ts`.
 
-```mdx
+Required frontmatter:
+
+```md
 ---
-title: "My cool new title"
-description: "A description of my content."
-date: "Mar 22 2024"
+title: "Field notes from Nevarro"
+description: "A short update from the workshop."
+date: "2026-03-02"
+tags:
+  - Notes
+  - Process
 draft: false
 ---
 ```
 
-Metadata fields
+Fields:
 
-| Field       | Req  | Type    | Remarks                                          |
-| :---------- | :--- | :------ | :----------------------------------------------- |
-| title       | Yes  | string  | Title of the content. Used in SEO and RSS.       |
-| description | Yes  | string  | Description of the content. Used in SEO and RSS. |
-| date        | Yes  | string  | Must be a valid date string (able to be parsed). |
-| draft       | No\* | boolean | draft: true, content will not be published.      |
+| Field | Required | Notes |
+| :-- | :-- | :-- |
+| `title` | Yes | Used on the page and in metadata |
+| `description` | Yes | Used in cards, SEO, and RSS |
+| `date` | Yes | Must parse as a valid date |
+| `tags` | Yes | Powers filtering on `/blog` |
+| `draft` | No | Hidden from the site when `true` |
 
-All that's left to do is write your content under the metadata.
-
-```mdx
----
-title: "My cool new title"
-description: "A description of my content."
-date: "Mar 22 2024"
-draft: false
----
-
-### Woot
-
-This is a paragraph.
-```
-
-🎉 Congrats, you are now a blogger.
+Write in Markdown when you only need text. Use MDX when the post needs components or richer media.

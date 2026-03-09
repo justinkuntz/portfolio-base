@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Project design tokens (non-color)
+   Typography, spacing, radius, shadows, motion, layout.
+   Colors live in theme.css.
+   ========================================================================== */
+
+:root {
+  /* Typography */
+  --font-sans: "Public Sans", system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+  --font-mono: ui-monospace, monospace;
+
+  /* Font sizes – map to Open Props scale where available */
+  --text-xs: var(--font-size-00, 0.75rem);
+  --text-sm: var(--font-size-0, 0.875rem);
+  --text-base: var(--font-size-1, 1rem);
+  --text-lg: var(--font-size-2, 1.125rem);
+  --text-xl: var(--font-size-3, 1.25rem);
+  --text-2xl: var(--font-size-4, 1.5rem);
+  --text-3xl: var(--font-size-5, 1.875rem);
+  --text-4xl: var(--font-size-6, 2.25rem);
+  --text-4_5xl: 2.75rem;
+  --text-5xl: var(--font-size-7, 3rem);
+  --text-6xl: var(--font-size-8, 3.75rem);
+  --text-7xl: 4.5rem;
+
+  /* Font weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Spacing – use Open Props size scale */
+  --space-1: var(--size-1, 0.25rem);
+  --space-2: var(--size-2, 0.5rem);
+  --space-3: var(--size-3, 0.75rem);
+  --space-4: var(--size-4, 1rem);
+  --space-5: var(--size-5, 1.25rem);
+  --space-6: var(--size-6, 1.5rem);
+  --space-7: var(--size-7, 1.75rem);
+  --space-8: var(--size-8, 2rem);
+  --space-10: var(--size-10, 2.5rem);
+  --space-12: var(--size-12, 3rem);
+  --space-14: var(--size-14, 3.5rem);
+  --space-16: var(--size-16, 4rem);
+  --space-20: var(--size-20, 5rem);
+  --space-24: var(--size-24, 6rem);
+  --space-2xl: var(--size-12, 3rem);
+  --space-4xl: 6rem;
+  --space-32: 8rem;
+
+  /* Border radius – use these site-wide for consistency */
+  --radius-sm: var(--radius-2, 0.25rem);   /* tags, small controls, copy btn */
+  --radius-md: var(--radius-3, 0.5rem);   /* cards, buttons, inputs, images, code blocks */
+  --radius-lg: var(--radius-4, 0.75rem);  /* large cards, nav cards */
+  --radius-xl: var(--radius-5, 1rem);     /* featured panels */
+  --radius-full: var(--radius-round, 9999px); /* pills, avatars, icon buttons */
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-2);
+  --shadow-md: var(--shadow-3);
+  --shadow-lg: var(--shadow-4);
+
+  /* Motion */
+  --ease-default: var(--ease-3, ease);
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  --transition-base: var(--duration-base) var(--ease-default);
+  --transition-slow: var(--duration-slow) var(--ease-default);
+  --transition-slower: var(--duration-slower) var(--ease-default);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-readable: 65ch;
+
+  /* Z-index */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-fixed: 50;
+  --z-modal: 40;
+
+  /* Copy button (used by code blocks) */
+  --copy-btn-margin: 10px;
+}

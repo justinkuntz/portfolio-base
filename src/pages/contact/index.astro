@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
+import Button from "@components/Button.astro";
 import { CONTACT } from "@consts";
 
 const searchParams = Astro.url.searchParams;
@@ -11,7 +12,7 @@ const statusCopy = (() => {
   if (statusParam === "success") {
     return {
       tone: "success",
-      text: "Thanks for reaching out! We'll reply as soon as possible.",
+      text: "Transmission received. Grogu will review it between training sessions.",
     };
   }
   if (statusParam === "error") {
@@ -27,45 +28,34 @@ const statusCopy = (() => {
 
 <PageLayout title={CONTACT.TITLE} description={CONTACT.DESCRIPTION}>
   <Container size="lg">
-    <section class="py-24">
-      <div class="grid gap-12 lg:gap-20 lg:grid-cols-2">
-        <div class="space-y-6">
-          <p
-            class="text-sm font-semibold uppercase tracking-[0.2em] text-surface10/60"
-          >
-            {CONTACT.TITLE}
-          </p>
-          <h1
-            class="text-4xl md:text-5xl font-semibold text-surface10 tracking-tight"
-          >
-            Let's build something together
+    <section class="contact">
+      <div class="contact__grid">
+        <div class="contact__intro">
+          <p class="contact__label">{CONTACT.TITLE}</p>
+          <h1 class="contact__title">
+            Send a transmission to the covert
           </h1>
-          <p class="text-lg text-surface10/80">
-            Tell me about your project, collaboration idea, or speaking request
-            and I will get back to you within two business days.
+          <p class="contact__description">
+            Have a mission, a collaboration, or a discreet request that needs a
+            steady hand? Send the details and Grogu will respond when the ship
+            is back in range.
           </p>
-          <ul class="space-y-4 text-surface10/70">
-            <li class="flex gap-3">
-              <span class="font-medium text-surface10">Availability</span>
-              <span>Accepting new work for Q3–Q4.</span>
+          <ul class="contact__list">
+            <li class="contact__list-item">
+              <span class="contact__list-label">Availability</span>
+              <span>Accepting new missions this season.</span>
             </li>
-            <li class="flex gap-3">
-              <span class="font-medium text-surface10">Response time</span>
-              <span>Typically within 48 hours.</span>
+            <li class="contact__list-item">
+              <span class="contact__list-label">Response time</span>
+              <span>Usually within 48 hours, unless hyperspace gets noisy.</span>
             </li>
           </ul>
         </div>
-        <div
-          class="bg-surface rounded-md border border-surface3 shadow-sm p-6 sm:p-8"
-        >
+        <div class="contact__form-wrap">
           {
             statusCopy && (
               <div
-                class={`mb-6 rounded-md border px-4 py-3 text-sm ${
-                  statusCopy.tone === "success"
-                    ? "border-emerald-500/60 bg-emerald-500/10 text-emerald-900 dark:text-emerald-200"
-                    : "border-rose-500/60 bg-rose-500/10 text-rose-900 dark:text-rose-200"
-                }`}
+                class={`contact__status contact__status--${statusCopy.tone}`}
               >
                 {statusCopy.text}
               </div>
@@ -75,7 +65,7 @@ const statusCopy = (() => {
             id="contact-form"
             action="/api/contact"
             method="post"
-            class="space-y-5"
+            class="contact__form"
             novalidate
           >
             <input type="hidden" name="startedAt" id="contact-started" />
@@ -87,50 +77,38 @@ const statusCopy = (() => {
               tabindex="-1"
               autocomplete="off"
               aria-hidden="true"
-              class="absolute opacity-0 pointer-events-none"
+              class="contact__hidden"
             />
 
-            <div class="space-y-2">
-              <label
-                class="text-sm font-medium text-surface10"
-                for="contact-name"
-              >
-                Name
-              </label>
+            <div class="contact__field">
+              <label class="contact__label" for="contact-name">Name</label>
               <input
                 id="contact-name"
                 name="name"
                 type="text"
                 required
                 minlength="2"
-                placeholder="Olive Oyl"
-                class="w-full rounded-md border border-surface3 bg-surface px-4 py-3 text-base text-surface10 outline-none focus-visible:border-surface10/70 focus-visible:ring-2 focus-visible:ring-surface10/20"
+                placeholder="Din Djarin"
+                class="contact__input"
               />
             </div>
 
-            <div class="space-y-2">
-              <label
-                class="text-sm font-medium text-surface10"
-                for="contact-email"
-              >
-                Email
-              </label>
+            <div class="contact__field">
+              <label class="contact__label" for="contact-email">Email</label>
               <input
                 id="contact-email"
                 name="email"
                 type="email"
                 required
-                placeholder="olive@oyl.studio"
-                class="w-full rounded-md border border-surface3 bg-surface px-4 py-3 text-base text-surface10 outline-none focus-visible:border-surface10/70 focus-visible:ring-2 focus-visible:ring-surface10/20"
+                placeholder="din@covert.space"
+                class="contact__input"
               />
             </div>
 
-            <div class="space-y-2">
-              <div class="flex items-center justify-between text-sm">
-                <label class="font-medium text-surface10" for="contact-message">
-                  Message
-                </label>
-                <span class="text-surface10/60">Minimum 20 characters</span>
+            <div class="contact__field">
+              <div class="contact__field-head">
+                <label class="contact__label" for="contact-message">Message</label>
+                <span class="contact__hint">Minimum 20 characters</span>
               </div>
               <textarea
                 id="contact-message"
@@ -138,27 +116,24 @@ const statusCopy = (() => {
                 required
                 minlength="20"
                 rows="6"
-                placeholder="Share what you're working on, timelines, and anything else that's helpful."
-                class="w-full rounded-md border border-surface3 bg-surface px-4 py-3 text-base text-surface10 outline-none focus-visible:border-surface10/70 focus-visible:ring-2 focus-visible:ring-surface10/20"
+                placeholder="Share the mission, timeline, constraints, and anything Grogu should know before boarding."
+                class="contact__input contact__textarea"
               ></textarea>
             </div>
 
-            <div class="space-y-4">
-              <p class="text-sm text-surface10/60">
+            <div class="contact__submit-wrap">
+              <p class="contact__hint">
                 By submitting you agree to receive a reply at the email address
                 you provided.
               </p>
-              <button
-                type="submit"
-                class="inline-flex w-full items-center justify-center rounded-md bg-surface10 px-4 py-3 text-base font-semibold text-surface shadow-sm transition hover:bg-surface10/90 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                <span class="inline" data-submit-text>Send message</span>
-              </button>
+              <Button type="submit" variant="primary" size="lg" class="contact__submit">
+                <span class="inline" data-submit-text>Send transmission</span>
+              </Button>
               <p
                 id="contact-status"
                 role="status"
                 aria-live="polite"
-                class="text-sm"
+                class="contact__status-msg"
                 hidden
               >
               </p>
@@ -171,30 +146,206 @@ const statusCopy = (() => {
 </PageLayout>
 
 <style>
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  .contact {
+    padding-block: var(--space-24);
   }
+
+  .contact__grid {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  @media (min-width: 1024px) {
+    .contact__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-20);
+    }
+  }
+
+  .contact__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .contact__label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgb(from var(--color-surface-950) r g b / 0.6);
+  }
+
+  .contact__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-semibold);
+    color: var(--color-surface-950);
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .contact__title {
+      font-size: var(--text-5xl);
+    }
+  }
+
+  .contact__description {
+    font-size: var(--text-lg);
+    color: rgb(from var(--color-surface-950) r g b / 0.8);
+    margin: 0;
+  }
+
+  .contact__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    color: rgb(from var(--color-surface-950) r g b / 0.7);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .contact__list-item {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .contact__list-label {
+    font-weight: var(--font-medium);
+    color: var(--color-surface-950);
+  }
+
+  .contact__form-wrap {
+    background-color: var(--color-surface-50);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-surface-300);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .contact__form-wrap {
+      padding: var(--space-8);
+    }
+  }
+
+  .contact__status {
+    margin-bottom: var(--space-6);
+    border-radius: var(--radius-md);
+    border: 1px solid;
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  .contact__status--success {
+    border-color: rgb(16 185 129 / 0.6);
+    background-color: rgb(16 185 129 / 0.1);
+    color: var(--color-surface-900);
+  }
+
+  html.dark .contact__status--success {
+    color: rgb(167 243 208);
+  }
+
+  .contact__status--error {
+    border-color: rgb(244 63 94 / 0.6);
+    background-color: rgb(244 63 94 / 0.1);
+    color: var(--color-surface-900);
+  }
+
+  html.dark .contact__status--error {
+    color: rgb(253 164 175);
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact__field-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+  }
+
+  .contact__hint {
+    font-size: var(--text-sm);
+    color: rgb(from var(--color-surface-950) r g b / 0.6);
+    margin: 0;
+  }
+
+  .contact__input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-surface-300);
+    background-color: var(--color-surface-50);
+    color: var(--color-surface-950);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    outline: none;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .contact__input:focus-visible {
+    border-color: rgb(from var(--color-surface-950) r g b / 0.7);
+    box-shadow: 0 0 0 2px rgb(from var(--color-surface-950) r g b / 0.2);
+  }
+
+  .contact__textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  .contact__hidden {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact__submit-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .contact__submit {
+    width: 100%;
+  }
+
+  .contact__submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .contact__status-msg {
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
   #contact-status[data-variant="success"] {
     color: rgb(16 185 129 / 0.95);
   }
+
   #contact-status[data-variant="error"] {
     color: rgb(244 63 94 / 0.95);
   }
 </style>
 
 <script>
-  const form = document.getElementById("contact-form");
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
   const status = document.getElementById("contact-status");
-  const submitButton = form?.querySelector("button[type=submit]");
-  const startedAtInput = document.getElementById("contact-started");
+  const submitButton = form?.querySelector("button[type=submit]") as HTMLButtonElement | null | undefined;
+  const startedAtInput = document.getElementById("contact-started") as HTMLInputElement | null;
 
   function setTimestamp() {
     if (startedAtInput) {
@@ -202,7 +353,7 @@ const statusCopy = (() => {
     }
   }
 
-  function setStatus(message, variant) {
+  function setStatus(message: string, variant: string) {
     if (!status) return;
     status.textContent = message;
     status.dataset.variant = variant;
@@ -216,7 +367,7 @@ const statusCopy = (() => {
     status.hidden = true;
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: Event) {
     event.preventDefault();
     if (!form || !submitButton) return;
 

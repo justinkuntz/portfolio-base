@@ -1,0 +1,122 @@
+.root {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  align-items: stretch;
+  border: 1px solid rgb(from var(--color-surface-950) r g b / 0.15);
+  border-radius: var(--radius-md);
+  color: currentColor;
+  text-decoration: none;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.card:hover {
+  background-color: rgb(from var(--color-surface-950) r g b / 0.05);
+}
+
+.card:hover .card__body,
+.card:hover .card__arrow {
+  color: var(--color-surface-950);
+}
+
+.card__body {
+  width: 100%;
+  padding: var(--space-6);
+  transition: color var(--transition-base);
+}
+
+.card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  border-bottom: 1px solid rgb(from var(--color-surface-950) r g b / 0.25);
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.card__date {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+}
+
+.card__tags {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-2);
+}
+
+.card__tag {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-block: 0.125rem;
+  padding-inline: var(--space-1);
+  border-radius: var(--radius-sm);
+  background-color: rgb(from var(--color-surface-950) r g b / 0.1);
+  color: rgb(from var(--color-surface-950) r g b / 0.75);
+}
+
+.card__titleRow {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.card__title {
+  font-size: var(--text-3xl);
+  font-weight: var(--font-bold);
+  color: var(--color-surface-950);
+}
+
+@media (min-width: 640px) {
+  .card__title {
+    font-size: var(--text-5xl);
+  }
+}
+
+.card__arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  stroke: currentColor;
+  transition: stroke var(--transition-base);
+}
+
+.card__arrowLine {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-base);
+}
+
+.card:hover .card__arrowLine {
+  transform: scaleX(1);
+}
+
+.card__arrowPoly {
+  transition: transform var(--transition-base);
+}
+
+.card:hover .card__arrowPoly {
+  transform: translateX(4px);
+}
+
+.card__img {
+  margin-inline: auto;
+  width: 100%;
+  height: 36rem;
+  object-fit: cover;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}

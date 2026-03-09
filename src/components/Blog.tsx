@@ -1,68 +1,54 @@
 import type { CollectionEntry } from "astro:content";
-import { createEffect, createSignal, For } from "solid-js";
+import { createEffect, createSignal } from "solid-js";
 import ArrowCard from "@components/ArrowCard";
-import { cn } from "@lib/utils";
+import FilterBar from "@components/FilterBar";
+import styles from "./Blog.module.css";
 
 type Props = {
-  tags: string[]
-  data: CollectionEntry<"blog">[]
-}
+  tags: string[];
+  data: CollectionEntry<"blog">[];
+};
 
 export default function Blog({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>());
   const [posts, setPosts] = createSignal<CollectionEntry<"blog">[]>([]);
 
   createEffect(() => {
-    setPosts(data.filter((entry) => 
-      Array.from(filter()).every((value) => 
-        entry.data.tags.some((tag:string) => 
-          tag.toLowerCase() === String(value).toLowerCase()
+    setPosts(
+      data.filter((entry) =>
+        Array.from(filter()).every((value) =>
+          entry.data.tags.some(
+            (tag: string) =>
+              tag.toLowerCase() === String(value).toLowerCase()
+          )
         )
       )
-    ));
+    );
   });
 
   function toggleTag(tag: string) {
-    setFilter((prev) => 
-      new Set(prev.has(tag) 
-        ? [...prev].filter((t) => t !== tag) 
-        : [...prev, tag]
+    setFilter((prev) =>
+      new Set(
+        prev.has(tag) ? [...prev].filter((t) => t !== tag) : [...prev, tag]
       )
     );
   }
 
   return (
-    <div class="grid grid-cols-1 gap-6">
-      <div class="col-span-3 mt-12 md:mt-24">
-        <div class="flex items-center justify-end gap-3">
-        <div class="text-sm font-semibold uppercase text-surface10">Filter:</div>
-          <ul class="flex flex-wrap gap-1.5">
-            <For each={tags}>
-              {(tag) => (
-                <li>
-                  <button onClick={() => toggleTag(tag)} class={cn("w-full px-2 py-1 rounded", "whitespace-nowrap overflow-hidden overflow-ellipsis", "flex gap-2 items-center", "bg-surface10/5", "hover:bg-surface10/10", "transition-colors duration-300 ease-in-out", filter().has(tag) && "text-surface10")}>
-                    <svg class={cn("size-5 fill-surface10/50", "transition-colors duration-300 ease-in-out", filter().has(tag) && "fill-surface10")}>
-                      <use href={`/ui.svg#square`} class={cn(!filter().has(tag) ? "block" : "hidden")} />
-                      <use href={`/ui.svg#square-check`} class={cn(filter().has(tag) ? "block" : "hidden")} />
-                    </svg>
-                    {tag}
-                  </button>
-                </li>
-              )}
-            </For>
-          </ul>
-        </div>
-      </div>
-      <div class="col-span-3">
-        <div class="flex flex-col">
-          <ul class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {posts().map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div class={styles.root}>
+      <FilterBar
+        tags={tags}
+        selectedTags={filter()}
+        onToggleTag={toggleTag}
+      />
+      <div class={styles.grid}>
+        <ul class={styles.gridList}>
+          {posts().map((post) => (
+            <li>
+              <ArrowCard entry={post} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

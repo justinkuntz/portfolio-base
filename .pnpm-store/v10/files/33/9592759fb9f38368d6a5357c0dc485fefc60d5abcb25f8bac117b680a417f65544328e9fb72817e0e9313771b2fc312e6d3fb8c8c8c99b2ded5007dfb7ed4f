@@ -1,0 +1,71 @@
+{
+  "name": "astro-fuse",
+  "version": "1.0.4",
+  "description": "Use Fuse.js to search documents in your Astro site",
+  "keywords": [
+    "astro-integration",
+    "astro-component"
+  ],
+  "homepage": "https://github.com/johnny-mh/blog2/tree/main/packages/astro-fuse",
+  "bugs": {
+    "url": "https://github.com/johnny-mh/blog2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnny-mh/blog2.git",
+    "directory": "packages/astro-fuse"
+  },
+  "license": "MIT",
+  "author": "johnny-mh <romz1212@gmail.com>",
+  "exports": {
+    ".": {
+      "default": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "default": "./dist/client.mjs",
+      "types": "./dist/client.d.ts"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "cheerio": "1.0.0-rc.12",
+    "fuse.js": "^7.0.0",
+    "html-to-text": "^9.0.5",
+    "js-yaml": "^4.1.0",
+    "lodash.debounce": "^4.0.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.7.0",
+    "@types/html-to-text": "^9.0.1",
+    "@types/js-yaml": "^4.0.5",
+    "@types/lodash.debounce": "^4.0.9",
+    "@types/node": "^18.14.6",
+    "astro": "^4.12.2",
+    "eslint": "9.x",
+    "eslint-plugin-perfectionist": "^3.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.8.0",
+    "prettier": "3.3.3",
+    "tsup": "^6.6.3",
+    "type-fest": "^4.23.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0",
+    "vite": "^5.3.4"
+  },
+  "peerDependencies": {
+    "astro": ">=4.8.0",
+    "fuse.js": "^7.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsup"
+  }
+}

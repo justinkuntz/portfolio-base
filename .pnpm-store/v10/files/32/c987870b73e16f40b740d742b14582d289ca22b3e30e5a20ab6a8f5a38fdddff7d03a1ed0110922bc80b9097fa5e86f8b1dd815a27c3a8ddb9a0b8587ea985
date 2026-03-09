@@ -1,0 +1,6 @@
+{
+  "bugs": "https://github.com/remarkjs/remark-unwrap-images/issues",
+  "name": "remark-unwrap-images",
+  "repository": "remarkjs/remark-unwrap-images",
+  "version": "5.0.0"
+}

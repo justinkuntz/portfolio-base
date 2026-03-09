@@ -1,14 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ==========================================================================
+   Open Props foundation
+   ========================================================================== */
 
-:root {
-  --copy-btn-margin: 10px;
-}
+@import "open-props/normalize.min.css";
+@import "open-props/open-props.min.css";
+
+/* ==========================================================================
+   Project theme and tokens
+   ========================================================================== */
+
+@import "./theme.css";
+@import "./tokens.css";
+
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
 
 html {
   overflow-y: scroll;
   color-scheme: light;
+  background-color: var(--color-surface-100);
+  background-image:
+    radial-gradient(circle at top left, rgb(from var(--color-primary) r g b / 0.1), transparent 30%),
+    radial-gradient(circle at 82% 14%, rgb(from var(--color-secondary) r g b / 0.1), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgb(214 198 167 / 0.12), transparent 28%),
+    linear-gradient(180deg, var(--color-surface-50) 0%, var(--color-surface-100) 100%);
+  background-attachment: fixed;
 }
 
 html.dark {
@@ -17,122 +34,365 @@ html.dark {
 
 html,
 body {
-  @apply size-full;
-  @apply font-sans;
+  min-height: 100%;
+  font-family: var(--font-sans);
 }
 
 body {
-  @apply font-sans antialiased;
-  @apply flex flex-col;
-  @apply bg-surface;
-  @apply text-surface10;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgb(from var(--color-primary) r g b / 0.035), transparent 36%),
+    linear-gradient(180deg, rgb(from var(--color-surface-50) r g b / 0.9), rgb(from var(--color-surface-100) r g b / 0.97));
+  color: var(--color-surface-950);
 }
-
-/* header {
-  @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-stone-100/75 dark:bg-stone-900/25;
-  @apply backdrop-blur-sm saturate-200;
-} */
 
 header {
-  @apply transition-all duration-300 ease-in-out;
+  transition: background-color var(--transition-base), backdrop-filter var(--transition-base);
 }
 
-header:not(.scrolled) {
-  @apply bg-transparent;
+header {
+  background-color: transparent;
 }
 
-header.scrolled {
-  @apply bg-surface/75;
-  @apply backdrop-blur-sm saturate-200;
+html.scrolled header {
+  background-color: rgb(from var(--color-surface-50) r g b / 0.72);
+  backdrop-filter: blur(14px) saturate(130%);
 }
 
 main {
-  @apply flex-1 pt-32 pb-16;
+  flex: 1;
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-16);
+  background:
+    linear-gradient(180deg, rgb(from var(--color-surface-50) r g b / 0.86), rgb(from var(--color-surface-100) r g b / 0.94));
 }
 
 footer {
-  @apply py-5 text-sm;
+  padding-block: var(--space-5);
+  font-size: var(--text-sm);
 }
+
+/* ==========================================================================
+   Article / prose (MDX content)
+   ========================================================================== */
 
 article {
-  @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-sans prose-headings:font-sans;
-  @apply prose-headings:text-surface10;
+  max-width: 100%;
+  font-family: var(--font-sans);
 }
 
-@layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-2;
-    @apply decoration-surface10/15;
-    @apply transition-colors duration-300 ease-in-out;
-  }
-  article a:hover {
-    @apply text-surface10;
-    @apply decoration-surface10/25;
+article h1,
+article h2,
+article h3,
+article h4,
+article h5,
+article h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--font-semibold);
+  color: var(--color-surface-950);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-2);
+}
+
+article h1:first-child,
+article h2:first-child,
+article h3:first-child,
+article h4:first-child,
+article h5:first-child,
+article h6:first-child {
+  margin-top: 0;
+}
+
+article p {
+  font-family: var(--font-sans);
+  margin-block: var(--space-4);
+}
+
+article p:first-child {
+  margin-top: 0;
+}
+
+article p:last-child {
+  margin-bottom: 0;
+}
+
+article a {
+  font-family: var(--font-sans);
+  color: currentColor;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.15);
+  transition: color var(--transition-base), text-decoration-color var(--transition-base);
+}
+
+article a:hover {
+  color: var(--color-surface-950);
+  text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.25);
+}
+
+article img {
+  margin-inline: auto;
+  margin-block: var(--space-4);
+  border-radius: var(--radius-md);
+}
+
+article ul,
+article ol {
+  margin-block: var(--space-4);
+  padding-left: var(--space-8);
+}
+
+article li {
+  margin-block: var(--space-1);
+}
+
+article blockquote {
+  border: 0;
+  font-family: var(--font-sans);
+  font-size: 1.3125em;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  padding-left: 0;
+  margin-block: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  article blockquote {
+    font-size: 1.66667em;
+    line-height: 1.3;
   }
 }
 
-@layer base {
-  :root {
-    --color-primary: #de6826;
-    --color-secondary: #f6daa6;
-    --color-surface-50: #f6f6f5;
-    --color-surface-100: #d1d1d0;
-    --color-surface-200: #d5d9e2;
-    --color-surface-300: #b1b0af;
-    --color-surface-400: #8a8a86;
-    --color-surface-500: #6f6f6b;
-    --color-surface-600: #5e5d5c;
-    --color-surface-700: #504f4e;
-    --color-surface-800: #464644;
-    --color-surface-900: #3c3b3f;
-    --color-surface-950: #302f32;
-  }
-  html.dark {
-    --color-primary: #de6826;
-    --color-secondary: #f6daa6;
-    --color-surface-50: #302f32;
-    --color-surface-100: #3c3b3f;
-    --color-surface-200: #464644;
-    --color-surface-300: #504f4e;
-    --color-surface-400: #5e5d5c;
-    --color-surface-500: #6f6f6b;
-    --color-surface-600: #8a8a86;
-    --color-surface-700: #b1b0af;
-    --color-surface-800: #d1d1d0;
-    --color-surface-900: #e7e7e6;
-    --color-surface-950: #f6f6f5;
-  }
+article code {
+  font-family: var(--font-mono);
 }
+
+article pre {
+  background-color: var(--color-surface-800);
+  color: var(--color-surface-100);
+  border-radius: var(--radius-md);
+  overflow: auto;
+  margin-block: var(--space-4);
+}
+
+article pre code {
+  color: inherit;
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
 
 .animate {
-  @apply opacity-0 translate-y-3;
-  @apply transition-all duration-700 ease-out;
+  opacity: 0;
+  transform: translateY(var(--space-3));
+  transition: opacity var(--transition-slower), transform var(--transition-slower);
 }
 
 .animate.show {
-  @apply opacity-100 translate-y-0;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 html #back-to-top {
-  @apply opacity-0 pointer-events-none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 html.scrolled #back-to-top {
-  @apply opacity-100 pointer-events-auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .copy-cnt {
-  @apply absolute w-full;
+  position: absolute;
+  width: 100%;
   top: var(--copy-btn-margin);
 }
+
 .copy-btn {
-  @apply w-[30px] fixed;
+  width: 30px;
+  position: fixed;
   left: calc(100% - var(--copy-btn-margin));
   transform: translateX(-100%);
+  border-radius: var(--radius-sm);
 }
 
 .copy-svg {
-  @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
+  width: 100%;
+  aspect-ratio: 1;
+  color: white;
+  opacity: 0.7;
+}
+
+.copy-svg:hover {
+  opacity: 0.9;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Page layout helpers */
+.page-heading {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-surface-950);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (min-width: 1024px) {
+  .page-heading {
+    font-size: var(--text-5xl);
+  }
+}
+
+.page-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-4xl);
+}
+
+@media (min-width: 768px) {
+  .page-intro {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-12);
+  }
+}
+
+.page-intro__title {
+  font-size: var(--text-4xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-surface-950);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .page-intro__title {
+    flex-basis: 33%;
+    max-width: 33%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-intro__title {
+    font-size: var(--text-5xl);
+  }
+}
+
+.page-intro__description {
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--color-surface-950);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .page-intro__description {
+    flex-basis: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-intro__description {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Line clamp (e.g. for card descriptions) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blend {
+  mix-blend-mode: normal;
+}
+
+/* Animated arrow (line + polyline) – use on SVGs inside links/buttons/cards */
+.arrow-animated {
+  fill: none;
+  stroke: currentColor;
+}
+
+.arrow-animated__line {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-base);
+}
+
+.arrow-animated__poly {
+  transition: transform var(--transition-base);
+}
+
+a:hover .arrow-animated__line,
+button:hover .arrow-animated__line,
+.card:hover .arrow-animated__line {
+  transform: scaleX(1);
+}
+
+a:hover .arrow-animated__poly,
+button:hover .arrow-animated__poly,
+.card:hover .arrow-animated__poly {
+  transform: translateX(4px);
+}
+
+.arrow-animated--left .arrow-animated__poly {
+  transform: translateX(4px);
+}
+
+a:hover .arrow-animated--left .arrow-animated__poly,
+button:hover .arrow-animated--left .arrow-animated__poly,
+.card:hover .arrow-animated--left .arrow-animated__poly {
+  transform: translateX(0);
+}
+
+/* In-content button (e.g. MDX demos) */
+.content-button {
+  padding: var(--space-2);
+  border: 1px solid rgb(from var(--color-surface-950) r g b / 0.1);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.content-button:hover {
+  background-color: rgb(from var(--color-surface-950) r g b / 0.05);
+  border-color: rgb(from var(--color-surface-950) r g b / 0.15);
+}
+
+html.dark .content-button {
+  border-color: rgb(from var(--color-surface-50) r g b / 0.1);
+}
+
+html.dark .content-button:hover {
+  background-color: rgb(from var(--color-surface-50) r g b / 0.05);
+  border-color: rgb(from var(--color-surface-50) r g b / 0.15);
 }
