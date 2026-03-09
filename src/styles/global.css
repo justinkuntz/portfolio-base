@@ -20,6 +20,12 @@ html {
   overflow-y: scroll;
   color-scheme: light;
   background-color: var(--color-surface-100);
+  background-image:
+    radial-gradient(circle at top left, rgb(from var(--color-primary) r g b / 0.1), transparent 30%),
+    radial-gradient(circle at 82% 14%, rgb(from var(--color-secondary) r g b / 0.1), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgb(214 198 167 / 0.12), transparent 28%),
+    linear-gradient(180deg, var(--color-surface-50) 0%, var(--color-surface-100) 100%);
+  background-attachment: fixed;
 }
 
 html.dark {
@@ -39,7 +45,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-surface-100);
+  background-color: transparent;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgb(from var(--color-primary) r g b / 0.035), transparent 36%),
+    linear-gradient(180deg, rgb(from var(--color-surface-50) r g b / 0.9), rgb(from var(--color-surface-100) r g b / 0.97));
   color: var(--color-surface-950);
 }
 
@@ -52,15 +61,16 @@ header {
 }
 
 html.scrolled header {
-  background-color: rgb(from var(--color-surface-50) r g b / 0.75);
-  backdrop-filter: blur(10px);
+  background-color: rgb(from var(--color-surface-50) r g b / 0.72);
+  backdrop-filter: blur(14px) saturate(130%);
 }
 
 main {
   flex: 1;
   padding-top: var(--space-32);
   padding-bottom: var(--space-16);
-  background-color: var(--color-surface-50);
+  background:
+    linear-gradient(180deg, rgb(from var(--color-surface-50) r g b / 0.86), rgb(from var(--color-surface-100) r g b / 0.94));
 }
 
 footer {

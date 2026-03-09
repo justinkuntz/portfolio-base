@@ -1,42 +1,40 @@
 import type { Site, Page, Links, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Popeye the Sailor",
-  EMAIL: "popeyethesailor234@gmail.com",
+  NAME: "Grogu",
   NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_WORKS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
+  DESCRIPTION: "A portfolio starter with Grogu-flavored placeholder content and room for your own story.",
+};
+
+export const ABOUT: Metadata = {
+  TITLE: "About",
+  DESCRIPTION: "A playful placeholder biography for Grogu on the road to becoming a Mandalorian.",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
-};
-
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+  DESCRIPTION: "Starter guides, field notes, and sample documentation from Grogu's training archive.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION: "Case studies, experiments, and missions completed on Grogu's path to the forge.",
 };
 
 export const CONTACT: Metadata = {
   TITLE: "Contact",
-  DESCRIPTION: "Reach out about new work, collaborations, or speaking gigs.",
+  DESCRIPTION: "A contact page template for missions, collaborations, and quiet transmissions to the covert.",
 };
 
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
-  DESCRIPTION: "Search all posts and projects by keyword.",
+  DESCRIPTION: "Search posts and projects by keyword.",
 };
 
 // Links
@@ -60,23 +58,19 @@ export const LINKS: Links = [
 ];
 
 export const SOCIALS: Socials = [
-  { 
+  {
     NAME: "twitter-x",
     ICON: "twitter-x",
-    TEXT: "pope_the_sailor",
-    HREF: "https://twitter.com/pope_the_sailor",
+    HREF: "https://twitter.com/your_handle",
   },
-  { 
+  {
     NAME: "github",
     ICON: "github",
-    TEXT: "popeye-the-sailor",
-    HREF: "https://github.com/popeyeTheSailor",
+    HREF: "https://github.com/your-handle",
   },
-  { 
+  {
     NAME: "linkedin",
     ICON: "linkedin",
-    TEXT: "popeye-the-sailor",
-    HREF: "https://www.linkedin.com/in/popeye-the-sailor/",
-    
-  }
+    HREF: "https://www.linkedin.com/in/your-handle/",
+  },
 ];

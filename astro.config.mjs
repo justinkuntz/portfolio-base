@@ -6,7 +6,7 @@ import solidJs from "@astrojs/solid-js";
 import fuse from "astro-fuse";
 
 export default defineConfig({
-  site: "https://astro-nano-demo.vercel.app",
+  site: process.env.SITE_URL ?? "https://example.com",
   integrations: [
     mdx({ rehypePlugins: [rehypeUnwrap] }),
     sitemap(),

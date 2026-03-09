@@ -1,0 +1,33 @@
+---
+title: "MDX syntax guide"
+description: "Use Astro components inside your content when plain Markdown is not enough."
+date: "2026-03-05"
+draft: false
+tags:
+  - Tutorial
+  - MDX
+---
+
+MDX lets you mix Markdown with Astro components. That is useful for image-rich case studies, interactive examples, and small presentation details you do not want to hardcode into a page template.
+
+Here is a simple example using the existing date component:
+
+```astro
+import FormattedDate from "../../../components/FormattedDate.astro";
+
+<FormattedDate date={new Date()} />
+```
+
+import FormattedDate from "../../../components/FormattedDate.astro";
+
+<FormattedDate date={new Date()} />
+
+Because this starter already includes MDX support, you can use the same pattern inside blog posts and project pages.
+
+When a component needs client-side interactivity, remember the `client:*` directive:
+
+```astro
+<InteractiveComponent client:load />
+```
+
+Grogu would call this the difference between a quiet meditation and a switch you can actually press.

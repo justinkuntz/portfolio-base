@@ -1,77 +1,33 @@
 ---
 title: "Getting started"
-description: "Hit the ground running."
-date: "Mar 22 2024"
+description: "The first files Grogu would update before taking this starter out of the covert."
+date: "2026-03-01"
 draft: false
 tags:
   - Tutorial
-  - Design
+  - Setup
 ---
 
-The basic configuration of Nano is pretty simple.
+This starter is intentionally simple to customize. The first stop is `src/consts.ts`.
 
-Edit `src/consts.ts`
-
-Customize the base site
+That file controls the shared site metadata:
 
 ```ts
-// src/consts.ts
-
 export const SITE: Site = {
-  NAME: "Astro Nano",
-  EMAIL: "markhorn.dev@gmail.com",
+  NAME: "Grogu",
   NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 ```
 
-| Field        | Req | Description                                          |
-| :----------- | :-- | :--------------------------------------------------- |
-| NAME         | Yes | Displayed in header and footer. Used in SEO and RSS. |
-| EMAIL        | Yes | Displayed in contact section.                        |
-| NUM_POSTS    | Yes | Limit num of posts on home page.                     |
-| NUM_WORKS    | Yes | Limit num of works on home page.                     |
-| NUM_PROJECTS | Yes | Limit num of projects on home page.                  |
+Use it to update the site name, homepage content limits, page descriptions, navigation links, and social profiles.
 
-Customize your page metadata
+Then edit the main public-facing pages:
 
-```ts
-// src/consts.ts
+- `src/pages/index.astro`
+- `src/pages/about/index.astro`
+- `src/pages/contact/index.astro`
 
-export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
-};
-```
+Those pages currently follow Grogu's path toward becoming a Mandalorian. Replace the placeholder voice with your own once the site is ready to leave the forge.
 
-| Field       | Req | Description                                    |
-| :---------- | :-- | :--------------------------------------------- |
-| TITLE       | Yes | Displayed in browser tab. Used in SEO and RSS. |
-| DESCRIPTION | Yes | Used in SEO and RSS.                           |
-
-Customize your social media
-
-```ts
-// src/consts.ts
-
-export const SOCIALS: Socials = [
-  {
-    NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
-  },
-  {
-    NAME: "github",
-    HREF: "https://github.com/markhorn-dev",
-  },
-  {
-    NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
-  },
-];
-```
-
-| Field | Req | Description                             |
-| :---- | :-- | :-------------------------------------- |
-| NAME  | Yes | Displayed in contact section as a link. |
-| HREF  | Yes | External url to social media profile.   |
+Finish by setting a real canonical URL in `astro.config.mjs` or by defining `SITE_URL` in your deployment environment.

@@ -1,64 +1,42 @@
 ---
-title: "Work Collection"
-description: "How to add work experience."
-date: "Mar 19 2024"
+title: "Work collection"
+description: "How the experience timeline on the about page is assembled."
+date: "2026-03-04"
 draft: false
 tags:
   - Tutorial
+  - About
 ---
 
-The `work` collections is found in `src/content/work`.
+The experience timeline on `/about` is powered by the `work` collection in `src/content/work`.
 
-Working with the `work` collection:
+Unlike the blog and projects collections, each work entry is a single Markdown file:
 
+```text
+src/content/work
+├── the-covert.md
+├── din-djarin.md
+└── jedi-training.md
 ```
-📁 /src/content/work
-└── 📄 apple.md
-└── 📄 facebook.md
-└── 📄 google.md
-└── 📄 mcdonalds.md
-```
 
-In the above example, four entries on the /work page will be generated.
+Required frontmatter:
 
-`apple`, `facebook`, `google`, `mcdonalds`
-
-All content must be preceded by required metadata in the markdown file in `yaml` format, and be enclosed by triple dashes. --- ---
-
-```mdx
+```md
 ---
-company: "McDonalds"
-role: "French Fryer"
-dateStart: "01/01/2020"
-dateEnd: "11/27/2022"
+company: "The Covert"
+role: "Mandalorian Apprentice"
+dateStart: "2026-01-01"
+dateEnd: "Present"
 ---
 ```
 
-Metadata fields
+Fields:
 
-| Field     | Req | Type   | Remarks                                        |
-| :-------- | :-- | :----- | :--------------------------------------------- |
-| company   | Yes | string | Company name.                                  |
-| role      | Yes | string | Role at the company. Ex: Full stack developer. |
-| dateStart | Yes | string | Date string that can be parsed to a date.      |
-| dateEnd   | Yes | string | Date string that can be parsed to a date.      |
+| Field | Required | Notes |
+| :-- | :-- | :-- |
+| `company` | Yes | Organization or team name |
+| `role` | Yes | Title shown in the timeline |
+| `dateStart` | Yes | Start date |
+| `dateEnd` | Yes | End date or a string like `Present` |
 
-\* _Note: If you are still employed at company, for dateEnd you can enter Current,
-Now or Present instead of a date._
-
-All that's left to do is write your content under the metadata.
-
-```mdx
----
-title: "My awesome project"
-description: "A description of my project."
-date: "Mar 22 2024"
-draft: false
----
-
-### Woot
-
-This is a paragraph about my role at this company.
-```
-
-🎉 Congrats, you are now a blogger, _and_ developer, _and_ employed.
+The Markdown body becomes the supporting description for that role. Keep it brief. One tight paragraph reads better than a cargo hold of bullet points.
