@@ -18,6 +18,10 @@
   margin: 0;
 }
 
+.gridList > li {
+  padding-inline-start: 0;
+}
+
 @media (min-width: 768px) {
   .gridList {
     grid-template-columns: repeat(2, 1fr);

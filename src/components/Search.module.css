@@ -58,3 +58,7 @@
   padding: 0;
   margin: 0;
 }
+
+.resultsList > li {
+  padding-inline-start: 0;
+}
