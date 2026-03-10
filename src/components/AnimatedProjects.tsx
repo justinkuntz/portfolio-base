@@ -48,18 +48,6 @@ export default function AnimatedProjects({ projects }: Props): JSX.Element {
                   class={styles.card}
                 >
                   <div class={`${styles.cardInner} blend`}>
-                    <div class={styles.cardMeta}>
-                      <span class={styles.cardDate}>
-                        {formatDate(entry.data.date)}
-                      </span>
-                      <div class={styles.cardTags}>
-                        {entry.data.tags.map((tag) => (
-                          <span class={styles.cardTag}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
                     <div class={styles.cardTitleRow}>
                       <h3 class={styles.cardTitle}>
                         {entry.data.title}
