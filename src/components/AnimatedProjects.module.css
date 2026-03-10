@@ -40,9 +40,9 @@
   padding: 1px;
   background: linear-gradient(
     to bottom,
-    var(--color-surface-200),
-    rgb(from var(--color-surface-950) r g b / 0.1),
-    rgb(from var(--color-surface-950) r g b / 0.1)
+    var(--color-surface-300),
+    rgb(from var(--color-surface-800) r g b / 0.1),
+    rgb(from var(--color-surface-800) r g b / 0.1)
   );
   transition: box-shadow var(--transition-base);
 }
@@ -54,7 +54,7 @@
 .cardInner {
   width: 100%;
   padding: var(--space-6);
-  background-color: var(--color-surface-50);
+  background-color: var(--color-surface-100);
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   transition: color var(--transition-base);
 }
