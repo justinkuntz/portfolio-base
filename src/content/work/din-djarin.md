@@ -2,7 +2,7 @@
 company: "Din Djarin"
 role: "Foundling and Field Companion"
 dateStart: "2021-01-01"
-dateEnd: "2023-12-31"
+dateEnd: "Present"
 ---
 
-Learned navigation, patience, situational awareness, and how to survive a mission without speaking more than necessary.
+I supported field missions across unfamiliar and high-risk environments, learning the value of loyalty, awareness, and calm action under pressure.

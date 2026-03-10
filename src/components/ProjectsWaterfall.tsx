@@ -1,4 +1,3 @@
-import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
 import styles from "./ProjectsWaterfall.module.css";
 
@@ -12,9 +11,6 @@ export default function ProjectsWaterfall({ entry }: Props) {
       <a href={`/projects/${entry.slug}`} class={styles.card}>
         <div class={styles.card__body}>
           <div class={styles.card__meta}>
-            <span class={styles.card__date}>
-              {formatDate(entry.data.date)}
-            </span>
             <div class={styles.card__tags}>
               {entry.data.tags.map((tag: string) => (
                 <span class={styles.card__tag}>
