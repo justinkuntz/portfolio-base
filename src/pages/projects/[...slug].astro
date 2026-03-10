@@ -4,6 +4,7 @@ import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import Image from "astro/components/Image.astro";
+import PostNav from "@components/PostNav.astro";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
@@ -115,28 +116,7 @@ const next = items[(index + 1) % items.length];
     <article class="project-content animate">
       <Content />
     </article>
-    <div class="post-nav">
-      <Link href={`/${prev.collection}/${prev.slug}`} class="post-nav__card post-nav__card--prev">
-        <span class="post-nav__body">
-          <span class="post-nav__label">Prev</span>
-          <span class="post-nav__title">{prev.data.title}</span>
-        </span>
-        <svg class="post-nav__arrow arrow-animated arrow-animated--left post-nav__arrow--left" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
-          <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"></polyline>
-        </svg>
-      </Link>
-      <Link href={`/${next.collection}/${next.slug}`} class="post-nav__card post-nav__card--next">
-        <span class="post-nav__body post-nav__body--right">
-          <span class="post-nav__label">Next</span>
-          <span class="post-nav__title">{next.data.title}</span>
-        </span>
-        <svg class="post-nav__arrow arrow-animated" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
-          <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"></polyline>
-        </svg>
-      </Link>
-    </div>
+    <PostNav prev={prev} next={next} topSpacing="md" />
   </Container>
 </PageLayout>
 
@@ -163,6 +143,10 @@ const next = items[(index + 1) % items.length];
   .project-hero__title {
     font-size: var(--text-5xl);
     font-weight: var(--font-semibold);
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    max-inline-size: var(--measure-title);
+    text-wrap: balance;
     color: var(--color-surface-950);
     margin: 0;
   }
@@ -193,11 +177,12 @@ const next = items[(index + 1) % items.length];
   .project-hero__desc-title {
     font-size: var(--text-xl);
     font-weight: 300;
+    line-height: var(--leading-body);
     color: var(--color-surface-950);
     margin: 0;
-    max-inline-size: none;
+    max-inline-size: var(--measure-copy);
     width: 100%;
-    text-wrap: wrap;
+    text-wrap: pretty;
   }
 
   @media (min-width: 1024px) {
@@ -240,7 +225,8 @@ const next = items[(index + 1) % items.length];
 
   .project-article__heading {
     font-size: var(--text-sm);
-    letter-spacing: 0.1em;
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     font-weight: 400;
     padding-top: var(--space-4);
@@ -353,65 +339,4 @@ const next = items[(index + 1) % items.length];
     border-radius: inherit;
   }
 
-  .post-nav {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
-    margin-top: var(--space-12);
-  }
-
-  .post-nav__card {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    border: 1px solid rgb(from var(--color-surface-950) r g b / 0.15);
-    border-radius: var(--radius-lg);
-    color: currentColor;
-    text-decoration: none;
-    transition: background-color var(--transition-base), color var(--transition-base);
-  }
-
-  .post-nav__card:hover {
-    background-color: rgb(from var(--color-surface-950) r g b / 0.05);
-  }
-
-  .post-nav__card:hover .post-nav__title,
-  .post-nav__card:hover .post-nav__arrow {
-    color: var(--color-surface-950);
-    stroke: var(--color-surface-950);
-  }
-
-  .post-nav__card--prev .post-nav__arrow--left {
-    order: -1;
-    transform: rotate(180deg);
-  }
-
-  .post-nav__body {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .post-nav__body--right {
-    text-align: right;
-  }
-
-  .post-nav__label {
-    font-size: var(--text-sm);
-    text-transform: uppercase;
-  }
-
-  .post-nav__title {
-    display: block;
-    font-weight: var(--font-semibold);
-    margin-top: var(--space-3);
-    color: var(--color-surface-950);
-    transition: color var(--transition-base);
-  }
-
-  .post-nav__arrow {
-    flex-shrink: 0;
-    stroke: currentColor;
-    transition: stroke var(--transition-base);
-  }
 </style>

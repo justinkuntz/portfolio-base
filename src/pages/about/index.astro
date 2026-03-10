@@ -187,7 +187,10 @@ const work = await Promise.all(
   .about__title {
     font-size: var(--text-5xl);
     font-weight: var(--font-bold);
-    letter-spacing: -0.025em;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    max-inline-size: var(--measure-tight);
+    text-wrap: balance;
     color: var(--color-surface-950);
     margin: 0 0 var(--space-8);
   }
@@ -209,8 +212,10 @@ const work = await Promise.all(
     margin-bottom: var(--space-4);
     font-size: var(--text-lg);
     font-weight: var(--font-medium);
+    line-height: var(--leading-body);
     color: rgb(from var(--color-surface-950) r g b / 0.8);
-    max-width: var(--container-readable);
+    max-width: var(--measure-copy);
+    text-wrap: pretty;
   }
 
   @media (min-width: 640px) {
@@ -347,6 +352,9 @@ const work = await Promise.all(
 
   .about__p {
     font-size: var(--text-lg);
+    line-height: var(--leading-body);
+    max-inline-size: var(--measure-copy);
+    text-wrap: pretty;
     margin: 0 0 var(--space-4);
   }
 
@@ -370,6 +378,8 @@ const work = await Promise.all(
   .about__timeline-title {
     font-size: var(--text-2xl);
     font-weight: 400;
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
     color: rgb(from var(--color-surface-950) r g b / 0.4);
     padding-left: calc(var(--space-8) + var(--space-4));
     margin: 0 0 var(--space-4);
@@ -427,6 +437,7 @@ const work = await Promise.all(
     grid-row: 1;
     font-weight: var(--font-medium);
     font-size: var(--text-xl);
+    line-height: var(--leading-heading);
     color: var(--color-surface-950);
     margin: 0;
   }
@@ -436,6 +447,7 @@ const work = await Promise.all(
     grid-row: 2;
     font-size: var(--text-lg);
     font-weight: var(--font-bold);
+    line-height: var(--leading-heading);
     color: rgb(from var(--color-surface-950) r g b / 0.6);
     margin: 0 0 var(--space-3);
   }
@@ -444,7 +456,8 @@ const work = await Promise.all(
     font-size: var(--text-sm);
     font-weight: var(--font-semibold);
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-label);
     padding: var(--space-1) var(--space-2);
     background-color: rgb(from var(--color-surface-950) r g b / 0.08);
     color: rgb(from var(--color-surface-950) r g b / 0.7);
@@ -457,7 +470,7 @@ const work = await Promise.all(
     grid-row: 4;
     color: rgb(from var(--color-surface-950) r g b / 0.5);
     font-size: var(--text-base);
-    line-height: 1.6;
+    line-height: var(--leading-body);
     margin: 0;
   }
 

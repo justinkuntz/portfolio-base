@@ -172,7 +172,8 @@ const statusCopy = (() => {
     font-size: var(--text-sm);
     font-weight: var(--font-semibold);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-caps);
     color: rgb(from var(--color-surface-950) r g b / 0.6);
   }
 
@@ -180,7 +181,10 @@ const statusCopy = (() => {
     font-size: var(--text-4xl);
     font-weight: var(--font-semibold);
     color: var(--color-surface-950);
-    letter-spacing: -0.025em;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    max-inline-size: var(--measure-title);
+    text-wrap: balance;
     margin: 0;
   }
 
@@ -192,6 +196,9 @@ const statusCopy = (() => {
 
   .contact__description {
     font-size: var(--text-lg);
+    line-height: var(--leading-body);
+    max-inline-size: var(--measure-copy);
+    text-wrap: pretty;
     color: rgb(from var(--color-surface-950) r g b / 0.8);
     margin: 0;
   }
@@ -209,6 +216,7 @@ const statusCopy = (() => {
   .contact__list-item {
     display: flex;
     gap: var(--space-3);
+    line-height: var(--leading-body);
   }
 
   .contact__list-label {
