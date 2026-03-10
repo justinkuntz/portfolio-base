@@ -175,6 +175,7 @@ const projects = (await getCollection("projects"))
 
   .home__greeting {
     font-weight: 400;
+    line-height: var(--leading-heading);
     color: var(--color-surface-950);
     margin-top: 0;
   }
@@ -183,7 +184,10 @@ const projects = (await getCollection("projects"))
     font-weight: var(--font-bold);
     color: var(--color-surface-950);
     font-size: var(--text-5xl);
-    letter-spacing: -0.025em;
+    line-height: var(--leading-display);
+    letter-spacing: var(--tracking-display);
+    max-inline-size: var(--measure-tight);
+    text-wrap: balance;
     margin-bottom: var(--space-4);
   }
 
@@ -201,6 +205,9 @@ const projects = (await getCollection("projects"))
 
   .home__description {
     font-size: var(--text-lg);
+    line-height: var(--leading-body);
+    max-inline-size: var(--measure-copy);
+    text-wrap: pretty;
   }
 
   @media (min-width: 768px) {
@@ -259,6 +266,8 @@ const projects = (await getCollection("projects"))
   .home__section-title {
     font-size: var(--text-2xl);
     font-weight: 400;
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
     color: rgb(from var(--color-surface-950) r g b / 0.4);
   }
 
