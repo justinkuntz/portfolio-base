@@ -1,12 +1,12 @@
-import type { CollectionEntry } from "astro:content";
 import { createMemo, createSignal } from "solid-js";
 import FilterBar from "@components/FilterBar";
 import ProjectsWaterfall from "@components/ProjectsWaterfall";
+import type { ProjectCardEntry } from "@types";
 import styles from "./Projects.module.css";
 
 type Props = {
   tags: string[];
-  data: CollectionEntry<"projects">[];
+  data: ProjectCardEntry[];
 };
 
 export default function Projects({ data, tags }: Props) {
@@ -14,9 +14,7 @@ export default function Projects({ data, tags }: Props) {
   const projects = createMemo(() =>
     data.filter((entry) =>
       Array.from(filter()).every((value) =>
-        entry.data.tags.some(
-          (tag: string) => tag.toLowerCase() === String(value).toLowerCase()
-        )
+        entry.tags.some((tag) => tag.toLowerCase() === String(value).toLowerCase())
       )
     )
   );

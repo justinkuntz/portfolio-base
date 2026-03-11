@@ -1,12 +1,10 @@
 ---
 import "../styles/global.css";
-import publicSans from "@fontsource-variable/public-sans/files/public-sans-latin-wght-italic.woff2?url";
+import publicSans from "@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url";
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-600.css";
 import "@fontsource/lora/400.css";
 import "@fontsource/lora/600.css";
-import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
-import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
 import { SEO } from "@config/seo";
 import type { ResolvedSeo } from "@lib/seo";
 
@@ -43,8 +41,6 @@ const { seo } = Astro.props;
   href={publicSans}
   crossorigin="anonymous"
 />
-<link rel="preload" href={lora400} as="font" type="font/woff2" crossorigin />
-<link rel="preload" href={lora600} as="font" type="font/woff2" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={seo.canonicalUrl} />

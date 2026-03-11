@@ -1,8 +1,9 @@
-import type { CollectionEntry } from "astro:content";
+import { MEDIA } from "@config/media";
+import type { ProjectCardEntry } from "@types";
 import styles from "./ProjectsWaterfall.module.css";
 
 type Props = {
-  entry: CollectionEntry<"projects">;
+  entry: ProjectCardEntry;
 };
 
 export default function ProjectsWaterfall({ entry }: Props) {
@@ -12,7 +13,7 @@ export default function ProjectsWaterfall({ entry }: Props) {
         <div class={styles.card__body}>
           <div class={styles.card__meta}>
             <div class={styles.card__tags}>
-              {entry.data.tags.map((tag: string) => (
+              {entry.tags.map((tag) => (
                 <span class={styles.card__tag}>
                   {tag}
                 </span>
@@ -21,7 +22,7 @@ export default function ProjectsWaterfall({ entry }: Props) {
           </div>
           <div class={styles.card__titleRow}>
             <h3 class={styles.card__title}>
-              {entry.data.title}
+              {entry.title}
             </h3>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -40,13 +41,20 @@ export default function ProjectsWaterfall({ entry }: Props) {
             </svg>
           </div>
         </div>
-        <img
-          class={styles.card__img}
-          src={entry.data.thumbNail.src}
-          width="519"
-          height="490"
-          alt={entry.data.thumbNailAlt}
-        />
+        <div class={styles.card__imgWrap}>
+          <img
+            class={styles.card__img}
+            style={{ "aspect-ratio": MEDIA.projectThumbnail.aspectRatio }}
+            src={entry.image.src}
+            srcset={entry.image.srcset}
+            sizes={entry.image.sizes}
+            width={entry.image.width}
+            height={entry.image.height}
+            alt={entry.thumbNailAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </a>
     </div>
   );

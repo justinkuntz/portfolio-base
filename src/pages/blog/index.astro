@@ -30,7 +30,7 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
       </p>
     </div>
     <div class="animate">
-      <Blog client:load tags={tags} data={posts} />
+      <Blog client:idle tags={tags} data={posts} />
     </div>
   </Container>
 </PageLayout>

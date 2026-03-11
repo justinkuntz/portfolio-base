@@ -170,10 +170,11 @@
 .cardImg {
   margin-inline: auto;
   width: 100%;
-  height: 32rem;
+  height: auto;
   object-fit: cover;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
   transition: transform var(--transition-base);
+  display: block;
 }
 
 .card:hover .cardImg,

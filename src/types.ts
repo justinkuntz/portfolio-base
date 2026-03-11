@@ -24,3 +24,19 @@ export type Page = {
   TITLE: string;
   DESCRIPTION: string;
 };
+
+export type OptimizedImage = {
+  src: string;
+  srcset: string;
+  sizes: string;
+  width: number;
+  height: number;
+};
+
+export type ProjectCardEntry = {
+  slug: string;
+  title: string;
+  tags: string[];
+  thumbNailAlt: string;
+  image: OptimizedImage;
+};

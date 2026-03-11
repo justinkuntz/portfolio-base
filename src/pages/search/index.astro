@@ -27,7 +27,7 @@ const data: Array<CollectionEntry<"blog"> | CollectionEntry<"projects">> = [
       {SEARCH.TITLE}
     </div>
     <div class="animate">
-      <Search client:load data={data} />
+      <Search client:idle data={data} />
     </div>
   </Container>
 </PageLayout>

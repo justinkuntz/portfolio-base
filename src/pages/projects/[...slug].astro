@@ -5,6 +5,7 @@ import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import Image from "astro/components/Image.astro";
 import PostNav from "@components/PostNav.astro";
+import { MEDIA, getProjectHeroSizes } from "@config/media";
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
@@ -27,6 +28,9 @@ const items = (await getCollection(collection))
 const index = items.findIndex((x) => x.slug === project.slug);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
+const projectHeroLayoutClass = MEDIA.projectHero.layout === "full-bleed"
+  ? "project-hero-image project-hero-image--fullbleed"
+  : "project-hero-image";
 ---
 
 <PageLayout
@@ -74,16 +78,18 @@ const next = items[(index + 1) % items.length];
         </h2>
       </div>
     </div>
-    <div class="project-hero-image">
+    <div class={projectHeroLayoutClass}>
       <Image
         class="project-hero-image__img"
         src={project.data.heroImage}
         alt={project.data.heroImageAlt}
-        width={1200}
-        height={800}
-        quality={"high"}
-        densities={[1, 2]}
+        widths={[...MEDIA.projectHero.widths]}
+        sizes={getProjectHeroSizes()}
+        quality={MEDIA.projectHero.quality}
         loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        style={`aspect-ratio: ${MEDIA.projectHero.aspectRatio};`}
       />
     </div>
     <article class="project-article">
@@ -204,24 +210,23 @@ const next = items[(index + 1) % items.length];
     margin-bottom: var(--space-8);
   }
 
+  .project-hero-image--fullbleed {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+
   .project-hero-image__img {
     width: 100%;
-    height: 18rem;
+    height: auto;
     object-fit: cover;
     background-color: var(--color-surface-600);
     border-radius: var(--radius-md);
+    display: block;
   }
 
-  @media (min-width: 768px) {
-    .project-hero-image__img {
-      height: 36rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .project-hero-image__img {
-      height: 48rem;
-    }
+  .project-hero-image--fullbleed .project-hero-image__img {
+    border-radius: 0;
   }
 
   .project-article {

@@ -47,10 +47,12 @@ const work = await Promise.all(
                 class="about__img"
                 src={aboutImageOne}
                 alt="Grogu with Din Djarin in a rocky canyon"
-                width={800}
-                height={800}
-                quality={"high"}
-                densities={[1, 2]}
+                widths={[480, 720, 960, 1280]}
+                sizes="(max-width: 1023px) min(92vw, 36rem), 32rem"
+                quality={74}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
             </div>
           </div>
@@ -60,10 +62,11 @@ const work = await Promise.all(
                 class="about__img"
                 src={aboutImageTwo}
                 alt="Grogu training with Luke Skywalker in a forest"
-                width={800}
-                height={800}
-                quality={"high"}
-                densities={[1, 2]}
+                widths={[360, 540, 720, 960]}
+                sizes="(max-width: 1023px) min(92vw, 36rem), 20rem"
+                quality={72}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div class="about__img-wrap about__img-wrap--hidden">
@@ -71,10 +74,11 @@ const work = await Promise.all(
                 class="about__img"
                 src={aboutImageThree}
                 alt="Grogu beside Ahsoka Tano in a misty woodland"
-                width={800}
-                height={800}
-                quality={"high"}
-                densities={[1, 2]}
+                widths={[360, 540, 720, 960]}
+                sizes="(max-width: 1023px) min(92vw, 36rem), 20rem"
+                quality={72}
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

@@ -5,7 +5,6 @@ import sharp from "sharp";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const blogRoot = path.resolve(__dirname, "../src/content/blog");
-const outputRoot = path.resolve(__dirname, "../public/images/blog-placeholders");
 
 function wrapText(text, maxChars, maxLines) {
   const words = text.trim().split(/\s+/);
@@ -138,12 +137,6 @@ async function main() {
   const entries = await fs.readdir(blogRoot, { withFileTypes: true });
   const created = [];
 
-  await fs.mkdir(outputRoot, { recursive: true });
-  const existingFiles = await fs.readdir(outputRoot);
-  await Promise.all(
-    existingFiles.map((file) => fs.rm(path.join(outputRoot, file), { force: true })),
-  );
-
   for (const entry of entries) {
     if (!entry.isDirectory()) {
       continue;
@@ -176,11 +169,11 @@ async function main() {
     const description = extractField(frontmatter, "description") || "Grogu blog entry";
     const tags = extractTags(frontmatter);
 
-    const outputPath = path.join(outputRoot, `hero-${entry.name}.png`);
+    const outputPath = path.join(blogRoot, entry.name, "hero.png");
     const svg = renderPlaceholder({ title, description, tags });
     const png = await sharp(Buffer.from(svg), { density: 144 }).png().toBuffer();
     await fs.writeFile(outputPath, png);
-    created.push(path.relative(outputRoot, outputPath));
+    created.push(path.relative(blogRoot, outputPath));
   }
 
   for (const item of created) {

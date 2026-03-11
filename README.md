@@ -17,17 +17,22 @@ The sample copy currently follows Grogu as he grows from foundling to Mandaloria
 ## Quick Start
 
 ```bash
+nvm use
 npm install
 npm run dev
 ```
 
 Open `http://localhost:4321`.
 
+If you use `asdf`/`mise`, the project also includes `.tool-versions`.
+
 ## Customize The Starter
 
 Start with these files:
 
 - `src/consts.ts` for site name, navigation, metadata, and social links
+- `src/config/media.ts` for image defaults like hero layout, thumbnail shape, and responsive widths
+- `src/config/seo.ts` for global SEO defaults
 - `src/pages/index.astro`, `src/pages/about/index.astro`, and `src/pages/contact/index.astro` for the main marketing copy
 - `src/content/projects/*` for case studies
 - `src/content/blog/*` for posts or notes
@@ -54,6 +59,69 @@ The top of each theme file is the main control surface:
 - container widths and content measures
 - primitive palette plus semantic surface, text, focus, and feedback colors
 
+## Images
+
+The image workflow is designed so users manage one source file per image slot and Astro handles delivery optimization during the build.
+
+### Simple author workflow
+
+When preparing images, keep it lightweight:
+
+- `hero` image: export a wide image around `2000-2400px`
+- `thumbnail` image: export a separate crop around `1200-1600px`
+- `gallery` image: export images around `1600-2200px`
+- photos and mockups: use `jpg`
+- transparency: use `png`
+- logos and vectors: use `svg`
+- keep images in `sRGB`
+- write alt text when you add the image
+
+Do not create your own `@2x`, mobile, desktop, or `webp` copies. The starter does that work for you.
+
+### Where to put images
+
+- project images live next to the project entry in `src/content/projects/<slug>/`
+- blog images live next to the blog entry in `src/content/blog/<slug>/`
+
+For projects, frontmatter should point to one file for each image slot:
+
+- `thumbNail`
+- `thumbNailAlt`
+- `heroImage`
+- `heroImageAlt`
+
+Inside MDX, each inline image should be referenced once. The shared `MDXImage` component turns that single source image into responsive output during the build.
+
+### Central media configuration
+
+The main control surface is `src/config/media.ts`.
+
+That file lets users change defaults without touching components:
+
+- project hero layout: contained or full-bleed
+- project hero aspect ratio
+- homepage project stack thumbnail aspect ratio
+- project thumbnail aspect ratio
+- responsive widths and `sizes`
+- image quality defaults for hero, thumbnail, and MDX images
+
+Example changes a user can make there:
+
+- make project heroes span the full viewport instead of staying inside the container
+- switch project thumbnails from landscape to square by changing the ratio to `1 / 1`
+- switch project thumbnails to portrait by changing the ratio to `4 / 5`
+
+### Why this works well for a future CMS
+
+This setup is intentionally close to how a self-hosted Markdown CMS would work later:
+
+- content entries keep a single file reference for each image field
+- the build pipeline decides how images are served
+- frontmatter field names stay stable
+- users do not need to manage generated asset paths
+
+Long term, gallery images can also move into structured frontmatter arrays if you want a more CMS-like editing experience.
+
 ## SEO And OG Images
 
 The SEO pipeline is centralized so users can configure metadata in one place and override it only when needed.
@@ -63,7 +131,7 @@ The SEO pipeline is centralized so users can configure metadata in one place and
 - `src/styles/theme.css` and the active theme do not affect metadata directly, but the generated placeholder OG images use the same Grogu visual direction
 - `src/pages/og/[...slug].png.ts` generates static social preview images at build time for pages, legal docs, blog posts, and project entries
 - `generatedImage: true` in `PageLayout` SEO props opts a route into a route-specific generated OG placeholder
-- `npm run generate:placeholders` creates starter blog placeholder PNGs in `public/images/blog-placeholders/`
+- `npm run generate:placeholders` creates starter blog hero PNGs next to each blog entry
 
 Fallback order:
 
@@ -81,7 +149,37 @@ Content entries can override SEO with optional `seo` frontmatter. For blog and p
 - `seo.noindex`
 
 Blog entries can also define optional `heroImage` and `heroImageAlt`. If present, they become the default OG image for that post unless `seo.image` overrides them.
-For the starter content, those placeholder hero images live in `public/images/blog-placeholders/` as PNGs so they stay simple string paths and avoid content-loader coupling.
+For the starter content, those sample hero images live next to each blog entry as local files, so blog images follow the same content-managed pattern as projects.
+
+## Accessibility
+
+The starter includes a basic accessibility foundation:
+
+- skip link and explicit `main` target
+- keyboard-visible focus states
+- active navigation state with `aria-current`
+- labeled search input and live results status
+- improved mobile drawer semantics
+- consistent alt text handling in the main templates
+
+This should still be checked in-browser with real content before launch.
+
+## Performance Direction
+
+The starter now includes a first round of performance work:
+
+- centralized image defaults in `src/config/media.ts`
+- responsive project thumbnails generated at build time
+- tighter MDX image width generation
+- less aggressive hydration on blog, projects, search, and homepage interactive surfaces
+- cleaned up font preloading so the head is lighter by default
+
+The long-term strategy is:
+
+- keep one source image per content slot
+- let Astro generate delivery variants during the build
+- keep configuration in central files instead of component-by-component overrides
+- stay close to a content model that can later be edited by a Markdown-based CMS
 
 ## Content Model
 
@@ -111,6 +209,7 @@ Without those variables, the endpoint stays disabled and returns an error respon
 | `npm run build` | Run Astro checks and create a production build |
 | `npm run preview` | Preview the production build locally |
 | `npm run preview:network` | Preview the production build on your local network |
+| `npm run generate:placeholders` | Generate starter blog placeholder images |
 | `npm run lint` | Run ESLint |
 | `npm run lint:fix` | Auto-fix ESLint issues |
 

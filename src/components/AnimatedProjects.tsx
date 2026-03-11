@@ -1,10 +1,11 @@
 import { createSignal, onMount, onCleanup } from "solid-js";
 import type { JSX } from "solid-js";
-import type { CollectionEntry } from "astro:content";
+import { MEDIA } from "@config/media";
+import type { ProjectCardEntry } from "@types";
 import styles from "./AnimatedProjects.module.css";
 
 type Props = {
-  projects: CollectionEntry<"projects">[];
+  projects: ProjectCardEntry[];
 };
 
 export default function AnimatedProjects({ projects }: Props): JSX.Element {
@@ -49,7 +50,7 @@ export default function AnimatedProjects({ projects }: Props): JSX.Element {
                   <div class={`${styles.cardInner} blend`}>
                     <div class={styles.cardTitleRow}>
                       <h3 class={styles.cardTitle}>
-                        {entry.data.title}
+                        {entry.title}
                       </h3>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -71,10 +72,15 @@ export default function AnimatedProjects({ projects }: Props): JSX.Element {
                   <div class={styles.cardImgWrap}>
                     <img
                       class={styles.cardImg}
-                      src={entry.data.thumbNail.src}
-                      width={entry.data.thumbNail.width}
-                      height={entry.data.thumbNail.height}
-                      alt={entry.data.thumbNailAlt}
+                      style={{ "aspect-ratio": MEDIA.homepageProjectThumbnail.aspectRatio }}
+                      src={entry.image.src}
+                      srcset={entry.image.srcset}
+                      sizes={entry.image.sizes}
+                      width={entry.image.width}
+                      height={entry.image.height}
+                      alt={entry.thumbNailAlt}
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </a>

@@ -8,6 +8,7 @@ import { SITE, HOME } from "@consts";
 import { Image } from "astro:assets";
 import profileImage from "@assets/grogu-profile.jpg";
 import AnimatedProjects from "@components/AnimatedProjects.tsx";
+import { toProjectCardEntries } from "@lib/images";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -18,6 +19,8 @@ const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+
+const projectCards = await toProjectCardEntries(projects);
 ---
 
 <PageLayout
@@ -60,10 +63,12 @@ const projects = (await getCollection("projects"))
             class="home__image animate"
             src={profileImage}
             alt="Portrait of Grogu standing in a rocky landscape"
-            width={800}
-            height={800}
-            quality={"high"}
-            densities={[1, 2]}
+            widths={[480, 720, 960, 1280]}
+            sizes="(max-width: 767px) min(92vw, 32rem), (max-width: 1279px) 38vw, 32rem"
+            quality={76}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
         </div>
       </section>
@@ -96,7 +101,7 @@ const projects = (await getCollection("projects"))
             </a>
           </h2>
         </div>
-        <AnimatedProjects projects={projects} client:load />
+        <AnimatedProjects projects={projectCards} client:visible />
       </section>
 
       <section class="home__section animate">
