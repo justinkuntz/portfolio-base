@@ -19,7 +19,10 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
 ---
 
 <div class:list={["post-nav", `post-nav--${topSpacing}`]}>
-  <Link href={`/${prev.collection}/${prev.slug}`} class="post-nav__card post-nav__card--prev">
+  <Link
+    href={`/${prev.collection}/${prev.slug}`}
+    class="post-nav__card post-nav__card--prev"
+  >
     <span class="post-nav__body">
       <span class="post-nav__label">Prev</span>
       <span class="post-nav__title">{prev.data.title}</span>
@@ -37,10 +40,14 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
       aria-hidden="true"
     >
       <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
-      <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"></polyline>
+      <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"
+      ></polyline>
     </svg>
   </Link>
-  <Link href={`/${next.collection}/${next.slug}`} class="post-nav__card post-nav__card--next">
+  <Link
+    href={`/${next.collection}/${next.slug}`}
+    class="post-nav__card post-nav__card--next"
+  >
     <span class="post-nav__body post-nav__body--right">
       <span class="post-nav__label">Next</span>
       <span class="post-nav__title">{next.data.title}</span>
@@ -58,7 +65,8 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
       aria-hidden="true"
     >
       <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
-      <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"></polyline>
+      <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"
+      ></polyline>
     </svg>
   </Link>
 </div>

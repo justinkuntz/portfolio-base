@@ -367,6 +367,38 @@ const work = await Promise.all(
     margin-bottom: 0;
   }
 
+  .about__quote {
+    margin: var(--space-8) 0 0;
+    max-inline-size: var(--measure-copy);
+    padding-left: var(--space-3);
+    padding-top: var(--space-2);
+    border-left: 6px solid rgb(from var(--color-surface-950) r g b / 0.2);
+  }
+
+  .about__quote-text {
+    margin: 0;
+    /* font-family: var(--font-serif); */
+    font-size: clamp(var(--text-xl), 2.4vw, var(--text-2xl));
+    line-height: var(--leading-heading);
+    color: var(--color-surface-950);
+    text-wrap: pretty;
+    border: none;
+  }
+
+  .about__quote-credit {
+    margin-top: var(--space-3);
+    font-size: var(--text-base);
+    font-weight: var(--font-medium);
+    line-height: var(--leading-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: rgb(from var(--color-surface-950) r g b / 0.5);
+  }
+
+  .about__quote-credit::before {
+    content: "\2014  ";
+  }
+
   .about__timeline {
     position: relative;
     padding-top: var(--space-12);

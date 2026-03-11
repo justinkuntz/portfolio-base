@@ -16,7 +16,9 @@ import BackToTop from "@components/BackToTop.astro";
     <div class="footer__grid">
       <div class="footer__copy">
         &copy; {new Date().getFullYear()}
-        {SITE.NAME}. All rights reserved. <Link href="/legal/privacy">Privacy Policy</Link>
+        {SITE.NAME}. All rights reserved. <Link href="/legal/privacy"
+          >Privacy Policy</Link
+        >
         and
         <Link href="/legal/terms">Terms of Use.</Link>
       </div>
@@ -43,8 +45,11 @@ import BackToTop from "@components/BackToTop.astro";
               aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
               class="footer__social-link"
             >
-              <svg class="footer__social-icon footer__social-icon--fill" aria-hidden="true">
-                <use href={`/social.svg#${SOCIAL.ICON}`}></use>
+              <svg
+                class="footer__social-icon footer__social-icon--fill"
+                aria-hidden="true"
+              >
+                <use href={`/social.svg#${SOCIAL.ICON}`} />
               </svg>
             </a>
           ))
@@ -57,6 +62,7 @@ import BackToTop from "@components/BackToTop.astro";
 <style>
   .footer {
     background-color: var(--color-surface-100);
+    border-top: 1px solid var(--color-surface-200);
   }
 
   .footer__top {
@@ -147,7 +153,9 @@ import BackToTop from "@components/BackToTop.astro";
     padding: var(--space-2);
     border-radius: var(--radius-full);
     color: currentColor;
-    transition: background-color var(--transition-base), color var(--transition-base);
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base);
   }
 
   .footer__social-link:hover {
