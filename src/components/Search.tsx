@@ -45,12 +45,20 @@ export default function Search({ data }: Props) {
 
   return (
     <div class={styles.root}>
+      <label class="sr-only" for="site-search">
+        Search blog posts and projects
+      </label>
+      <p id="site-search-help" class="sr-only">
+        Enter at least two characters to search blog posts and projects.
+      </p>
       <div class={styles.inputWrap}>
         <input
+          id="site-search"
           name="search"
-          type="text"
+          type="search"
           value={query()}
           onInput={onInput}
+          aria-describedby="site-search-help site-search-results"
           autocomplete="off"
           spellcheck={false}
           placeholder="What are you looking for?"
@@ -60,18 +68,22 @@ export default function Search({ data }: Props) {
           <use href="/ui.svg#search" />
         </svg>
       </div>
-      {query().length >= 2 && results().length >= 1 && (
+      {query().length >= 2 && (
         <div class={styles.results}>
-          <div class={styles.resultsLabel}>
-            Found {results().length} results for '{query()}'
+          <div id="site-search-results" class={styles.resultsLabel} role="status" aria-live="polite">
+            {results().length >= 1
+              ? `Found ${results().length} results for "${query()}"`
+              : `No results found for "${query()}"`}
           </div>
-          <ul class={styles.resultsList}>
-            {results().map((result) => (
-              <li>
-                <ArrowCard entry={result} pill={true} />
-              </li>
-            ))}
-          </ul>
+          {results().length >= 1 && (
+            <ul class={styles.resultsList}>
+              {results().map((result) => (
+                <li>
+                  <ArrowCard entry={result} pill={true} />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
     </div>

@@ -6,14 +6,23 @@ const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
 ---
 
-<div id="drawer" class="drawer">
-  <nav class="drawer__nav">
+<div
+  id="drawer"
+  class="drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Mobile navigation"
+  aria-hidden="true"
+  inert
+>
+  <nav class="drawer__nav" aria-label="Primary">
     {
       LINKS.map((LINK) => (
         <Button
           href={LINK.HREF}
           variant={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "primary" : "ghost"}
           size="lg"
+          aria-current={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "page" : undefined}
           class="drawer__nav-link"
         >
           {LINK.TEXT}

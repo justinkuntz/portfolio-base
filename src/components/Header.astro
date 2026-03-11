@@ -19,13 +19,14 @@ import { SITE, LINKS } from "@consts";
         </a>
       </div>
       <div class="header__nav-wrap">
-        <nav class="header__nav">
+        <nav class="header__nav" aria-label="Primary">
           {
             LINKS.map((LINK) => (
               <Button
                 href={LINK.HREF}
                 variant={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "primary" : "ghost"}
                 size="lg"
+                aria-current={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "page" : undefined}
                 class="header__nav-link"
               >
                 {LINK.TEXT}
@@ -59,7 +60,9 @@ import { SITE, LINKS } from "@consts";
             variant="ghost"
             size="md"
             iconOnly
-            aria-label="Toggle drawer open and closed"
+            aria-controls="drawer"
+            aria-expanded="false"
+            aria-label="Open navigation menu"
             class="header__action-btn header__action-btn--drawer"
           >
             <svg id="drawer-open" class="header__action-icon" aria-hidden="true">
@@ -209,18 +212,75 @@ import { SITE, LINKS } from "@consts";
 </style>
 
 <script is:inline>
-  function toggleDrawer() {
+  function setDrawerState(isOpen, options = { restoreFocus: true }) {
     const drawer = document.getElementById("drawer");
     const drawerButton = document.getElementById("header-drawer-button");
-    drawer?.classList.toggle("open");
-    drawerButton?.classList.toggle("open");
+
+    if (!drawer || !drawerButton) return;
+
+    drawer.classList.toggle("open", isOpen);
+    drawerButton.classList.toggle("open", isOpen);
+    drawerButton.setAttribute("aria-expanded", String(isOpen));
+    drawerButton.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation menu" : "Open navigation menu",
+    );
+    drawer.setAttribute("aria-hidden", String(!isOpen));
+
+    if (isOpen) {
+      drawer.removeAttribute("inert");
+      const firstLink = drawer.querySelector('a, button:not([disabled])');
+      if (firstLink instanceof HTMLElement) firstLink.focus();
+    } else if (options.restoreFocus) {
+      drawer.setAttribute("inert", "");
+      drawerButton.focus();
+    } else {
+      drawer.setAttribute("inert", "");
+    }
+  }
+
+  function toggleDrawer() {
+    const drawer = document.getElementById("drawer");
+    if (!drawer) return;
+    setDrawerState(!drawer.classList.contains("open"));
   }
 
   function initializeDrawerButton() {
     const drawerButton = document.getElementById("header-drawer-button");
-    drawerButton?.addEventListener("click", toggleDrawer);
+    const drawer = document.getElementById("drawer");
+
+    if (!drawerButton || !drawer) return;
+
+    drawerButton.onclick = () => toggleDrawer();
+
+    drawer.onclick = (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (target.closest('a[href]')) {
+        setDrawerState(false);
+      }
+    };
+
+    if (!window.__drawerEscapeHandlerBound) {
+      document.addEventListener("keydown", (event) => {
+        const activeDrawer = document.getElementById("drawer");
+        if (event.key === "Escape" && activeDrawer?.classList.contains("open")) {
+          setDrawerState(false);
+        }
+      });
+      window.__drawerEscapeHandlerBound = true;
+    }
+
+    setDrawerState(false, { restoreFocus: false });
   }
 
-  document.addEventListener("astro:after-swap", initializeDrawerButton);
+  window.__drawerEscapeHandlerBound = window.__drawerEscapeHandlerBound ?? false;
+  window.__drawerAfterSwapHandlerBound = window.__drawerAfterSwapHandlerBound ?? false;
+</script>
+<script is:inline>
+  if (!window.__drawerAfterSwapHandlerBound) {
+    document.addEventListener("astro:after-swap", initializeDrawerButton);
+    window.__drawerAfterSwapHandlerBound = true;
+  }
   initializeDrawerButton();
 </script>

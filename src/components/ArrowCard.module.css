@@ -16,8 +16,14 @@
   background-color: var(--color-surface-hover);
 }
 
+.card:focus-visible {
+  background-color: var(--color-surface-hover);
+}
+
 .card:hover .card__title,
-.card:hover .card__arrow {
+.card:hover .card__arrow,
+.card:focus-visible .card__title,
+.card:focus-visible .card__arrow {
   color: var(--color-surface-950);
 }
 
@@ -28,7 +34,8 @@
     transform var(--transition-base);
 }
 
-.card:hover .card__arrow {
+.card:hover .card__arrow,
+.card:focus-visible .card__arrow {
   stroke: var(--color-surface-950);
 }
 
@@ -102,7 +109,8 @@
   transition: transform var(--transition-base);
 }
 
-.card:hover .card__arrowLine {
+.card:hover .card__arrowLine,
+.card:focus-visible .card__arrowLine {
   transform: scaleX(1);
 }
 
@@ -110,6 +118,7 @@
   transition: transform var(--transition-base);
 }
 
-.card:hover .card__arrowPoly {
+.card:hover .card__arrowPoly,
+.card:focus-visible .card__arrowPoly {
   transform: translateX(4px);
 }

@@ -104,8 +104,14 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
     background-color: var(--color-surface-hover);
   }
 
+  .post-nav__card:focus-visible {
+    background-color: var(--color-surface-hover);
+  }
+
   .post-nav__card:hover .post-nav__title,
-  .post-nav__card:hover .post-nav__arrow {
+  .post-nav__card:hover .post-nav__arrow,
+  .post-nav__card:focus-visible .post-nav__title,
+  .post-nav__card:focus-visible .post-nav__arrow {
     color: var(--color-surface-950);
     stroke: var(--color-surface-950);
   }

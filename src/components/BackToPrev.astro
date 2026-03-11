@@ -39,6 +39,12 @@ const { href } = Astro.props;
     text-decoration: none;
   }
 
+  .back-to-prev:focus-visible {
+    background-color: var(--color-surface-hover);
+    color: var(--color-surface-950);
+    text-decoration: none;
+  }
+
   .back-to-prev__icon {
     position: absolute;
     top: 50%;
@@ -52,7 +58,8 @@ const { href } = Astro.props;
     transition: transform var(--transition-base);
   }
 
-  .back-to-prev:hover .back-to-prev__icon {
+  .back-to-prev:hover .back-to-prev__icon,
+  .back-to-prev:focus-visible .back-to-prev__icon {
     transform: translateY(-50%) translateX(-2px);
   }
 
@@ -62,7 +69,8 @@ const { href } = Astro.props;
     transition: transform var(--transition-base);
   }
 
-  .back-to-prev:hover .back-to-prev__icon line {
+  .back-to-prev:hover .back-to-prev__icon line,
+  .back-to-prev:focus-visible .back-to-prev__icon line {
     transform: translateX(0) scaleX(1);
   }
 
@@ -71,7 +79,8 @@ const { href } = Astro.props;
     transition: transform var(--transition-base);
   }
 
-  .back-to-prev:hover .back-to-prev__icon polyline {
+  .back-to-prev:hover .back-to-prev__icon polyline,
+  .back-to-prev:focus-visible .back-to-prev__icon polyline {
     transform: translateX(0);
   }
 

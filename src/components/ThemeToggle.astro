@@ -14,6 +14,7 @@ const maskId = `${id ?? `theme-toggle-${size}`}-mask`;
   type="button"
   class:list={["theme-toggle", `theme-toggle--${size}`, className]}
   data-theme-toggle
+  data-theme-toggle-ready="false"
   data-theme="light"
   aria-label="Switch to dark theme"
   aria-pressed="false"
@@ -102,33 +103,38 @@ const maskId = `${id ?? `theme-toggle-${size}`}-mask`;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .theme-toggle__glyph,
-    .theme-toggle__sun,
-    .theme-toggle__beams,
-    .theme-toggle__cutout {
+    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__glyph,
+    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__sun,
+    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__beams,
+    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__cutout {
       transition:
         transform 0.6s var(--ease-spring-3, var(--ease-default)),
         opacity 0.35s var(--ease-3, ease);
     }
   }
 
+  :global(html.dark) .theme-toggle,
   .theme-toggle[data-theme="dark"] {
     color: var(--color-surface-950);
   }
 
+  :global(html.dark) .theme-toggle .theme-toggle__glyph,
   .theme-toggle[data-theme="dark"] .theme-toggle__glyph {
     transform: rotate(-22deg);
   }
 
+  :global(html.dark) .theme-toggle .theme-toggle__sun,
   .theme-toggle[data-theme="dark"] .theme-toggle__sun {
     transform: scale(1.32);
   }
 
+  :global(html.dark) .theme-toggle .theme-toggle__beams,
   .theme-toggle[data-theme="dark"] .theme-toggle__beams {
     transform: rotate(-35deg) scale(0.72);
     opacity: 0;
   }
 
+  :global(html.dark) .theme-toggle .theme-toggle__cutout,
   .theme-toggle[data-theme="dark"] .theme-toggle__cutout {
     transform: translateX(-6.25px);
   }

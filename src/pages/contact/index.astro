@@ -88,6 +88,7 @@ const statusCopy = (() => {
                 type="text"
                 required
                 minlength="2"
+                autocomplete="name"
                 placeholder="Din Djarin"
                 class="contact__input"
               />
@@ -100,6 +101,7 @@ const statusCopy = (() => {
                 name="email"
                 type="email"
                 required
+                autocomplete="email"
                 placeholder="din@covert.space"
                 class="contact__input"
               />
@@ -108,7 +110,7 @@ const statusCopy = (() => {
             <div class="contact__field">
               <div class="contact__field-head">
                 <label class="contact__label" for="contact-message">Message</label>
-                <span class="contact__hint">Minimum 20 characters</span>
+                <span id="contact-message-hint" class="contact__hint">Minimum 20 characters</span>
               </div>
               <textarea
                 id="contact-message"
@@ -116,6 +118,7 @@ const statusCopy = (() => {
                 required
                 minlength="20"
                 rows="6"
+                aria-describedby="contact-message-hint"
                 placeholder="Share the mission, timeline, constraints, and anything Grogu should know before boarding."
                 class="contact__input contact__textarea"
               ></textarea>

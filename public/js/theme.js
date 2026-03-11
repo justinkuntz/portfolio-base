@@ -48,6 +48,12 @@
       if (label) {
         label.textContent = `Switch to ${nextTheme} theme`;
       }
+
+      if (button.dataset.themeToggleReady !== "true") {
+        requestAnimationFrame(() => {
+          button.dataset.themeToggleReady = "true";
+        });
+      }
     });
   }
 
@@ -55,6 +61,7 @@
     withTransitionsDisabled(() => {
       document.documentElement.classList.toggle("dark", theme === "dark");
       document.documentElement.dataset.theme = theme;
+      syncThemeToggles(theme);
     });
 
     if (persist) {
@@ -65,7 +72,6 @@
       }
     }
 
-    syncThemeToggles(theme);
   }
 
   function toggleTheme() {
