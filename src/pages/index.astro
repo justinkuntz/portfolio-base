@@ -268,7 +268,7 @@ const projects = (await getCollection("projects"))
     font-weight: 400;
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
-    color: rgb(from var(--color-surface-950) r g b / 0.4);
+    color: var(--color-text-ghost);
   }
 
   @media (min-width: 640px) {
@@ -287,7 +287,7 @@ const projects = (await getCollection("projects"))
   }
 
   .home__section-link:hover {
-    color: rgb(from var(--color-surface-950) r g b / 0.6);
+    color: var(--color-text-subtle);
   }
 
   .home__section-icon {

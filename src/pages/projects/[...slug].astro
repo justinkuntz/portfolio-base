@@ -232,7 +232,7 @@ const next = items[(index + 1) % items.length];
     padding-top: var(--space-4);
     margin-bottom: var(--space-4);
     margin-top: 0;
-    border-top: 1px solid rgb(from var(--color-surface-950) r g b / 0.2);
+    border-top: 1px solid var(--color-border-emphasis);
   }
 
   @media (min-width: 768px) {
@@ -262,7 +262,7 @@ const next = items[(index + 1) % items.length];
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    background-color: rgb(from var(--color-surface-950) r g b / 0.1);
+    background-color: var(--color-surface-strong);
     margin: 0;
     font-size: var(--text-base);
   }
@@ -272,7 +272,7 @@ const next = items[(index + 1) % items.length];
   }
 
   .project-content :global(.project-mdx-lead) {
-    font-family: var(--font-sans);
+    font-family: var(--font-heading);
     font-size: var(--text-4xl);
     line-height: 1.15;
     font-weight: 400;
@@ -280,8 +280,8 @@ const next = items[(index + 1) % items.length];
     color: var(--color-surface-950);
     margin-top: 0;
     margin-bottom: var(--space-8);
-    max-width: 58rem;
-    max-inline-size: 58rem;
+    max-width: var(--measure-project-lead);
+    max-inline-size: var(--measure-project-lead);
     text-wrap: balance;
   }
 

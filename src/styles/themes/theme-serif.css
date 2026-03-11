@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Theme: Serif
+   Editorial serif typography, square corners, wider desktop layout,
+   and a warmer palette to demonstrate a full theme swap.
+   ========================================================================== */
+
+:root {
+  /* Theme controls */
+  --theme-font-body: var(--font-serif-default);
+  --theme-font-heading: var(--font-serif-default);
+  --theme-font-ui: var(--font-ui-default);
+
+  --theme-radius-sm: 0;
+  --theme-radius-md: 0;
+  --theme-radius-lg: 0;
+  --theme-radius-xl: 0;
+  --theme-radius-full: 0;
+
+  --theme-container-lg: 1080px;
+  --theme-container-xl: 1360px;
+  --theme-container-2xl: 1640px;
+  --theme-container-gutter: clamp(1rem, 2vw, 1.5rem);
+  --theme-measure-project-lead: 62rem;
+
+  --color-primary: #8f5a43;
+  --color-secondary: #d2b08b;
+  --color-surface-50: #fbf6ef;
+  --color-surface-100: #f2e9db;
+  --color-surface-200: #e1d2bd;
+  --color-surface-300: #cab79d;
+  --color-surface-400: #ab967c;
+  --color-surface-500: #8c7760;
+  --color-surface-600: #6d5a47;
+  --color-surface-700: #504132;
+  --color-surface-800: #36291f;
+  --color-surface-900: #241a14;
+  --color-surface-950: #15100c;
+
+  /* Semantic surfaces and text */
+  --color-text-muted: rgb(from var(--color-surface-950) r g b / 0.8);
+  --color-text-soft: rgb(from var(--color-surface-950) r g b / 0.7);
+  --color-text-subtle: rgb(from var(--color-surface-950) r g b / 0.6);
+  --color-text-faint: rgb(from var(--color-surface-950) r g b / 0.5);
+  --color-text-ghost: rgb(from var(--color-surface-950) r g b / 0.4);
+  --color-tag-text: rgb(from var(--color-surface-950) r g b / 0.75);
+
+  --color-border-subtle: rgb(from var(--color-surface-950) r g b / 0.1);
+  --color-border-default: rgb(from var(--color-surface-950) r g b / 0.15);
+  --color-border-emphasis: rgb(from var(--color-surface-950) r g b / 0.2);
+  --color-border-strong: rgb(from var(--color-surface-950) r g b / 0.25);
+
+  --color-surface-hover: rgb(from var(--color-surface-950) r g b / 0.05);
+  --color-surface-emphasis: rgb(from var(--color-surface-950) r g b / 0.08);
+  --color-surface-strong: rgb(from var(--color-surface-950) r g b / 0.1);
+
+  --color-link-underline: rgb(from var(--color-surface-950) r g b / 0.18);
+  --color-link-underline-hover: rgb(from var(--color-surface-950) r g b / 0.3);
+  --color-focus-ring: rgb(from var(--color-primary) r g b / 0.2);
+  --color-focus-ring-strong: rgb(from var(--color-primary) r g b / 0.35);
+  --color-form-focus-border: rgb(from var(--color-primary) r g b / 0.75);
+
+  /* Background / chrome */
+  --color-header-surface: rgb(from var(--color-surface-50) r g b / 0.8);
+  --color-bg-accent-primary: rgb(from var(--color-primary) r g b / 0.12);
+  --color-bg-accent-secondary: rgb(from var(--color-secondary) r g b / 0.12);
+  --color-bg-accent-tertiary: rgb(180 149 107 / 0.14);
+  --color-body-accent: rgb(from var(--color-primary) r g b / 0.045);
+  --color-body-surface-start: rgb(from var(--color-surface-50) r g b / 0.93);
+  --color-body-surface-end: rgb(from var(--color-surface-100) r g b / 0.98);
+  --color-main-surface-start: rgb(from var(--color-surface-50) r g b / 0.9);
+  --color-main-surface-end: rgb(from var(--color-surface-100) r g b / 0.96);
+
+  /* Feedback */
+  --color-success-border: rgb(58 122 91 / 0.55);
+  --color-success-surface: rgb(58 122 91 / 0.1);
+  --color-success-text: var(--color-surface-900);
+  --color-success-text-strong: rgb(48 112 82 / 0.95);
+  --color-error-border: rgb(166 78 67 / 0.55);
+  --color-error-surface: rgb(166 78 67 / 0.1);
+  --color-error-text: var(--color-surface-900);
+  --color-error-text-strong: rgb(166 78 67 / 0.95);
+}
+
+html.dark {
+  --color-primary: #c98b67;
+  --color-secondary: #e3c8a8;
+  --color-surface-50: #16110d;
+  --color-surface-100: #1d1712;
+  --color-surface-200: #29211b;
+  --color-surface-300: #3b3027;
+  --color-surface-400: #57493d;
+  --color-surface-500: #766756;
+  --color-surface-600: #9e8f7b;
+  --color-surface-700: #c2b2a0;
+  --color-surface-800: #ddd3c6;
+  --color-surface-900: #f1e9df;
+  --color-surface-950: #fbf7f2;
+
+  --color-text-muted: rgb(from var(--color-surface-950) r g b / 0.82);
+  --color-text-soft: rgb(from var(--color-surface-950) r g b / 0.72);
+  --color-text-subtle: rgb(from var(--color-surface-950) r g b / 0.62);
+  --color-text-faint: rgb(from var(--color-surface-950) r g b / 0.52);
+  --color-text-ghost: rgb(from var(--color-surface-950) r g b / 0.42);
+  --color-tag-text: rgb(from var(--color-surface-950) r g b / 0.8);
+
+  --color-border-subtle: rgb(from var(--color-surface-950) r g b / 0.1);
+  --color-border-default: rgb(from var(--color-surface-950) r g b / 0.16);
+  --color-border-emphasis: rgb(from var(--color-surface-950) r g b / 0.22);
+  --color-border-strong: rgb(from var(--color-surface-950) r g b / 0.28);
+
+  --color-surface-hover: rgb(from var(--color-surface-950) r g b / 0.06);
+  --color-surface-emphasis: rgb(from var(--color-surface-950) r g b / 0.09);
+  --color-surface-strong: rgb(from var(--color-surface-950) r g b / 0.12);
+
+  --color-link-underline: rgb(from var(--color-surface-950) r g b / 0.2);
+  --color-link-underline-hover: rgb(from var(--color-surface-950) r g b / 0.3);
+  --color-focus-ring: rgb(from var(--color-primary) r g b / 0.24);
+  --color-focus-ring-strong: rgb(from var(--color-primary) r g b / 0.38);
+  --color-form-focus-border: rgb(from var(--color-primary) r g b / 0.8);
+
+  --color-header-surface: rgb(from var(--color-surface-50) r g b / 0.78);
+  --color-bg-accent-primary: rgb(from var(--color-primary) r g b / 0.12);
+  --color-bg-accent-secondary: rgb(from var(--color-secondary) r g b / 0.1);
+  --color-bg-accent-tertiary: rgb(180 149 107 / 0.08);
+  --color-body-accent: rgb(from var(--color-primary) r g b / 0.05);
+  --color-body-surface-start: rgb(from var(--color-surface-50) r g b / 0.92);
+  --color-body-surface-end: rgb(from var(--color-surface-100) r g b / 0.98);
+  --color-main-surface-start: rgb(from var(--color-surface-50) r g b / 0.88);
+  --color-main-surface-end: rgb(from var(--color-surface-100) r g b / 0.95);
+
+  --color-success-text: rgb(179 227 198);
+  --color-error-text: rgb(245 184 175);
+}

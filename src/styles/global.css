@@ -21,9 +21,9 @@ html {
   color-scheme: light;
   background-color: var(--color-surface-100);
   background-image:
-    radial-gradient(circle at top left, rgb(from var(--color-primary) r g b / 0.1), transparent 30%),
-    radial-gradient(circle at 82% 14%, rgb(from var(--color-secondary) r g b / 0.1), transparent 22%),
-    radial-gradient(circle at 50% 100%, rgb(214 198 167 / 0.12), transparent 28%),
+    radial-gradient(circle at top left, var(--color-bg-accent-primary), transparent 30%),
+    radial-gradient(circle at 82% 14%, var(--color-bg-accent-secondary), transparent 22%),
+    radial-gradient(circle at 50% 100%, var(--color-bg-accent-tertiary), transparent 28%),
     linear-gradient(180deg, var(--color-surface-50) 0%, var(--color-surface-100) 100%);
   background-attachment: fixed;
 }
@@ -35,11 +35,11 @@ html.dark {
 html,
 body {
   min-height: 100%;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: var(--leading-body);
   text-rendering: optimizeLegibility;
@@ -50,8 +50,8 @@ body {
   flex-direction: column;
   background-color: transparent;
   background-image:
-    radial-gradient(circle at 50% 0%, rgb(from var(--color-primary) r g b / 0.035), transparent 36%),
-    linear-gradient(180deg, rgb(from var(--color-surface-50) r g b / 0.9), rgb(from var(--color-surface-100) r g b / 0.97));
+    radial-gradient(circle at 50% 0%, var(--color-body-accent), transparent 36%),
+    linear-gradient(180deg, var(--color-body-surface-start), var(--color-body-surface-end));
   color: var(--color-surface-950);
 }
 
@@ -64,7 +64,7 @@ header {
 }
 
 html.scrolled header {
-  background-color: rgb(from var(--color-surface-50) r g b / 0.72);
+  background-color: var(--color-header-surface);
   backdrop-filter: blur(14px) saturate(130%);
 }
 
@@ -73,7 +73,7 @@ main {
   padding-top: var(--space-32);
   padding-bottom: var(--space-16);
   background:
-    linear-gradient(180deg, rgb(from var(--color-surface-50) r g b / 0.86), rgb(from var(--color-surface-100) r g b / 0.94));
+    linear-gradient(180deg, var(--color-main-surface-start), var(--color-main-surface-end));
 }
 
 footer {
@@ -87,7 +87,7 @@ footer {
 
 article {
   max-width: 100%;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
 }
 
 article h1,
@@ -96,7 +96,7 @@ article h3,
 article h4,
 article h5,
 article h6 {
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-weight: var(--font-semibold);
   line-height: var(--leading-heading);
   letter-spacing: var(--tracking-heading);
@@ -116,7 +116,7 @@ article h6:first-child {
 }
 
 article p {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   line-height: var(--leading-body);
   max-inline-size: var(--measure-copy);
   text-wrap: pretty;
@@ -132,17 +132,17 @@ article p:last-child {
 }
 
 article a {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   color: currentColor;
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.15);
+  text-decoration-color: var(--color-link-underline);
   transition: color var(--transition-base), text-decoration-color var(--transition-base);
 }
 
 article a:hover {
   color: var(--color-surface-950);
-  text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.25);
+  text-decoration-color: var(--color-link-underline-hover);
 }
 
 article img {
@@ -164,7 +164,7 @@ article li {
 
 article blockquote {
   border: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: 1.3125em;
   font-style: italic;
   font-weight: 400;
@@ -260,6 +260,7 @@ html.scrolled #back-to-top {
 
 /* Page layout helpers */
 .page-heading {
+  font-family: var(--font-heading);
   font-size: var(--text-4xl);
   font-weight: var(--font-semibold);
   line-height: var(--leading-display);
@@ -292,6 +293,7 @@ html.scrolled #back-to-top {
 }
 
 .page-intro__title {
+  font-family: var(--font-heading);
   font-size: var(--text-4xl);
   font-weight: var(--font-semibold);
   line-height: var(--leading-display);
@@ -316,6 +318,7 @@ html.scrolled #back-to-top {
 }
 
 .page-intro__description {
+  font-family: var(--font-body);
   font-size: var(--text-lg);
   font-weight: 400;
   color: var(--color-surface-950);
@@ -393,7 +396,7 @@ button:hover .arrow-animated--left .arrow-animated__poly,
 /* In-content button (e.g. MDX demos) */
 .content-button {
   padding: var(--space-2);
-  border: 1px solid rgb(from var(--color-surface-950) r g b / 0.1);
+  border: 1px solid var(--color-border-subtle);
   background: transparent;
   color: inherit;
   font: inherit;
@@ -403,15 +406,15 @@ button:hover .arrow-animated--left .arrow-animated__poly,
 }
 
 .content-button:hover {
-  background-color: rgb(from var(--color-surface-950) r g b / 0.05);
-  border-color: rgb(from var(--color-surface-950) r g b / 0.15);
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-border-default);
 }
 
 html.dark .content-button {
-  border-color: rgb(from var(--color-surface-50) r g b / 0.1);
+  border-color: var(--color-border-subtle);
 }
 
 html.dark .content-button:hover {
-  background-color: rgb(from var(--color-surface-50) r g b / 0.05);
-  border-color: rgb(from var(--color-surface-50) r g b / 0.15);
+  background-color: var(--color-surface-hover);
+  border-color: var(--color-border-default);
 }

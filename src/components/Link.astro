@@ -29,7 +29,7 @@ const { href, external, underline = true, class: className, ...rest } = Astro.pr
   .link--underline {
     text-decoration: underline;
     text-underline-offset: 2px;
-    text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.15);
+    text-decoration-color: var(--color-link-underline);
   }
 
   .link:hover {
@@ -37,6 +37,6 @@ const { href, external, underline = true, class: className, ...rest } = Astro.pr
   }
 
   .link--underline:hover {
-    text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.25);
+    text-decoration-color: var(--color-link-underline-hover);
   }
 </style>

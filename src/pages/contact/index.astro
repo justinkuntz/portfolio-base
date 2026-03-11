@@ -174,7 +174,7 @@ const statusCopy = (() => {
     text-transform: uppercase;
     line-height: var(--leading-label);
     letter-spacing: var(--tracking-caps);
-    color: rgb(from var(--color-surface-950) r g b / 0.6);
+    color: var(--color-text-subtle);
   }
 
   .contact__title {
@@ -199,7 +199,7 @@ const statusCopy = (() => {
     line-height: var(--leading-body);
     max-inline-size: var(--measure-copy);
     text-wrap: pretty;
-    color: rgb(from var(--color-surface-950) r g b / 0.8);
+    color: var(--color-text-muted);
     margin: 0;
   }
 
@@ -207,7 +207,7 @@ const statusCopy = (() => {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    color: rgb(from var(--color-surface-950) r g b / 0.7);
+    color: var(--color-text-subtle);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -247,23 +247,15 @@ const statusCopy = (() => {
   }
 
   .contact__status--success {
-    border-color: rgb(16 185 129 / 0.6);
-    background-color: rgb(16 185 129 / 0.1);
-    color: var(--color-surface-900);
-  }
-
-  html.dark .contact__status--success {
-    color: rgb(167 243 208);
+    border-color: var(--color-success-border);
+    background-color: var(--color-success-surface);
+    color: var(--color-success-text);
   }
 
   .contact__status--error {
-    border-color: rgb(244 63 94 / 0.6);
-    background-color: rgb(244 63 94 / 0.1);
-    color: var(--color-surface-900);
-  }
-
-  html.dark .contact__status--error {
-    color: rgb(253 164 175);
+    border-color: var(--color-error-border);
+    background-color: var(--color-error-surface);
+    color: var(--color-error-text);
   }
 
   .contact__form {
@@ -287,7 +279,7 @@ const statusCopy = (() => {
 
   .contact__hint {
     font-size: var(--text-sm);
-    color: rgb(from var(--color-surface-950) r g b / 0.6);
+    color: var(--color-text-subtle);
     margin: 0;
   }
 
@@ -298,15 +290,15 @@ const statusCopy = (() => {
     border: 1px solid var(--color-surface-300);
     background-color: var(--color-surface-50);
     color: var(--color-surface-950);
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
     font-size: var(--text-base);
     outline: none;
     transition: border-color var(--transition-base), box-shadow var(--transition-base);
   }
 
   .contact__input:focus-visible {
-    border-color: rgb(from var(--color-surface-950) r g b / 0.7);
-    box-shadow: 0 0 0 2px rgb(from var(--color-surface-950) r g b / 0.2);
+    border-color: var(--color-form-focus-border);
+    box-shadow: 0 0 0 2px var(--color-focus-ring);
   }
 
   .contact__textarea {
@@ -341,11 +333,11 @@ const statusCopy = (() => {
   }
 
   #contact-status[data-variant="success"] {
-    color: rgb(16 185 129 / 0.95);
+    color: var(--color-success-text-strong);
   }
 
   #contact-status[data-variant="error"] {
-    color: rgb(244 63 94 / 0.95);
+    color: var(--color-error-text-strong);
   }
 </style>
 

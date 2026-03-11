@@ -1,14 +1,22 @@
 /* ==========================================================================
    Project design tokens (non-color)
    Typography, spacing, radius, shadows, motion, layout.
-   Colors live in theme.css.
+   Theme controls and colors live in theme.css and src/styles/themes/.
    ========================================================================== */
 
 :root {
   /* Typography */
-  --font-sans: "Public Sans", system-ui, sans-serif;
-  --font-serif: "Lora", Georgia, serif;
-  --font-mono: ui-monospace, monospace;
+  --font-sans-default: "Public Sans", system-ui, sans-serif;
+  --font-serif-default: "Lora", Georgia, serif;
+  --font-ui-default: "Inter", system-ui, sans-serif;
+  --font-mono-default: ui-monospace, monospace;
+
+  --font-sans: var(--theme-font-sans, var(--font-sans-default));
+  --font-serif: var(--theme-font-serif, var(--font-serif-default));
+  --font-ui: var(--theme-font-ui, var(--font-sans));
+  --font-body: var(--theme-font-body, var(--font-sans));
+  --font-heading: var(--theme-font-heading, var(--font-sans));
+  --font-mono: var(--theme-font-mono, var(--font-mono-default));
 
   /* Font sizes – map to Open Props scale where available */
   --text-xs: var(--font-size-00, 0.75rem);
@@ -67,11 +75,11 @@
   --space-32: 8rem;
 
   /* Border radius – use these site-wide for consistency */
-  --radius-sm: var(--radius-2, 0.25rem);   /* tags, small controls, copy btn */
-  --radius-md: var(--radius-3, 0.5rem);   /* cards, buttons, inputs, images, code blocks */
-  --radius-lg: var(--radius-4, 0.75rem);  /* large cards, nav cards */
-  --radius-xl: var(--radius-5, 1rem);     /* featured panels */
-  --radius-full: var(--radius-round, 9999px); /* pills, avatars, icon buttons */
+  --radius-sm: var(--theme-radius-sm, var(--radius-2, 0.25rem));   /* tags, small controls, copy btn */
+  --radius-md: var(--theme-radius-md, var(--radius-3, 0.5rem));   /* cards, buttons, inputs, images, code blocks */
+  --radius-lg: var(--theme-radius-lg, var(--radius-4, 0.75rem));  /* large cards, nav cards */
+  --radius-xl: var(--theme-radius-xl, var(--radius-5, 1rem));     /* featured panels */
+  --radius-full: var(--theme-radius-full, var(--radius-round, 9999px)); /* pills, avatars, icon buttons */
 
   /* Shadows */
   --shadow-sm: var(--shadow-2);
@@ -89,16 +97,18 @@
   --transition-slower: var(--duration-slower) var(--ease-default);
 
   /* Layout */
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-  --container-2xl: 1536px;
-  --container-readable: 65ch;
-  --measure-tight: 12ch;
-  --measure-title: 16ch;
-  --measure-lead: 32rem;
-  --measure-copy: 62ch;
+  --container-sm: var(--theme-container-sm, 640px);
+  --container-md: var(--theme-container-md, 768px);
+  --container-lg: var(--theme-container-lg, 1024px);
+  --container-xl: var(--theme-container-xl, 1280px);
+  --container-2xl: var(--theme-container-2xl, 1536px);
+  --container-gutter: var(--theme-container-gutter, var(--space-4));
+  --container-readable: var(--theme-container-readable, 65ch);
+  --measure-tight: var(--theme-measure-tight, 12ch);
+  --measure-title: var(--theme-measure-title, 16ch);
+  --measure-lead: var(--theme-measure-lead, 32rem);
+  --measure-copy: var(--theme-measure-copy, 62ch);
+  --measure-project-lead: var(--theme-measure-project-lead, 58rem);
 
   /* Z-index */
   --z-dropdown: 10;

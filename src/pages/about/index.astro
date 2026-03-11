@@ -213,7 +213,7 @@ const work = await Promise.all(
     font-size: var(--text-xl);
     font-weight: var(--font-regular);
     line-height: var(--leading-body);
-    color: rgb(from var(--color-surface-950) r g b / 0.8);
+    color: var(--color-text-muted);
     max-width: var(--measure-copy);
     text-wrap: pretty;
   }
@@ -372,7 +372,7 @@ const work = await Promise.all(
     max-inline-size: var(--measure-copy);
     padding-left: var(--space-3);
     padding-top: var(--space-2);
-    border-left: 6px solid rgb(from var(--color-surface-950) r g b / 0.2);
+    border-left: 6px solid var(--color-border-emphasis);
   }
 
   .about__quote-text {
@@ -392,7 +392,7 @@ const work = await Promise.all(
     line-height: var(--leading-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: rgb(from var(--color-surface-950) r g b / 0.5);
+    color: var(--color-text-faint);
   }
 
   .about__quote-credit::before {
@@ -417,7 +417,7 @@ const work = await Promise.all(
     font-weight: 400;
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
-    color: rgb(from var(--color-surface-950) r g b / 0.4);
+    color: var(--color-text-ghost);
     padding-left: calc(var(--space-8) + var(--space-4));
     margin: 0 0 var(--space-4);
   }
@@ -485,7 +485,7 @@ const work = await Promise.all(
     font-size: var(--text-lg);
     font-weight: var(--font-bold);
     line-height: var(--leading-heading);
-    color: rgb(from var(--color-surface-950) r g b / 0.6);
+    color: var(--color-text-subtle);
     margin: 0 0 var(--space-3);
   }
 
@@ -496,16 +496,15 @@ const work = await Promise.all(
     line-height: var(--leading-label);
     letter-spacing: var(--tracking-label);
     padding: var(--space-1) var(--space-2);
-    background-color: rgb(from var(--color-surface-950) r g b / 0.08);
-    color: rgb(from var(--color-surface-950) r g b / 0.7);
+    background-color: var(--color-surface-emphasis);
+    color: var(--color-text-soft);
     border-radius: var(--radius-full);
-    /* border: 1px solid rgb(from var(--color-surface-950) r g b / 0.15); */
   }
 
   .about__timeline-desc {
     grid-column: 2;
     grid-row: 4;
-    color: rgb(from var(--color-surface-950) r g b / 0.5);
+    color: var(--color-text-faint);
     font-size: var(--text-base);
     line-height: var(--leading-body);
     margin: 0;

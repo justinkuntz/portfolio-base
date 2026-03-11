@@ -67,7 +67,7 @@
 }
 
 .input:focus-visible + .icon {
-  outline: 2px solid rgb(from var(--color-surface-950) r g b / 0.3);
+  outline: 2px solid var(--color-focus-ring-strong);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
@@ -80,7 +80,7 @@
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  fill: rgb(from var(--color-surface-950) r g b / 0.5);
+  fill: var(--color-text-faint);
   transition: fill var(--transition-base);
 }
 

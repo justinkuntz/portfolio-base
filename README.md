@@ -38,6 +38,22 @@ The blog also includes starter guidance posts for the core collections and conta
 
 The default `site` value in `astro.config.mjs` falls back to `https://example.com`. Replace it or set `SITE_URL` in your deployment environment before going live.
 
+## Themes
+
+The active theme is selected in `src/styles/theme.css`.
+
+- `src/styles/themes/theme-default.css` keeps the original sans-forward, rounded look.
+- `src/styles/themes/theme-serif.css` demonstrates a serif-led, square-corner, wider-layout variation with a warmer palette.
+
+To switch themes, change the `@import` in `src/styles/theme.css`.
+
+The top of each theme file is the main control surface:
+
+- font roles for body, headings, and UI
+- radius values for corners and pills
+- container widths and content measures
+- primitive palette plus semantic surface, text, focus, and feedback colors
+
 ## Content Model
 
 The starter uses Astro content collections:
