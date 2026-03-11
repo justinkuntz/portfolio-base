@@ -1,67 +1,99 @@
-function changeTheme() {
-  const element = document.documentElement
-  const theme = element.classList.contains("dark") ? "light" : "dark"
+(() => {
+  const themeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  const css = document.createElement("style")
-
-  css.appendChild(
-    document.createTextNode(
-      `* {
-           -webkit-transition: none !important;
-           -moz-transition: none !important;
-           -o-transition: none !important;
-           -ms-transition: none !important;
-           transition: none !important;
+  function withTransitionsDisabled(callback) {
+    const css = document.createElement("style");
+    css.appendChild(
+      document.createTextNode(
+        `* {
+          -webkit-transition: none !important;
+          -moz-transition: none !important;
+          -o-transition: none !important;
+          -ms-transition: none !important;
+          transition: none !important;
         }`,
-    ),
-  )
-  document.head.appendChild(css)
-
-  if (theme === "dark") {
-    element.classList.add("dark")
-  } else {
-    element.classList.remove("dark")
+      ),
+    );
+    document.head.appendChild(css);
+    callback();
+    void window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
   }
 
-  window.getComputedStyle(css).opacity
-  document.head.removeChild(css)
-  localStorage.theme = theme
-}
-
-function preloadTheme() {
-  const theme = (() => {
-    const userTheme = localStorage.theme
-
-    if (userTheme === "light" || userTheme === "dark") {
-      return userTheme
-    } else {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  function getStoredTheme() {
+    try {
+      const value = localStorage.getItem("theme");
+      return value === "light" || value === "dark" ? value : null;
+    } catch {
+      return null;
     }
-  })()
-
-  const element = document.documentElement
-
-  if (theme === "dark") {
-    element.classList.add("dark")
-  } else {
-    element.classList.remove("dark")
   }
 
-  localStorage.theme = theme
-}
+  function getSystemTheme() {
+    return themeQuery.matches ? "dark" : "light";
+  }
 
-window.onload = () => {
-  function initializeThemeButtons() {
-    const headerThemeButton = document.getElementById("header-theme-button")
-    const drawerThemeButton = document.getElementById("drawer-theme-button")
-    headerThemeButton?.addEventListener("click", changeTheme)
-    drawerThemeButton?.addEventListener("click", changeTheme)
-  } 
-  
-  document.addEventListener("astro:after-swap", initializeThemeButtons)
-  initializeThemeButtons()
-}
+  function getResolvedTheme() {
+    return getStoredTheme() ?? getSystemTheme();
+  }
 
-document.addEventListener("astro:after-swap", preloadTheme)
+  function syncThemeToggles(theme) {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+      button.dataset.theme = theme;
+      button.setAttribute("aria-pressed", String(theme === "dark"));
+      button.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
+      button.setAttribute("title", `Switch to ${nextTheme} theme`);
+      const label = button.querySelector("[data-theme-toggle-label]");
+      if (label) {
+        label.textContent = `Switch to ${nextTheme} theme`;
+      }
+    });
+  }
 
-preloadTheme()
+  function applyTheme(theme, { persist = false } = {}) {
+    withTransitionsDisabled(() => {
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.documentElement.dataset.theme = theme;
+    });
+
+    if (persist) {
+      try {
+        localStorage.setItem("theme", theme);
+      } catch {
+        // Ignore storage failures.
+      }
+    }
+
+    syncThemeToggles(theme);
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    applyTheme(currentTheme === "dark" ? "light" : "dark", { persist: true });
+  }
+
+  function bindThemeToggle(button) {
+    if (button.dataset.themeToggleBound === "true") return;
+    button.dataset.themeToggleBound = "true";
+    button.addEventListener("click", toggleTheme);
+  }
+
+  function initTheme() {
+    const theme = getResolvedTheme();
+    applyTheme(theme);
+    document.querySelectorAll("[data-theme-toggle]").forEach(bindThemeToggle);
+  }
+
+  themeQuery.addEventListener("change", () => {
+    if (getStoredTheme()) return;
+    applyTheme(getSystemTheme());
+  });
+
+  document.addEventListener("DOMContentLoaded", initTheme);
+  document.addEventListener("astro:after-swap", initTheme);
+
+  initTheme();
+})();

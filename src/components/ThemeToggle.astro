@@ -1,0 +1,135 @@
+---
+type Props = {
+  id?: string;
+  class?: string;
+  size?: "md" | "lg";
+};
+
+const { id, class: className, size = "md" } = Astro.props;
+const maskId = `${id ?? `theme-toggle-${size}`}-mask`;
+---
+
+<button
+  id={id}
+  type="button"
+  class:list={["theme-toggle", `theme-toggle--${size}`, className]}
+  data-theme-toggle
+  data-theme="light"
+  aria-label="Switch to dark theme"
+  aria-pressed="false"
+  title="Switch to dark theme"
+>
+  <span class="sr-only" data-theme-toggle-label>Switch to dark theme</span>
+  <svg
+    class="theme-toggle__glyph"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <mask id={maskId} class="theme-toggle__mask">
+      <rect x="0" y="0" width="24" height="24" fill="white"></rect>
+      <circle class="theme-toggle__cutout" cx="24" cy="10" r="6" fill="black"></circle>
+    </mask>
+    <circle class="theme-toggle__sun" cx="12" cy="12" r="6" mask={`url(#${maskId})`}></circle>
+    <g class="theme-toggle__beams">
+      <line x1="12" y1="1.5" x2="12" y2="4"></line>
+      <line x1="12" y1="20" x2="12" y2="22.5"></line>
+      <line x1="4.22" y1="4.22" x2="5.99" y2="5.99"></line>
+      <line x1="18.01" y1="18.01" x2="19.78" y2="19.78"></line>
+      <line x1="1.5" y1="12" x2="4" y2="12"></line>
+      <line x1="20" y1="12" x2="22.5" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.99" y2="18.01"></line>
+      <line x1="18.01" y1="5.99" x2="19.78" y2="4.22"></line>
+    </g>
+  </svg>
+</button>
+
+<style>
+  .theme-toggle {
+    --toggle-size: 2.5rem;
+    --toggle-icon-size: 1.65rem;
+
+    display: inline-grid;
+    place-items: center;
+    inline-size: var(--toggle-size);
+    block-size: var(--toggle-size);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--color-surface-950);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .theme-toggle--lg {
+    --toggle-size: 2.75rem;
+    --toggle-icon-size: 1.82rem;
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__glyph {
+    inline-size: var(--toggle-icon-size);
+    block-size: var(--toggle-icon-size);
+    overflow: visible;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: currentColor;
+    transform-origin: center center;
+  }
+
+  .theme-toggle__sun {
+    transform-origin: center center;
+    transform-box: fill-box;
+  }
+
+  .theme-toggle__beams {
+    transform-origin: center center;
+    transform-box: fill-box;
+    fill: none;
+    stroke-width: 1.8;
+  }
+
+  .theme-toggle__cutout {
+    transform: translateX(0);
+    transform-origin: center center;
+    transform-box: fill-box;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .theme-toggle__glyph,
+    .theme-toggle__sun,
+    .theme-toggle__beams,
+    .theme-toggle__cutout {
+      transition:
+        transform 0.6s var(--ease-spring-3, var(--ease-default)),
+        opacity 0.35s var(--ease-3, ease);
+    }
+  }
+
+  .theme-toggle[data-theme="dark"] {
+    color: var(--color-surface-950);
+  }
+
+  .theme-toggle[data-theme="dark"] .theme-toggle__glyph {
+    transform: rotate(-22deg);
+  }
+
+  .theme-toggle[data-theme="dark"] .theme-toggle__sun {
+    transform: scale(1.32);
+  }
+
+  .theme-toggle[data-theme="dark"] .theme-toggle__beams {
+    transform: rotate(-35deg) scale(0.72);
+    opacity: 0;
+  }
+
+  .theme-toggle[data-theme="dark"] .theme-toggle__cutout {
+    transform: translateX(-6.25px);
+  }
+</style>

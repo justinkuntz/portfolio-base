@@ -1,5 +1,6 @@
 ---
 import Button from "@components/Button.astro";
+import ThemeToggle from "@components/ThemeToggle.astro";
 import { SITE, LINKS } from "@consts";
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
@@ -46,22 +47,11 @@ const subpath = pathname.match(/[^/]+/g);
         <use href="/ui.svg#rss"></use>
       </svg>
     </Button>
-    <Button
+    <ThemeToggle
       id="drawer-theme-button"
-      type="button"
-      variant="ghost"
-      size="md"
-      iconOnly
-      aria-label="Toggle light and dark theme"
-      class="drawer__action-btn"
-    >
-      <svg class="drawer__action-icon drawer__action-icon--sun" aria-hidden="true">
-        <use href="/ui.svg#sun"></use>
-      </svg>
-      <svg class="drawer__action-icon drawer__action-icon--moon" aria-hidden="true">
-        <use href="/ui.svg#moon"></use>
-      </svg>
-    </Button>
+      size="lg"
+      class="drawer__theme-toggle"
+    />
   </div>
 </div>
 
@@ -129,19 +119,7 @@ const subpath = pathname.match(/[^/]+/g);
     fill: none;
   }
 
-  .drawer :global(.drawer__action-icon--sun) {
-    display: block;
-  }
-
-  html.dark .drawer :global(.drawer__action-icon--sun) {
-    display: none;
-  }
-
-  .drawer :global(.drawer__action-icon--moon) {
-    display: none;
-  }
-
-  html.dark .drawer :global(.drawer__action-icon--moon) {
-    display: block;
+  .drawer :global(.drawer__theme-toggle) {
+    flex-shrink: 0;
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import Button from "@components/Button.astro";
+import ThemeToggle from "@components/ThemeToggle.astro";
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^/]+/g);
 import { SITE, LINKS } from "@consts";
@@ -45,22 +46,13 @@ import { SITE, LINKS } from "@consts";
               <use href="/ui.svg#search"></use>
             </svg>
           </Button>
-          <Button
-            id="header-theme-button"
-            type="button"
-            variant="ghost"
-            size="md"
-            iconOnly
-            aria-label="Toggle light and dark theme"
-            class="header__action-btn header__action-btn--theme"
-          >
-            <svg class="header__action-icon header__action-icon--sun" aria-hidden="true">
-              <use href="/ui.svg#sun"></use>
-            </svg>
-            <svg class="header__action-icon header__action-icon--moon" aria-hidden="true">
-              <use href="/ui.svg#moon"></use>
-            </svg>
-          </Button>
+          <div class="header__theme-toggle-wrap">
+            <ThemeToggle
+              id="header-theme-button"
+              size="md"
+              class="header__theme-toggle"
+            />
+          </div>
           <Button
             id="header-drawer-button"
             type="button"
@@ -171,23 +163,14 @@ import { SITE, LINKS } from "@consts";
     }
   }
 
-  .header :global(.header__action-btn--theme) {
+  .header__theme-toggle-wrap {
     display: none;
   }
 
   @media (min-width: 768px) {
-    .header :global(.header__action-btn--theme) {
+    .header__theme-toggle-wrap {
       display: inline-flex;
-    }
-  }
-
-  .header :global(.header__action-btn--drawer) {
-    display: inline-flex;
-  }
-
-  @media (min-width: 768px) {
-    .header :global(.header__action-btn--drawer) {
-      display: none;
+      align-items: center;
     }
   }
 
@@ -198,20 +181,14 @@ import { SITE, LINKS } from "@consts";
     fill: none;
   }
 
-  .header :global(.header__action-icon--sun) {
-    display: block;
+  .header :global(.header__action-btn--drawer) {
+    display: inline-flex;
   }
 
-  html.dark .header :global(.header__action-icon--sun) {
-    display: none;
-  }
-
-  .header :global(.header__action-icon--moon) {
-    display: none;
-  }
-
-  html.dark .header :global(.header__action-icon--moon) {
-    display: block;
+  @media (min-width: 768px) {
+    .header :global(.header__action-btn--drawer) {
+      display: none;
+    }
   }
 
   .header :global(#header-drawer-button) :global(#drawer-open) {
