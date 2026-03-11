@@ -1,7 +1,7 @@
 ---
 title: "Blog collection"
 description: "How to add notes, essays, and field reports to the blog."
-heroImage: "/images/blog-placeholders/hero-02-blog-collection.svg"
+heroImage: "/images/blog-placeholders/hero-02-blog-collection.png"
 heroImageAlt: "Grogu-themed placeholder artwork for the Blog collection article"
 date: "2026-03-02"
 draft: false

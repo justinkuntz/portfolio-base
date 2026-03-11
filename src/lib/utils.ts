@@ -4,12 +4,21 @@ export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
+const SHORT_DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
+const MONTH_YEAR_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+
 export function formatDate(date: Date) {
-  return Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric"
-  }).format(date);
+  return SHORT_DATE_FORMATTER.format(date);
 }
 
 export function readingTime(html: string) {
@@ -20,18 +29,14 @@ export function readingTime(html: string) {
 }
 
 export function dateRange(startDate: Date, endDate?: Date | string): string {
-  const startMonth = startDate.toLocaleString("default", { month: "short" });
-  const startYear = startDate.getFullYear().toString();
-  const startLabel = `${startMonth} ${startYear}`;
+  const startLabel = MONTH_YEAR_FORMATTER.format(startDate);
   let endLabel = "";
 
   if (endDate) {
     if (typeof endDate === "string") {
       endLabel = endDate;
     } else {
-      const endMonth = endDate.toLocaleString("default", { month: "short" });
-      const endYear = endDate.getFullYear().toString();
-      endLabel = `${endMonth} ${endYear}`;
+      endLabel = MONTH_YEAR_FORMATTER.format(endDate);
     }
   }
 

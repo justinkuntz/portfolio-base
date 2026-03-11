@@ -1,9 +1,10 @@
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 import eslintPluginAstro from "eslint-plugin-astro";
 import globals from "globals";
 
-export default tseslint.config(
+export default defineConfig([
   {
     ignores: [".astro/", ".vscode/", "dist/", "node_modules/", "public/"],
   },
@@ -27,5 +28,5 @@ export default tseslint.config(
       quotes: ["error", "double", { allowTemplateLiterals: true, avoidEscape: true }],
       "@typescript-eslint/triple-slash-reference": "off",
     },
-  }
-);
+  },
+]);

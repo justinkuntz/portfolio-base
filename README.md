@@ -63,7 +63,7 @@ The SEO pipeline is centralized so users can configure metadata in one place and
 - `src/styles/theme.css` and the active theme do not affect metadata directly, but the generated placeholder OG images use the same Grogu visual direction
 - `src/pages/og/[...slug].png.ts` generates static social preview images at build time for pages, legal docs, blog posts, and project entries
 - `generatedImage: true` in `PageLayout` SEO props opts a route into a route-specific generated OG placeholder
-- `npm run generate:placeholders` creates starter blog placeholder images in `public/images/blog-placeholders/`
+- `npm run generate:placeholders` creates starter blog placeholder PNGs in `public/images/blog-placeholders/`
 
 Fallback order:
 
@@ -81,7 +81,7 @@ Content entries can override SEO with optional `seo` frontmatter. For blog and p
 - `seo.noindex`
 
 Blog entries can also define optional `heroImage` and `heroImageAlt`. If present, they become the default OG image for that post unless `seo.image` overrides them.
-For the starter content, those placeholder hero images live in `public/images/blog-placeholders/` so they stay simple string paths and avoid content-loader coupling.
+For the starter content, those placeholder hero images live in `public/images/blog-placeholders/` as PNGs so they stay simple string paths and avoid content-loader coupling.
 
 ## Content Model
 

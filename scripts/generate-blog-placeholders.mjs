@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const blogRoot = path.resolve(__dirname, "../src/content/blog");
@@ -138,6 +139,10 @@ async function main() {
   const created = [];
 
   await fs.mkdir(outputRoot, { recursive: true });
+  const existingFiles = await fs.readdir(outputRoot);
+  await Promise.all(
+    existingFiles.map((file) => fs.rm(path.join(outputRoot, file), { force: true })),
+  );
 
   for (const entry of entries) {
     if (!entry.isDirectory()) {
@@ -171,12 +176,10 @@ async function main() {
     const description = extractField(frontmatter, "description") || "Grogu blog entry";
     const tags = extractTags(frontmatter);
 
-    const outputPath = path.join(outputRoot, `hero-${entry.name}.svg`);
-    await fs.writeFile(
-      outputPath,
-      renderPlaceholder({ title, description, tags }),
-      "utf8",
-    );
+    const outputPath = path.join(outputRoot, `hero-${entry.name}.png`);
+    const svg = renderPlaceholder({ title, description, tags });
+    const png = await sharp(Buffer.from(svg), { density: 144 }).png().toBuffer();
+    await fs.writeFile(outputPath, png);
     created.push(path.relative(outputRoot, outputPath));
   }
 

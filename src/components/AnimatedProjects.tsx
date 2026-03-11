@@ -1,6 +1,5 @@
 import { createSignal, onMount, onCleanup } from "solid-js";
 import type { JSX } from "solid-js";
-import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
 import styles from "./AnimatedProjects.module.css";
 
