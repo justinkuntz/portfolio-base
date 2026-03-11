@@ -210,18 +210,23 @@ const work = await Promise.all(
   .about__intro {
     margin-top: var(--space-8);
     margin-bottom: var(--space-4);
-    font-size: var(--text-lg);
-    font-weight: var(--font-medium);
+    font-size: var(--text-xl);
+    font-weight: var(--font-regular);
     line-height: var(--leading-body);
     color: rgb(from var(--color-surface-950) r g b / 0.8);
     max-width: var(--measure-copy);
     text-wrap: pretty;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     .about__intro {
-      font-size: 1.25rem;
-      line-height: 1.5;
+      font-size: var(--text-2xl);
+    }
+  }
+  @media (min-width: 1024px) {
+    .about__intro {
+      font-size: var(--text-2xl);
+      /* line-height: 1.5; */
     }
   }
 
