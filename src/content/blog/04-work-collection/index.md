@@ -1,6 +1,8 @@
 ---
 title: "Work collection"
 description: "How the experience timeline on the about page is assembled."
+heroImage: "/images/blog-placeholders/hero-04-work-collection.svg"
+heroImageAlt: "Grogu-themed placeholder artwork for the Work collection article"
 date: "2026-03-04"
 draft: false
 tags:

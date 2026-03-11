@@ -14,7 +14,11 @@ const tags = [
 ].sort((a, b) => a.localeCompare(b));
 ---
 
-<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+<PageLayout
+  title={PROJECTS.TITLE}
+  description={PROJECTS.DESCRIPTION}
+  seo={{ kind: "page", generatedImage: true }}
+>
   <Container size="xl">
     <div class="page-intro page-intro--projects">
       <h1 class="page-intro__title animate">

@@ -20,7 +20,11 @@ const projects = (await getCollection("projects"))
   .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<PageLayout
+  title={HOME.TITLE}
+  description={HOME.DESCRIPTION}
+  seo={{ kind: "page", generatedImage: true }}
+>
   <Container size="xl">
     <div class="home">
       <section class="home__hero">

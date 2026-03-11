@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#16213A"/>
+    </linearGradient>
+    <radialGradient id="glow-left" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(220 160) rotate(20) scale(440 300)">
+      <stop stop-color="#94A3FF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#94A3FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-right" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1270 740) rotate(-14) scale(520 320)">
+      <stop stop-color="#C7D2FE" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#C7D2FE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect x="52" y="52" width="1496" height="796" stroke="rgba(255,255,255,0.14)"/>
+  <rect x="78" y="0" width="14" height="900" fill="rgba(148,163,255,0.35)"/>
+  <circle cx="220" cy="160" r="260" fill="url(#glow-left)"/>
+  <circle cx="1270" cy="740" r="320" fill="url(#glow-right)"/>
+  <text x="170" y="172" fill="#A5B4FC" font-size="28" font-family="Public Sans, Inter, Arial, sans-serif" letter-spacing="0.24em">BLOG ENTRY</text>
+  <text x="168" y="302" fill="#F8FAFC" font-size="100" font-family="Lora, Georgia, serif" font-weight="600">
+    <tspan x="168" dy="0">Contact workflow</tspan>
+  </text>
+  <text x="174" y="676" fill="rgba(248,250,252,0.82)" font-size="34" font-family="Public Sans, Inter, Arial, sans-serif">
+    <tspan x="174" dy="0">What the contact form does before it</tspan><tspan x="174" dy="44">relays a message back to the covert.</tspan>
+  </text>
+  
+  <rect x="174" y="748" width="170" height="44" fill="rgba(248,250,252,0.08)"/>
+  <text x="259" y="776" text-anchor="middle" fill="#C7D2FE" font-size="20" font-family="Public Sans, Inter, Arial, sans-serif" letter-spacing="0.08em">TUTORIAL</text>
+  <rect x="370" y="748" width="170" height="44" fill="rgba(248,250,252,0.08)"/>
+  <text x="455" y="776" text-anchor="middle" fill="#C7D2FE" font-size="20" font-family="Public Sans, Inter, Arial, sans-serif" letter-spacing="0.08em">CONTACT</text>
+  <text x="1428" y="796" text-anchor="end" fill="#E2E8F0" font-size="28" font-family="Public Sans, Inter, Arial, sans-serif" letter-spacing="0.18em">GROGU</text>
+</svg>

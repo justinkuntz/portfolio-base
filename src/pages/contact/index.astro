@@ -26,7 +26,11 @@ const statusCopy = (() => {
 })();
 ---
 
-<PageLayout title={CONTACT.TITLE} description={CONTACT.DESCRIPTION}>
+<PageLayout
+  title={CONTACT.TITLE}
+  description={CONTACT.DESCRIPTION}
+  seo={{ kind: "page", generatedImage: true }}
+>
   <Container size="lg">
     <section class="contact">
       <div class="contact__grid">

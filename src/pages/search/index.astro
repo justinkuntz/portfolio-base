@@ -17,7 +17,11 @@ const data: Array<CollectionEntry<"blog"> | CollectionEntry<"projects">> = [
 ];
 ---
 
-<PageLayout title={SEARCH.TITLE} description={SEARCH.DESCRIPTION}>
+<PageLayout
+  title={SEARCH.TITLE}
+  description={SEARCH.DESCRIPTION}
+  seo={{ noindex: true, kind: "page", generatedImage: true }}
+>
   <Container size="xl">
     <div class="animate page-heading">
       {SEARCH.TITLE}

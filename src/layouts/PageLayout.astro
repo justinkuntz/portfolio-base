@@ -4,19 +4,37 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Drawer from "@components/Drawer.astro";
 import { SITE } from "@consts";
+import { resolveSeo, type SeoInput, type SeoImage } from "@lib/seo";
 
 type Props = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  image?: SeoImage;
+  seo?: Omit<SeoInput, "pathname" | "site" | "title"> & { title?: string };
 };
 
-const { title, description } = Astro.props;
+const { title, description, image, seo } = Astro.props;
+const resolvedSeo = resolveSeo({
+  pathname: Astro.url.pathname,
+  site: Astro.site ?? new URL("https://example.com"),
+  title: seo?.title ?? title ?? SITE.NAME,
+  description: seo?.description ?? description,
+  image: seo?.image ?? image,
+  imageAlt: seo?.imageAlt,
+  generatedImage: seo?.generatedImage,
+  kind: seo?.kind,
+  type: seo?.type,
+  noindex: seo?.noindex,
+  publishedTime: seo?.publishedTime,
+  modifiedTime: seo?.modifiedTime,
+  tags: seo?.tags,
+});
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Head title={`${title} | ${SITE.NAME}`} description={description} />
+    <Head seo={resolvedSeo} />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>

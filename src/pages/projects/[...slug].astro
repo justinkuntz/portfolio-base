@@ -30,8 +30,17 @@ const next = items[(index + 1) % items.length];
 ---
 
 <PageLayout
-  title={project.data.title}
-  description={project.data.description || ""}
+  seo={{
+    title: project.data.seo?.title ?? project.data.title,
+    description: project.data.seo?.description ?? (project.data.description || ""),
+    image: project.data.seo?.image ?? project.data.heroImage,
+    imageAlt: project.data.seo?.imageAlt ?? project.data.heroImageAlt,
+    generatedImage: true,
+    noindex: project.data.seo?.noindex,
+    kind: "project",
+    publishedTime: project.data.date,
+    tags: project.data.tags,
+  }}
 >
   <Container size="xl">
     <div class="project-hero">

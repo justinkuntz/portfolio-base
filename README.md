@@ -54,6 +54,35 @@ The top of each theme file is the main control surface:
 - container widths and content measures
 - primitive palette plus semantic surface, text, focus, and feedback colors
 
+## SEO And OG Images
+
+The SEO pipeline is centralized so users can configure metadata in one place and override it only when needed.
+
+- `src/config/seo.ts` controls the global site defaults
+- `src/lib/seo.ts` resolves canonical URLs, title templates, OG/Twitter meta, and structured data
+- `src/styles/theme.css` and the active theme do not affect metadata directly, but the generated placeholder OG images use the same Grogu visual direction
+- `src/pages/og/[...slug].png.ts` generates static social preview images at build time for pages, legal docs, blog posts, and project entries
+- `generatedImage: true` in `PageLayout` SEO props opts a route into a route-specific generated OG placeholder
+- `npm run generate:placeholders` creates starter blog placeholder images in `public/images/blog-placeholders/`
+
+Fallback order:
+
+1. explicit per-page or per-entry SEO image
+2. entry hero image when that content type provides one
+3. generated route OG image like `/og/projects/onelab.png` when the route opts in with `generatedImage: true`
+4. global site fallback at `/og/site.png`
+
+Content entries can override SEO with optional `seo` frontmatter. For blog and project entries this supports:
+
+- `seo.title`
+- `seo.description`
+- `seo.image`
+- `seo.imageAlt`
+- `seo.noindex`
+
+Blog entries can also define optional `heroImage` and `heroImageAlt`. If present, they become the default OG image for that post unless `seo.image` overrides them.
+For the starter content, those placeholder hero images live in `public/images/blog-placeholders/` so they stay simple string paths and avoid content-loader coupling.
+
 ## Content Model
 
 The starter uses Astro content collections:

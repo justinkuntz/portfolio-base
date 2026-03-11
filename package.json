@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "preview:network": "astro preview --host",
     "astro": "astro",
+    "generate:placeholders": "node scripts/generate-blog-placeholders.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

@@ -1,6 +1,8 @@
 ---
 title: "Getting started"
 description: "The first files Grogu would update before taking this starter out of the covert."
+heroImage: "/images/blog-placeholders/hero-01-getting-started.svg"
+heroImageAlt: "Grogu-themed placeholder artwork for the Getting started article"
 date: "2026-03-01"
 draft: false
 tags:

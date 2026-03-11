@@ -1,6 +1,8 @@
 ---
 title: "Contact workflow"
 description: "What the contact form does before it relays a message back to the covert."
+heroImage: "/images/blog-placeholders/hero-06-contact-workflow.svg"
+heroImageAlt: "Grogu-themed placeholder artwork for the Contact workflow article"
 date: "2026-03-06"
 draft: false
 tags:

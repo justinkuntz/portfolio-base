@@ -30,7 +30,20 @@ const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<PageLayout
+  seo={{
+    title: post.data.seo?.title ?? post.data.title,
+    description: post.data.seo?.description ?? post.data.description,
+    image: post.data.seo?.image ?? post.data.heroImage,
+    imageAlt: post.data.seo?.imageAlt ?? post.data.heroImageAlt,
+    generatedImage: true,
+    noindex: post.data.seo?.noindex,
+    kind: "blog",
+    type: "article",
+    publishedTime: post.data.date,
+    tags: post.data.tags,
+  }}
+>
   <Container size="xl">
     <div class="animate">
       <BackToPrev href="/blog"> Back to blog </BackToPrev>

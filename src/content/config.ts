@@ -2,12 +2,21 @@ import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
   type: "content",
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()),
-    draft: z.boolean().optional()
+    draft: z.boolean().optional(),
+    heroImage: z.string().optional(),
+    heroImageAlt: z.string().optional(),
+    seo: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      noindex: z.boolean().optional(),
+    }).optional(),
   }),
 });
 
@@ -41,6 +50,13 @@ const projects = defineCollection({
     challenge: z.string().optional(),
     solution: z.string().optional(),
     results: z.string().optional(),
+    seo: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      noindex: z.boolean().optional(),
+    }).optional(),
   }),
 });
 
@@ -49,6 +65,11 @@ const legal = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
+    seo: z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      noindex: z.boolean().optional(),
+    }).optional(),
   }),
 });
 

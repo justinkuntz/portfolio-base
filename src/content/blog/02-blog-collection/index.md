@@ -1,6 +1,8 @@
 ---
 title: "Blog collection"
 description: "How to add notes, essays, and field reports to the blog."
+heroImage: "/images/blog-placeholders/hero-02-blog-collection.svg"
+heroImageAlt: "Grogu-themed placeholder artwork for the Blog collection article"
 date: "2026-03-02"
 draft: false
 tags:
@@ -48,6 +50,8 @@ Fields:
 | `description` | Yes | Used in cards, SEO, and RSS |
 | `date` | Yes | Must parse as a valid date |
 | `tags` | Yes | Powers filtering on `/blog` |
+| `heroImage` | No | Optional local image used for SEO and sharing |
+| `heroImageAlt` | No | Alt text for the optional hero image |
 | `draft` | No | Hidden from the site when `true` |
 
 Write in Markdown when you only need text. Use MDX when the post needs components or richer media.

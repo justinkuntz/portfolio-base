@@ -22,7 +22,11 @@ const work = await Promise.all(
 );
 ---
 
-<PageLayout title={ABOUT.TITLE} description={ABOUT.DESCRIPTION}>
+<PageLayout
+  title={ABOUT.TITLE}
+  description={ABOUT.DESCRIPTION}
+  seo={{ kind: "page", generatedImage: true }}
+>
   <Container size="xl">
     <div class="about">
       <div class="about__hero">

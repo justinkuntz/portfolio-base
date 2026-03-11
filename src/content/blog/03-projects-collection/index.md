@@ -1,6 +1,8 @@
 ---
 title: "Projects collection"
 description: "How to add new missions, case studies, and image-heavy project pages."
+heroImage: "/images/blog-placeholders/hero-03-projects-collection.svg"
+heroImageAlt: "Grogu-themed placeholder artwork for the Projects collection article"
 date: "2026-03-03"
 draft: false
 tags:

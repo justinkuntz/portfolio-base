@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { createEffect, createSignal } from "solid-js";
+import { createMemo, createSignal } from "solid-js";
 import ArrowCard from "@components/ArrowCard";
 import FilterBar from "@components/FilterBar";
 import styles from "./Blog.module.css";
@@ -11,20 +11,15 @@ type Props = {
 
 export default function Blog({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>());
-  const [posts, setPosts] = createSignal<CollectionEntry<"blog">[]>([]);
-
-  createEffect(() => {
-    setPosts(
-      data.filter((entry) =>
-        Array.from(filter()).every((value) =>
-          entry.data.tags.some(
-            (tag: string) =>
-              tag.toLowerCase() === String(value).toLowerCase()
-          )
+  const posts = createMemo(() =>
+    data.filter((entry) =>
+      Array.from(filter()).every((value) =>
+        entry.data.tags.some(
+          (tag: string) => tag.toLowerCase() === String(value).toLowerCase()
         )
       )
-    );
-  });
+    )
+  );
 
   function toggleTag(tag: string) {
     setFilter((prev) =>
