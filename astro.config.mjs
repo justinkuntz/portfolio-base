@@ -3,7 +3,6 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import rehypeUnwrap from "rehype-unwrap-images";
 import solidJs from "@astrojs/solid-js";
-import fuse from "astro-fuse";
 
 export default defineConfig({
   site: process.env.SITE_URL ?? "https://example.com",
@@ -11,6 +10,5 @@ export default defineConfig({
     mdx({ rehypePlugins: [rehypeUnwrap] }),
     sitemap(),
     solidJs(),
-    fuse(),
   ],
 });
