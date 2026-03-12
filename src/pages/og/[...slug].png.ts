@@ -81,7 +81,7 @@ export async function getStaticPaths() {
   const blogPaths = posts
     .filter((post) => !post.data.draft)
     .map((post) => ({
-      params: { slug: `blog/${post.slug}` },
+      params: { slug: `blog/${post.id}` },
       props: {
         title: post.data.title,
         description: post.data.description,
@@ -93,7 +93,7 @@ export async function getStaticPaths() {
   const projectPaths = projects
     .filter((project) => !project.data.draft)
     .map((project) => ({
-      params: { slug: `projects/${project.slug}` },
+      params: { slug: `projects/${project.id}` },
       props: {
         title: project.data.title,
         description: project.data.description || PROJECTS.DESCRIPTION,
@@ -103,7 +103,7 @@ export async function getStaticPaths() {
     }));
 
   const legalPaths = legalDocs.map((doc) => ({
-    params: { slug: `legal/${doc.slug}` },
+    params: { slug: `legal/${doc.id}` },
     props: {
       title: doc.data.title,
       description: `${doc.data.title} for ${SEO.siteName}.`,

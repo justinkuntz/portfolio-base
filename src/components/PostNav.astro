@@ -3,7 +3,7 @@ import Link from "@components/Link.astro";
 
 type NavEntry = {
   collection: string;
-  slug: string;
+  id: string;
   data: {
     title: string;
   };
@@ -20,7 +20,7 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
 
 <div class:list={["post-nav", `post-nav--${topSpacing}`]}>
   <Link
-    href={`/${prev.collection}/${prev.slug}`}
+    href={`/${prev.collection}/${prev.id}`}
     class="post-nav__card post-nav__card--prev"
   >
     <span class="post-nav__body">
@@ -45,7 +45,7 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
     </svg>
   </Link>
   <Link
-    href={`/${next.collection}/${next.slug}`}
+    href={`/${next.collection}/${next.id}`}
     class="post-nav__card post-nav__card--next"
   >
     <span class="post-nav__body post-nav__body--right">

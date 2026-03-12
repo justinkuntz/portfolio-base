@@ -10,7 +10,7 @@ type Props = {
 export default function ArrowCard({ entry, pill }: Props) {
   return (
     <a
-      href={`/${entry.collection}/${entry.slug}`}
+      href={`/${entry.collection}/${entry.id}`}
       class={styles.card}
     >
       <div class={styles.card__body}>

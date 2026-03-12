@@ -1,7 +1,13 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const blog = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/index.{md,mdx}",
+    base: "./src/content/blog",
+    generateId: ({ entry }) => entry.replace(/\/index\.(md|mdx)$/, ""),
+  }),
   schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
@@ -21,7 +27,11 @@ const blog = defineCollection({
 });
 
 const work = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "*.md",
+    base: "./src/content/work",
+    generateId: ({ entry }) => entry.replace(/\.md$/, ""),
+  }),
   schema: z.object({
     company: z.string(),
     role: z.string(),
@@ -31,7 +41,11 @@ const work = defineCollection({
 });
 
 const projects = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "**/index.mdx",
+    base: "./src/content/projects",
+    generateId: ({ entry }) => entry.replace(/\/index\.mdx$/, ""),
+  }),
   schema: ({ image }) => z.object({
     accentColor: z.string().optional(),
     title: z.string(),
@@ -61,7 +75,11 @@ const projects = defineCollection({
 });
 
 const legal = defineCollection({
-  type: "content",
+  loader: glob({
+    pattern: "*.md",
+    base: "./src/content/legal",
+    generateId: ({ entry }) => entry.replace(/\.md$/, ""),
+  }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -72,6 +90,5 @@ const legal = defineCollection({
     }).optional(),
   }),
 });
-
 
 export const collections = { blog, work, projects, legal };

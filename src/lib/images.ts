@@ -25,7 +25,7 @@ export async function toProjectCardEntry(
   project: CollectionEntry<"projects">
 ): Promise<ProjectCardEntry> {
   return {
-    slug: project.slug,
+    slug: project.id,
     title: project.data.title,
     tags: project.data.tags,
     thumbNailAlt: project.data.thumbNailAlt,

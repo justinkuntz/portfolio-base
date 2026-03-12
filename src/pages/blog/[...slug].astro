@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: post,
   }));
 }
@@ -20,12 +20,12 @@ type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { collection } = post;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const items = (await getCollection(collection))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const index = items.findIndex((x) => x.slug === post.slug);
+const index = items.findIndex((x) => x.id === post.id);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
 ---
@@ -63,7 +63,7 @@ const next = items[(index + 1) % items.length];
           <svg class="post-meta__icon" aria-hidden="true">
             <use href="/ui.svg#book-open"></use>
           </svg>
-          {readingTime(post.body)}
+          {readingTime(post.body ?? "")}
         </span>
       </div>
     </div>

@@ -8,7 +8,7 @@ The sample copy currently follows Grogu as he grows from foundling to Mandaloria
 
 - Astro 5 with MDX and Solid components
 - Filterable projects and blog collections
-- Full-text search with `astro-fuse`
+- Full-text search with Fuse.js
 - Sitemap and RSS generation
 - Light and dark theme toggle
 - Contact form endpoint with honeypot, timing check, and rate limiting
