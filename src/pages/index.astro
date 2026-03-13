@@ -33,18 +33,18 @@ const projectCards = await toProjectCardEntries(projects);
       <section class="home__hero">
         <article class="home__hero-content">
           <div class="home__hero-text">
-            <h1 class="home__headline">
+            <h1 class="home__headline animate">
               Foundling, Force-user, and future Mandalorian.
             </h1>
-            <h2 class="home__greeting">I'm Grogu,</h2>
+            <h2 class="home__greeting animate">I'm Grogu,</h2>
           </div>
-          <p class="home__description">
+          <p class="home__description animate">
             My path has been shaped by ancient wisdom, unlikely friendships, and
             the quiet belief that even the smallest among us can carry great
             purpose. I try to move through the world with courage, curiosity,
             and care while learning each day how to protect what matters most.
           </p>
-          <div class="home__actions">
+          <div class="home__actions animate">
             <Button
               href="/projects"
               variant="primary"
@@ -60,7 +60,7 @@ const projectCards = await toProjectCardEntries(projects);
         </article>
         <div class="home__image-wrap">
           <Image
-            class="home__image"
+            class="home__image animate"
             src={profileImage}
             alt="Portrait of Grogu standing in a rocky landscape"
             widths={[480, 720, 960, 1280]}

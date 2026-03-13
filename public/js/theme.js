@@ -1,6 +1,5 @@
 (() => {
   const themeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  const root = document.documentElement;
 
   function withTransitionsDisabled(callback) {
     const css = document.createElement("style");
@@ -17,11 +16,8 @@
     );
     document.head.appendChild(css);
     callback();
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.head.removeChild(css);
-      });
-    });
+    void window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
   }
 
   function getStoredTheme() {
@@ -61,14 +57,10 @@
     });
   }
 
-  function setThemeOnRoot(theme) {
-    root.classList.toggle("dark", theme === "dark");
-    root.dataset.theme = theme;
-  }
-
   function applyTheme(theme, { persist = false } = {}) {
     withTransitionsDisabled(() => {
-      setThemeOnRoot(theme);
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.documentElement.dataset.theme = theme;
       syncThemeToggles(theme);
     });
 
@@ -83,7 +75,9 @@
   }
 
   function toggleTheme() {
-    const currentTheme = root.classList.contains("dark") ? "dark" : "light";
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
     applyTheme(currentTheme === "dark" ? "light" : "dark", { persist: true });
   }
 
@@ -94,9 +88,8 @@
   }
 
   function initTheme() {
-    const theme = root.dataset.theme || getResolvedTheme();
-    setThemeOnRoot(theme);
-    syncThemeToggles(theme);
+    const theme = getResolvedTheme();
+    applyTheme(theme);
     document.querySelectorAll("[data-theme-toggle]").forEach(bindThemeToggle);
   }
 

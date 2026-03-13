@@ -8,7 +8,7 @@
   /* Typography */
   --font-sans-default: "Public Sans", system-ui, sans-serif;
   --font-serif-default: "Lora", Georgia, serif;
-  --font-ui-default: var(--font-sans-default);
+  --font-ui-default: "Inter", system-ui, sans-serif;
   --font-mono-default: ui-monospace, monospace;
 
   --font-sans: var(--theme-font-sans, var(--font-sans-default));
