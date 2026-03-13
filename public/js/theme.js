@@ -16,8 +16,11 @@
     );
     document.head.appendChild(css);
     callback();
-    void window.getComputedStyle(css).opacity;
-    document.head.removeChild(css);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        css.remove();
+      });
+    });
   }
 
   function getStoredTheme() {
