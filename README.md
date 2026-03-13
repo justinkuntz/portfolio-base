@@ -6,7 +6,7 @@ The sample copy currently follows Grogu as he grows from foundling to Mandaloria
 
 ## Features
 
-- Astro 5 with MDX and Solid components
+- Astro 6 with MDX and Solid components
 - Filterable projects and blog collections
 - Full-text search with Fuse.js
 - Sitemap and RSS generation
@@ -41,7 +41,7 @@ Start with these files:
 
 The blog also includes starter guidance posts for the core collections and contact workflow, so the sample content doubles as lightweight documentation while you are getting oriented.
 
-The default `site` value in `astro.config.mjs` falls back to `https://example.com`. Replace it or set `SITE_URL` in your deployment environment before going live.
+The default `site` value in `astro.config.mjs` falls back to `https://example.com`. On Vercel previews, the config will fall back to the Vercel preview URL automatically. For production, replace it or set `SITE_URL` in your deployment environment before going live.
 
 ## Themes
 
@@ -200,6 +200,37 @@ The `/contact` page posts to `/api/contact`. To enable email delivery, configure
 
 Without those variables, the endpoint stays disabled and returns an error response.
 
+## Deployment
+
+The starter stays host-agnostic by default.
+
+- `npm run build` creates the standard static Astro build for generic static hosting.
+- Vercel support is included, but it only activates when the build runs on Vercel or when `DEPLOY_TARGET=vercel` is set.
+- That keeps the template usable on Netlify, Cloudflare Pages, GitHub Pages, or any other static host without first removing Vercel-specific code.
+
+### Vercel Preview Deployments
+
+If you import the repo into Vercel:
+
+- Astro automatically switches to the Vercel adapter
+- the app uses `server` output on Vercel so `/api/contact` can work
+- preview deployments get a usable canonical site URL from Vercel when `SITE_URL` is not set
+
+Recommended production environment variables:
+
+- `SITE_URL`
+- `RESEND_API_KEY`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_TO_EMAIL`
+
+To validate the Vercel-targeted build locally:
+
+```bash
+npm run deploy:check
+```
+
+This keeps Vercel as an optional deployment target instead of the only supported host.
+
 ## Commands
 
 | Command | Action |
@@ -207,6 +238,8 @@ Without those variables, the endpoint stays disabled and returns an error respon
 | `npm run dev` | Start the local dev server |
 | `npm run dev:network` | Start the dev server on your local network |
 | `npm run build` | Run Astro checks and create a production build |
+| `npm run build:vercel` | Run Astro checks and build with the optional Vercel target |
+| `npm run deploy:check` | Validate the Vercel deployment build locally |
 | `npm run preview` | Preview the production build locally |
 | `npm run preview:network` | Preview the production build on your local network |
 | `npm run generate:placeholders` | Generate starter blog placeholder images |
