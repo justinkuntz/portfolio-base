@@ -101,7 +101,7 @@ const projectCards = await toProjectCardEntries(projects);
             </a>
           </h2>
         </div>
-        <AnimatedProjects projects={projectCards} client:visible />
+        <AnimatedProjects projects={projectCards} client:load />
       </section>
 
       <section class="home__section animate">

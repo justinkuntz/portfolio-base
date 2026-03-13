@@ -1,4 +1,4 @@
-import { createSignal, onMount, onCleanup } from "solid-js";
+import { createEffect, createSignal, onMount, onCleanup } from "solid-js";
 import type { JSX } from "solid-js";
 import { MEDIA } from "@config/media";
 import type { ProjectCardEntry } from "@types";
@@ -11,19 +11,37 @@ type Props = {
 export default function AnimatedProjects({ projects }: Props): JSX.Element {
   const [entered, setEntered] = createSignal(0);
   const refs: HTMLElement[] = [];
-  const cleanups: (() => void)[] = [];
+  let observer: IntersectionObserver | undefined;
 
   onMount(() => {
-    projects.forEach((_, idx) => {
-      const obs = new IntersectionObserver(
-        ([e]) => e.isIntersecting && setEntered(idx),
-        { rootMargin: "-70% 0px -30% 0px" }
-      );
-      obs.observe(refs[idx]);
-      cleanups.push(() => obs.disconnect());
-    });
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+
+        const idx = Number((entry.target as HTMLElement).dataset.index);
+        if (!Number.isFinite(idx)) return;
+
+        // Advance the stack one card at a time so shorter cards do not cause
+        // the whole sequence to complete immediately on initial load.
+        setEntered((current) => (idx === current + 1 ? idx : current));
+      },
+      {
+        threshold: 0.6,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
   });
-  onCleanup(() => cleanups.forEach((fn) => fn()));
+
+  createEffect(() => {
+    if (!observer) return;
+
+    observer.disconnect();
+    const nextIdx = entered() + 1;
+    const nextRef = refs[nextIdx];
+    if (nextRef) observer.observe(nextRef);
+  });
+
+  onCleanup(() => observer?.disconnect());
 
   return (
     <div class={styles.root}>
@@ -33,6 +51,7 @@ export default function AnimatedProjects({ projects }: Props): JSX.Element {
           return (
             <section
               ref={(el) => (refs[idx] = el!)}
+              data-index={idx}
               style={`--i: ${idx}; --e: ${entered()};`}
             >
               <div

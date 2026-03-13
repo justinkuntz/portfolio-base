@@ -24,9 +24,19 @@ npm run dev
 
 Open `http://localhost:4321`.
 
+The project is currently pinned to Node `22.22.1` in both `.nvmrc` and `.tool-versions`.
+
 If you use `asdf`/`mise`, the project also includes `.tool-versions`.
 
+If you switch between `asdf` and `nvm`, make sure only one is controlling Node for the project. A stale npm `prefix` from `asdf` can break `nvm use`.
+
 The starter is standardized on `npm`. It includes a `package-lock.json` and a `packageManager` field so hosts like Vercel do not guess the wrong installer.
+
+### Local Dev Note
+
+The Astro 6 + Vite 7 setup includes a small workaround in `astro.config.mjs` for local environments where Vite's internal `@vite/env` or `@vite/client` imports fail to resolve during `astro dev`.
+
+This only affects local dev. It does not change production build output.
 
 ## Customize The Starter
 

@@ -4,6 +4,10 @@ import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import rehypeUnwrap from "rehype-unwrap-images";
 import solidJs from "@astrojs/solid-js";
+import { fileURLToPath } from "node:url";
+
+const viteEnvPath = fileURLToPath(new URL("./node_modules/vite/dist/client/env.mjs", import.meta.url));
+const viteClientPath = fileURLToPath(new URL("./node_modules/vite/dist/client/client.mjs", import.meta.url));
 
 const isVercel =
   process.env.DEPLOY_TARGET === "vercel" ||
@@ -27,4 +31,37 @@ export default defineConfig({
     sitemap(),
     solidJs(),
   ],
+  vite: {
+    plugins: [
+      {
+        name: "resolve-vite-client-imports",
+        enforce: "pre",
+        resolveId(source) {
+          if (source === "@vite/env" || source === "/@vite/env") {
+            return viteEnvPath;
+          }
+
+          if (source === "@vite/client" || source === "/@vite/client") {
+            return viteClientPath;
+          }
+
+          return null;
+        },
+      },
+    ],
+    resolve: {
+      alias: [
+        {
+          // Some local Astro/Vite dev environments fail to resolve Vite's
+          // internal virtual client imports unless they are mapped explicitly.
+          find: /^\/?@vite\/env$/,
+          replacement: viteEnvPath,
+        },
+        {
+          find: /^\/?@vite\/client$/,
+          replacement: viteClientPath,
+        },
+      ],
+    },
+  },
 });
