@@ -1,10 +1,6 @@
 ---
 import "../styles/global.css";
 import publicSans from "@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url";
-import "@fontsource/inter/latin-400.css";
-import "@fontsource/inter/latin-600.css";
-import "@fontsource/lora/400.css";
-import "@fontsource/lora/600.css";
 import { SEO } from "@config/seo";
 import type { ResolvedSeo } from "@lib/seo";
 
@@ -32,6 +28,28 @@ const { seo } = Astro.props;
 />
 <link rel="icon" type="image/x-icon" href="/favicon-light.svg" />
 <meta name="generator" content={Astro.generator} />
+
+<script is:inline>
+  (() => {
+    try {
+      const storedTheme = localStorage.getItem("theme");
+      const theme =
+        storedTheme === "light" || storedTheme === "dark"
+          ? storedTheme
+          : window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.documentElement.dataset.theme = theme;
+    } catch {
+      const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.documentElement.dataset.theme = theme;
+    }
+  })();
+</script>
 
 <!-- Font preloads -->
 <link
@@ -84,9 +102,7 @@ const { seo } = Astro.props;
 }
 
 <!-- Global Scripts -->
-<script is:inline src="/js/theme.js"></script>
-<script is:inline src="/js/scroll.js"></script>
-<script is:inline src="/js/animate.js"></script>
+<script defer is:inline src="/js/theme.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
 
 <script>
@@ -101,43 +117,48 @@ const { seo } = Astro.props;
 </script>
 
 <script is:inline>
-  function init() {
-    onScroll();
-    animate();
-
-    const backToTop = document.getElementById("back-to-top");
-    backToTop?.addEventListener("click", (event) => scrollToTop(event));
-
-    const backToPrev = document.getElementById("back-to-prev");
-    backToPrev?.addEventListener("click", () => window.history.back());
-
-    document.addEventListener("scroll", onScroll);
-  }
-
-  function animate() {
-    const animateElements = document.querySelectorAll(".animate");
-
-    animateElements.forEach((element, index) => {
+  function revealAnimateElements() {
+    document.querySelectorAll(".animate").forEach((element, index) => {
       setTimeout(() => {
         element.classList.add("show");
       }, index * 150);
     });
   }
 
-  function onScroll() {
-    if (window.scrollY > 0) {
-      document.documentElement.classList.add("scrolled");
-    } else {
-      document.documentElement.classList.remove("scrolled");
+  function updateScrolledState() {
+    document.documentElement.classList.toggle("scrolled", window.scrollY > 0);
+  }
+
+  function initializeSiteUi() {
+    updateScrolledState();
+    revealAnimateElements();
+
+    const backToTop = document.getElementById("back-to-top");
+    if (backToTop && backToTop.dataset.bound !== "true") {
+      backToTop.dataset.bound = "true";
+      backToTop.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    }
+
+    const backToPrev = document.getElementById("back-to-prev");
+    if (backToPrev && backToPrev.dataset.bound !== "true") {
+      backToPrev.dataset.bound = "true";
+      backToPrev.addEventListener("click", () => window.history.back());
     }
   }
 
-  function scrollToTop(event) {
-    event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+  if (!window.__siteScrollHandlerBound) {
+    document.addEventListener("scroll", updateScrolledState, { passive: true });
+    window.__siteScrollHandlerBound = true;
+  }
+
+  function init() {
+    initializeSiteUi();
   }
 
   document.addEventListener("DOMContentLoaded", () => init());

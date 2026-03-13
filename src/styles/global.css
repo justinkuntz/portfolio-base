@@ -4,6 +4,7 @@
 
 @import "open-props/normalize.min.css";
 @import "open-props/open-props.min.css";
+@import "@fontsource-variable/public-sans/wght.css";
 
 /* ==========================================================================
    Project theme and tokens

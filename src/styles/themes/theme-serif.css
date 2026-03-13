@@ -4,6 +4,9 @@
    and a warmer palette to demonstrate a full theme swap.
    ========================================================================== */
 
+@import "@fontsource/lora/400.css";
+@import "@fontsource/lora/600.css";
+
 :root {
   /* Theme controls */
   --theme-font-body: var(--font-serif-default);
