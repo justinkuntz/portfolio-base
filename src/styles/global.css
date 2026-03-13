@@ -2,8 +2,11 @@
    Open Props foundation
    ========================================================================== */
 
-@import "open-props/normalize.min.css";
-@import "open-props/open-props.min.css";
+@import "open-props/sizes.min.css";
+@import "open-props/fonts.min.css";
+@import "open-props/easings.min.css";
+@import "open-props/shadows.min.css";
+@import "open-props/borders.min.css";
 @import "@fontsource-variable/public-sans/wght.css";
 
 /* ==========================================================================
