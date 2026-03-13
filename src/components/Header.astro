@@ -278,9 +278,20 @@ import { SITE, LINKS } from "@consts";
   window.__drawerAfterSwapHandlerBound = window.__drawerAfterSwapHandlerBound ?? false;
 </script>
 <script is:inline>
+  function bootDrawerButton() {
+    if (document.getElementById("header-drawer-button") && document.getElementById("drawer")) {
+      initializeDrawerButton();
+    }
+  }
+
   if (!window.__drawerAfterSwapHandlerBound) {
-    document.addEventListener("astro:after-swap", initializeDrawerButton);
+    document.addEventListener("astro:after-swap", bootDrawerButton);
     window.__drawerAfterSwapHandlerBound = true;
   }
-  initializeDrawerButton();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootDrawerButton, { once: true });
+  } else {
+    bootDrawerButton();
+  }
 </script>
