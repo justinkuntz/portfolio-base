@@ -156,6 +156,7 @@ const projectCards = await toProjectCardEntries(projects);
   .home__hero {
     display: grid;
     gap: var(--space-10);
+    min-width: 0;
   }
 
   @media (min-width: 768px) {
@@ -169,6 +170,7 @@ const projectCards = await toProjectCardEntries(projects);
     flex-direction: column;
     gap: var(--space-4);
     max-height: fit-content;
+    min-width: 0;
   }
 
   @media (min-width: 768px) {
@@ -237,6 +239,9 @@ const projectCards = await toProjectCardEntries(projects);
     order: -1;
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
 
   @media (min-width: 768px) {
@@ -247,7 +252,9 @@ const projectCards = await toProjectCardEntries(projects);
   }
 
   .home__image {
+    display: block;
     width: 100%;
+    max-width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: var(--radius-md);
