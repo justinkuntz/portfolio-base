@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import { formatDate } from "@lib/utils";
@@ -14,9 +14,14 @@ export async function getStaticPaths() {
   }));
 }
 
-// Get the requested legal doc
-type Props = CollectionEntry<"legal">;
-const doc = Astro.props;
+const docs = await getCollection("legal");
+const slug = Astro.params.slug;
+const doc = docs.find((item) => item.id === slug);
+
+if (!doc) {
+  return Astro.redirect("/");
+}
+
 const { title, date } = doc.data;
 const { Content } = await render(doc);
 ---

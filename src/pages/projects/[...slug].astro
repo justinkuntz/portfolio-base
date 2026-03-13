@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
@@ -16,15 +16,19 @@ export async function getStaticPaths() {
     props: project,
   }));
 }
-type Props = CollectionEntry<"projects">;
 
-const project = Astro.props;
-const { collection } = project;
-const { Content } = await render(project);
-
-const items = (await getCollection(collection))
+const items = (await getCollection("projects"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const slug = Astro.params.slug;
+const project = items.find((item) => item.id === slug);
+
+if (!project) {
+  return Astro.redirect("/projects");
+}
+
+const { Content } = await render(project);
+
 const index = items.findIndex((x) => x.id === project.id);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];

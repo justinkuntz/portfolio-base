@@ -122,13 +122,71 @@ export async function getStaticPaths() {
   ];
 }
 
-export const GET: APIRoute<OgProps> = async ({ props }) => {
+function normalizeSlugParam(value: string | undefined) {
+  return value?.replace(/^\/+|\/+$/g, "") ?? "";
+}
+
+export const GET: APIRoute<OgProps> = async ({ props, params }) => {
+  const slug = normalizeSlugParam(params.slug);
+
+  let resolvedProps = props;
+
+  if (!resolvedProps && slug) {
+    const staticEntry = staticPages.find((entry) => entry.slug === slug);
+
+    if (staticEntry) {
+      resolvedProps = staticEntry.props;
+    } else if (slug.startsWith("blog/")) {
+      const id = slug.slice("blog/".length);
+      const posts = await getCollection("blog");
+      const post = posts.find((entry) => !entry.data.draft && entry.id === id);
+
+      if (post) {
+        resolvedProps = {
+          title: post.data.title,
+          description: post.data.description,
+          eyebrow: "Blog Post",
+          tags: post.data.tags,
+        };
+      }
+    } else if (slug.startsWith("projects/")) {
+      const id = slug.slice("projects/".length);
+      const projects = await getCollection("projects");
+      const project = projects.find((entry) => !entry.data.draft && entry.id === id);
+
+      if (project) {
+        resolvedProps = {
+          title: project.data.title,
+          description: project.data.description || PROJECTS.DESCRIPTION,
+          eyebrow: "Project",
+          tags: project.data.tags,
+        };
+      }
+    } else if (slug.startsWith("legal/")) {
+      const id = slug.slice("legal/".length);
+      const legalDocs = await getCollection("legal");
+      const doc = legalDocs.find((entry) => entry.id === id);
+
+      if (doc) {
+        resolvedProps = {
+          title: doc.data.title,
+          description: `${doc.data.title} for ${SEO.siteName}.`,
+          eyebrow: "Legal",
+        };
+      }
+    }
+  }
+
+  if (!resolvedProps) {
+    return new Response("Not found", { status: 404 });
+  }
+
   const svg = renderOgImage({
-    title: props.title,
-    description: props.description,
-    eyebrow: props.eyebrow,
+    title: resolvedProps.title,
+    description: resolvedProps.description,
+    eyebrow: resolvedProps.eyebrow,
     siteName: SEO.siteName,
-    tags: props.tags,
+    tags: resolvedProps.tags,
   });
 
   const png = await sharp(Buffer.from(svg), { density: 144 })

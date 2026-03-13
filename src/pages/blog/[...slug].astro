@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
@@ -16,15 +16,19 @@ export async function getStaticPaths() {
     props: post,
   }));
 }
-type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
-const { collection } = post;
-const { Content } = await render(post);
-
-const items = (await getCollection(collection))
+const items = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const slug = Astro.params.slug;
+const post = items.find((item) => item.id === slug);
+
+if (!post) {
+  return Astro.redirect("/blog");
+}
+
+const { Content } = await render(post);
+
 const index = items.findIndex((x) => x.id === post.id);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
