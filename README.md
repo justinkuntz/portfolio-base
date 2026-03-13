@@ -26,6 +26,8 @@ Open `http://localhost:4321`.
 
 If you use `asdf`/`mise`, the project also includes `.tool-versions`.
 
+The starter is standardized on `npm`. It includes a `package-lock.json` and a `packageManager` field so hosts like Vercel do not guess the wrong installer.
+
 ## Customize The Starter
 
 Start with these files:
@@ -230,6 +232,14 @@ npm run deploy:check
 ```
 
 This keeps Vercel as an optional deployment target instead of the only supported host.
+
+If your shell reports `No version is set for command vercel`, that is usually an `asdf` or `mise` shim issue on your machine, not a repo problem. In that case, use:
+
+```bash
+npx vercel
+```
+
+You can also install the CLI under your active Node version and reshim, but the project docs assume `npx vercel` so users do not need a global install.
 
 ## Commands
 

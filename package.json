@@ -2,6 +2,7 @@
   "name": "portfolio-base",
   "type": "module",
   "version": "1.0.0",
+  "packageManager": "npm@11.9.0",
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
@@ -42,11 +43,5 @@
     "solid-js": "^1.9.11",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp"
-    ]
   }
 }
