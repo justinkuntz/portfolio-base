@@ -157,6 +157,7 @@
 .card__imgWrap {
   overflow: hidden;
   width: 100%;
+  margin-top: auto;
   border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 

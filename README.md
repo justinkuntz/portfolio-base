@@ -144,6 +144,29 @@ export const HOMEPAGE_PROJECTS = {
 
 The homepage will automatically choose the right thumbnail image profile for the selected layout, so users do not need to manage separate image references when switching between waterfall and grid.
 
+## Project Landing Grid
+
+The project landing page grid is also configured in `src/consts.ts`.
+
+That config currently supports:
+
+- `GRID_COLUMNS: 1 | 2 | 3 | 4` to control the desktop grid density
+
+Example:
+
+```ts
+export const PROJECTS_LISTING = {
+  GRID_COLUMNS: 3,
+};
+```
+
+This keeps the projects index on a simple responsive grid:
+
+- `1` stays one-up
+- `2` becomes two-up on larger screens
+- `3` becomes two-up first, then three-up
+- `4` becomes two-up, then three-up, then four-up
+
 ### Why this works well for a future CMS
 
 This setup is intentionally close to how a self-hosted Markdown CMS would work later:

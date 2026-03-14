@@ -1,4 +1,4 @@
-import type { Site, Page, Links, Metadata, Socials, HomepageProjects } from "@types";
+import type { Site, Page, Links, Metadata, Socials, HomepageProjects, ProjectsListing } from "@types";
 
 export const SITE: Site = {
   NAME: "Grogu",
@@ -9,6 +9,10 @@ export const SITE: Site = {
 export const HOMEPAGE_PROJECTS: HomepageProjects = {
   LAYOUT: "waterfall",
   GRID_COLUMNS: 3,
+};
+
+export const PROJECTS_LISTING: ProjectsListing = {
+  GRID_COLUMNS: 2,
 };
 
 export const HOME: Metadata = {

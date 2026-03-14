@@ -4,9 +4,15 @@ export type Site = {
   NUM_PROJECTS_ON_HOMEPAGE: number;
 };
 
+export type GridColumns = 1 | 2 | 3 | 4;
+
 export type HomepageProjects = {
   LAYOUT: "waterfall" | "grid";
-  GRID_COLUMNS: 1 | 2 | 3 | 4;
+  GRID_COLUMNS: GridColumns;
+};
+
+export type ProjectsListing = {
+  GRID_COLUMNS: GridColumns;
 };
 
 export type Metadata = {

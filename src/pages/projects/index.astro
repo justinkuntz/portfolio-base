@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Projects from "@components/Projects";
-import { PROJECTS } from "@consts";
+import { PROJECTS, PROJECTS_LISTING } from "@consts";
 import { toProjectCardEntries } from "@lib/images";
 
 const projects = (await getCollection("projects"))
@@ -33,7 +33,12 @@ const projectCards = await toProjectCardEntries(projects);
       </p>
     </div>
     <div class="animate">
-      <Projects client:idle tags={tags} data={projectCards} />
+      <Projects
+        client:idle
+        tags={tags}
+        data={projectCards}
+        gridColumns={PROJECTS_LISTING.GRID_COLUMNS}
+      />
     </div>
   </Container>
 </PageLayout>
