@@ -167,6 +167,29 @@ This keeps the projects index on a simple responsive grid:
 - `3` becomes two-up first, then three-up
 - `4` becomes two-up, then three-up, then four-up
 
+## Blog Landing Grid
+
+The blog landing page grid is configured in `src/consts.ts` as well.
+
+That config currently supports:
+
+- `GRID_COLUMNS: 1 | 2 | 3 | 4` to control the desktop grid density
+
+Example:
+
+```ts
+export const BLOG_LISTING = {
+  GRID_COLUMNS: 3,
+};
+```
+
+This keeps the blog index on the same responsive pattern as the projects index:
+
+- `1` stays one-up
+- `2` becomes two-up on larger screens
+- `3` becomes two-up first, then three-up
+- `4` becomes two-up, then three-up, then four-up
+
 ### Why this works well for a future CMS
 
 This setup is intentionally close to how a self-hosted Markdown CMS would work later:

@@ -35,6 +35,9 @@
 
 .control {
   position: relative;
+  appearance: none;
+  border: 0;
+  background: transparent;
   padding-inline: var(--space-1);
   padding-block: var(--space-1);
   border-radius: var(--radius-md);
@@ -50,23 +53,12 @@
   transition: color var(--transition-base);
 }
 
-.control:hover {
+.control:hover,
+.control:focus-visible {
   color: var(--color-surface-950);
 }
 
-.input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.input:focus-visible + .icon {
+.control:focus-visible .icon {
   outline: 2px solid var(--color-focus-ring-strong);
   outline-offset: 2px;
   border-radius: var(--radius-sm);

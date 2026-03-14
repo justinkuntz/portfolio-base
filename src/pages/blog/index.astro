@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Blog from "@components/Blog";
-import { BLOG } from "@consts";
+import { BLOG, BLOG_LISTING } from "@consts";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -30,7 +30,12 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
       </p>
     </div>
     <div class="animate">
-      <Blog client:idle tags={tags} data={posts} />
+      <Blog
+        client:idle
+        tags={tags}
+        data={posts}
+        gridColumns={BLOG_LISTING.GRID_COLUMNS}
+      />
     </div>
   </Container>
 </PageLayout>

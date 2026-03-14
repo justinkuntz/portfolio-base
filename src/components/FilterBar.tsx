@@ -15,26 +15,21 @@ export default function FilterBar(props: Props) {
         <span class={styles.label}>{props.label ?? "Filter:"}</span>
         <ul class={styles.list}>
           <For each={props.tags}>
-            {(tag, index) => (
+            {(tag) => (
               <li>
-                <label
+                <button
+                  type="button"
                   class={styles.control}
                   classList={{ [styles.controlActive]: props.selectedTags.has(tag) }}
-                  for={`filter-${index()}`}
+                  aria-pressed={props.selectedTags.has(tag)}
+                  onClick={() => props.onToggleTag(tag)}
                 >
-                  <input
-                    id={`filter-${index()}`}
-                    type="checkbox"
-                    class={styles.input}
-                    checked={props.selectedTags.has(tag)}
-                    onChange={() => props.onToggleTag(tag)}
-                  />
                   <svg class={styles.icon} aria-hidden="true">
                     <use href="/ui.svg#square" class={styles.iconUnchecked} />
                     <use href="/ui.svg#square-check" class={styles.iconChecked} />
                   </svg>
                   <span>{tag}</span>
-                </label>
+                </button>
               </li>
             )}
           </For>

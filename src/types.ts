@@ -11,7 +11,7 @@ export type HomepageProjects = {
   GRID_COLUMNS: GridColumns;
 };
 
-export type ProjectsListing = {
+export type GridListing = {
   GRID_COLUMNS: GridColumns;
 };
 
