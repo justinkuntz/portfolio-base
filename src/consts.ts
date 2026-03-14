@@ -7,8 +7,8 @@ export const SITE: Site = {
 };
 
 export const HOMEPAGE_PROJECTS: HomepageProjects = {
-  LAYOUT: "grid",
-  GRID_COLUMNS: 4,
+  LAYOUT: "waterfall",
+  GRID_COLUMNS: 3,
 };
 
 export const HOME: Metadata = {
