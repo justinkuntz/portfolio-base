@@ -12,7 +12,7 @@ const { projects, layout, gridColumns } = Astro.props as {
 
 {
   layout === "waterfall" ? (
-    <AnimatedProjects projects={projects} client:load />
+    <AnimatedProjects projects={projects} client:visible />
   ) : (
     <div
       class:list={[
