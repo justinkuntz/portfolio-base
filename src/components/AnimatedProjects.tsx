@@ -11,45 +11,19 @@ type Props = {
 export default function AnimatedProjects({ projects }: Props): JSX.Element {
   const [entered, setEntered] = createSignal(0);
   const refs: HTMLElement[] = [];
-  let frame = 0;
-
-  const updateEntered = () => {
-    const trigger = window.innerHeight * 0.38;
-    let nextEntered = 0;
-
-    refs.forEach((section, idx) => {
-      if (!section) return;
-      if (section.getBoundingClientRect().top <= trigger) {
-        nextEntered = idx;
-      }
-    });
-
-    setEntered(nextEntered);
-  };
-
-  const scheduleUpdate = () => {
-    if (frame) return;
-    frame = window.requestAnimationFrame(() => {
-      frame = 0;
-      updateEntered();
-    });
-  };
+  const cleanups: (() => void)[] = [];
 
   onMount(() => {
-    updateEntered();
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
+    projects.forEach((_, idx) => {
+      const obs = new IntersectionObserver(
+        ([e]) => e.isIntersecting && setEntered(idx),
+        { rootMargin: "-70% 0px -30% 0px" }
+      );
+      obs.observe(refs[idx]);
+      cleanups.push(() => obs.disconnect());
+    });
   });
-
-  onCleanup(() => {
-    if (typeof window !== "undefined") {
-      window.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      if (frame) {
-        window.cancelAnimationFrame(frame);
-      }
-    }
-  });
+  onCleanup(() => cleanups.forEach((fn) => fn()));
 
   return (
     <div class={styles.root}>

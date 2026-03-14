@@ -1,0 +1,85 @@
+---
+import AnimatedProjects from "@components/AnimatedProjects.tsx";
+import ProjectsWaterfall from "@components/ProjectsWaterfall.tsx";
+import type { ProjectCardEntry } from "@types";
+
+const { projects, layout, gridColumns } = Astro.props as {
+  projects: ProjectCardEntry[];
+  layout: "waterfall" | "grid";
+  gridColumns: 1 | 2 | 3 | 4;
+};
+---
+
+{
+  layout === "waterfall" ? (
+    <AnimatedProjects projects={projects} client:load />
+  ) : (
+    <div
+      class:list={[
+        "homepage-projects__grid",
+        `homepage-projects__grid--${gridColumns}`,
+      ]}
+    >
+      {projects.map((entry) => (
+        <div class="homepage-projects__item">
+          <ProjectsWaterfall
+            entry={entry}
+            variant="homepage-grid"
+            showTags={false}
+          />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .homepage-projects__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+    align-self: stretch;
+    margin: 0;
+    padding: 0;
+  }
+
+  .homepage-projects__item {
+    display: flex;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+    align-self: stretch;
+  }
+
+  .homepage-projects__item > * {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+  }
+
+  @media (min-width: 768px) {
+    .homepage-projects__grid--2,
+    .homepage-projects__grid--3,
+    .homepage-projects__grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: stretch;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .homepage-projects__grid--3,
+    .homepage-projects__grid--4 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .homepage-projects__grid--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+</style>

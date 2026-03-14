@@ -42,7 +42,7 @@ This only affects local dev. It does not change production build output.
 
 Start with these files:
 
-- `src/consts.ts` for site name, navigation, metadata, and social links
+- `src/consts.ts` for site name, navigation, homepage card layout, metadata, and social links
 - `src/config/media.ts` for image defaults like hero layout, thumbnail shape, and responsive widths
 - `src/config/seo.ts` for global SEO defaults
 - `src/pages/index.astro`, `src/pages/about/index.astro`, and `src/pages/contact/index.astro` for the main marketing copy
@@ -122,6 +122,27 @@ Example changes a user can make there:
 - make project heroes span the full viewport instead of staying inside the container
 - switch project thumbnails from landscape to square by changing the ratio to `1 / 1`
 - switch project thumbnails to portrait by changing the ratio to `4 / 5`
+
+## Homepage Project Cards
+
+The homepage project section is configured in `src/consts.ts`, alongside the other starter-level site controls.
+
+That config currently supports:
+
+- `LAYOUT: "waterfall"` for the stacked scrolling cards
+- `LAYOUT: "grid"` for a static grid of cards
+- `GRID_COLUMNS: 1 | 2 | 3 | 4` to control the desktop grid density
+
+Example:
+
+```ts
+export const HOMEPAGE_PROJECTS = {
+  LAYOUT: "grid",
+  GRID_COLUMNS: 3,
+};
+```
+
+The homepage will automatically choose the right thumbnail image profile for the selected layout, so users do not need to manage separate image references when switching between waterfall and grid.
 
 ### Why this works well for a future CMS
 
