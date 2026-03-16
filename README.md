@@ -55,6 +55,36 @@ The blog also includes starter guidance posts for the core collections and conta
 
 The default `site` value in `astro.config.mjs` falls back to `https://example.com`. On Vercel previews, the config will fall back to the Vercel preview URL automatically. For production, replace it or set `SITE_URL` in your deployment environment before going live.
 
+## Environment Variables
+
+Copy `.env.example` to `.env.local` for local development:
+
+```bash
+cp .env.example .env.local
+```
+
+Then fill in only the values you need for the features you are using.
+
+Typical local variables:
+
+- `SITE_URL`
+- `RESEND_API_KEY`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_TO_EMAIL`
+- `PROJECT_ACCESS_SECRET`
+- `PROJECT_ACCESS_PASSWORD`
+- `PROJECT_ACCESS_NOTIFY_TO_EMAIL`
+- `PROJECT_PASSWORD_<ID>` or `PROJECT_ACCESS_PASSWORDS`
+
+For the starter protected project example, the matching local variable is:
+
+```bash
+PROJECT_ACCESS_PASSWORD=your-shared-password
+PROJECT_PASSWORD_ALCOHOLICVODKA=your-password
+```
+
+`.env.local` should stay uncommitted. The repo only includes `.env.example` as a template.
+
 ## Themes
 
 The active theme is selected in `src/styles/theme.css`.
@@ -166,6 +196,86 @@ This keeps the projects index on a simple responsive grid:
 - `2` becomes two-up on larger screens
 - `3` becomes two-up first, then three-up
 - `4` becomes two-up, then three-up, then four-up
+
+## Protected Projects
+
+Projects can optionally be protected behind a password while still showing a public overview page.
+
+When a project is protected:
+
+- the project detail page still shows the hero, metadata, and overview content
+- the full case study body stays hidden behind a password form
+- successful unlocks use a signed `HttpOnly` cookie, not a client-side password check
+
+The simple author-facing setup is:
+
+```md
+passwordProtect: Yes
+```
+
+Fields:
+
+- `passwordProtect`: `Yes` or `No`
+- `passwordId`: optional override for the password key; if omitted, the project slug is used
+
+Passwords do not live in content files. Configure them with environment variables instead.
+
+Supported env patterns:
+
+- `PROJECT_ACCESS_SECRET`
+- `PROJECT_ACCESS_PASSWORD`
+- `PROJECT_ACCESS_PASSWORDS`
+- or individual keys like `PROJECT_PASSWORD_ACME_CASE_STUDY`
+
+Resolution order:
+
+1. project-specific password like `PROJECT_PASSWORD_ACME_CASE_STUDY`
+2. JSON map entry in `PROJECT_ACCESS_PASSWORDS`
+3. shared fallback password in `PROJECT_ACCESS_PASSWORD`
+
+Example setup:
+
+```bash
+PROJECT_ACCESS_SECRET=replace-this-with-a-long-random-secret
+PROJECT_ACCESS_PASSWORD=shared-review-password
+PROJECT_ACCESS_PASSWORDS='{"acme_case_study":"hunter2"}'
+```
+
+For the included sample protected project, you can also use:
+
+```bash
+PROJECT_PASSWORD_ALCOHOLICVODKA=your-password
+```
+
+`PROJECT_ACCESS_SECRET` is not the password your reviewer types.
+
+- `PROJECT_ACCESS_PASSWORD` or `PROJECT_PASSWORD_<ID>` is the user-facing password
+- `PROJECT_ACCESS_SECRET` is the server-only signing secret used to create trusted access cookies
+
+Keep `PROJECT_ACCESS_SECRET` different from your project passwords.
+
+The unlock flow is server-side, so protected projects require a server deployment.
+
+Protected project access asks for:
+
+- a valid email address
+- the correct project password
+
+The email is validated for format only. There is no built-in allowlist or separate store of approved addresses.
+
+If mail is configured, the site can optionally notify the owner for each access attempt with:
+
+- project
+- email
+- timestamp
+- IP
+- success or failure
+
+That notification uses the same Resend setup as the contact form. By default it goes to `CONTACT_TO_EMAIL`, and you can override that with `PROJECT_ACCESS_NOTIFY_TO_EMAIL`.
+
+Successful unlock cookies currently last 5 days.
+
+On this branch, the default build now uses Astro's Node adapter so protected projects can work locally and on generic Node hosts. Vercel is still supported through the dedicated Vercel build target.
 
 ## Blog Landing Grid
 
@@ -281,18 +391,19 @@ Without those variables, the endpoint stays disabled and returns an error respon
 
 ## Deployment
 
-The starter stays host-agnostic by default.
+The starter stays host-agnostic, but protected projects change the deployment requirements.
 
-- `npm run build` creates the standard static Astro build for generic static hosting.
-- Vercel support is included, but it only activates when the build runs on Vercel or when `DEPLOY_TARGET=vercel` is set.
-- That keeps the template usable on Netlify, Cloudflare Pages, GitHub Pages, or any other static host without first removing Vercel-specific code.
+- `npm run build` now creates a server build with Astro's Node adapter.
+- `npm run build:node` does the same explicitly for generic Node hosting.
+- `npm run build:vercel` switches to the Vercel adapter for Vercel deployments.
+- If you remove protected projects and other server-only features, you can switch the build target strategy back to static later.
 
 ### Vercel Preview Deployments
 
 If you import the repo into Vercel:
 
 - Astro automatically switches to the Vercel adapter
-- the app uses `server` output on Vercel so `/api/contact` can work
+- the app uses `server` output on Vercel so `/api/contact` and protected projects can work
 - preview deployments get a usable canonical site URL from Vercel when `SITE_URL` is not set
 
 Recommended production environment variables:
@@ -301,6 +412,16 @@ Recommended production environment variables:
 - `RESEND_API_KEY`
 - `CONTACT_FROM_EMAIL`
 - `CONTACT_TO_EMAIL`
+- `PROJECT_ACCESS_SECRET` if you use protected projects
+- `PROJECT_ACCESS_NOTIFY_TO_EMAIL` if you want owner notifications for protected projects
+- `PROJECT_ACCESS_PASSWORDS` or `PROJECT_PASSWORD_<ID>` if you use protected projects
+
+For Vercel:
+
+1. Open your project settings
+2. Go to `Environment Variables`
+3. Add the same variables you use locally
+4. Redeploy after changing them
 
 To validate the Vercel-targeted build locally:
 
@@ -324,7 +445,8 @@ You can also install the CLI under your active Node version and reshim, but the 
 | :-- | :-- |
 | `npm run dev` | Start the local dev server |
 | `npm run dev:network` | Start the dev server on your local network |
-| `npm run build` | Run Astro checks and create a production build |
+| `npm run build` | Run Astro checks and create a Node server build |
+| `npm run build:node` | Run Astro checks and build with the Node adapter |
 | `npm run build:vercel` | Run Astro checks and build with the optional Vercel target |
 | `npm run deploy:check` | Validate the Vercel deployment build locally |
 | `npm run preview` | Preview the production build locally |

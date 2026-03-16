@@ -3,9 +3,18 @@ import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import ProtectedContentGate from "@components/ProtectedContentGate";
 import Image from "astro/components/Image.astro";
 import PostNav from "@components/PostNav.astro";
 import { MEDIA, getProjectHeroSizes } from "@config/media";
+import {
+  getProjectProtection,
+  getProjectPasswordId,
+  getProjectAccessCookieName,
+  hasValidProjectAccessCookie,
+} from "@lib/project-access";
+
+export const prerender = false;
 
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
@@ -27,7 +36,22 @@ if (!project) {
   return Astro.redirect("/projects");
 }
 
-const { Content } = await render(project);
+const protection = getProjectProtection(project.data);
+const isProtected = protection.isProtected;
+const passwordId = getProjectPasswordId(project.data, project.id);
+const accessCookie = passwordId
+  ? Astro.cookies.get(getProjectAccessCookieName(project.id))?.value
+  : undefined;
+const hasAccess = isProtected && passwordId
+  ? hasValidProjectAccessCookie(
+      accessCookie,
+      project.id,
+      passwordId,
+      import.meta.env.PROJECT_ACCESS_SECRET
+    )
+  : false;
+const shouldRenderContent = !isProtected || hasAccess;
+const { Content } = shouldRenderContent ? await render(project) : { Content: null };
 
 const index = items.findIndex((x) => x.id === project.id);
 const prev = items[(index - 1 + items.length) % items.length];
@@ -44,7 +68,7 @@ const projectHeroLayoutClass = MEDIA.projectHero.layout === "full-bleed"
     image: project.data.seo?.image ?? project.data.heroImage,
     imageAlt: project.data.seo?.imageAlt ?? project.data.heroImageAlt,
     generatedImage: true,
-    noindex: project.data.seo?.noindex,
+    noindex: project.data.seo?.noindex ?? isProtected,
     kind: "project",
     publishedTime: project.data.date,
     tags: project.data.tags,
@@ -132,10 +156,20 @@ const projectHeroLayoutClass = MEDIA.projectHero.layout === "full-bleed"
         </ul>
       </div>
     </article>
-    <article class="project-content animate">
-      <Content />
-    </article>
-    <PostNav prev={prev} next={next} topSpacing="md" />
+    {
+      shouldRenderContent ? (
+        <>
+          <article class="project-content animate">
+            {Content && <Content />}
+          </article>
+          <PostNav prev={prev} next={next} topSpacing="md" />
+        </>
+      ) : (
+        <div class="animate">
+          <ProtectedContentGate slug={project.id} client:load />
+        </div>
+      )
+    }
   </Container>
 </PageLayout>
 

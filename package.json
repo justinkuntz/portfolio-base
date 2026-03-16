@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
-    "build": "astro check && astro build",
+    "build": "astro check && DEPLOY_TARGET=node astro build",
+    "build:node": "astro check && DEPLOY_TARGET=node astro build",
     "build:vercel": "astro check && DEPLOY_TARGET=vercel astro build",
     "deploy:check": "astro check && DEPLOY_TARGET=vercel astro build",
     "preview": "astro preview",
@@ -19,6 +20,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.7",
     "@astrojs/mdx": "^5.0.0",
+    "@astrojs/node": "^10.0.1",
     "@astrojs/rss": "^4.0.17",
     "@astrojs/sitemap": "^3.7.1",
     "@astrojs/solid-js": "^6.0.0",

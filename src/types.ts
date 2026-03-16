@@ -15,6 +15,28 @@ export type GridListing = {
   GRID_COLUMNS: GridColumns;
 };
 
+export type ProtectedProjectsConfig = {
+  EYEBROW: string;
+  TITLE: string;
+  DESCRIPTION: string;
+  NDA_TEXT: string;
+  NDA_HREF: string;
+  LOGIN_TAB_TEXT: string;
+  REQUEST_TAB_TEXT: string;
+  EMAIL_LABEL: string;
+  EMAIL_PLACEHOLDER: string;
+  PASSWORD_LABEL: string;
+  PASSWORD_PLACEHOLDER: string;
+  LOGIN_SUBMIT_TEXT: string;
+  LOGIN_FOOTER_PREFIX: string;
+  LOGIN_FOOTER_ACTION_TEXT: string;
+  REQUEST_MESSAGE_LABEL: string;
+  REQUEST_MESSAGE_PLACEHOLDER: string;
+  REQUEST_SUBMIT_TEXT: string;
+  REQUEST_FOOTER_PREFIX: string;
+  REQUEST_FOOTER_ACTION_TEXT: string;
+};
+
 export type Metadata = {
   TITLE: string;
   DESCRIPTION: string;

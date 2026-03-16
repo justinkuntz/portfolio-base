@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import rehypeUnwrap from "rehype-unwrap-images";
@@ -20,12 +21,20 @@ const vercelSiteUrl =
   process.env.VERCEL_URL ||
   process.env.VERCEL_PROJECT_PRODUCTION_URL;
 
+const deployTarget = process.env.DEPLOY_TARGET ?? (isVercel ? "vercel" : "node");
+const isServerTarget = deployTarget === "vercel" || deployTarget === "node";
+
 export default defineConfig({
   site:
     process.env.SITE_URL ??
     (vercelSiteUrl ? `https://${vercelSiteUrl}` : "https://example.com"),
-  output: isVercel ? "server" : "static",
-  adapter: isVercel ? vercel() : undefined,
+  output: isServerTarget ? "server" : "static",
+  adapter:
+    deployTarget === "vercel"
+      ? vercel()
+      : deployTarget === "node"
+        ? node({ mode: "standalone" })
+        : undefined,
   integrations: [
     mdx({ rehypePlugins: [rehypeUnwrap] }),
     sitemap(),
