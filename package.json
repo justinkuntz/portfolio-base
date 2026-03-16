@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
-    "build": "astro check && DEPLOY_TARGET=node astro build",
+    "build": "astro check && astro build",
     "build:node": "astro check && DEPLOY_TARGET=node astro build",
     "build:vercel": "astro check && DEPLOY_TARGET=vercel astro build",
     "deploy:check": "astro check && DEPLOY_TARGET=vercel astro build",
