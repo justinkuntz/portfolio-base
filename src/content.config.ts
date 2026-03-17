@@ -64,6 +64,28 @@ const projects = defineCollection({
     challenge: z.string().optional(),
     solution: z.string().optional(),
     results: z.string().optional(),
+    passwordProtect: z.union([
+      z.boolean(),
+      z.enum(["Yes", "No", "yes", "no"]),
+    ]).transform((value) => {
+      if (typeof value === "boolean") return value;
+      return value.toLowerCase() === "yes";
+    }).optional().default(false),
+    passwordId: z.string().optional(),
+    passwordHint: z.string().optional(),
+    passwordSummary: z.string().optional(),
+    access: z.object({
+      visibility: z.enum(["public", "protected"]).default("public"),
+      passwordId: z.string().optional(),
+      hint: z.string().optional(),
+      summary: z.string().optional(),
+    }).optional().refine((value) => {
+      if (!value || value.visibility === "public") return true;
+      return Boolean(value.passwordId);
+    }, {
+      message: "Protected projects require an access.passwordId value.",
+      path: ["passwordId"],
+    }),
     seo: z.object({
       title: z.string().optional(),
       description: z.string().optional(),

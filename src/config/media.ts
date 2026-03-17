@@ -26,7 +26,7 @@ export const MEDIA: {
 } = {
   projectHero: {
     layout: "contained",
-    aspectRatio: "5 / 4",
+    aspectRatio: "16 / 9",
     widths: [640, 960, 1280, 1600],
     sizesContained: "(max-width: 767px) 100vw, min(92vw, 80rem)",
     sizesFullBleed: "100vw",

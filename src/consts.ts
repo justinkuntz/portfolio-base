@@ -1,4 +1,13 @@
-import type { Site, Page, Links, Metadata, Socials, HomepageProjects, GridListing } from "@types";
+import type {
+  Site,
+  Page,
+  Links,
+  Metadata,
+  Socials,
+  HomepageProjects,
+  GridListing,
+  ProtectedProjectsConfig,
+} from "@types";
 
 export const SITE: Site = {
   NAME: "Grogu",
@@ -42,6 +51,29 @@ export const PROJECTS: Metadata = {
 export const CONTACT: Metadata = {
   TITLE: "Contact",
   DESCRIPTION: "A contact page template for missions, collaborations, and quiet transmissions to the covert.",
+};
+
+export const PROTECTED_PROJECTS: ProtectedProjectsConfig = {
+  EYEBROW: "",
+  TITLE: "Password Protected Content",
+  DESCRIPTION:
+    "This content contains confidential information. Please log in to gain access.",
+  NDA_TEXT: "terms of the NDA",
+  NDA_HREF: "/legal/nda",
+  LOGIN_TAB_TEXT: "Log in",
+  REQUEST_TAB_TEXT: "Request Access",
+  EMAIL_LABEL: "Email",
+  EMAIL_PLACEHOLDER: "Enter your email",
+  PASSWORD_LABEL: "Password",
+  PASSWORD_PLACEHOLDER: "Enter your password",
+  LOGIN_SUBMIT_TEXT: "Unlock Content",
+  LOGIN_FOOTER_PREFIX: "Looking for access?",
+  LOGIN_FOOTER_ACTION_TEXT: "Request Access",
+  REQUEST_MESSAGE_LABEL: "Message",
+  REQUEST_MESSAGE_PLACEHOLDER: "Details about why you would like access...",
+  REQUEST_SUBMIT_TEXT: "Request Access",
+  REQUEST_FOOTER_PREFIX: "Already have a password?",
+  REQUEST_FOOTER_ACTION_TEXT: "Log in",
 };
 
 // Search Page
