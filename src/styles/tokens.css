@@ -118,4 +118,39 @@
 
   /* Copy button (used by code blocks) */
   --copy-btn-margin: 10px;
+
+  /* Forms */
+  --form-shell-max-inline-size: var(--container-sm);
+  --form-shell-padding: clamp(var(--space-6), 2vw + var(--space-4), var(--space-8));
+  --form-shell-surface: var(--color-surface-50);
+  --form-shell-border: var(--color-border-default);
+  --form-shell-shadow: var(--shadow-sm);
+
+  --form-stack-gap: var(--space-5);
+  --form-field-gap: var(--space-2);
+  --form-submit-gap: var(--space-4);
+
+  --form-label-font-size: var(--text-sm);
+  --form-label-weight: var(--font-semibold);
+  --form-label-line-height: var(--leading-label);
+  --form-label-tracking: var(--tracking-caps);
+  --form-label-color: var(--color-text-subtle);
+
+  --form-control-padding-block: var(--space-3);
+  --form-control-padding-inline: var(--space-4);
+  --form-control-border: var(--color-border-default);
+  --form-control-radius: var(--radius-md);
+  --form-control-surface: var(--color-surface-50);
+  --form-control-text: var(--color-surface-950);
+  --form-control-font-family: var(--font-ui);
+  --form-control-font-size: var(--text-base);
+  --form-control-focus-border: var(--color-form-focus-border);
+  --form-control-focus-ring: var(--color-focus-ring);
+
+  --form-help-font-size: var(--text-sm);
+  --form-help-line-height: var(--leading-label);
+  --form-help-color: var(--color-text-subtle);
+
+  --form-feedback-radius: var(--radius-md);
+  --form-feedback-border-width: 1px;
 }

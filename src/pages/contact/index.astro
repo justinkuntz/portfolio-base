@@ -232,25 +232,19 @@ const statusCopy = (() => {
   }
 
   .contact__form-wrap {
-    background-color: var(--color-surface-50);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-surface-300);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-6);
-  }
-
-  @media (min-width: 640px) {
-    .contact__form-wrap {
-      padding: var(--space-8);
-    }
+    background-color: var(--form-shell-surface);
+    border-radius: var(--form-control-radius);
+    border: 1px solid var(--form-shell-border);
+    box-shadow: var(--form-shell-shadow);
+    padding: var(--form-shell-padding);
   }
 
   .contact__status {
     margin-bottom: var(--space-6);
-    border-radius: var(--radius-md);
-    border: 1px solid;
+    border-radius: var(--form-feedback-radius);
+    border: var(--form-feedback-border-width) solid;
     padding: var(--space-3) var(--space-4);
-    font-size: var(--text-sm);
+    font-size: var(--form-help-font-size);
   }
 
   .contact__status--success {
@@ -268,13 +262,13 @@ const statusCopy = (() => {
   .contact__form {
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: var(--form-stack-gap);
   }
 
   .contact__field {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--form-field-gap);
   }
 
   .contact__field-head {
@@ -285,27 +279,27 @@ const statusCopy = (() => {
   }
 
   .contact__hint {
-    font-size: var(--text-sm);
-    color: var(--color-text-subtle);
+    font-size: var(--form-help-font-size);
+    color: var(--form-help-color);
     margin: 0;
   }
 
   .contact__input {
     width: 100%;
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-surface-300);
-    background-color: var(--color-surface-50);
-    color: var(--color-surface-950);
-    font-family: var(--font-ui);
-    font-size: var(--text-base);
+    padding: var(--form-control-padding-block) var(--form-control-padding-inline);
+    border-radius: var(--form-control-radius);
+    border: 1px solid var(--form-control-border);
+    background-color: var(--form-control-surface);
+    color: var(--form-control-text);
+    font-family: var(--form-control-font-family);
+    font-size: var(--form-control-font-size);
     outline: none;
     transition: border-color var(--transition-base), box-shadow var(--transition-base);
   }
 
   .contact__input:focus-visible {
-    border-color: var(--color-form-focus-border);
-    box-shadow: 0 0 0 2px var(--color-focus-ring);
+    border-color: var(--form-control-focus-border);
+    box-shadow: 0 0 0 2px var(--form-control-focus-ring);
   }
 
   .contact__textarea {
@@ -322,7 +316,7 @@ const statusCopy = (() => {
   .contact__submit-wrap {
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: var(--form-submit-gap);
   }
 
   .contact__submit {
@@ -335,7 +329,7 @@ const statusCopy = (() => {
   }
 
   .contact__status-msg {
-    font-size: var(--text-sm);
+    font-size: var(--form-help-font-size);
     margin: 0;
   }
 

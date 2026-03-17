@@ -1,13 +1,40 @@
 .root {
-  inline-size: min(100%, 42rem);
+  --gate-max-inline-size: var(--form-shell-max-inline-size);
+  --gate-shell-padding: var(--form-shell-padding);
+  --gate-shell-surface: var(--form-shell-surface);
+  --gate-shell-border: var(--form-shell-border);
+  --gate-shell-border-strong: var(--color-border-emphasis);
+  --gate-shell-shadow: var(--form-shell-shadow);
+  --gate-icon-wrap-size: calc(var(--space-16) * 0.9);
+  --gate-icon-size: calc((var(--space-8) + var(--space-1)) * 0.9);
+  --gate-segment-padding: var(--space-1);
+  --gate-segment-min-height: 3rem;
+  --gate-segment-surface: var(--color-surface-emphasis);
+  --gate-segment-thumb-surface: var(--color-surface-50);
+  --gate-segment-thumb-shadow: var(--shadow-sm);
+  --gate-segment-inset-shadow: inset 0 1px 0 var(--color-border-subtle);
+  --gate-link-underline: var(--color-link-underline);
+  --gate-link-underline-hover: var(--color-link-underline-hover);
+  --gate-link-color: var(--color-surface-950);
+  --gate-submit-surface: var(--color-surface-950);
+  --gate-submit-surface-hover: var(--color-surface-800);
+  --gate-submit-border: transparent;
+  --gate-submit-text: var(--color-surface-50);
+  --gate-panel-min-height: 26rem;
+  --gate-input-min-height: 0;
+  --gate-submit-min-height: 0;
+  --gate-emphasis-transition: var(--duration-base) var(--ease-squish-3);
+  --gate-fade-transition: var(--duration-fast) var(--ease-default);
+
+  inline-size: min(100%, var(--gate-max-inline-size));
   margin-inline: auto;
   display: grid;
   gap: var(--space-6);
-  padding: clamp(var(--space-6), 2vw + var(--space-4), var(--space-8));
-  border: 1px solid var(--color-surface-300);
+  padding: var(--gate-shell-padding);
+  border: 1px solid var(--gate-shell-border);
   border-radius: var(--radius-md);
-  background-color: var(--color-surface-50);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--gate-shell-surface);
+  box-shadow: var(--gate-shell-shadow);
 }
 
 .head {
@@ -18,19 +45,19 @@
 }
 
 .iconWrap {
-  inline-size: 4.25rem;
-  block-size: 4.25rem;
+  inline-size: var(--gate-icon-wrap-size);
+  block-size: var(--gate-icon-wrap-size);
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  border: 1px solid var(--color-surface-300);
-  background: var(--color-surface-50);
+  /* border-radius: var(--radius-full); */
+  /* border: 1px solid var(--gate-shell-border); */
+  background: var(--gate-shell-surface);
   color: var(--color-surface-950);
 }
 
 .icon {
-  inline-size: 2.25rem;
-  block-size: 2.25rem;
+  inline-size: var(--gate-icon-size);
+  block-size: var(--gate-icon-size);
 }
 
 .eyebrow {
@@ -44,7 +71,11 @@
 
 .title {
   margin: 0;
-  font-size: clamp(var(--text-3xl), 2.2vw + var(--text-xl), var(--text-5xl));
+  font-size: clamp(
+    calc(var(--text-3xl) * 0.765),
+    1.75vw + calc(var(--text-xl) * 0.765),
+    calc(var(--text-5xl) * 0.765)
+  );
   font-weight: var(--font-semibold);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
@@ -54,7 +85,7 @@
 
 .description {
   margin: 0;
-  max-inline-size: 42rem;
+  max-inline-size: var(--measure-copy);
   font-size: var(--text-lg);
   line-height: var(--leading-body);
   color: var(--color-text-muted);
@@ -66,30 +97,31 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-1);
-  padding: 0.25rem;
-  border: 1px solid var(--color-surface-300);
+  padding: var(--gate-segment-padding);
+  border: 1px solid var(--gate-shell-border);
   border-radius: var(--radius-md);
-  background: var(--color-surface-50);
-  box-shadow: inset 0 1px 0 rgb(from var(--color-surface-0) r g b / 0.28);
+  background: var(--gate-segment-surface);
+  box-shadow: var(--gate-segment-inset-shadow);
 }
 
 .segmentThumb {
   position: absolute;
-  inset-block: 0.25rem;
-  inline-size: calc(50% - 0.25rem);
-  border-radius: calc(var(--radius-md) - 0.125rem);
-  border: 1px solid var(--color-surface-300);
-  background: var(--color-surface-50);
-  box-shadow: var(--shadow-sm);
-  transform: translateX(0.25rem);
+  inset-block: var(--gate-segment-padding);
+  inline-size: calc(50% - var(--gate-segment-padding));
+  border-radius: calc(var(--radius-md) - var(--gate-segment-padding));
+  border: 1px solid var(--gate-shell-border);
+  background: var(--gate-segment-thumb-surface);
+  box-shadow: var(--gate-segment-thumb-shadow);
+  transform: translateX(var(--gate-segment-padding));
   transition:
-    transform 240ms var(--ease-squish-3),
-    background-color 180ms var(--ease-3),
-    box-shadow 180ms var(--ease-3);
+    transform var(--gate-emphasis-transition),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .segment[data-mode="request"] .segmentThumb {
-  transform: translateX(calc(100% + 0.25rem));
+  transform: translateX(calc(100% + var(--gate-segment-padding)));
 }
 
 .segmentButton {
@@ -98,15 +130,15 @@
   appearance: none;
   border: 0;
   background: transparent;
-  min-height: 3.5rem;
-  border-radius: calc(var(--radius-md) - 0.125rem);
+  min-height: var(--gate-segment-min-height);
+  border-radius: calc(var(--radius-md) - var(--gate-segment-padding));
   font: inherit;
   font-weight: var(--font-medium);
   color: var(--color-text-soft);
   cursor: pointer;
   transition:
-    color 180ms var(--ease-3),
-    transform 180ms var(--ease-3);
+    color var(--transition-base),
+    transform var(--transition-base);
 }
 
 .segmentButton[aria-pressed="true"] {
@@ -116,8 +148,8 @@
 
 .body {
   position: relative;
-  min-block-size: var(--gate-panel-height, 26rem);
-  transition: min-block-size 320ms var(--ease-squish-3);
+  min-block-size: var(--gate-panel-height, var(--gate-panel-min-height));
+  transition: min-block-size var(--gate-emphasis-transition);
 }
 
 .panel {
@@ -128,9 +160,9 @@
   pointer-events: none;
   transform: translateY(0.75rem) scale(0.985);
   transition:
-    opacity 180ms var(--ease-3),
-    transform 240ms var(--ease-squish-3),
-    visibility 0s linear 240ms;
+    opacity var(--gate-fade-transition),
+    transform var(--gate-emphasis-transition),
+    visibility 0s linear var(--duration-base);
 }
 
 .panelActive {
@@ -139,44 +171,53 @@
   pointer-events: auto;
   transform: translateY(0) scale(1);
   transition:
-    opacity 220ms var(--ease-3),
-    transform 280ms var(--ease-squish-3),
+    opacity var(--transition-base),
+    transform var(--gate-emphasis-transition),
     visibility 0s linear 0s;
 }
 
 .form {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--form-stack-gap);
 }
 
 .label {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
+  font-size: var(--form-label-font-size);
+  font-weight: var(--form-label-weight);
   text-transform: uppercase;
-  line-height: var(--leading-label);
-  letter-spacing: var(--tracking-caps);
-  color: var(--color-text-subtle);
+  line-height: var(--form-label-line-height);
+  letter-spacing: var(--form-label-tracking);
+  color: var(--form-label-color);
+  margin-bottom: calc(var(--space-2) * -1);
 }
 
 .input {
   width: 100%;
-  min-height: 3.5rem;
-  padding-inline: var(--space-4);
-  border: 1px solid var(--color-surface-300);
-  border-radius: var(--radius-md);
-  background: var(--color-surface-50);
-  color: var(--color-surface-950);
-  font: inherit;
-  box-shadow: inset 0 1px 0 rgb(from var(--color-surface-0) r g b / 0.35);
+  padding: var(--form-control-padding-block) var(--form-control-padding-inline);
+  border: 1px solid var(--form-control-border);
+  border-radius: var(--form-control-radius);
+  background: var(--form-control-surface);
+  color: var(--form-control-text);
+  font-family: var(--form-control-font-family);
+  font-size: var(--form-control-font-size);
+  outline: none;
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    background-color var(--transition-base);
 }
 
 .textarea {
-  min-height: 10rem;
+  min-height: calc(var(--space-24) + var(--space-8));
   resize: vertical;
   padding-block: var(--space-4);
 }
 
-.input:focus-visible,
+.input:focus-visible {
+  border-color: var(--form-control-focus-border);
+  box-shadow: 0 0 0 2px var(--form-control-focus-ring);
+}
+
 .textButton:focus-visible,
 .segmentButton:focus-visible,
 .inlineLink:focus-visible {
@@ -187,23 +228,30 @@
 .submit {
   appearance: none;
   border: 0;
-  min-height: 3.75rem;
+  width: 100%;
+  margin-top: var(--space-2);
+  padding: var(--form-control-padding-block) var(--space-5);
   padding-inline: var(--space-5);
-  border-radius: var(--radius-md);
-  background: var(--color-surface-950);
-  color: var(--color-surface-50);
-  font: inherit;
+  border-radius: var(--form-control-radius);
+  background: var(--gate-submit-surface);
+  border: 1px solid var(--gate-submit-border);
+  color: var(--gate-submit-text);
+  font-family: var(--font-ui);
+  font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition:
-    transform 180ms var(--ease-squish-3),
-    box-shadow 180ms var(--ease-3);
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .submit:hover:not(:disabled) {
+  background: var(--gate-submit-surface-hover);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-3);
+  box-shadow: var(--shadow-md);
 }
 
 .submit:disabled {
@@ -220,16 +268,39 @@
 
 .meta,
 .switcher {
-  color: var(--color-text-subtle);
+  justify-self: center;
+  max-inline-size: 32rem;
+  font-size: var(--form-help-font-size);
+  color: var(--form-help-color);
+}
+
+.meta {
+  line-height: var(--form-help-line-height);
+}
+
+.switcher {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25em;
 }
 
 .inlineLink,
 .textButton {
-  color: var(--color-surface-950);
+  color: var(--gate-link-color);
   font-weight: var(--font-medium);
   text-decoration: underline;
-  text-decoration-color: rgb(from var(--color-surface-950) r g b / 0.35);
+  text-decoration-color: var(--gate-link-underline);
   text-underline-offset: 0.18em;
+  transition:
+    color var(--transition-base),
+    text-decoration-color var(--transition-base);
+}
+
+.inlineLink:hover,
+.textButton:hover {
+  text-decoration-color: var(--gate-link-underline-hover);
 }
 
 .textButton {
@@ -243,8 +314,8 @@
 
 .feedback {
   padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
+  border-radius: var(--form-feedback-radius);
+  border: var(--form-feedback-border-width) solid transparent;
 }
 
 .feedbackError {
@@ -260,22 +331,10 @@
 }
 
 :global(html.dark) .root {
-  background-color: var(--color-surface-50);
-}
-
-:global(html.dark) .iconWrap,
-:global(html.dark) .segment,
-:global(html.dark) .input {
-  background: var(--color-surface-50);
-}
-
-:global(html.dark) .segmentThumb {
-  background: var(--color-surface-100);
-}
-
-:global(html.dark) .submit {
-  background: var(--color-surface-950);
-  color: var(--color-surface-50);
+  --gate-submit-surface: var(--color-surface-100);
+  --gate-submit-surface-hover: var(--color-surface-200);
+  --gate-submit-border: var(--color-surface-hover);
+  --gate-submit-text: var(--color-surface-950);
 }
 
 @media (prefers-reduced-motion: reduce) {

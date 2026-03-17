@@ -151,21 +151,12 @@ export default function ProtectedContentGate({ slug }: Props) {
     <section class={styles.root} aria-labelledby="protected-content-title">
       <div class={styles.head}>
         <div class={styles.iconWrap} aria-hidden="true">
-          <svg viewBox="0 0 24 24" class={styles.icon}>
-            <path
-              d="M12 3c3.866 0 7 3.134 7 7 0 1.79-.672 3.423-1.778 4.66l-1.17-1.17A5.47 5.47 0 0 0 17 10a5 5 0 0 0-10 0c0 3.596 4.617 3.063 4.617 6.64A2.36 2.36 0 0 1 9.258 19 5 5 0 0 1 7 10"
-              fill="none"
+          <svg viewBox="0 0 24 24" fill="none" class={styles.icon}>
+            <path 
+              d="M12 14.5V16.5M7 10.0288C7.47142 10 8.05259 10 8.8 10H15.2C15.9474 10 16.5286 10 17 10.0288M7 10.0288C6.41168 10.0647 5.99429 10.1455 5.63803 10.327C5.07354 10.6146 4.6146 11.0735 4.32698 11.638C4 12.2798 4 13.1198 4 14.8V16.2C4 17.8802 4 18.7202 4.32698 19.362C4.6146 19.9265 5.07354 20.3854 5.63803 20.673C6.27976 21 7.11984 21 8.8 21H15.2C16.8802 21 17.7202 21 18.362 20.673C18.9265 20.3854 19.3854 19.9265 19.673 19.362C20 18.7202 20 17.8802 20 16.2V14.8C20 13.1198 20 12.2798 19.673 11.638C19.3854 11.0735 18.9265 10.6146 18.362 10.327C18.0057 10.1455 17.5883 10.0647 17 10.0288M7 10.0288V8C7 5.23858 9.23858 3 12 3C14.7614 3 17 5.23858 17 8V10.0288"    
               stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M10.2 10.8c.8.52 1.8 1.38 1.8 2.86A2.84 2.84 0 0 1 9.16 16.5M13.8 7.5A2.48 2.48 0 0 1 16 10"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.75"
-              stroke-linecap="round"
+              stroke-width="2" 
+              stroke-linecap="round" 
               stroke-linejoin="round"
             />
           </svg>
