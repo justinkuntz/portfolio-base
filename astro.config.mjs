@@ -35,6 +35,15 @@ export default defineConfig({
       : deployTarget === "node"
         ? node({ mode: "standalone" })
         : undefined,
+  markdown: {
+    shikiConfig: {
+      themes: {
+        light: "github-light",
+        dark: "github-dark",
+      },
+      defaultColor: "light",
+    },
+  },
   integrations: [
     mdx({ rehypePlugins: [rehypeUnwrap] }),
     sitemap(),
