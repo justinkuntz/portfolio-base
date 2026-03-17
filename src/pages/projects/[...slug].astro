@@ -42,29 +42,34 @@ const passwordId = getProjectPasswordId(project.data, project.id);
 const accessCookie = passwordId
   ? Astro.cookies.get(getProjectAccessCookieName(project.id))?.value
   : undefined;
-const hasAccess = isProtected && passwordId
-  ? hasValidProjectAccessCookie(
-      accessCookie,
-      project.id,
-      passwordId,
-      import.meta.env.PROJECT_ACCESS_SECRET
-    )
-  : false;
+const hasAccess =
+  isProtected && passwordId
+    ? hasValidProjectAccessCookie(
+        accessCookie,
+        project.id,
+        passwordId,
+        import.meta.env.PROJECT_ACCESS_SECRET,
+      )
+    : false;
 const shouldRenderContent = !isProtected || hasAccess;
-const { Content } = shouldRenderContent ? await render(project) : { Content: null };
+const { Content } = shouldRenderContent
+  ? await render(project)
+  : { Content: null };
 
 const index = items.findIndex((x) => x.id === project.id);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
-const projectHeroLayoutClass = MEDIA.projectHero.layout === "full-bleed"
-  ? "project-hero-image project-hero-image--fullbleed"
-  : "project-hero-image";
+const projectHeroLayoutClass =
+  MEDIA.projectHero.layout === "full-bleed"
+    ? "project-hero-image project-hero-image--fullbleed"
+    : "project-hero-image";
 ---
 
 <PageLayout
   seo={{
     title: project.data.seo?.title ?? project.data.title,
-    description: project.data.seo?.description ?? (project.data.description || ""),
+    description:
+      project.data.seo?.description ?? (project.data.description || ""),
     image: project.data.seo?.image ?? project.data.heroImage,
     imageAlt: project.data.seo?.imageAlt ?? project.data.heroImageAlt,
     generatedImage: true,
@@ -178,7 +183,7 @@ const projectHeroLayoutClass = MEDIA.projectHero.layout === "full-bleed"
     width: 100%;
     margin-inline: auto;
     margin-top: var(--space-4);
-    margin-bottom: var(--space-12);
+    margin-bottom: var(--space-8);
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-4);
@@ -390,5 +395,4 @@ const projectHeroLayoutClass = MEDIA.projectHero.layout === "full-bleed"
     margin: 0;
     border-radius: inherit;
   }
-
 </style>

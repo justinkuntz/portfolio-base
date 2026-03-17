@@ -99,6 +99,7 @@ import BackToTop from "@components/BackToTop.astro";
   .footer__copy {
     font-size: var(--text-base);
     color: var(--color-surface-950);
+    text-align: center;
   }
 
   .footer__copy a {
@@ -120,6 +121,10 @@ import BackToTop from "@components/BackToTop.astro";
   }
 
   @media (min-width: 640px) {
+    .footer__copy {
+      text-align: left;
+    }
+
     .footer__socials {
       order: 2;
       justify-content: flex-end;
@@ -135,7 +140,7 @@ import BackToTop from "@components/BackToTop.astro";
   }
 
   .footer__social-btn--rss {
-    display: none;
+    /* display: none; */
   }
 
   @media (min-width: 768px) {

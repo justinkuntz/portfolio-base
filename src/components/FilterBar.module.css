@@ -1,11 +1,11 @@
 .root {
   width: 100%;
-  margin-top: var(--space-12);
+  margin-top: 0;
 }
 
 @media (min-width: 768px) {
   .root {
-    margin-top: var(--space-24);
+    margin-top: var(--space-6);
   }
 }
 

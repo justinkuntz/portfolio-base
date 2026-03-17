@@ -21,10 +21,26 @@ html {
   color-scheme: light;
   background-color: var(--color-surface-100);
   background-image:
-    radial-gradient(circle at top left, var(--color-bg-accent-primary), transparent 30%),
-    radial-gradient(circle at 82% 14%, var(--color-bg-accent-secondary), transparent 22%),
-    radial-gradient(circle at 50% 100%, var(--color-bg-accent-tertiary), transparent 28%),
-    linear-gradient(180deg, var(--color-surface-50) 0%, var(--color-surface-100) 100%);
+    radial-gradient(
+      circle at top left,
+      var(--color-bg-accent-primary),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 14%,
+      var(--color-bg-accent-secondary),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      var(--color-bg-accent-tertiary),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-surface-50) 0%,
+      var(--color-surface-100) 100%
+    );
   background-attachment: fixed;
 }
 
@@ -50,8 +66,16 @@ body {
   flex-direction: column;
   background-color: transparent;
   background-image:
-    radial-gradient(circle at 50% 0%, var(--color-body-accent), transparent 36%),
-    linear-gradient(180deg, var(--color-body-surface-start), var(--color-body-surface-end));
+    radial-gradient(
+      circle at 50% 0%,
+      var(--color-body-accent),
+      transparent 36%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-body-surface-start),
+      var(--color-body-surface-end)
+    );
   color: var(--color-surface-950);
 }
 
@@ -78,7 +102,9 @@ body {
 }
 
 header {
-  transition: background-color var(--transition-base), backdrop-filter var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    backdrop-filter var(--transition-base);
 }
 
 header {
@@ -94,8 +120,11 @@ main {
   flex: 1;
   padding-top: var(--space-32);
   padding-bottom: var(--space-16);
-  background:
-    linear-gradient(180deg, var(--color-main-surface-start), var(--color-main-surface-end));
+  background: linear-gradient(
+    180deg,
+    var(--color-main-surface-start),
+    var(--color-main-surface-end)
+  );
 }
 
 footer {
@@ -159,7 +188,9 @@ article a {
   text-decoration: underline;
   text-underline-offset: 2px;
   text-decoration-color: var(--color-link-underline);
-  transition: color var(--transition-base), text-decoration-color var(--transition-base);
+  transition:
+    color var(--transition-base),
+    text-decoration-color var(--transition-base);
 }
 
 article a:hover {
@@ -225,7 +256,9 @@ article pre code {
 .animate {
   opacity: 0;
   transform: translateY(var(--space-3));
-  transition: opacity var(--transition-slower), transform var(--transition-slower);
+  transition:
+    opacity var(--transition-slower),
+    transform var(--transition-slower);
 }
 
 .animate.show {
@@ -302,8 +335,12 @@ html.scrolled #back-to-top {
 .page-intro {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
-  margin-bottom: var(--space-4xl);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.page-intro--listing {
+  margin-top: var(--space-6);
 }
 
 @media (min-width: 768px) {
@@ -311,6 +348,11 @@ html.scrolled #back-to-top {
     flex-direction: row;
     align-items: flex-start;
     gap: var(--space-12);
+    margin-bottom: var(--space-4xl);
+  }
+
+  .page-intro--listing {
+    margin-top: var(--space-12);
   }
 }
 
@@ -362,6 +404,10 @@ html.scrolled #back-to-top {
 @media (min-width: 1024px) {
   .page-intro__description {
     font-size: var(--text-xl);
+  }
+
+  .page-intro--listing {
+    margin-top: var(--space-20);
   }
 }
 
@@ -424,7 +470,9 @@ button:hover .arrow-animated--left .arrow-animated__poly,
   font: inherit;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color var(--transition-base), border-color var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .content-button:hover {
