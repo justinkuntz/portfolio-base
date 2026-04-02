@@ -1,9 +1,11 @@
+@import "@fontsource-variable/public-sans/wght.css";
+
 /* ==========================================================================
    Theme: Default
    Sans-forward typography, rounded controls, original layout widths.
    ========================================================================== */
 
-:root {
+:root[data-brand-theme="default"] {
   /* Theme controls */
   --theme-font-body: var(--font-sans-default);
   --theme-font-heading: var(--font-sans-default);
@@ -80,7 +82,7 @@
   --color-error-text-strong: rgb(244 63 94 / 0.95);
 }
 
-html.dark {
+:root[data-brand-theme="default"].dark {
   --color-primary: #95a4f0;
   --color-secondary: #d8e1ff;
   --color-surface-50: #0f1422;

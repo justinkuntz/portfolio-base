@@ -62,7 +62,7 @@ export default function Search({ data }: Props) {
           autocomplete="off"
           spellcheck={false}
           placeholder="What are you looking for?"
-          class={styles.input}
+          class={`form-control ${styles.input}`}
         />
         <svg class={styles.inputIcon} aria-hidden="true">
           <use href="/ui.svg#search" />
