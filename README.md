@@ -8,9 +8,12 @@ The sample copy currently follows Grogu as he grows from foundling to Mandaloria
 
 - Astro 6 with MDX and Solid components
 - Filterable projects and blog collections
-- Full-text search with Fuse.js
+- Full-text search with Fuse.js (`/search`)
 - Sitemap and RSS generation
-- Light and dark theme toggle
+- Light and dark color mode toggle (stored under a configurable localStorage key)
+- Two brand themes (default sans and serif), with a `/styleguide` page for tokens, components, and patterns (not linked in the main nav; see [Styleguide](#styleguide))
+- Shared UI patterns: form controls (`form-control`, `form-field`), surface panels (`surface-panel`), and status notices
+- Optional password-gated project bodies with server-signed cookies and API routes
 - Contact form endpoint with honeypot, timing check, and rate limiting
 - Sample legal pages for privacy, cookies, and terms
 
@@ -43,6 +46,7 @@ This only affects local dev. It does not change production build output.
 Start with these files:
 
 - `src/consts.ts` for site name, navigation, homepage card layout, metadata, and social links
+- `src/config/theme.ts` for brand theme id (`default` or `serif`) and color-mode storage key (see [Themes](#themes))
 - `src/config/media.ts` for image defaults like hero layout, thumbnail shape, and responsive widths
 - `src/config/seo.ts` for global SEO defaults
 - `src/pages/index.astro`, `src/pages/about/index.astro`, and `src/pages/contact/index.astro` for the main marketing copy
@@ -63,36 +67,34 @@ Copy `.env.example` to `.env.local` for local development:
 cp .env.example .env.local
 ```
 
-Then fill in only the values you need for the features you are using.
+Fill in values for the features you use. Details and examples:
 
-Typical local variables:
+- [Contact Form](#contact-form) — Resend and mail addresses
+- [Protected Projects](#protected-projects) — signing secret, passwords, resolution order, and example `bash` snippets
 
-- `SITE_URL`
-- `RESEND_API_KEY`
-- `CONTACT_FROM_EMAIL`
-- `CONTACT_TO_EMAIL`
-- `PROJECT_ACCESS_SECRET`
-- `PROJECT_ACCESS_PASSWORD`
-- `PROJECT_ACCESS_NOTIFY_TO_EMAIL`
-- `PROJECT_PASSWORD_<ID>` or `PROJECT_ACCESS_PASSWORDS`
-
-For the starter protected project example, the matching local variable is:
-
-```bash
-PROJECT_ACCESS_PASSWORD=your-shared-password
-PROJECT_PASSWORD_ALCOHOLICVODKA=your-password
-```
+| Area | Variables |
+| :-- | :-- |
+| Site | `SITE_URL` |
+| Contact | `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL` |
+| Protected projects | `PROJECT_ACCESS_SECRET`, `PROJECT_ACCESS_PASSWORD`, `PROJECT_ACCESS_PASSWORDS`, `PROJECT_PASSWORD_<ID>`, `PROJECT_ACCESS_NOTIFY_TO_EMAIL` |
 
 `.env.local` should stay uncommitted. The repo only includes `.env.example` as a template.
 
 ## Themes
 
-The active theme is selected in `src/styles/theme.css`.
+Brand appearance is controlled in **`src/config/theme.ts`**:
 
-- `src/styles/themes/theme-default.css` keeps the original sans-forward, rounded look.
-- `src/styles/themes/theme-serif.css` demonstrates a serif-led, square-corner, wider-layout variation with a warmer palette.
+- **`THEME.BRAND`**: `default` or `serif`. This sets `data-brand-theme` on the `<html>` element (see `PageLayout`) so the matching rules in the theme CSS files apply.
+- **`THEME.COLOR_MODE_STORAGE_KEY`**: localStorage key for light/dark preference (default `"theme"`). Change it if you need to avoid clashing with another app on the same origin.
 
-To switch themes, change the `@import` in `src/styles/theme.css`.
+Font preloading in `src/components/Head.astro` follows `THEME.BRAND` (Public Sans for default, Lora for serif).
+
+The theme styles live in `src/styles/theme.css`, which imports both:
+
+- `src/styles/themes/theme-default.css` — sans-forward, rounded look
+- `src/styles/themes/theme-serif.css` — serif-led, square corners, wider layout, warmer palette
+
+Both files are always loaded; only one block is active at a time according to `data-brand-theme`. Switch brands by editing `THEME.BRAND` in `src/config/theme.ts` (not by changing `@import` lines).
 
 The top of each theme file is the main control surface:
 
@@ -100,6 +102,12 @@ The top of each theme file is the main control surface:
 - radius values for corners and pills
 - container widths and content measures
 - primitive palette plus semantic surface, text, focus, and feedback colors
+
+## Styleguide
+
+The route **`/styleguide`** is a living reference for typography tokens, spacing, surfaces, buttons, forms, and prose patterns used across the site. It is intentionally **not** linked from the primary navigation in `src/consts.ts` so production sites can stay minimal; add a nav link locally if you want it visible to visitors.
+
+Use it during theme tweaks and component work to verify light/dark color modes and brand theme switching in one place.
 
 ## Images
 
@@ -218,14 +226,7 @@ Fields:
 - `passwordProtect`: `Yes` or `No`
 - `passwordId`: optional override for the password key; if omitted, the project slug is used
 
-Passwords do not live in content files. Configure them with environment variables instead.
-
-Supported env patterns:
-
-- `PROJECT_ACCESS_SECRET`
-- `PROJECT_ACCESS_PASSWORD`
-- `PROJECT_ACCESS_PASSWORDS`
-- or individual keys like `PROJECT_PASSWORD_ACME_CASE_STUDY`
+Passwords do not live in content files. Configure them with environment variables instead (see the [environment variables](#environment-variables) table for names).
 
 Resolution order:
 
@@ -275,7 +276,7 @@ That notification uses the same Resend setup as the contact form. By default it 
 
 Successful unlock cookies currently last 5 days.
 
-On this branch, the default build now uses Astro's Node adapter so protected projects can work locally and on generic Node hosts. Vercel is still supported through the dedicated Vercel build target.
+The default `npm run build` uses Astro's Node adapter so protected projects and API routes work locally and on generic Node hosts. Use `npm run build:vercel` when deploying to Vercel (see [Deployment](#deployment)).
 
 ## Blog Landing Grid
 
@@ -406,15 +407,7 @@ If you import the repo into Vercel:
 - the app uses `server` output on Vercel so `/api/contact` and protected projects can work
 - preview deployments get a usable canonical site URL from Vercel when `SITE_URL` is not set
 
-Recommended production environment variables:
-
-- `SITE_URL`
-- `RESEND_API_KEY`
-- `CONTACT_FROM_EMAIL`
-- `CONTACT_TO_EMAIL`
-- `PROJECT_ACCESS_SECRET` if you use protected projects
-- `PROJECT_ACCESS_NOTIFY_TO_EMAIL` if you want owner notifications for protected projects
-- `PROJECT_ACCESS_PASSWORDS` or `PROJECT_PASSWORD_<ID>` if you use protected projects
+Use the same variables as in [Environment Variables](#environment-variables) (and the detailed sections for contact and protected projects). For production, set at least `SITE_URL` plus any mail or project-access values you rely on.
 
 For Vercel:
 

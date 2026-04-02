@@ -1,13 +1,12 @@
 ---
 import "../styles/global.css";
-import publicSans from "@fontsource-variable/public-sans/files/public-sans-latin-wght-normal.woff2?url";
 import { SEO } from "@config/seo";
+import { THEME } from "@config/theme";
 import type { ResolvedSeo } from "@lib/seo";
 
 interface Props {
   seo: ResolvedSeo;
 }
-
 const { seo } = Astro.props;
 ---
 
@@ -29,35 +28,125 @@ const { seo } = Astro.props;
 <link rel="icon" type="image/x-icon" href="/favicon-light.svg" />
 <meta name="generator" content={Astro.generator} />
 
-<!-- Font preloads -->
-<link
-  rel="preload"
-  as="font"
-  type="font/woff2"
-  href={publicSans}
-  crossorigin="anonymous"
-/>
-
-<script is:inline>
+<script is:inline define:vars={{ themeStorageKey: THEME.COLOR_MODE_STORAGE_KEY }}>
   (() => {
-    try {
-      const storedTheme = localStorage.getItem("theme");
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-      const theme = storedTheme === "light" || storedTheme === "dark"
-        ? storedTheme
-        : systemTheme;
+    const globalKey = "__portfolioBaseTheme__";
 
-      document.documentElement.classList.toggle("dark", theme === "dark");
-      document.documentElement.dataset.theme = theme;
-    } catch {
-      const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+    if (window[globalKey]) {
+      window[globalKey].init();
+      return;
+    }
+
+    const themeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function withTransitionsDisabled(callback) {
+      const css = document.createElement("style");
+      css.appendChild(
+        document.createTextNode(
+          `* {
+            -webkit-transition: none !important;
+            -moz-transition: none !important;
+            -o-transition: none !important;
+            -ms-transition: none !important;
+            transition: none !important;
+          }`,
+        ),
+      );
+      document.head.appendChild(css);
+      callback();
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          css.remove();
+        });
+      });
+    }
+
+    function getStoredColorMode() {
+      try {
+        const value = localStorage.getItem(themeStorageKey);
+        return value === "light" || value === "dark" ? value : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function getSystemColorMode() {
+      return themeQuery.matches ? "dark" : "light";
+    }
+
+    function getResolvedColorMode() {
+      return getStoredColorMode() ?? getSystemColorMode();
+    }
+
+    function syncThemeToggles(colorMode) {
+      const nextColorMode = colorMode === "dark" ? "light" : "dark";
+      document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+        button.dataset.colorMode = colorMode;
+        button.setAttribute("aria-pressed", String(colorMode === "dark"));
+        button.setAttribute("aria-label", `Switch to ${nextColorMode} mode`);
+        button.setAttribute("title", `Switch to ${nextColorMode} mode`);
+        const label = button.querySelector("[data-theme-toggle-label]");
+        if (label) {
+          label.textContent = `Switch to ${nextColorMode} mode`;
+        }
+
+        if (button.dataset.themeToggleReady !== "true") {
+          requestAnimationFrame(() => {
+            button.dataset.themeToggleReady = "true";
+          });
+        }
+      });
+    }
+
+    function applyColorMode(colorMode, { persist = false, disableTransitions = false } = {}) {
+      const run = () => {
+        document.documentElement.classList.toggle("dark", colorMode === "dark");
+        document.documentElement.dataset.colorMode = colorMode;
+        syncThemeToggles(colorMode);
+      };
+
+      if (disableTransitions) {
+        withTransitionsDisabled(run);
+      } else {
+        run();
+      }
+
+      if (persist) {
+        try {
+          localStorage.setItem(themeStorageKey, colorMode);
+        } catch {
+          // Ignore storage failures.
+        }
+      }
+    }
+
+    function toggleColorMode() {
+      const currentColorMode = document.documentElement.classList.contains("dark")
         ? "dark"
         : "light";
-      document.documentElement.classList.toggle("dark", theme === "dark");
-      document.documentElement.dataset.theme = theme;
+      applyColorMode(currentColorMode === "dark" ? "light" : "dark", { persist: true });
     }
+
+    function bindThemeToggle(button) {
+      if (button.dataset.themeToggleBound === "true") return;
+      button.dataset.themeToggleBound = "true";
+      button.addEventListener("click", toggleColorMode);
+    }
+
+    function initTheme() {
+      applyColorMode(getResolvedColorMode(), { disableTransitions: true });
+      document.querySelectorAll("[data-theme-toggle]").forEach(bindThemeToggle);
+    }
+
+    themeQuery.addEventListener("change", () => {
+      if (getStoredColorMode()) return;
+      applyColorMode(getSystemColorMode(), { disableTransitions: true });
+    });
+
+    window[globalKey] = { init: initTheme };
+    initTheme();
+    document.addEventListener("DOMContentLoaded", initTheme);
+    document.addEventListener("astro:after-swap", initTheme);
   })();
 </script>
 
@@ -103,7 +192,6 @@ const { seo } = Astro.props;
 }
 
 <!-- Global Scripts -->
-<script defer is:inline src="/js/theme.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
 
 <script>

@@ -41,9 +41,9 @@ import { SITE, LINKS } from "@consts";
             size="md"
             iconOnly
             aria-label={`Search blog posts and projects on ${SITE.NAME}`}
-            class="header__action-btn header__action-btn--search"
+            class="header__action-btn header__action-btn--search icon-button"
           >
-            <svg class="header__action-icon" aria-hidden="true">
+            <svg class="header__action-icon icon-button__icon" aria-hidden="true">
               <use href="/ui.svg#search"></use>
             </svg>
           </Button>
@@ -63,12 +63,12 @@ import { SITE, LINKS } from "@consts";
             aria-controls="drawer"
             aria-expanded="false"
             aria-label="Open navigation menu"
-            class="header__action-btn header__action-btn--drawer"
+            class="header__action-btn header__action-btn--drawer icon-button"
           >
-            <svg id="drawer-open" class="header__action-icon" aria-hidden="true">
+            <svg id="drawer-open" class="header__action-icon icon-button__icon" aria-hidden="true">
               <use href="/ui.svg#menu"></use>
             </svg>
-            <svg id="drawer-close" class="header__action-icon" aria-hidden="true">
+            <svg id="drawer-close" class="header__action-icon icon-button__icon" aria-hidden="true">
               <use href="/ui.svg#x"></use>
             </svg>
           </Button>
@@ -85,51 +85,44 @@ import { SITE, LINKS } from "@consts";
     left: 0;
     right: 0;
     width: 100%;
-    height: 5rem;
+    min-height: 4rem;
     z-index: var(--z-fixed);
+    border-bottom: 1px solid var(--surface-border);
+    background: var(--page-background);
   }
 
   .header__inner {
-    position: relative;
-    height: 100%;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+    min-height: 4rem;
   }
 
   .header__logo-link {
     display: flex;
-    gap: var(--space-2);
+    gap: 0.5rem;
     align-items: center;
     color: currentColor;
-    font-size: var(--text-xl);
-    font-weight: var(--font-semibold);
-    transition: color var(--transition-base);
-  }
-
-  .header__logo-link:hover {
-    color: var(--color-surface-700);
     text-decoration: none;
   }
 
   .header__logo-icon {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
     fill: currentColor;
   }
 
   .header__nav-wrap {
     display: flex;
-    gap: var(--space-5);
+    gap: 0.75rem;
+    align-items: center;
   }
 
   .header__nav {
     display: none;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-3);
-    font-size: var(--text-xl);
+    gap: 0.5rem;
   }
 
   @media (min-width: 768px) {
@@ -140,20 +133,13 @@ import { SITE, LINKS } from "@consts";
 
   /* :global() so styles apply to Button's rendered root (different component scope) */
   .header :global(.header__nav-link) {
-    height: 2.5rem;
-    border-radius: var(--radius-full);
-    padding-inline: var(--space-4);
+    min-height: 2.25rem;
   }
 
   .header__actions {
     display: flex;
-    gap: var(--space-3);
-  }
-
-  .header :global(.header__action-btn) {
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: var(--space-2);
+    gap: 0.5rem;
+    align-items: center;
   }
 
   .header :global(.header__action-btn--search) {
@@ -175,13 +161,6 @@ import { SITE, LINKS } from "@consts";
       display: inline-flex;
       align-items: center;
     }
-  }
-
-  .header :global(.header__action-icon) {
-    width: 100%;
-    height: 100%;
-    stroke: currentColor;
-    fill: none;
   }
 
   .header :global(.header__action-btn--drawer) {

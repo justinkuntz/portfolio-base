@@ -1,156 +1,95 @@
-/* ==========================================================================
-   Project design tokens (non-color)
-   Typography, spacing, radius, shadows, motion, layout.
-   Theme controls and colors live in theme.css and src/styles/themes/.
-   ========================================================================== */
-
 :root {
-  /* Typography */
-  --font-sans-default: "Public Sans", system-ui, sans-serif;
-  --font-serif-default: "Lora", Georgia, serif;
-  --font-ui-default: var(--font-sans-default);
-  --font-mono-default: ui-monospace, monospace;
+  --font-body: inherit;
+  --font-heading: inherit;
+  --font-ui: inherit;
+  --font-mono: ui-monospace, monospace;
 
-  --font-sans: var(--theme-font-sans, var(--font-sans-default));
-  --font-serif: var(--theme-font-serif, var(--font-serif-default));
-  --font-ui: var(--theme-font-ui, var(--font-sans));
-  --font-body: var(--theme-font-body, var(--font-sans));
-  --font-heading: var(--theme-font-heading, var(--font-sans));
-  --font-mono: var(--theme-font-mono, var(--font-mono-default));
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-4xl: 6rem;
 
-  /* Font sizes – map to Open Props scale where available */
-  --text-xs: var(--font-size-00, 0.75rem);
-  --text-sm: var(--font-size-0, 0.875rem);
-  --text-base: var(--font-size-1, 1rem);
-  --text-lg: var(--font-size-2, 1.125rem);
-  --text-xl: var(--font-size-3, 1.25rem);
-  --text-2xl: var(--font-size-4, 1.5rem);
-  --text-3xl: var(--font-size-5, 1.875rem);
-  --text-4xl: var(--font-size-6, 2.25rem);
-  --text-4_5xl: 2.75rem;
-  --text-5xl: var(--font-size-7, 3rem);
-  --text-6xl: var(--font-size-8, 3.75rem);
-  --text-7xl: 4.5rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.5rem;
+  --text-7xl: 4rem;
 
-  /* Type rhythm */
-  --leading-display: 1.08;
-  --leading-heading: 1.15;
-  --leading-body: 1.6;
-  --leading-label: 1.3;
-
-  --tracking-display: -0.03em;
-  --tracking-heading: -0.02em;
-  --tracking-label: 0.08em;
-  --tracking-caps: 0.12em;
-
-  /* Font weights */
-  --font-thin: 100;
-  --font-extralight: 200;
-  --font-light: 300;
-  --font-regular: 400;
-  --font-normal: var(--font-regular);
   --font-medium: 500;
   --font-semibold: 600;
   --font-bold: 700;
-  --font-extrabold: 800;
-  --font-black: 900;
 
-  /* Spacing – use Open Props size scale */
-  --space-1: var(--size-1, 0.25rem);
-  --space-2: var(--size-2, 0.5rem);
-  --space-3: var(--size-3, 0.75rem);
-  --space-4: var(--size-4, 1rem);
-  --space-5: var(--size-5, 1.25rem);
-  --space-6: var(--size-6, 1.5rem);
-  --space-7: var(--size-7, 1.75rem);
-  --space-8: var(--size-8, 2rem);
-  --space-10: var(--size-10, 2.5rem);
-  --space-12: var(--size-12, 3rem);
-  --space-14: var(--size-14, 3.5rem);
-  --space-16: var(--size-16, 4rem);
-  --space-20: var(--size-20, 5rem);
-  --space-24: var(--size-24, 6rem);
-  --space-2xl: var(--size-12, 3rem);
-  --space-4xl: 6rem;
-  --space-32: 8rem;
+  --leading-body: 1.5;
+  --leading-heading: 1.2;
+  --leading-display: 1.1;
+  --leading-label: 1.3;
+  --tracking-label: 0.04em;
+  --tracking-caps: 0.08em;
+  --tracking-display: 0;
 
-  /* Border radius – use these site-wide for consistency */
-  --radius-sm: var(--theme-radius-sm, var(--radius-2, 0.25rem));   /* tags, small controls, copy btn */
-  --radius-md: var(--theme-radius-md, var(--radius-3, 0.5rem));   /* cards, buttons, inputs, images, code blocks */
-  --radius-lg: var(--theme-radius-lg, var(--radius-4, 0.75rem));  /* large cards, nav cards */
-  --radius-xl: var(--theme-radius-xl, var(--radius-5, 1rem));     /* featured panels */
-  --radius-full: var(--theme-radius-full, var(--radius-round, 9999px)); /* pills, avatars, icon buttons */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-full: 999px;
 
-  /* Shadows */
-  --shadow-sm: var(--shadow-2);
-  --shadow-md: var(--shadow-3);
-  --shadow-lg: var(--shadow-4);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
 
-  /* Motion */
-  --ease-default: var(--ease-3, ease);
-  --duration-fast: 150ms;
-  --duration-base: 300ms;
-  --duration-slow: 500ms;
-  --duration-slower: 700ms;
-  --transition-base: var(--duration-base) var(--ease-default);
-  --transition-slow: var(--duration-slow) var(--ease-default);
-  --transition-slower: var(--duration-slower) var(--ease-default);
+  --duration-fast: 0ms;
+  --duration-base: 0ms;
+  --duration-slow: 0ms;
+  --duration-slower: 0ms;
+  --transition-base: 0ms ease;
+  --transition-slow: 0ms ease;
+  --transition-slower: 0ms ease;
 
-  /* Layout */
-  --container-sm: var(--theme-container-sm, 640px);
-  --container-md: var(--theme-container-md, 768px);
-  --container-lg: var(--theme-container-lg, 1024px);
-  --container-xl: var(--theme-container-xl, 1280px);
-  --container-2xl: var(--theme-container-2xl, 1536px);
-  --container-gutter: var(--theme-container-gutter, var(--space-4));
-  --container-readable: var(--theme-container-readable, 65ch);
-  --measure-tight: var(--theme-measure-tight, 12ch);
-  --measure-title: var(--theme-measure-title, 16ch);
-  --measure-lead: var(--theme-measure-lead, 32rem);
-  --measure-copy: var(--theme-measure-copy, 62ch);
-  --measure-project-lead: var(--theme-measure-project-lead, 58rem);
+  --container-sm: 40rem;
+  --container-md: 48rem;
+  --container-lg: 64rem;
+  --container-xl: 72rem;
+  --container-2xl: 80rem;
+  --container-gutter: 1rem;
+  --container-readable: 65ch;
+  --measure-tight: 18ch;
+  --measure-title: 24ch;
+  --measure-lead: 36rem;
+  --measure-copy: 70ch;
+  --measure-project-lead: 70ch;
 
-  /* Z-index */
   --z-dropdown: 10;
   --z-sticky: 20;
-  --z-fixed: 50;
+  --z-fixed: 30;
   --z-modal: 40;
 
-  /* Copy button (used by code blocks) */
-  --copy-btn-margin: 10px;
-
-  /* Forms */
-  --form-shell-max-inline-size: var(--container-sm);
-  --form-shell-padding: clamp(var(--space-6), 2vw + var(--space-4), var(--space-8));
-  --form-shell-surface: var(--color-surface-50);
-  --form-shell-border: var(--color-border-default);
-  --form-shell-shadow: var(--shadow-sm);
-
-  --form-stack-gap: var(--space-5);
-  --form-field-gap: var(--space-2);
-  --form-submit-gap: var(--space-4);
-
-  --form-label-font-size: var(--text-sm);
-  --form-label-weight: var(--font-semibold);
-  --form-label-line-height: var(--leading-label);
-  --form-label-tracking: var(--tracking-caps);
-  --form-label-color: var(--color-text-subtle);
-
-  --form-control-padding-block: var(--space-3);
-  --form-control-padding-inline: var(--space-4);
-  --form-control-border: var(--color-border-default);
-  --form-control-radius: var(--radius-md);
-  --form-control-surface: var(--color-surface-50);
-  --form-control-text: var(--color-surface-950);
-  --form-control-font-family: var(--font-ui);
-  --form-control-font-size: var(--text-base);
-  --form-control-focus-border: var(--color-form-focus-border);
-  --form-control-focus-ring: var(--color-focus-ring);
-
-  --form-help-font-size: var(--text-sm);
-  --form-help-line-height: var(--leading-label);
-  --form-help-color: var(--color-text-subtle);
-
-  --form-feedback-radius: var(--radius-md);
-  --form-feedback-border-width: 1px;
+  --form-stack-gap: 1rem;
+  --form-field-gap: 0.375rem;
+  --form-submit-gap: 0.75rem;
+  --form-help-font-size: 0.875rem;
+  --form-help-line-height: 1.4;
+  --form-label-font-size: 1rem;
+  --form-label-weight: 600;
+  --form-label-line-height: 1.4;
+  --form-label-tracking: 0;
+  --form-control-padding-block: 0.5rem;
+  --form-control-padding-inline: 0.625rem;
+  --form-control-radius: 0;
+  --form-feedback-radius: 0;
 }

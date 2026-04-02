@@ -74,46 +74,31 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
 <style>
   .post-nav {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .post-nav {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .post-nav--md {
-    margin-top: var(--space-12);
+    margin-top: 2rem;
   }
 
   .post-nav--lg {
-    margin-top: var(--space-16);
+    margin-top: 3rem;
   }
 
   .post-nav__card {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    border: 1px solid var(--color-border-default);
-    border-radius: var(--radius-md);
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--surface-border);
     color: currentColor;
     text-decoration: none;
-    transition:
-      background-color var(--transition-base),
-      color var(--transition-base);
-  }
-
-  .post-nav__card:hover {
-    background-color: var(--color-surface-hover);
-  }
-
-  .post-nav__card:focus-visible {
-    background-color: var(--color-surface-hover);
-  }
-
-  .post-nav__card:hover .post-nav__title,
-  .post-nav__card:hover .post-nav__arrow,
-  .post-nav__card:focus-visible .post-nav__title,
-  .post-nav__card:focus-visible .post-nav__arrow {
-    color: var(--color-surface-950);
-    stroke: var(--color-surface-950);
   }
 
   .post-nav__card--prev .post-nav__arrow--left {
@@ -131,24 +116,17 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
   }
 
   .post-nav__label {
-    font-size: var(--text-sm);
+    font-size: 0.875rem;
     text-transform: uppercase;
-    line-height: var(--leading-label, 1.3);
-    letter-spacing: var(--tracking-label, 0.08em);
   }
 
   .post-nav__title {
     display: block;
-    font-weight: var(--font-semibold);
-    line-height: var(--leading-heading, 1.15);
-    margin-top: var(--space-3);
-    color: var(--color-surface-950);
-    transition: color var(--transition-base);
+    margin-top: 0.25rem;
   }
 
   .post-nav__arrow {
     flex-shrink: 0;
     stroke: currentColor;
-    transition: stroke var(--transition-base);
   }
 </style>

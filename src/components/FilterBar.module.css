@@ -1,84 +1,48 @@
 .root {
   width: 100%;
-  margin-top: 0;
-}
-
-@media (min-width: 768px) {
-  .root {
-    margin-top: var(--space-6);
-  }
 }
 
 .inner {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-2);
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .label {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
+  font-size: 0.875rem;
+  font-weight: 600;
   text-transform: uppercase;
-  color: var(--color-surface-950);
-  letter-spacing: 0.2em;
 }
 
 .list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
+  gap: 0.5rem;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .control {
-  position: relative;
-  appearance: none;
-  border: 0;
-  background: transparent;
-  padding-inline: var(--space-1);
-  padding-block: var(--space-1);
-  border-radius: var(--radius-md);
-  white-space: nowrap;
   display: inline-flex;
-  gap: var(--space-2);
   align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-background);
   color: inherit;
-  font: inherit;
-  font-size: var(--text-base);
   cursor: pointer;
-  user-select: none;
-  transition: color var(--transition-base);
-}
-
-.control:hover,
-.control:focus-visible {
-  color: var(--color-surface-950);
-}
-
-.control:focus-visible .icon {
-  outline: 2px solid var(--color-focus-ring-strong);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
 }
 
 .controlActive {
-  color: var(--color-surface-950);
+  font-weight: 600;
 }
 
 .icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
-  fill: var(--color-text-faint);
-  transition: fill var(--transition-base);
-}
-
-.control:hover .icon,
-.controlActive .icon {
-  fill: var(--color-surface-950);
+  fill: currentColor;
 }
 
 .iconUnchecked {

@@ -12,61 +12,22 @@
 
 <style>
   .back-to-top {
-    position: relative;
-    width: fit-content;
-    display: flex;
-    padding-left: var(--space-6);
-    padding-right: var(--space-3);
-    padding-block: var(--space-1);
-    padding-block: 0.375rem;
-    flex-wrap: nowrap;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border-default);
-    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--surface-border);
+    background: var(--surface-background);
     color: currentColor;
-    font-family: var(--font-ui);
     cursor: pointer;
-    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
-  }
-
-  .back-to-top:hover {
-    background-color: var(--color-surface-hover);
-    color: var(--color-surface-950);
   }
 
   .back-to-top__icon {
-    position: absolute;
-    top: 50%;
-    left: var(--space-2);
-    transform: translateY(-50%) rotate(90deg);
+    transform: rotate(90deg);
     width: 1rem;
     height: 1rem;
     stroke-width: 2;
     fill: none;
     stroke: currentColor;
-    transition: transform var(--transition-base);
-  }
-
-  .back-to-top__icon line {
-    transform: translateX(var(--space-2)) scaleX(0);
-    transform-origin: center;
-    transition: transform var(--transition-base);
-  }
-
-  .back-to-top:hover .back-to-top__icon line {
-    transform: translateX(0) scaleX(1);
-  }
-
-  .back-to-top__icon polyline {
-    transform: translateX(var(--space-1));
-    transition: transform var(--transition-base);
-  }
-
-  .back-to-top:hover .back-to-top__icon polyline {
-    transform: translateX(0);
-  }
-
-  .back-to-top__label {
-    font-size: var(--text-sm);
   }
 </style>

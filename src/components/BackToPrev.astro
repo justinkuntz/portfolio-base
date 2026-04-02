@@ -1,5 +1,5 @@
 ---
-import Link from "@components/Link.astro";
+import Button from "@components/Button.astro";
 type Props = {
   href: string;
 };
@@ -7,84 +7,6 @@ type Props = {
 const { href } = Astro.props;
 ---
 
-<Link href={href} class="back-to-prev">
-  <svg class="back-to-prev__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-    <line x1="5" y1="12" x2="19" y2="12"></line>
-    <polyline points="12 5 5 12 12 19"></polyline>
-  </svg>
-  <span class="back-to-prev__label">
-    <slot />
-  </span>
-</Link>
-
-<style>
-  .back-to-prev {
-    position: relative;
-    width: fit-content;
-    display: inline-flex;
-    padding-left: var(--space-7);
-    padding-right: var(--space-3);
-    padding-block: 0.375rem;
-    flex-wrap: nowrap;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border-default);
-    color: currentColor;
-    text-decoration: none;
-    transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base);
-  }
-
-  .back-to-prev:hover {
-    background-color: var(--color-surface-hover);
-    color: var(--color-surface-950);
-    text-decoration: none;
-  }
-
-  .back-to-prev:focus-visible {
-    background-color: var(--color-surface-hover);
-    color: var(--color-surface-950);
-    text-decoration: none;
-  }
-
-  .back-to-prev__icon {
-    position: absolute;
-    top: 50%;
-    left: var(--space-2);
-    transform: translateY(-50%);
-    width: 1rem;
-    height: 1rem;
-    stroke-width: 2;
-    fill: none;
-    stroke: currentColor;
-    transition: transform var(--transition-base);
-  }
-
-  .back-to-prev:hover .back-to-prev__icon,
-  .back-to-prev:focus-visible .back-to-prev__icon {
-    transform: translateY(-50%) translateX(-2px);
-  }
-
-  .back-to-prev__icon line {
-    transform: translateX(2px) scaleX(0);
-    transform-origin: center;
-    transition: transform var(--transition-base);
-  }
-
-  .back-to-prev:hover .back-to-prev__icon line,
-  .back-to-prev:focus-visible .back-to-prev__icon line {
-    transform: translateX(0) scaleX(1);
-  }
-
-  .back-to-prev__icon polyline {
-    transform: translateX(4px);
-    transition: transform var(--transition-base);
-  }
-
-  .back-to-prev:hover .back-to-prev__icon polyline,
-  .back-to-prev:focus-visible .back-to-prev__icon polyline {
-    transform: translateX(0);
-  }
-
-  .back-to-prev__label {
-    font-size: var(--text-sm);
-  }
-</style>
+<Button href={href} variant="outline" size="sm" iconLeft="arrow-left">
+  <slot />
+</Button>

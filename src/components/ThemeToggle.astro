@@ -15,12 +15,12 @@ const maskId = `${id ?? `theme-toggle-${size}`}-mask`;
   class:list={["theme-toggle", `theme-toggle--${size}`, className]}
   data-theme-toggle
   data-theme-toggle-ready="false"
-  data-theme="light"
-  aria-label="Switch to dark theme"
+  data-color-mode="light"
+  aria-label="Switch to dark mode"
   aria-pressed="false"
-  title="Switch to dark theme"
+  title="Switch to dark mode"
 >
-  <span class="sr-only" data-theme-toggle-label>Switch to dark theme</span>
+  <span class="sr-only" data-theme-toggle-label>Switch to dark mode</span>
   <svg
     class="theme-toggle__glyph"
     xmlns="http://www.w3.org/2000/svg"
@@ -47,95 +47,30 @@ const maskId = `${id ?? `theme-toggle-${size}`}-mask`;
 
 <style>
   .theme-toggle {
-    --toggle-size: 2.5rem;
-    --toggle-icon-size: 1.65rem;
-
     display: inline-grid;
     place-items: center;
-    inline-size: var(--toggle-size);
-    block-size: var(--toggle-size);
-    padding: 0;
-    border: 0;
-    border-radius: var(--radius-full);
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    padding: 0.25rem;
+    border: 1px solid var(--surface-border);
     background: transparent;
-    color: var(--color-surface-950);
+    color: inherit;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
   }
 
   .theme-toggle--lg {
-    --toggle-size: 2.75rem;
-    --toggle-icon-size: 1.82rem;
-  }
-
-  .theme-toggle:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
   }
 
   .theme-toggle__glyph {
-    inline-size: var(--toggle-icon-size);
-    block-size: var(--toggle-icon-size);
-    overflow: visible;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: currentColor;
-    transform-origin: center center;
-  }
-
-  .theme-toggle__sun {
-    transform-origin: center center;
-    transform-box: fill-box;
-  }
-
-  .theme-toggle__beams {
-    transform-origin: center center;
-    transform-box: fill-box;
     fill: none;
     stroke-width: 1.8;
-  }
-
-  .theme-toggle__cutout {
-    transform: translateX(0);
-    transform-origin: center center;
-    transform-box: fill-box;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__glyph,
-    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__sun,
-    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__beams,
-    .theme-toggle[data-theme-toggle-ready="true"] .theme-toggle__cutout {
-      transition:
-        transform 0.6s var(--ease-spring-3, var(--ease-default)),
-        opacity 0.35s var(--ease-3, ease);
-    }
-  }
-
-  :global(html.dark) .theme-toggle,
-  .theme-toggle[data-theme="dark"] {
-    color: var(--color-surface-950);
-  }
-
-  :global(html.dark) .theme-toggle .theme-toggle__glyph,
-  .theme-toggle[data-theme="dark"] .theme-toggle__glyph {
-    transform: rotate(-22deg);
-  }
-
-  :global(html.dark) .theme-toggle .theme-toggle__sun,
-  .theme-toggle[data-theme="dark"] .theme-toggle__sun {
-    transform: scale(1.32);
-  }
-
-  :global(html.dark) .theme-toggle .theme-toggle__beams,
-  .theme-toggle[data-theme="dark"] .theme-toggle__beams {
-    transform: rotate(-35deg) scale(0.72);
-    opacity: 0;
-  }
-
-  :global(html.dark) .theme-toggle .theme-toggle__cutout,
-  .theme-toggle[data-theme="dark"] .theme-toggle__cutout {
-    transform: translateX(-6.25px);
   }
 </style>

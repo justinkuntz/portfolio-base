@@ -67,20 +67,18 @@ const subpath = pathname.match(/[^/]+/g);
 <style>
   .drawer {
     position: fixed;
-    top: 5rem; /* below header */
+    top: 4rem;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 0;
     z-index: 40;
-    overflow: hidden;
-    display: flex;
+    display: none;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-surface-100);
-    transition: height var(--transition-base);
-    pointer-events: none;
+    gap: 1rem;
+    padding: 1rem;
+    overflow: auto;
+    border-top: 1px solid var(--surface-border);
+    background: var(--page-background);
   }
 
   @media (min-width: 768px) {
@@ -90,45 +88,36 @@ const subpath = pathname.match(/[^/]+/g);
   }
 
   .drawer.open {
-    height: calc(100vh - 5rem);
-    pointer-events: auto;
+    display: flex;
   }
 
   .drawer__nav {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: var(--space-8);
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 
   /* :global() so styles apply to Button's rendered root */
   .drawer :global(.drawer__nav-link) {
-    padding-inline: var(--space-3);
-    padding-block: var(--space-1);
-    border-radius: var(--radius-full);
-    font-size: var(--text-xl);
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .drawer__actions {
     display: flex;
-    gap: var(--space-4);
-    margin-top: var(--space-8);
+    gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .drawer :global(.drawer__action-btn) {
-    width: 2.75rem;
-    height: 2.75rem;
-    padding: var(--space-2);
+    min-width: 2.25rem;
   }
 
   .drawer :global(.drawer__action-icon) {
-    width: 100%;
-    height: 100%;
+    width: 1rem;
+    height: 1rem;
     stroke: currentColor;
     fill: none;
-  }
-
-  .drawer :global(.drawer__theme-toggle) {
-    flex-shrink: 0;
   }
 </style>

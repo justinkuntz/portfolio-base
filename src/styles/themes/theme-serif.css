@@ -7,7 +7,7 @@
    and a warmer palette to demonstrate a full theme swap.
    ========================================================================== */
 
-:root {
+:root[data-brand-theme="serif"] {
   /* Theme controls */
   --theme-font-body: var(--font-serif-default);
   --theme-font-heading: var(--font-serif-default);
@@ -84,7 +84,7 @@
   --color-error-text-strong: rgb(166 78 67 / 0.95);
 }
 
-html.dark {
+:root[data-brand-theme="serif"].dark {
   --color-primary: #c98b67;
   --color-secondary: #e3c8a8;
   --color-surface-50: #16110d;

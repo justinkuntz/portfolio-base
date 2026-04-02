@@ -21,22 +21,10 @@ const { href, external, underline = true, class: className, ...rest } = Astro.pr
 
 <style>
   .link {
-    display: inline-block;
     color: currentColor;
-    transition: color var(--transition-base), text-decoration-color var(--transition-base);
   }
 
   .link--underline {
     text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: var(--color-link-underline);
-  }
-
-  .link:hover {
-    color: var(--color-surface-950);
-  }
-
-  .link--underline:hover {
-    text-decoration-color: var(--color-link-underline-hover);
   }
 </style>
