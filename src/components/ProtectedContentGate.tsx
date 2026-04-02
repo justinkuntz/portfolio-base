@@ -148,10 +148,7 @@ export default function ProtectedContentGate({ slug }: Props) {
   });
 
   return (
-    <section
-      class={`${styles.root} surface-panel surface-panel--md`}
-      aria-labelledby="protected-content-title"
-    >
+    <section class={styles.root} aria-labelledby="protected-content-title">
       <div class={styles.head}>
         <div class={styles.iconWrap} aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" class={styles.icon}>
@@ -205,40 +202,36 @@ export default function ProtectedContentGate({ slug }: Props) {
           aria-hidden={mode() !== "login"}
         >
           <form class={styles.form} onSubmit={submitLogin}>
-            <div class="form-field">
-              <label class="form-label" for={`gate-email-${slug}`}>
-                {PROTECTED_PROJECTS.EMAIL_LABEL}
-              </label>
-              <input
-                id={`gate-email-${slug}`}
-                class="form-control"
-                type="email"
-                name="email"
-                inputmode="email"
-                autocomplete="email"
-                placeholder={PROTECTED_PROJECTS.EMAIL_PLACEHOLDER}
-                value={email()}
-                onInput={(event) => setEmail(event.currentTarget.value)}
-                required
-              />
-            </div>
+            <label class={styles.label} for={`gate-email-${slug}`}>
+              {PROTECTED_PROJECTS.EMAIL_LABEL}
+            </label>
+            <input
+              id={`gate-email-${slug}`}
+              class={styles.input}
+              type="email"
+              name="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder={PROTECTED_PROJECTS.EMAIL_PLACEHOLDER}
+              value={email()}
+              onInput={(event) => setEmail(event.currentTarget.value)}
+              required
+            />
 
-            <div class="form-field">
-              <label class="form-label" for={`gate-password-${slug}`}>
-                {PROTECTED_PROJECTS.PASSWORD_LABEL}
-              </label>
-              <input
-                id={`gate-password-${slug}`}
-                class="form-control"
-                type="password"
-                name="password"
-                autocomplete="current-password"
-                placeholder={PROTECTED_PROJECTS.PASSWORD_PLACEHOLDER}
-                value={password()}
-                onInput={(event) => setPassword(event.currentTarget.value)}
-                required
-              />
-            </div>
+            <label class={styles.label} for={`gate-password-${slug}`}>
+              {PROTECTED_PROJECTS.PASSWORD_LABEL}
+            </label>
+            <input
+              id={`gate-password-${slug}`}
+              class={styles.input}
+              type="password"
+              name="password"
+              autocomplete="current-password"
+              placeholder={PROTECTED_PROJECTS.PASSWORD_PLACEHOLDER}
+              value={password()}
+              onInput={(event) => setPassword(event.currentTarget.value)}
+              required
+            />
 
             <button class={styles.submit} type="submit" disabled={loginPending()}>
               {loginPending() ? "Unlocking..." : PROTECTED_PROJECTS.LOGIN_SUBMIT_TEXT}
@@ -264,12 +257,9 @@ export default function ProtectedContentGate({ slug }: Props) {
             </p>
 
             <p
-              role="status"
-              aria-live="polite"
               classList={{
                 [styles.feedback]: true,
-                "status-notice": true,
-                "status-notice--error": Boolean(loginFeedback()),
+                [styles.feedbackError]: Boolean(loginFeedback()),
               }}
               hidden={!loginFeedback()}
             >
@@ -287,38 +277,34 @@ export default function ProtectedContentGate({ slug }: Props) {
           aria-hidden={mode() !== "request"}
         >
           <form class={styles.form} onSubmit={submitRequest}>
-            <div class="form-field">
-              <label class="form-label" for={`gate-request-email-${slug}`}>
-                {PROTECTED_PROJECTS.EMAIL_LABEL}
-              </label>
-              <input
-                id={`gate-request-email-${slug}`}
-                class="form-control"
-                type="email"
-                name="email"
-                inputmode="email"
-                autocomplete="email"
-                placeholder={PROTECTED_PROJECTS.EMAIL_PLACEHOLDER}
-                value={email()}
-                onInput={(event) => setEmail(event.currentTarget.value)}
-                required
-              />
-            </div>
+            <label class={styles.label} for={`gate-request-email-${slug}`}>
+              {PROTECTED_PROJECTS.EMAIL_LABEL}
+            </label>
+            <input
+              id={`gate-request-email-${slug}`}
+              class={styles.input}
+              type="email"
+              name="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder={PROTECTED_PROJECTS.EMAIL_PLACEHOLDER}
+              value={email()}
+              onInput={(event) => setEmail(event.currentTarget.value)}
+              required
+            />
 
-            <div class="form-field">
-              <label class="form-label" for={`gate-request-message-${slug}`}>
-                {PROTECTED_PROJECTS.REQUEST_MESSAGE_LABEL}
-              </label>
-              <textarea
-                id={`gate-request-message-${slug}`}
-                class={`${styles.textarea} form-control form-control--textarea`}
-                name="message"
-                placeholder={PROTECTED_PROJECTS.REQUEST_MESSAGE_PLACEHOLDER}
-                value={requestMessage()}
-                onInput={(event) => setRequestMessage(event.currentTarget.value)}
-                required
-              />
-            </div>
+            <label class={styles.label} for={`gate-request-message-${slug}`}>
+              {PROTECTED_PROJECTS.REQUEST_MESSAGE_LABEL}
+            </label>
+            <textarea
+              id={`gate-request-message-${slug}`}
+              class={`${styles.input} ${styles.textarea}`}
+              name="message"
+              placeholder={PROTECTED_PROJECTS.REQUEST_MESSAGE_PLACEHOLDER}
+              value={requestMessage()}
+              onInput={(event) => setRequestMessage(event.currentTarget.value)}
+              required
+            />
 
             <button class={styles.submit} type="submit" disabled={requestPending()}>
               {requestPending() ? "Sending..." : PROTECTED_PROJECTS.REQUEST_SUBMIT_TEXT}
@@ -336,12 +322,9 @@ export default function ProtectedContentGate({ slug }: Props) {
             </p>
 
             <p
-              role="status"
-              aria-live="polite"
               classList={{
                 [styles.feedback]: true,
-                "status-notice": true,
-                "status-notice--success": Boolean(requestFeedback()),
+                [styles.feedbackSuccess]: Boolean(requestFeedback()),
               }}
               hidden={!requestFeedback()}
             >
