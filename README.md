@@ -10,8 +10,8 @@ The sample copy currently follows Grogu as he grows from foundling to Mandaloria
 - Filterable projects and blog collections
 - Full-text search with Fuse.js (`/search`)
 - Sitemap and RSS generation
-- Light and dark color mode toggle (stored under a configurable localStorage key)
-- Two brand themes (default sans and serif), with a `/styleguide` page for tokens, components, and patterns (not linked in the main nav; see [Styleguide](#styleguide))
+- Light and dark color mode toggle
+- A `/styleguide` page for tokens, components, and patterns (not linked in the main nav; see [Styleguide](#styleguide))
 - Shared UI patterns: form controls (`form-control`, `form-field`), surface panels (`surface-panel`), and status notices
 - Optional password-gated project bodies with server-signed cookies and API routes
 - Contact form endpoint with honeypot, timing check, and rate limiting
@@ -46,7 +46,6 @@ This only affects local dev. It does not change production build output.
 Start with these files:
 
 - `src/consts.ts` for site name, navigation, homepage card layout, metadata, and social links
-- `src/config/theme.ts` for brand theme id (`default` or `serif`) and color-mode storage key (see [Themes](#themes))
 - `src/config/media.ts` for image defaults like hero layout, thumbnail shape, and responsive widths
 - `src/config/seo.ts` for global SEO defaults
 - `src/pages/index.astro`, `src/pages/about/index.astro`, and `src/pages/contact/index.astro` for the main marketing copy
@@ -80,34 +79,17 @@ Fill in values for the features you use. Details and examples:
 
 `.env.local` should stay uncommitted. The repo only includes `.env.example` as a template.
 
-## Themes
+## Color Mode
 
-Brand appearance is controlled in **`src/config/theme.ts`**:
-
-- **`THEME.BRAND`**: `default` or `serif`. This sets `data-brand-theme` on the `<html>` element (see `PageLayout`) so the matching rules in the theme CSS files apply.
-- **`THEME.COLOR_MODE_STORAGE_KEY`**: localStorage key for light/dark preference (default `"theme"`). Change it if you need to avoid clashing with another app on the same origin.
-
-Font preloading in `src/components/Head.astro` follows `THEME.BRAND` (Public Sans for default, Lora for serif).
-
-The theme styles live in `src/styles/theme.css`, which imports both:
-
-- `src/styles/themes/theme-default.css` — sans-forward, rounded look
-- `src/styles/themes/theme-serif.css` — serif-led, square corners, wider layout, warmer palette
-
-Both files are always loaded; only one block is active at a time according to `data-brand-theme`. Switch brands by editing `THEME.BRAND` in `src/config/theme.ts` (not by changing `@import` lines).
-
-The top of each theme file is the main control surface:
-
-- font roles for body, headings, and UI
-- radius values for corners and pills
-- container widths and content measures
-- primitive palette plus semantic surface, text, focus, and feedback colors
+Light and dark mode are handled by the shared toggle component and persisted in localStorage under
+the `theme` key. The baseline experiment keeps this behavior so surface contrast, forms, and code
+blocks can still be checked in both modes while testing a new CSS foundation.
 
 ## Styleguide
 
 The route **`/styleguide`** is a living reference for typography tokens, spacing, surfaces, buttons, forms, and prose patterns used across the site. It is intentionally **not** linked from the primary navigation in `src/consts.ts` so production sites can stay minimal; add a nav link locally if you want it visible to visitors.
 
-Use it during theme tweaks and component work to verify light/dark color modes and brand theme switching in one place.
+Use it to verify light/dark color modes and to see how a new design system changes the baseline primitives in one place.
 
 ## Images
 

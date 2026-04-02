@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import { SEO } from "@config/seo";
-import { THEME } from "@config/theme";
 import type { ResolvedSeo } from "@lib/seo";
 
 interface Props {
@@ -28,8 +27,9 @@ const { seo } = Astro.props;
 <link rel="icon" type="image/x-icon" href="/favicon-light.svg" />
 <meta name="generator" content={Astro.generator} />
 
-<script is:inline define:vars={{ themeStorageKey: THEME.COLOR_MODE_STORAGE_KEY }}>
+<script is:inline>
   (() => {
+    const themeStorageKey = "theme";
     const globalKey = "__portfolioBaseTheme__";
 
     if (window[globalKey]) {

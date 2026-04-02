@@ -3,11 +3,9 @@ import { getCollection } from "astro:content";
 import ArrowCard from "@components/ArrowCard";
 import Button from "@components/Button.astro";
 import ThemeToggle from "@components/ThemeToggle.astro";
-import { BRAND_THEMES, THEME } from "@config/theme";
 import PageLayout from "@layouts/PageLayout.astro";
 import { SITE } from "@consts";
-
-const activeTheme = BRAND_THEMES[THEME.BRAND];
+import "../../styles/styleguide-page.css";
 
 const sections = [
   { id: "overview", label: "Overview" },
@@ -174,9 +172,7 @@ const projectSample = (await getCollection("projects"))
       <div class="styleguide-docs__controls">
         <ThemeToggle id="styleguide-theme-toggle" size="md" />
         <p class="styleguide-docs__theme-meta">
-          <span class="styleguide-docs__theme-name">{activeTheme.label}</span>
-          {" "}
-          — {activeTheme.description} · Edit in <code>src/config/theme.ts</code>
+          Toggle color mode to inspect neutral surfaces and control states.
         </p>
       </div>
     </aside>
@@ -192,8 +188,8 @@ const projectSample = (await getCollection("projects"))
             columns from tablet sizes up.
           </p>
           <p class="styleguide-hero__meta">
-            Switch brand theme (<code>default</code> / <code>serif</code>) in{" "}
-            <code>src/config/theme.ts</code>, then reload to compare typography and radii.
+            Use this page to evaluate how baseline tokens and shared UI patterns respond before
+            layering in a new design system.
           </p>
         </header>
       </section>
