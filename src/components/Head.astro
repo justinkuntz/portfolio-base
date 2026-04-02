@@ -81,6 +81,7 @@ const { seo } = Astro.props;
     function syncThemeToggles(colorMode) {
       const nextColorMode = colorMode === "dark" ? "light" : "dark";
       document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
+        button.dataset.theme = colorMode;
         button.dataset.colorMode = colorMode;
         button.setAttribute("aria-pressed", String(colorMode === "dark"));
         button.setAttribute("aria-label", `Switch to ${nextColorMode} mode`);
