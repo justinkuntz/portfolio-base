@@ -1,10 +1,7 @@
 /* ==========================================================================
    Active theme entrypoint
-   Switch the import below to change the site's overall visual system.
+   Brand theme selection is controlled in src/config/theme.ts.
    ========================================================================== */
 
 @import "./themes/theme-default.css";
-
-/* Alternate example theme:
 @import "./themes/theme-serif.css";
-*/
