@@ -20,15 +20,15 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
   seo={{ kind: "page", generatedImage: true }}
 >
   <Container size="xl">
-    <div class="page-intro page-intro--listing">
-      <h1 class="page-intro__title animate">
+    <header>
+      <h1 class="animate">
         Blog
       </h1>
-      <p class="page-intro__description animate">
+      <p class="animate">
         Notes from the covert: setup guides, content documentation, and a few
         lessons from Grogu's apprenticeship.
       </p>
-    </div>
+    </header>
     <div class="animate">
       <Blog
         client:idle

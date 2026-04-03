@@ -62,9 +62,9 @@ export default function Search({ data }: Props) {
           autocomplete="off"
           spellcheck={false}
           placeholder="What are you looking for?"
-          class={`form-control ${styles.input}`}
+          class={styles.input}
         />
-        <svg class={styles.inputIcon} aria-hidden="true">
+        <svg class={styles.inputIcon} viewBox="0 0 24 24" aria-hidden="true">
           <use href="/ui.svg#search" />
         </svg>
       </div>

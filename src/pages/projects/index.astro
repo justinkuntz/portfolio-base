@@ -23,18 +23,18 @@ const projectCards = await toProjectCardEntries(projects);
   seo={{ kind: "page", generatedImage: true }}
 >
   <Container size="xl">
-    <div class="page-intro page-intro--listing">
-      <h1 class="page-intro__title animate">
+    <header>
+      <h1 class="animate">
         Projects
       </h1>
-      <p class="page-intro__description">
+      <p>
         Sample case studies that demonstrate the project collection, tag
         filtering, and image-heavy MDX layouts.
       </p>
-    </div>
+    </header>
     <div class="animate">
       <Projects
-        client:idle
+        client:load
         tags={tags}
         data={projectCards}
         gridColumns={PROJECTS_LISTING.GRID_COLUMNS}

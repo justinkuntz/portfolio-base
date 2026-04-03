@@ -28,7 +28,7 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
       <span class="post-nav__title">{prev.data.title}</span>
     </span>
     <svg
-      class="post-nav__arrow arrow-animated arrow-animated--left post-nav__arrow--left"
+      class="post-nav__arrow post-nav__arrow--left"
       xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
@@ -39,9 +39,8 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
       stroke-linejoin="round"
       aria-hidden="true"
     >
-      <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
-      <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"
-      ></polyline>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   </Link>
   <Link
@@ -53,7 +52,7 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
       <span class="post-nav__title">{next.data.title}</span>
     </span>
     <svg
-      class="post-nav__arrow arrow-animated"
+      class="post-nav__arrow"
       xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
@@ -64,9 +63,8 @@ const { prev, next, topSpacing = "lg" } = Astro.props;
       stroke-linejoin="round"
       aria-hidden="true"
     >
-      <line x1="5" y1="12" x2="19" y2="12" class="arrow-animated__line"></line>
-      <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"
-      ></polyline>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
     </svg>
   </Link>
 </div>

@@ -35,11 +35,11 @@ const statusCopy = (() => {
     <section class="contact">
       <div class="contact__grid">
         <div class="contact__intro">
-          <p class="contact__label section-kicker">{CONTACT.TITLE}</p>
-          <h1 class="contact__title section-title section-title--page">
+          <p class="contact__label">{CONTACT.TITLE}</p>
+          <h1 class="contact__title">
             Send a transmission to the covert
           </h1>
-          <p class="contact__description section-copy">
+          <p class="contact__description">
             Have a mission, a collaboration, or a discreet request that needs a
             steady hand? Send the details and Grogu will respond when the ship
             is back in range.
@@ -55,16 +55,10 @@ const statusCopy = (() => {
             </li>
           </ul>
         </div>
-        <div class="contact__form-wrap surface-panel surface-panel--md">
+        <div class="contact__form-wrap">
           {
             statusCopy && (
-              <div
-                class:list={[
-                  "contact__status",
-                  "status-notice",
-                  statusCopy.tone === "success" ? "status-notice--success" : "status-notice--error",
-                ]}
-              >
+              <div class="contact__status">
                 {statusCopy.text}
               </div>
             )
@@ -88,8 +82,8 @@ const statusCopy = (() => {
               class="contact__hidden"
             />
 
-            <div class="contact__field form-field">
-              <label class="contact__label form-label" for="contact-name">Name</label>
+            <div class="contact__field">
+              <label class="contact__field-label" for="contact-name">Name</label>
               <input
                 id="contact-name"
                 name="name"
@@ -98,12 +92,12 @@ const statusCopy = (() => {
                 minlength="2"
                 autocomplete="name"
                 placeholder="Din Djarin"
-                class="contact__input form-control"
+                class="contact__input"
               />
             </div>
 
-            <div class="contact__field form-field">
-              <label class="contact__label form-label" for="contact-email">Email</label>
+            <div class="contact__field">
+              <label class="contact__field-label" for="contact-email">Email</label>
               <input
                 id="contact-email"
                 name="email"
@@ -111,14 +105,14 @@ const statusCopy = (() => {
                 required
                 autocomplete="email"
                 placeholder="din@covert.space"
-                class="contact__input form-control"
+                class="contact__input"
               />
             </div>
 
-            <div class="contact__field form-field">
+            <div class="contact__field">
               <div class="contact__field-head">
-                <label class="contact__label form-label" for="contact-message">Message</label>
-                <span id="contact-message-hint" class="contact__hint form-hint">Minimum 20 characters</span>
+                <label class="contact__field-label" for="contact-message">Message</label>
+                <span id="contact-message-hint" class="contact__hint">Minimum 20 characters</span>
               </div>
               <textarea
                 id="contact-message"
@@ -128,17 +122,17 @@ const statusCopy = (() => {
                 rows="6"
                 aria-describedby="contact-message-hint"
                 placeholder="Share the mission, timeline, constraints, and anything Grogu should know before boarding."
-                class="contact__input contact__textarea form-control form-control--textarea"
+                class="contact__input contact__textarea"
               ></textarea>
             </div>
 
             <div class="contact__submit-wrap">
-              <p class="contact__hint form-hint">
+              <p class="contact__hint">
                 By submitting you agree to receive a reply at the email address
                 you provided.
               </p>
               <Button type="submit" variant="primary" size="lg" class="contact__submit">
-                <span class="inline" data-submit-text>Send transmission</span>
+                <span data-submit-text>Send transmission</span>
               </Button>
               <p
                 id="contact-status"
@@ -186,8 +180,11 @@ const statusCopy = (() => {
     margin-bottom: 0.5rem;
   }
 
-  .contact__form-wrap {
-    padding: 1rem;
+  .contact__label,
+  .contact__description,
+  .contact__field-label,
+  .contact__hint {
+    margin: 0;
   }
 
   .contact__status {
@@ -199,11 +196,28 @@ const statusCopy = (() => {
     gap: 1rem;
   }
 
+  .contact__field {
+    display: grid;
+    gap: 0.375rem;
+  }
+
   .contact__field-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
+  }
+
+  .contact__input {
+    width: 100%;
+    min-height: 2.5rem;
+    box-sizing: border-box;
+    font: inherit;
+  }
+
+  .contact__textarea {
+    min-height: 8rem;
+    resize: vertical;
   }
 
   .contact__hidden {

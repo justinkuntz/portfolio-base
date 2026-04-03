@@ -35,15 +35,7 @@ export default function Projects({ data, tags, gridColumns }: Props) {
         selectedTags={filter()}
         onToggleTag={toggleTag}
       />
-      <div
-        classList={{
-          [styles.grid]: true,
-          [styles["grid--1"]]: gridColumns === 1,
-          [styles["grid--2"]]: gridColumns === 2,
-          [styles["grid--3"]]: gridColumns === 3,
-          [styles["grid--4"]]: gridColumns === 4,
-        }}
-      >
+      <div class={styles.grid} data-columns={gridColumns}>
         {projects().map((project) => (
           <ProjectsWaterfall entry={project} />
         ))}

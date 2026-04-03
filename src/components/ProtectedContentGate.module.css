@@ -74,8 +74,25 @@
   gap: 1rem;
 }
 
+.field {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.label {
+  margin: 0;
+}
+
+.input {
+  width: 100%;
+  min-height: 2.5rem;
+  box-sizing: border-box;
+  font: inherit;
+}
+
 .textarea {
   min-height: 8rem;
+  resize: vertical;
 }
 
 .submit {

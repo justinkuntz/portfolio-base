@@ -23,11 +23,9 @@ const data: Array<CollectionEntry<"blog"> | CollectionEntry<"projects">> = [
   seo={{ noindex: true, kind: "page", generatedImage: true }}
 >
   <Container size="xl">
-    <div class="animate page-heading">
-      {SEARCH.TITLE}
-    </div>
+    <h1 class="animate">{SEARCH.TITLE}</h1>
     <div class="animate">
-      <Search client:idle data={data} />
+      <Search client:load data={data} />
     </div>
   </Container>
 </PageLayout>

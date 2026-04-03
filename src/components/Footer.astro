@@ -30,9 +30,9 @@ import BackToTop from "@components/BackToTop.astro";
           size="md"
           iconOnly
           aria-label={`RSS feed for ${SITE.NAME}`}
-          class="footer__social-btn footer__social-btn--rss icon-button"
+          class="footer__social-btn footer__social-btn--rss"
         >
-          <svg class="footer__social-icon icon-button__icon" aria-hidden="true">
+          <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
             <use href="/ui.svg#rss"></use>
           </svg>
         </Button>
@@ -45,10 +45,11 @@ import BackToTop from "@components/BackToTop.astro";
               size="md"
               iconOnly
               aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-              class="footer__social-btn icon-button"
+              class="footer__social-btn"
             >
               <svg
-                class="footer__social-icon icon-button__icon icon-button__icon--fill"
+                class="footer__social-icon"
+                viewBox="0 0 24 24"
                 aria-hidden="true"
               >
                 <use href={`/social.svg#${SOCIAL.ICON}`} />
@@ -119,7 +120,19 @@ import BackToTop from "@components/BackToTop.astro";
     }
   }
 
-  .footer__social-btn--rss {
+  .footer :global(.footer__social-icon) {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor;
+    stroke: none;
+  }
+
+  .footer :global(.footer__social-btn--rss) {
     display: inline-flex;
+  }
+
+  .footer :global(.footer__social-btn--rss) :global(.footer__social-icon) {
+    stroke: currentColor;
+    fill: none;
   }
 </style>

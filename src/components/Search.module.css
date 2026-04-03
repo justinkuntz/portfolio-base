@@ -8,6 +8,10 @@
 }
 
 .input {
+  width: 100%;
+  min-height: 2.5rem;
+  box-sizing: border-box;
+  font: inherit;
   padding-inline: 0.625rem;
   padding-left: 2.5rem;
 }

@@ -39,15 +39,7 @@ export default function Blog({ data, tags, gridColumns }: Props) {
         onToggleTag={toggleTag}
       />
       <div class={styles.grid}>
-        <ul
-          classList={{
-            [styles.gridList]: true,
-            [styles["gridList--1"]]: gridColumns === 1,
-            [styles["gridList--2"]]: gridColumns === 2,
-            [styles["gridList--3"]]: gridColumns === 3,
-            [styles["gridList--4"]]: gridColumns === 4,
-          }}
-        >
+        <ul class={styles.gridList} data-columns={gridColumns}>
           {posts().map((post) => (
             <li>
               <ArrowCard entry={post} />
