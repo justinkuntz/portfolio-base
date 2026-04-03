@@ -208,7 +208,6 @@ const { seo } = Astro.props;
 <script is:inline>
   function init() {
     onScroll();
-    animate();
 
     const backToTop = document.getElementById("back-to-top");
     backToTop?.addEventListener("click", (event) => scrollToTop(event));
@@ -217,16 +216,6 @@ const { seo } = Astro.props;
     backToPrev?.addEventListener("click", () => window.history.back());
 
     document.addEventListener("scroll", onScroll);
-  }
-
-  function animate() {
-    const animateElements = document.querySelectorAll(".animate");
-
-    animateElements.forEach((element, index) => {
-      setTimeout(() => {
-        element.classList.add("show");
-      }, index * 150);
-    });
   }
 
   function onScroll() {

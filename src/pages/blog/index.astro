@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Blog from "@components/Blog";
-import { BLOG, BLOG_LISTING } from "@consts";
+import { BLOG } from "@consts";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -21,20 +21,17 @@ const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
 >
   <Container size="xl">
     <header>
-      <h1 class="animate">
-        Blog
-      </h1>
-      <p class="animate">
+      <h1>Blog</h1>
+      <p>
         Notes from the covert: setup guides, content documentation, and a few
         lessons from Grogu's apprenticeship.
       </p>
     </header>
-    <div class="animate">
+    <div>
       <Blog
         client:idle
         tags={tags}
         data={posts}
-        gridColumns={BLOG_LISTING.GRID_COLUMNS}
       />
     </div>
   </Container>

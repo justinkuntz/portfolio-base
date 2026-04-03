@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import Projects from "@components/Projects";
-import { PROJECTS, PROJECTS_LISTING } from "@consts";
+import { PROJECTS } from "@consts";
 import { toProjectCardEntries } from "@lib/images";
 
 const projects = (await getCollection("projects"))
@@ -24,20 +24,17 @@ const projectCards = await toProjectCardEntries(projects);
 >
   <Container size="xl">
     <header>
-      <h1 class="animate">
-        Projects
-      </h1>
+      <h1>Projects</h1>
       <p>
         Sample case studies that demonstrate the project collection, tag
         filtering, and image-heavy MDX layouts.
       </p>
     </header>
-    <div class="animate">
+    <div>
       <Projects
         client:load
         tags={tags}
         data={projectCards}
-        gridColumns={PROJECTS_LISTING.GRID_COLUMNS}
       />
     </div>
   </Container>

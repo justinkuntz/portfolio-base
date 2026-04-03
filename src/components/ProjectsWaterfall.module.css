@@ -17,12 +17,6 @@
   margin-bottom: 0.75rem;
 }
 
-.card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem;
-}
-
 .card__tag {
   font-size: 0.875rem;
   border: 1px solid currentColor;

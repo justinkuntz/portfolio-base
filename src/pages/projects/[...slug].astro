@@ -78,12 +78,12 @@ const next = items[(index + 1) % items.length];
   <Container size="xl">
     <div class="project-hero">
       <div class="project-hero__main">
-        <h1 class="project-hero__title animate">
+        <h1 class="project-hero__title">
           {project.data.title}
         </h1>
         {
           (project.data.demoURL || project.data.repoURL) && (
-            <nav class="project-hero__links animate">
+            <nav class="project-hero__links">
               {project.data.demoURL && (
                 <Link href={project.data.demoURL} external>
                   {project.data.demoText}
@@ -102,7 +102,7 @@ const next = items[(index + 1) % items.length];
         }
       </div>
       <div class="project-hero__desc">
-        <h2 class="project-hero__desc-title animate">
+        <h2 class="project-hero__desc-title">
           {project.data.description}
         </h2>
       </div>
@@ -124,7 +124,7 @@ const next = items[(index + 1) % items.length];
     <article class="project-article">
       {
         project.data.challenge && (
-          <div class="project-article__block animate">
+          <div class="project-article__block">
             <h3 class="project-article__heading">Challenge</h3>
             <p class="project-article__p">{project.data.challenge}</p>
           </div>
@@ -132,7 +132,7 @@ const next = items[(index + 1) % items.length];
       }
       {
         project.data.solution && (
-          <div class="project-article__block animate">
+          <div class="project-article__block">
             <h3 class="project-article__heading">Solution</h3>
             <p class="project-article__p">{project.data.solution}</p>
           </div>
@@ -140,13 +140,13 @@ const next = items[(index + 1) % items.length];
       }
       {
         project.data.results && (
-          <div class="project-article__block animate">
+          <div class="project-article__block">
             <h3 class="project-article__heading">Results</h3>
             <p class="project-article__p">{project.data.results}</p>
           </div>
         )
       }
-      <div class="project-article__block animate">
+      <div class="project-article__block">
         <h3 class="project-article__heading">Areas of Expertise</h3>
         <ul class="project-article__tags">
           {
@@ -160,13 +160,13 @@ const next = items[(index + 1) % items.length];
     {
       shouldRenderContent ? (
         <>
-          <article class="project-content animate">
+          <article class="project-content">
             {Content && <Content />}
           </article>
           <PostNav prev={prev} next={next} topSpacing="md" />
         </>
       ) : (
-        <div class="animate">
+        <div>
           <ProtectedContentGate slug={project.id} client:load />
         </div>
       )

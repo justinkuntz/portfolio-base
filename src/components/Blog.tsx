@@ -2,16 +2,14 @@ import type { CollectionEntry } from "astro:content";
 import { createMemo, createSignal } from "solid-js";
 import ArrowCard from "@components/ArrowCard";
 import FilterBar from "@components/FilterBar";
-import type { GridColumns } from "@types";
 import styles from "./Blog.module.css";
 
 type Props = {
   tags: string[];
   data: CollectionEntry<"blog">[];
-  gridColumns: GridColumns;
 };
 
-export default function Blog({ data, tags, gridColumns }: Props) {
+export default function Blog({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>());
   const posts = createMemo(() =>
     data.filter((entry) =>
@@ -32,21 +30,19 @@ export default function Blog({ data, tags, gridColumns }: Props) {
   }
 
   return (
-    <div class={styles.root}>
+    <div>
       <FilterBar
         tags={tags}
         selectedTags={filter()}
         onToggleTag={toggleTag}
       />
-      <div class={styles.grid}>
-        <ul class={styles.gridList} data-columns={gridColumns}>
-          {posts().map((post) => (
-            <li>
-              <ArrowCard entry={post} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul class={styles.gridList}>
+        {posts().map((post) => (
+          <li>
+            <ArrowCard entry={post} />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

@@ -76,13 +76,6 @@ main {
   transform: translateY(0);
 }
 
-.animate,
-.animate.show {
-  opacity: 1;
-  transform: none;
-  transition: none;
-}
-
 html #back-to-top {
   display: none;
 }

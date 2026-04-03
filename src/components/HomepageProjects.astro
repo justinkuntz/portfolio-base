@@ -3,10 +3,9 @@ import AnimatedProjects from "@components/AnimatedProjects.tsx";
 import ProjectsWaterfall from "@components/ProjectsWaterfall.tsx";
 import type { ProjectCardEntry } from "@types";
 
-const { projects, layout, gridColumns } = Astro.props as {
+const { projects, layout } = Astro.props as {
   projects: ProjectCardEntry[];
   layout: "waterfall" | "grid";
-  gridColumns: 1 | 2 | 3 | 4;
 };
 ---
 
@@ -14,19 +13,10 @@ const { projects, layout, gridColumns } = Astro.props as {
   layout === "waterfall" ? (
     <AnimatedProjects projects={projects} client:visible />
   ) : (
-    <div
-      class:list={[
-        "homepage-projects__grid",
-        `homepage-projects__grid--${gridColumns}`,
-      ]}
-    >
+    <div class="homepage-projects__grid">
       {projects.map((entry) => (
         <div class="homepage-projects__item">
-          <ProjectsWaterfall
-            entry={entry}
-            variant="homepage-grid"
-            showTags={false}
-          />
+          <ProjectsWaterfall entry={entry} showTags={false} />
         </div>
       ))}
     </div>

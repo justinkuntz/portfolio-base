@@ -1,18 +1,9 @@
-.root {
-  gap: 1.5rem;
-}
-
-.grid {
-  display: block;
-}
-
 .gridList {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 1.5rem 0 0;
 }
 
-.gridList > li {
-  padding-inline-start: 0;
-  margin-bottom: 1.5rem;
+.gridList > li + li {
+  margin-top: 1.5rem;
 }

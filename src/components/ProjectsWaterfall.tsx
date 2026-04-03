@@ -2,21 +2,17 @@ import { MEDIA } from "@config/media";
 import type { ProjectCardEntry } from "@types";
 import styles from "./ProjectsWaterfall.module.css";
 
-type ProjectCardVariant = "landing" | "homepage-grid";
-
 type Props = {
   entry: ProjectCardEntry;
-  variant?: ProjectCardVariant;
   showTags?: boolean;
 };
 
 export default function ProjectsWaterfall({
   entry,
-  variant = "landing",
   showTags = true,
 }: Props) {
   return (
-    <a href={`/projects/${entry.slug}`} class={styles.card} data-variant={variant}>
+    <a href={`/projects/${entry.slug}`} class={styles.card}>
       <div class={styles.card__body}>
         {showTags && (
           <div class={styles.card__meta}>

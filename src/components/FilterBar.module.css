@@ -1,17 +1,8 @@
 .root {
-  width: 100%;
-}
-
-.inner {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.label {
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  align-items: center;
 }
 
 .list {
@@ -27,36 +18,4 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  padding: 0.375rem 0.5rem;
-  border: 1px solid currentColor;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-}
-
-.controlActive {
-  font-weight: 600;
-}
-
-.icon {
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-  fill: currentColor;
-}
-
-.iconUnchecked {
-  display: block;
-}
-
-.iconChecked {
-  display: none;
-}
-
-.controlActive .iconUnchecked {
-  display: none;
-}
-
-.controlActive .iconChecked {
-  display: block;
 }

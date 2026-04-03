@@ -44,37 +44,32 @@ export default function Search({ data }: Props) {
   };
 
   return (
-    <div class={styles.root}>
+    <div>
       <label class="sr-only" for="site-search">
         Search blog posts and projects
       </label>
       <p id="site-search-help" class="sr-only">
         Enter at least two characters to search blog posts and projects.
       </p>
-      <div class={styles.inputWrap}>
-        <input
-          id="site-search"
-          name="search"
-          type="search"
-          value={query()}
-          onInput={onInput}
-          aria-describedby="site-search-help site-search-results"
-          autocomplete="off"
-          spellcheck={false}
-          placeholder="What are you looking for?"
-          class={styles.input}
-        />
-        <svg class={styles.inputIcon} viewBox="0 0 24 24" aria-hidden="true">
-          <use href="/ui.svg#search" />
-        </svg>
-      </div>
+      <input
+        id="site-search"
+        name="search"
+        type="search"
+        value={query()}
+        onInput={onInput}
+        aria-describedby="site-search-help site-search-results"
+        autocomplete="off"
+        spellcheck={false}
+        placeholder="What are you looking for?"
+        class={styles.input}
+      />
       {query().length >= 2 && (
-        <div class={styles.results}>
-          <div id="site-search-results" class={styles.resultsLabel} role="status" aria-live="polite">
+        <div>
+          <p id="site-search-results" role="status" aria-live="polite">
             {results().length >= 1
               ? `Found ${results().length} results for "${query()}"`
               : `No results found for "${query()}"`}
-          </div>
+          </p>
           {results().length >= 1 && (
             <ul class={styles.resultsList}>
               {results().map((result) => (

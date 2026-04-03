@@ -1,16 +1,15 @@
 import { createMemo, createSignal } from "solid-js";
 import FilterBar from "@components/FilterBar";
 import ProjectsWaterfall from "@components/ProjectsWaterfall";
-import type { GridColumns, ProjectCardEntry } from "@types";
+import type { ProjectCardEntry } from "@types";
 import styles from "./Projects.module.css";
 
 type Props = {
   tags: string[];
   data: ProjectCardEntry[];
-  gridColumns: GridColumns;
 };
 
-export default function Projects({ data, tags, gridColumns }: Props) {
+export default function Projects({ data, tags }: Props) {
   const [filter, setFilter] = createSignal(new Set<string>());
   const projects = createMemo(() =>
     data.filter((entry) =>
@@ -29,13 +28,13 @@ export default function Projects({ data, tags, gridColumns }: Props) {
   }
 
   return (
-    <div class={styles.root}>
+    <div>
       <FilterBar
         tags={tags}
         selectedTags={filter()}
         onToggleTag={toggleTag}
       />
-      <div class={styles.grid} data-columns={gridColumns}>
+      <div class={styles.grid}>
         {projects().map((project) => (
           <ProjectsWaterfall entry={project} />
         ))}

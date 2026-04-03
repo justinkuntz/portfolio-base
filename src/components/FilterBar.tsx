@@ -11,30 +11,23 @@ type Props = {
 export default function FilterBar(props: Props) {
   return (
     <div class={styles.root}>
-      <div class={styles.inner}>
-        <span class={styles.label}>{props.label ?? "Filter:"}</span>
-        <ul class={styles.list}>
-          <For each={props.tags}>
-            {(tag) => (
-              <li>
-                <button
-                  type="button"
-                  class={styles.control}
-                  classList={{ [styles.controlActive]: props.selectedTags.has(tag) }}
-                  aria-pressed={props.selectedTags.has(tag)}
-                  onClick={() => props.onToggleTag(tag)}
-                >
-                  <svg class={styles.icon} aria-hidden="true">
-                    <use href="/ui.svg#square" class={styles.iconUnchecked} />
-                    <use href="/ui.svg#square-check" class={styles.iconChecked} />
-                  </svg>
-                  <span>{tag}</span>
-                </button>
-              </li>
-            )}
-          </For>
-        </ul>
-      </div>
+      <span>{props.label ?? "Filter:"}</span>
+      <ul class={styles.list}>
+        <For each={props.tags}>
+          {(tag) => (
+            <li>
+              <label class={styles.control}>
+                <input
+                  type="checkbox"
+                  checked={props.selectedTags.has(tag)}
+                  onChange={() => props.onToggleTag(tag)}
+                />
+                <span>{tag}</span>
+              </label>
+            </li>
+          )}
+        </For>
+      </ul>
     </div>
   );
 }
