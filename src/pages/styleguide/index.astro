@@ -1,138 +1,10 @@
 ---
 import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard";
 import Button from "@components/Button.astro";
 import ThemeToggle from "@components/ThemeToggle.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import { SITE } from "@consts";
-
-const sections = [
-  { id: "overview", label: "Overview" },
-  { id: "foundations", label: "Foundations" },
-  { id: "layout", label: "Layout" },
-  { id: "components", label: "Components" },
-  { id: "patterns", label: "Patterns" },
-  { id: "content", label: "Content" },
-];
-
-const surfaceSteps = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"];
-
-const typographyScale = [
-  { token: "--text-xs", label: "Utility", sample: "Small utility labels and metadata" },
-  { token: "--text-sm", label: "Support", sample: "Secondary annotations and helper text" },
-  { token: "--text-base", label: "Body", sample: "Default reading size for interface copy" },
-  { token: "--text-lg", label: "Lead", sample: "Intro paragraphs and higher-emphasis copy" },
-  { token: "--text-2xl", label: "Section", sample: "Section headers and dense highlights" },
-  { token: "--text-5xl", label: "Display", sample: "Primary page statements and hero copy" },
-];
-
-const typographySpecimens = [
-  {
-    label: "Display",
-    token: "--text-5xl -> --text-7xl",
-    note: "Hero statements and high-emphasis opening lines.",
-    className: "section-title section-title--display",
-    sample: "Systems feel clearer when hierarchy is visible at a glance.",
-  },
-  {
-    label: "Page title",
-    token: "--text-4xl -> --text-5xl",
-    note: "Primary titles for listings, static pages, and section openers.",
-    className: "section-title section-title--page",
-    sample: "A page title should hold together even when the theme changes.",
-  },
-  {
-    label: "Section heading",
-    token: "--text-2xl",
-    note: "Subsection markers inside panels, essays, and feature blocks.",
-    className: "section-title",
-    style: "font-size: var(--text-2xl); max-inline-size: 18ch;",
-    sample: "Nested sections still need a strong shape.",
-  },
-  {
-    label: "Lead copy",
-    token: "--text-xl -> --text-2xl",
-    note: "Introductory supporting paragraphs paired with large headings.",
-    className: "section-copy section-copy--lead",
-    sample: "Lead text should stay readable and supportive without competing with the title above it.",
-  },
-  {
-    label: "Body copy",
-    token: "--text-lg",
-    note: "Default paragraph voice for rich content and interface guidance.",
-    className: "section-copy",
-    sample: "Body copy needs enough line length control, consistent rhythm, and a color value that works in both color modes.",
-  },
-];
-
-const foundationGroups = [
-  {
-    title: "Typography",
-    items: ["--font-body", "--font-heading", "--leading-body", "--tracking-display"],
-  },
-  {
-    title: "Spacing",
-    items: ["--space-2", "--space-4", "--space-8", "--space-16"],
-  },
-  {
-    title: "Radii",
-    items: ["--radius-sm", "--radius-md", "--radius-lg", "--radius-full"],
-  },
-  {
-    title: "Motion",
-    items: ["--duration-fast", "--duration-base", "--transition-base", "--transition-slower"],
-  },
-];
-
-const layoutMeasures = [
-  {
-    token: "--container-md",
-    label: "Content container",
-    description: "Default reading layouts and narrow section wrappers.",
-  },
-  {
-    token: "--container-xl",
-    label: "Page shell",
-    description: "Primary page width for marketing and listing layouts.",
-  },
-  {
-    token: "--measure-title",
-    label: "Headline measure",
-    description: "Balances hero and section headings before they become too wide.",
-  },
-  {
-    token: "--measure-copy",
-    label: "Body measure",
-    description: "Keeps long-form text readable in both light and dark mode.",
-  },
-];
-
-const spacingScale = [
-  { token: "--space-2", label: "Tight control gaps" },
-  { token: "--space-4", label: "Default block spacing" },
-  { token: "--space-8", label: "Section breathing room" },
-  { token: "--space-12", label: "Major layout separation" },
-  { token: "--space-16", label: "Page-level rhythm" },
-];
-
-const componentFamilies = [
-  {
-    title: "Actions",
-    description: "Buttons, icon controls, and inline links for primary flows.",
-  },
-  {
-    title: "Feedback",
-    description: "Status, emphasis, and inline surfaces that respond to state.",
-  },
-  {
-    title: "Forms",
-    description: "Inputs, textareas, placeholders, focus rings, and field labels.",
-  },
-  {
-    title: "Content",
-    description: "Typography, code, lists, and structured reading surfaces.",
-  },
-];
 
 const blogSample = (await getCollection("blog"))
   .filter((entry) => !entry.data.draft)
@@ -145,521 +17,77 @@ const projectSample = (await getCollection("projects"))
 
 <PageLayout
   title="Styleguide"
-  description="Reference page for the template's foundations, components, patterns, and content system."
+  description="Reference page for the stripped baseline."
   seo={{ kind: "page", noindex: true }}
 >
-  <div class="styleguide-docs">
-    <aside class="styleguide-docs__sidebar">
-      <div class="styleguide-docs__brand">
-        <span class="styleguide-docs__site">{SITE.NAME}</span>
-        <span class="styleguide-docs__kicker">Styleguide</span>
-      </div>
-      <nav class="styleguide-docs__nav" aria-label="On this page">
-        <p class="styleguide-docs__nav-group">Contents</p>
-        <ul class="styleguide-docs__nav-list">
-          {
-            sections.map((section) => (
-              <li>
-                <a href={`#${section.id}`} class="styleguide-docs__nav-link">
-                  {section.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-      <div class="styleguide-docs__controls">
-        <ThemeToggle id="styleguide-theme-toggle" size="md" />
-        <p class="styleguide-docs__theme-meta">
-          Toggle color mode to inspect neutral surfaces and control states.
-        </p>
-      </div>
-    </aside>
+  <Container size="xl">
+    <article>
+      <h1>Styleguide</h1>
+      <p>
+        This route is now a plain reference page for the stripped baseline.
+        Most decorative layout styling has been removed so the page reads in
+        normal document flow.
+      </p>
 
-    <div class="styleguide-docs__main">
-      <section id="overview" class="styleguide-section" aria-labelledby="styleguide-overview-title">
-        <header class="styleguide-hero">
-          <h1 id="styleguide-overview-title" class="styleguide-hero__title">Styleguide</h1>
-          <p class="styleguide-hero__lead">
-            Living reference for tokens, layout, components, and prose. Use the sidebar to jump
-            sections; toggle color mode to check surfaces. <strong>Stacked layouts</strong> read top
-            to bottom; <strong>column layouts</strong> show a hint and split into two or three
-            columns from tablet sizes up.
-          </p>
-          <p class="styleguide-hero__meta">
-            Use this page to evaluate how baseline tokens and shared UI patterns respond before
-            layering in a new design system.
-          </p>
-        </header>
+      <section>
+        <h2>Color mode</h2>
+        <p>Use the toggle below to inspect the site in light and dark mode.</p>
+        <p><ThemeToggle id="styleguide-theme-toggle" size="md" /></p>
       </section>
 
-      <section id="foundations" class="styleguide-section" aria-labelledby="foundations-title">
-        <header class="styleguide-section__header">
-          <p class="styleguide-section__kicker">Foundations</p>
-          <h2 id="foundations-title" class="styleguide-section__title">Tokens and visual primitives</h2>
-          <p class="styleguide-section__description">
-            Palettes, type scale, spacing, radii, layout measures, and motion tokens shared across
-            the template.
+      <section>
+        <h2>Controls</h2>
+        <p>
+          <Button variant="primary">Primary</Button>
+          {" "}
+          <Button variant="secondary">Secondary</Button>
+          {" "}
+          <Button variant="outline">Outline</Button>
+          {" "}
+          <Button variant="ghost">Ghost</Button>
+        </p>
+        <form>
+          <p>
+            <label>
+              Name
+              <br />
+              <input type="text" placeholder="Jane Founder" />
+            </label>
           </p>
-        </header>
-
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Type hierarchy</p>
-            <h3 class="styleguide-block__title">Semantic type roles</h3>
-            <p class="styleguide-block__copy">
-              Each row pairs a role with the CSS classes used in production layouts—not only raw
-              font-size tokens.
-            </p>
-          </div>
-          <p class="styleguide-layout-hint">
-            <strong>Stacked:</strong> one column — scroll to read each role in order.
+          <p>
+            <label>
+              Email
+              <br />
+              <input type="email" placeholder="jane@example.com" />
+            </label>
           </p>
-          <div class="styleguide-spec-list">
-            {
-              typographySpecimens.map((item) => (
-                <div class="styleguide-spec">
-                  <div class="styleguide-spec__meta">
-                    <p class="styleguide-spec__label">{item.label}</p>
-                    <p class="rich-text styleguide-spec__token">
-                      <code>{item.token}</code>
-                    </p>
-                    <p class="styleguide-spec__note">{item.note}</p>
-                  </div>
-                  <div class="styleguide-spec__preview">
-                    <p class:list={[item.className]} style={item.style}>
-                      {item.sample}
-                    </p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Type scale</p>
-            <h3 class="styleguide-block__title">Numeric scale</h3>
-            <p class="styleguide-block__copy">
-              Quick audit of each step on the type ramp for both color modes.
-            </p>
-          </div>
-          <p class="styleguide-layout-hint">
-            <strong>Grid:</strong> tiles wrap; each card is one step on the scale.
+          <p>
+            <label>
+              Notes
+              <br />
+              <textarea rows="6" placeholder="Warm neutrals, stronger contrast…" />
+            </label>
           </p>
-          <div class="styleguide-type-grid">
-            {
-              typographyScale.map((item) => (
-                <div class="styleguide-type-card">
-                  <p class="rich-text styleguide-type-card__token">
-                    <code>{item.token}</code>
-                  </p>
-                  <p class="styleguide-type-card__kicker section-kicker">{item.label}</p>
-                  <p class="styleguide-type-card__sample" style={`font-size: var(${item.token});`}>
-                    {item.sample}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Palette</p>
-            <h3 class="styleguide-block__title">Surfaces and token groups</h3>
-            <p class="styleguide-block__copy">
-              Surface ramp and common variable families you will edit when forking a theme.
-            </p>
-          </div>
-          <p class="styleguide-layout-hint">
-            <strong>Two columns:</strong> left — surface ramp swatches; right — token groups
-            (stacked). From 768px up they sit side by side; below that, stacked.
-          </p>
-          <div class="styleguide-grid styleguide-grid--2">
-            <div class="styleguide-demo">
-              <p class="styleguide-strip-label">Surface scale</p>
-              <div class="styleguide-swatch-grid">
-                {
-                  surfaceSteps.map((step) => (
-                    <div class="styleguide-swatch">
-                      <div
-                        class="styleguide-swatch__chip"
-                        style={`background: var(--color-surface-${step});`}
-                      />
-                      <span class="styleguide-swatch__label">{step}</span>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-            <div class="styleguide-demo">
-              <p class="styleguide-strip-label">Foundation groups</p>
-              <div class="styleguide-token-grid">
-                {
-                  foundationGroups.map((group) => (
-                    <div class="styleguide-token-card">
-                      <h4 class="styleguide-token-card__title">{group.title}</h4>
-                      <ul class="styleguide-token-card__list">
-                        {group.items.map((item) => (
-                          <li class="rich-text">
-                            <code>{item}</code>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
-        </div>
+        </form>
       </section>
 
-      <section id="layout" class="styleguide-section" aria-labelledby="layout-title">
-        <header class="styleguide-section__header">
-          <p class="styleguide-section__kicker">Layout</p>
-          <h2 id="layout-title" class="styleguide-section__title">Structure and spacing</h2>
-          <p class="styleguide-section__description">
-            Containers, page intros, and rhythm tokens used on real pages.
-          </p>
-        </header>
-
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Page scaffolds</p>
-            <h3 class="styleguide-block__title">Listing and split layouts</h3>
-            <p class="styleguide-block__copy">
-              Previews use the same global classes as production routes.
-            </p>
-          </div>
-          <p class="styleguide-layout-hint">
-            <strong>Two columns:</strong> compare listing intro (left) and split hero (right).
-          </p>
-          <div class="styleguide-grid styleguide-grid--2">
-            <div>
-              <p class="styleguide-strip-label">Listing intro</p>
-              <div class="styleguide-demo">
-                <div class="page-intro page-intro--listing styleguide-intro-preview">
-                  <h3 class="page-intro__title">Section titles should hold their shape</h3>
-                  <p class="page-intro__description">
-                    Uses shared <code>page-intro</code> classes—not guide-only markup.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p class="styleguide-strip-label">Split hero</p>
-              <div class="styleguide-demo">
-                <div class="styleguide-split-preview">
-                  <div>
-                    <p class="section-kicker">Narrative layout</p>
-                    <h3 class="section-title section-title--page">Large titles need supporting rhythm</h3>
-                    <p class="section-copy">
-                      Mirrors editorial / about-style splits: title column plus measured body copy.
-                    </p>
-                  </div>
-                  <div class="styleguide-split-preview__media" aria-hidden="true">
-                    <span class="styleguide-split-preview__block" />
-                    <span
-                      class="styleguide-split-preview__block styleguide-split-preview__block--offset"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Measures and rhythm</p>
-            <h3 class="styleguide-block__title">Layout tokens and spacing scale</h3>
-            <p class="styleguide-block__copy">
-              Use these when adjusting theme files or page-level CSS.
-            </p>
-          </div>
-          <p class="styleguide-layout-hint">
-            <strong>Two columns:</strong> layout tokens (left) and spacing scale (right). The
-            12-column strip below is full width.
-          </p>
-          <div class="styleguide-grid styleguide-grid--2">
-            <div class="styleguide-demo">
-              <p class="styleguide-strip-label">Layout measures</p>
-              <div class="styleguide-measure-grid">
-                {
-                  layoutMeasures.map((item) => (
-                    <div class="styleguide-measure-card">
-                      <p class="styleguide-measure-card__title">{item.label}</p>
-                      <p class="styleguide-measure-card__copy">{item.description}</p>
-                      <p class="rich-text styleguide-measure-card__token">
-                        <code>{item.token}</code>
-                      </p>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-            <div class="styleguide-demo">
-              <p class="styleguide-strip-label">Spacing scale</p>
-              <div class="styleguide-space-scale">
-                {
-                  spacingScale.map((item) => (
-                    <div class="styleguide-space-row">
-                      <div class="styleguide-space-meta">
-                        <p class="rich-text">
-                          <code>{item.token}</code>
-                        </p>
-                        <p class="styleguide-space-label">{item.label}</p>
-                      </div>
-                      <div class="styleguide-space-bar-wrap">
-                        <span class="styleguide-space-bar" style={`width: var(${item.token});`} />
-                      </div>
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </div>
-          <p class="styleguide-layout-hint styleguide-layout-hint--spaced">
-            <strong>Full width:</strong> sits below the two-column row — single block, not another
-            column.
-          </p>
-          <div class="styleguide-demo">
-            <p class="styleguide-strip-label">12-column rhythm</p>
-            <div class="styleguide-columns" aria-hidden="true">
-              {Array.from({ length: 12 }).map(() => <span class="styleguide-column" />)}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="components" class="styleguide-section" aria-labelledby="components-title">
-        <header class="styleguide-section__header">
-          <p class="styleguide-section__kicker">Components</p>
-          <h2 id="components-title" class="styleguide-section__title">Actions, forms, feedback</h2>
-          <p class="styleguide-section__description">
-            Core interactive patterns grouped by family. Extend within these buckets when adding UI.
-          </p>
-        </header>
-
-        <p class="styleguide-layout-hint">
-          <strong>Full width:</strong> family overview cards wrap in a grid; read as a single band
-          before the examples below.
-        </p>
-        <div class="styleguide-family-grid">
-          {
-            componentFamilies.map((family) => (
-              <div class="styleguide-family-card">
-                <p class="styleguide-family-card__title">{family.title}</p>
-                <p class="styleguide-family-card__copy">{family.description}</p>
-              </div>
-            ))
-          }
-        </div>
-
-        <p class="styleguide-layout-hint">
-          <strong>Three columns:</strong> Actions, Forms, and Feedback sit in one row from 960px up;
-          two columns from 768px; stacked on small screens.
-        </p>
-        <div class="styleguide-grid styleguide-grid--3">
-          <div>
-            <p class="styleguide-strip-label">Actions</p>
-            <div class="styleguide-demo">
-              <div class="styleguide-stack">
-                <div class="styleguide-row">
-                  <Button variant="primary">Primary</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
-                </div>
-                <div class="styleguide-row">
-                  <Button variant="primary" size="sm">Small</Button>
-                  <Button variant="primary">Medium</Button>
-                  <Button variant="primary" size="lg">Large</Button>
-                </div>
-                <div class="styleguide-row">
-                  <ThemeToggle id="styleguide-theme-toggle-inline" size="md" />
-                  <Button variant="ghost" iconOnly aria-label="Search example" class="icon-button">
-                    <svg class="styleguide-icon icon-button__icon" aria-hidden="true">
-                      <use href="/ui.svg#search" />
-                    </svg>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <p class="styleguide-strip-label">Forms</p>
-            <div class="styleguide-demo">
-              <div class="styleguide-stack">
-                <label class="styleguide-field form-field">
-                  <span class="form-label">Name</span>
-                  <input class="form-control" type="text" placeholder="Jane Founder" />
-                </label>
-                <label class="styleguide-field form-field">
-                  <span class="form-label">Email</span>
-                  <input class="form-control" type="email" placeholder="jane@example.com" />
-                </label>
-                <label class="styleguide-field form-field">
-                  <span class="form-label">Notes</span>
-                  <textarea
-                    class="form-control form-control--textarea"
-                    placeholder="Warm neutrals, stronger contrast…"
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <p class="styleguide-strip-label">Feedback</p>
-            <div class="styleguide-demo">
-              <div class="styleguide-stack">
-                <div class="rich-text">
-                  <p>
-                    <a href="/about">Text link</a>, <code>inline code</code>,{" "}
-                    <button class="content-button" type="button">content button</button>
-                  </p>
-                </div>
-                <div class="status-notice status-notice--success">Success surface copy.</div>
-                <div class="status-notice status-notice--error">Error surface copy.</div>
-                <div class="styleguide-pill-row">
-                  <span class="pill">Layout</span>
-                  <span class="pill">Typography</span>
-                  <span class="pill">States</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="patterns" class="styleguide-section" aria-labelledby="patterns-title">
-        <header class="styleguide-section__header">
-          <p class="styleguide-section__kicker">Patterns</p>
-          <h2 id="patterns-title" class="styleguide-section__title">Compositions</h2>
-          <p class="styleguide-section__description">
-            Real components from the template: preview cards and a sample feature block.
-          </p>
-        </header>
-
-        <p class="styleguide-layout-hint">
-          <strong>Two columns:</strong> live ArrowCard previews (left) and a static feature block
-          (right).
-        </p>
-        <div class="styleguide-grid styleguide-grid--2">
-          <div>
-            <p class="styleguide-strip-label">Arrow cards</p>
-            <div class="styleguide-demo">
-              <div class="styleguide-stack">
-                {blogSample && <ArrowCard entry={blogSample} pill />}
-                {projectSample && <ArrowCard entry={projectSample} pill />}
-              </div>
-            </div>
-          </div>
-          <div>
-            <p class="styleguide-strip-label">Feature block</p>
-            <div class="styleguide-feature">
-              <h3 class="styleguide-feature__title">Reusable preview surface</h3>
-              <p class="styleguide-feature__copy">
-                Local to the guide but uses the same token system as case studies and announcements.
-              </p>
-              <div class="styleguide-row">
-                <Button variant="primary">Primary</Button>
-                <Button variant="ghost">Secondary</Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="content" class="styleguide-section" aria-labelledby="content-title">
-        <header class="styleguide-section__header">
-          <p class="styleguide-section__kicker">Content</p>
-          <h2 id="content-title" class="styleguide-section__title">Prose and reading surfaces</h2>
-          <p class="styleguide-section__description">
-            Long-form hierarchy, blockquote, lists, and code blocks as rendered by global prose styles.
-          </p>
-        </header>
-
-        <p class="styleguide-layout-hint">
-          <strong>Stacked:</strong> full-width prose demos — scroll through each block in order.
-        </p>
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Prose hierarchy</p>
-            <h3 class="styleguide-block__title">Heading cascade</h3>
-            <p class="styleguide-block__copy">
-              Mirrors article / MDX output: headings, paragraphs, and lists in one flow.
-            </p>
-          </div>
-          <div class="styleguide-demo">
-            <article class="rich-text styleguide-prose">
-              <h1>Heading one introduces the narrative</h1>
-              <p>
-                Long-form pages need a reliable opening pace. The first paragraph should feel measured
-                and connected to the heading above it.
-              </p>
-              <h2>Heading two groups related material</h2>
-              <p>
-                Supporting elements like <a href="/about">links</a> and <code>inline code</code> use
-                shared semantic styles.
-              </p>
-              <h3>Heading three tightens the hierarchy</h3>
-              <ul>
-                <li>Lists keep rhythm with body copy.</li>
-                <li>Spacing stays consistent across color modes.</li>
-                <li>Nested structure remains clear on small screens.</li>
-              </ul>
-              <h4>Heading four supports denser sections</h4>
-              <p>Smaller headings matter when the page gets busy.</p>
-              <h5>Heading five for edge cases</h5>
-              <h6>Heading six stays legible</h6>
-            </article>
-          </div>
-        </div>
-
-        <div class="styleguide-block">
-          <div class="styleguide-block__head">
-            <p class="styleguide-block__label">Quotes and code</p>
-            <h3 class="styleguide-block__title">Blockquote and preformatted code</h3>
-            <p class="styleguide-block__copy">
-              Documentation-style blocks should survive theme changes.
-            </p>
-          </div>
-          <div class="styleguide-demo">
-            <article class="rich-text styleguide-prose">
-              <h3>Templates stay forkable when prose is inspectable</h3>
-              <p>
-                Review typography, spacing, and states here before replacing homepage or project copy.
-              </p>
-              <blockquote>
-                The styleguide should be the shortest path between a theme tweak and a confident
-                visual check.
-              </blockquote>
-              <ul>
-                <li>Validate headings, links, lists, and code blocks.</li>
-                <li>Exercise light and dark mode.</li>
-                <li>Keep examples tied to shipped components.</li>
-              </ul>
-              <pre data-language="css"><code>{`:root {
-  --button-primary-bg: var(--color-surface-900);
-  --button-primary-text: var(--color-surface-50);
-  --measure-copy: 62ch;
+      <section>
+        <h2>Content</h2>
+        <blockquote>
+          Strong foundations make future styling changes less risky.
+        </blockquote>
+        <pre><code>{`article pre {
+  overflow-x: auto;
 }`}</code></pre>
-            </article>
-          </div>
+      </section>
+
+      <section>
+        <h2>Cards</h2>
+        <div>
+          {projectSample && <ArrowCard entry={projectSample} />}
+          {blogSample && <ArrowCard entry={blogSample} />}
         </div>
       </section>
-    </div>
-  </div>
+    </article>
+  </Container>
 </PageLayout>
-
-<style>
-  :global(html) {
-    scroll-behavior: smooth;
-  }
-</style>

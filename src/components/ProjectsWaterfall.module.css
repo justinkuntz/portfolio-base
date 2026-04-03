@@ -10,7 +10,7 @@
 .card {
   display: grid;
   width: 100%;
-  border: 1px solid var(--surface-border);
+  border: 1px solid currentColor;
   color: currentColor;
   text-decoration: none;
 }
@@ -45,7 +45,7 @@
   text-transform: uppercase;
   padding-block: 0.125rem;
   padding-inline: 0.25rem;
-  border: 1px solid var(--surface-border);
+  border: 1px solid currentColor;
 }
 
 .card__titleRow {

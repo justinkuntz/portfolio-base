@@ -1,7 +1,7 @@
 .root {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
+  gap: 1.5rem;
 }
 
 .grid {
@@ -13,7 +13,7 @@
 .gridList {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-6);
+  gap: 1.5rem;
   width: 100%;
   list-style: none;
   padding: 0;

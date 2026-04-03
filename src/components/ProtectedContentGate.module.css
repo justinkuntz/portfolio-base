@@ -17,7 +17,7 @@
   block-size: 3rem;
   display: grid;
   place-items: center;
-  border: 1px solid var(--surface-border);
+  border: 1px solid currentColor;
 }
 
 .icon {
@@ -37,7 +37,7 @@
 }
 
 .description {
-  max-inline-size: var(--measure-copy);
+  max-inline-size: 70ch;
 }
 
 .segment {
@@ -51,8 +51,8 @@
 }
 
 .segmentButton {
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
   padding: 0.375rem 0.75rem;
   cursor: pointer;
 }
@@ -81,8 +81,8 @@
 .submit {
   width: 100%;
   padding: 0.5rem 0.75rem;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
   color: inherit;
   cursor: pointer;
 }

@@ -22,9 +22,8 @@ const projects = (await getCollection("projects"))
 
 const projectCards = await toProjectCardEntries(
   projects,
-  HOMEPAGE_PROJECTS.LAYOUT === "waterfall" ? "homepage" : "project"
+  HOMEPAGE_PROJECTS.LAYOUT === "waterfall" ? "homepage" : "project",
 );
-
 ---
 
 <PageLayout
@@ -33,82 +32,42 @@ const projectCards = await toProjectCardEntries(
   seo={{ kind: "page", generatedImage: true }}
 >
   <Container size="xl">
-    <div class="home">
-      <section class="home__hero">
-        <article class="home__hero-content">
-          <div class="home__hero-text">
-            <h1 class="home__headline animate">
-              Foundling, Force-user, and future Mandalorian.
-            </h1>
-            <h2 class="home__greeting animate">I'm Grogu,</h2>
-          </div>
-          <p class="home__description animate">
-            My path has been shaped by ancient wisdom, unlikely friendships, and
-            the quiet belief that even the smallest among us can carry great
-            purpose. I try to move through the world with courage, curiosity,
-            and care while learning each day how to protect what matters most.
-          </p>
-          <div class="home__actions animate">
-            <Button
-              href="/projects"
-              variant="primary"
-              size="lg"
-              iconRight="arrow"
-            >
-              View the missions
-            </Button>
-            <Button href="/about" variant="outline" size="lg">
-              Meet Grogu
-            </Button>
-          </div>
-        </article>
-        <div class="home__image-wrap">
-          <Image
-            class="home__image animate"
-            src={profileImage}
-            alt="Portrait of Grogu standing in a rocky landscape"
-            widths={[480, 720, 960, 1280]}
-            sizes="(max-width: 767px) min(92vw, 32rem), (max-width: 1279px) 38vw, 32rem"
-            quality={76}
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        </div>
-      </section>
-
-    </div>
+    <section>
+      <h1>Foundling, Force-user, and future Mandalorian.</h1>
+      <h2>I'm Grogu.</h2>
+      <p>
+        My path has been shaped by ancient wisdom, unlikely friendships, and
+        the quiet belief that even the smallest among us can carry great
+        purpose. I try to move through the world with courage, curiosity,
+        and care while learning each day how to protect what matters most.
+      </p>
+      <p>
+        <Button href="/projects" variant="primary" size="lg" iconRight="arrow">
+          View the missions
+        </Button>
+        {" "}
+        <Button href="/about" variant="outline" size="lg">
+          Meet Grogu
+        </Button>
+      </p>
+      <figure>
+        <Image
+          src={profileImage}
+          alt="Portrait of Grogu standing in a rocky landscape"
+          widths={[480, 720, 960, 1280]}
+          sizes="(max-width: 767px) min(92vw, 32rem), (max-width: 1279px) 38vw, 32rem"
+          quality={76}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+    </section>
   </Container>
 
   <Container size="xl">
-    <section class="home__section home__section--projects animate">
-      <div class="home__section-head">
-        <h2 class="home__section-title">
-          <a href="/projects" class="home__section-link">
-            Projects
-            <svg
-              class="home__section-icon arrow-animated"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line
-                x1="5"
-                y1="12"
-                x2="19"
-                y2="12"
-                class="arrow-animated__line"></line>
-              <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"
-              ></polyline>
-            </svg>
-          </a>
-        </h2>
-      </div>
+    <section>
+      <h2><a href="/projects">Projects</a></h2>
       <HomepageProjects
         projects={projectCards}
         layout={HOMEPAGE_PROJECTS.LAYOUT}
@@ -118,136 +77,11 @@ const projectCards = await toProjectCardEntries(
   </Container>
 
   <Container size="xl">
-    <section class="home__section animate">
-      <div class="home__section-head">
-        <h2 class="home__section-title">
-          <a href="/blog" class="home__section-link">
-            Writing
-            <svg
-              class="home__section-icon arrow-animated"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line
-                x1="5"
-                y1="12"
-                x2="19"
-                y2="12"
-                class="arrow-animated__line"></line>
-              <polyline points="12 5 19 12 12 19" class="arrow-animated__poly"
-              ></polyline>
-            </svg>
-          </a>
-        </h2>
+    <section>
+      <h2><a href="/blog">Writing</a></h2>
+      <div>
+        {blog.map((post) => <ArrowCard entry={post} />)}
       </div>
-      <ul class="home__blog-list">
-        {
-          blog.map((post) => (
-            <li>
-              <ArrowCard entry={post} />
-            </li>
-          ))
-        }
-      </ul>
     </section>
   </Container>
 </PageLayout>
-
-<style>
-  .home {
-    display: grid;
-    gap: 2rem;
-  }
-
-  .home__hero {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .home__hero {
-      grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
-      align-items: start;
-    }
-  }
-
-  .home__hero-content {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .home__hero-text {
-    display: grid;
-  }
-
-  .home__greeting {
-    margin: 0;
-  }
-
-  .home__headline {
-    margin: 0 0 0.75rem;
-    max-width: var(--measure-tight);
-  }
-
-  .home__description {
-    margin: 0;
-    max-width: var(--measure-copy);
-  }
-
-  .home__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .home__image-wrap {
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .home__image {
-    display: block;
-    width: 100%;
-  }
-
-  .home__section {
-    display: grid;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .home__section-title {
-    margin: 0;
-  }
-
-  .home__section-link {
-    display: inline-flex;
-    gap: 0.375rem;
-    align-items: center;
-  }
-
-  .home__section-icon {
-    width: 1rem;
-    height: 1rem;
-  }
-
-  .home__blog-list {
-    display: grid;
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  @media (min-width: 1024px) {
-    .home__blog-list {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-</style>

@@ -28,251 +28,101 @@ const work = await Promise.all(
   seo={{ kind: "page", generatedImage: true }}
 >
   <Container size="xl">
-    <div class="about">
-      <div class="about__hero">
-        <div class="about__hero-text">
-          <h1 class="about__title section-title section-title--display animate">A small traveler on a long path.</h1>
-          <p class="about__intro section-copy section-copy--lead animate">
-            I have never been the loudest in the room, and I was never meant to
-            be. My path has been shaped by listening, learning, and surviving
-            long enough to understand that strength is not always about power.
-            Sometimes it is patience. Sometimes it is compassion. Sometimes it
-            is knowing when to reach out, and when to remain still.
-          </p>
-        </div>
-        <div class="about__hero-images">
-          <div class="about__hero-images-col about__hero-images-col--main">
-            <div class="about__img-wrap">
-              <Image
-                class="about__img"
-                src={aboutImageOne}
-                alt="Grogu with Din Djarin in a rocky canyon"
-                widths={[480, 720, 960, 1280]}
-                sizes="(max-width: 1023px) min(92vw, 36rem), 32rem"
-                quality={74}
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
-            </div>
-          </div>
-          <div class="about__hero-images-col about__hero-images-col--side">
-            <div class="about__img-wrap about__img-wrap--pt">
-              <Image
-                class="about__img"
-                src={aboutImageTwo}
-                alt="Grogu training with Luke Skywalker in a forest"
-                widths={[360, 540, 720, 960]}
-                sizes="(max-width: 1023px) min(92vw, 36rem), 20rem"
-                quality={72}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-            <div class="about__img-wrap about__img-wrap--hidden">
-              <Image
-                class="about__img"
-                src={aboutImageThree}
-                alt="Grogu beside Ahsoka Tano in a misty woodland"
-                widths={[360, 540, 720, 960]}
-                sizes="(max-width: 1023px) min(92vw, 36rem), 20rem"
-                quality={72}
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="about__grid">
-        <div class="about__content">
-          <p class="about__p animate">
-            I come from an ancient lineage and carry lessons older than many
-            worlds, but much of who I am has been formed by uncertainty. I have
-            known protection and loss, solitude and friendship, discipline and
-            wonder. I have walked between different ways of life, learning from
-            each one. From warriors, I have learned loyalty. From teachers, I
-            have learned restraint. From hardship, I have learned resilience.
-          </p>
-          <p class="about__p animate">
-            My story is not only about where I came from, but about who I am
-            still becoming. I am a foundling. I am a student of the Force. I am
-            learning what it means to belong, to protect, and to choose a path
-            with intention. Though I am small, I have seen that size has little
-            to do with impact. What matters more is heart, courage, and the
-            willingness to keep going.
-          </p>
-          <p class="about__p animate">
-            I try to meet the world with curiosity, care, and quiet resolve. I
-            do not seek attention, but I do believe in showing up when it
-            matters. My journey has been unconventional, and it is far from
-            over, but each step has taught me that greatness does not need to
-            announce itself. It simply needs to be lived.
-          </p>
-          <p class="about__p animate">
-            If you'd like, I can also rewrite the experience/resume section into
-            first person so the whole site feels consistent.
-          </p>
-          <figure class="about__quote animate">
-            <blockquote class="about__quote-text">
-              And to this little one, I grant knighthood. You are now a knight
-              of the Ancient Order of Independent Regencies.
-            </blockquote>
-            <figcaption class="about__quote-credit">
-              Duchess of Plazir-15
-            </figcaption>
-          </figure>
-        </div>
-        <div class="about__timeline">
-          <h2 class="about__timeline-title animate">Experience</h2>
-          {
-            work.map((entry) => (
-              <div class="about__timeline-item">
-                <div class="about__timeline-role animate">
-                  {entry.data.role}
-                </div>
-                <div class="about__timeline-company animate">
-                  {entry.data.company}
-                </div>
-                <div class="about__timeline-date-row">
-                  <span class="about__timeline-dot-cell">
-                    <span
-                      class="about__timeline-dot animate"
-                      aria-hidden="true"
-                    />
-                  </span>
-                  <time class="about__timeline-date animate">
-                    {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-                  </time>
-                </div>
-                <div class="about__timeline-desc animate">
-                  <entry.Content />
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
+    <article>
+      <h1>A small traveler on a long path.</h1>
+      <p>
+        I have never been the loudest in the room, and I was never meant to
+        be. My path has been shaped by listening, learning, and surviving
+        long enough to understand that strength is not always about power.
+        Sometimes it is patience. Sometimes it is compassion. Sometimes it
+        is knowing when to reach out, and when to remain still.
+      </p>
+
+      <figure>
+        <Image
+          src={aboutImageOne}
+          alt="Grogu with Din Djarin in a rocky canyon"
+          widths={[480, 720, 960, 1280]}
+          sizes="(max-width: 1023px) min(92vw, 36rem), 32rem"
+          quality={74}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+
+      <figure>
+        <Image
+          src={aboutImageTwo}
+          alt="Grogu training with Luke Skywalker in a forest"
+          widths={[360, 540, 720, 960]}
+          sizes="(max-width: 1023px) min(92vw, 36rem), 20rem"
+          quality={72}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <figure>
+        <Image
+          src={aboutImageThree}
+          alt="Grogu beside Ahsoka Tano in a misty woodland"
+          widths={[360, 540, 720, 960]}
+          sizes="(max-width: 1023px) min(92vw, 36rem), 20rem"
+          quality={72}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+
+      <p>
+        I come from an ancient lineage and carry lessons older than many
+        worlds, but much of who I am has been formed by uncertainty. I have
+        known protection and loss, solitude and friendship, discipline and
+        wonder. I have walked between different ways of life, learning from
+        each one. From warriors, I have learned loyalty. From teachers, I
+        have learned restraint. From hardship, I have learned resilience.
+      </p>
+      <p>
+        My story is not only about where I came from, but about who I am
+        still becoming. I am a foundling. I am a student of the Force. I am
+        learning what it means to belong, to protect, and to choose a path
+        with intention. Though I am small, I have seen that size has little
+        to do with impact. What matters more is heart, courage, and the
+        willingness to keep going.
+      </p>
+      <p>
+        I try to meet the world with curiosity, care, and quiet resolve. I
+        do not seek attention, but I do believe in showing up when it
+        matters. My journey has been unconventional, and it is far from
+        over, but each step has taught me that greatness does not need to
+        announce itself. It simply needs to be lived.
+      </p>
+
+      <blockquote>
+        <p>
+          And to this little one, I grant knighthood. You are now a knight
+          of the Ancient Order of Independent Regencies.
+        </p>
+        <footer>Duchess of Plazir-15</footer>
+      </blockquote>
+
+      <section>
+        <h2>Experience</h2>
+        {
+          work.map((entry) => (
+            <section>
+              <h3>{entry.data.role}</h3>
+              <p>{entry.data.company}</p>
+              <p>
+                <time>{dateRange(entry.data.dateStart, entry.data.dateEnd)}</time>
+              </p>
+              <entry.Content />
+              <hr />
+            </section>
+          ))
+        }
+      </section>
+    </article>
   </Container>
 </PageLayout>
-
-<style>
-  .about__hero {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .about__title {
-    margin: 0 0 1rem;
-    max-width: var(--measure-tight);
-  }
-
-  .about__intro {
-    margin: 0;
-    max-width: var(--measure-copy);
-  }
-
-  .about__hero-images {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .about__hero-images {
-      grid-template-columns: 2fr 1fr;
-    }
-  }
-
-  .about__hero-images-col--side {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .about__img-wrap--hidden {
-      display: block;
-    }
-  }
-
-  .about__img {
-    width: 100%;
-  }
-
-  .about__grid {
-    display: grid;
-    gap: 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    .about__grid {
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-      align-items: start;
-    }
-  }
-
-  .about__p {
-    max-width: var(--measure-copy);
-  }
-
-  .about__quote {
-    margin: 1.5rem 0 0;
-    max-inline-size: var(--measure-copy);
-    padding-left: 1rem;
-    border-left: 3px solid var(--surface-border);
-  }
-
-  .about__quote-text {
-    margin: 0;
-    border: none;
-  }
-
-  .about__quote-credit {
-    margin-top: 0.5rem;
-  }
-
-  .about__quote-credit::before {
-    content: "\2014  ";
-  }
-
-  .about__timeline {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .about__timeline-title {
-    margin: 0;
-  }
-
-  .about__timeline-item {
-    display: grid;
-    gap: 0.5rem;
-    padding: 0.75rem 0;
-    border-top: 1px solid var(--surface-border);
-  }
-
-  .about__timeline-date-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .about__timeline-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background: currentColor;
-    flex-shrink: 0;
-  }
-
-  .about__timeline-role,
-  .about__timeline-company,
-  .about__timeline-date,
-  .about__timeline-desc {
-    margin: 0;
-  }
-
-  .about__timeline-date {
-    text-transform: uppercase;
-  }
-</style>

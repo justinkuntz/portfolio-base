@@ -1,149 +1,3 @@
-:root {
-  --page-background: Canvas;
-  --page-foreground: CanvasText;
-  --surface-background: Canvas;
-  --surface-border: GrayText;
-  --field-background: Field;
-  --field-foreground: FieldText;
-  --field-border: GrayText;
-  --link-color: LinkText;
-  --focus-ring: Highlight;
-  --success-background: #eef8ee;
-  --success-foreground: #123b12;
-  --success-border: #4a7a4a;
-  --error-background: #fdf0f0;
-  --error-foreground: #5a1b1b;
-  --error-border: #a14a4a;
-
-  --color-primary: LinkText;
-  --color-secondary: LinkText;
-  --color-surface-50: Canvas;
-  --color-surface-100: Canvas;
-  --color-surface-200: ButtonFace;
-  --color-surface-300: ButtonFace;
-  --color-surface-400: GrayText;
-  --color-surface-500: GrayText;
-  --color-surface-600: GrayText;
-  --color-surface-700: CanvasText;
-  --color-surface-800: CanvasText;
-  --color-surface-900: CanvasText;
-  --color-surface-950: CanvasText;
-  --color-text-muted: GrayText;
-  --color-text-subtle: GrayText;
-  --color-border-subtle: GrayText;
-  --color-border-default: GrayText;
-  --color-focus-ring: Highlight;
-  --color-surface-hover: Canvas;
-
-  --button-primary-bg: var(--surface-background);
-  --button-primary-text: var(--page-foreground);
-  --button-primary-border: var(--surface-border);
-  --button-primary-hover-bg: var(--surface-background);
-  --button-primary-hover-border: var(--surface-border);
-  --button-secondary-bg: var(--surface-background);
-  --button-secondary-text: var(--page-foreground);
-  --button-secondary-border: var(--surface-border);
-  --button-secondary-hover-bg: var(--surface-background);
-  --button-secondary-hover-border: var(--surface-border);
-  --button-outline-bg: transparent;
-  --button-outline-text: var(--page-foreground);
-  --button-outline-border: var(--surface-border);
-  --button-outline-hover-bg: transparent;
-  --button-outline-hover-border: var(--surface-border);
-  --button-ghost-bg: transparent;
-  --button-ghost-text: var(--page-foreground);
-  --button-ghost-hover-bg: transparent;
-  --button-ghost-hover-text: var(--page-foreground);
-  --card-background: transparent;
-  --card-border: var(--surface-border);
-  --card-hover-background: transparent;
-  --card-title-color: inherit;
-  --card-muted-color: inherit;
-  --card-section-border: var(--surface-border);
-  --card-pill-background: transparent;
-  --card-pill-text: inherit;
-  --card-frame-top: var(--surface-border);
-  --card-frame-bottom: var(--surface-border);
-  --card-shell-surface: var(--surface-background);
-  --form-shell-max-inline-size: 40rem;
-  --form-shell-padding: 1rem;
-  --form-shell-surface: var(--surface-background);
-  --form-shell-border: var(--surface-border);
-  --form-shell-shadow: none;
-
-  --font-body: inherit;
-  --font-heading: inherit;
-  --font-ui: inherit;
-  --font-mono: ui-monospace, monospace;
-
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-5xl: 3rem;
-
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-
-  --leading-body: 1.5;
-  --leading-heading: 1.2;
-  --tracking-heading: 0;
-
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-full: 999px;
-
-  --transition-base: 0ms ease;
-
-  --container-sm: 40rem;
-  --container-md: 48rem;
-  --container-lg: 64rem;
-  --container-xl: 72rem;
-  --container-2xl: 80rem;
-  --container-gutter: 1rem;
-  --container-readable: 65ch;
-  --measure-tight: 18ch;
-  --measure-title: 24ch;
-  --measure-copy: 70ch;
-  --measure-project-lead: 70ch;
-
-  --form-field-gap: 0.375rem;
-  --form-submit-gap: 0.75rem;
-  --form-help-font-size: 0.875rem;
-  --form-help-line-height: 1.4;
-  --form-label-font-size: 1rem;
-  --form-label-weight: 600;
-  --form-label-line-height: 1.4;
-  --form-control-padding-block: 0.5rem;
-  --form-control-padding-inline: 0.625rem;
-  --form-control-radius: 0;
-  --form-feedback-radius: 0;
-}
-
-html.dark {
-  --success-background: #112411;
-  --success-foreground: #d8f0d8;
-  --success-border: #5aa05a;
-  --error-background: #301414;
-  --error-foreground: #ffd7d7;
-  --error-border: #d47a7a;
-}
-
 html {
   color-scheme: light;
   overflow-y: scroll;
@@ -163,8 +17,6 @@ body {
 body {
   margin: 0;
   line-height: 1.5;
-  background: var(--page-background);
-  color: var(--page-foreground);
 }
 
 html.dark {
@@ -182,10 +34,6 @@ input,
 textarea,
 select {
   font: inherit;
-}
-
-a {
-  color: var(--link-color);
 }
 
 img,
@@ -218,19 +66,14 @@ main {
   left: 0.5rem;
   z-index: 100;
   padding: 0.5rem 0.75rem;
-  background: var(--surface-background);
-  border: 1px solid var(--surface-border);
+  background: Canvas;
+  border: 1px solid currentColor;
   color: inherit;
   transform: translateY(-200%);
 }
 
 .skip-link:focus {
   transform: translateY(0);
-}
-
-:where(a, button, input, textarea, select, summary):focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
 }
 
 :where(article, .rich-text) {
@@ -261,7 +104,7 @@ main {
 :where(article, .rich-text) blockquote,
 :where(article, .rich-text) pre,
 :where(article, .rich-text) figure {
-  max-width: var(--measure-copy);
+  max-width: 70ch;
 }
 
 :where(article, .rich-text) ul,
@@ -272,24 +115,24 @@ main {
 :where(article, .rich-text) blockquote {
   margin-left: 0;
   padding-left: 1rem;
-  border-left: 3px solid var(--surface-border);
+  border-left: 3px solid currentColor;
 }
 
 :where(article, .rich-text) code {
-  font-family: var(--font-mono);
+  font-family: ui-monospace, monospace;
 }
 
 :where(article, .rich-text) :not(pre) > code {
   padding: 0.1em 0.3em;
-  border: 1px solid var(--surface-border);
+  border: 1px solid currentColor;
 }
 
 :where(article, .rich-text) pre,
 :where(article, .rich-text) pre.astro-code {
   overflow-x: auto;
   padding: 1rem;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
 }
 
 :where(article, .rich-text) pre code,
@@ -324,8 +167,8 @@ html.scrolled #back-to-top {
 
 .copy-btn {
   padding: 0.25rem;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
   color: inherit;
   cursor: pointer;
 }
@@ -370,7 +213,7 @@ html.scrolled #back-to-top {
 .section-copy,
 .section-copy--lead {
   margin: 0;
-  max-width: var(--measure-copy);
+  max-width: 70ch;
 }
 
 .section-kicker {
@@ -379,8 +222,8 @@ html.scrolled #back-to-top {
 }
 
 .surface-panel {
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
 }
 
 .surface-panel--md,
@@ -390,26 +233,13 @@ html.scrolled #back-to-top {
 
 .status-notice {
   padding: 0.75rem;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
-}
-
-.status-notice--success {
-  border-color: var(--success-border);
-  background: var(--success-background);
-  color: var(--success-foreground);
-}
-
-.status-notice--error {
-  border-color: var(--error-border);
-  background: var(--error-background);
-  color: var(--error-foreground);
+  border: 1px solid currentColor;
 }
 
 .pill {
   display: inline-block;
   padding: 0.1rem 0.4rem;
-  border: 1px solid var(--surface-border);
+  border: 1px solid currentColor;
 }
 
 .icon-button {
@@ -442,10 +272,7 @@ html.scrolled #back-to-top {
 .form-control {
   width: 100%;
   min-height: 2.5rem;
-  padding: 0.5rem 0.625rem;
-  border: 1px solid var(--field-border);
-  background: var(--field-background);
-  color: var(--field-foreground);
+  box-sizing: border-box;
 }
 
 .form-control--textarea {
@@ -473,8 +300,8 @@ html.scrolled #back-to-top {
 
 .content-button {
   padding: 0.375rem 0.75rem;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
   color: inherit;
   cursor: pointer;
 }

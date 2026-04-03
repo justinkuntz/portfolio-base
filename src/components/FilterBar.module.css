@@ -28,8 +28,8 @@
   align-items: center;
   gap: 0.375rem;
   padding: 0.375rem 0.5rem;
-  border: 1px solid var(--surface-border);
-  background: var(--surface-background);
+  border: 1px solid currentColor;
+  background: transparent;
   color: inherit;
   cursor: pointer;
 }
