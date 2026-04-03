@@ -16,115 +16,18 @@ type Props = {
 };
 
 const { prev, next, topSpacing = "lg" } = Astro.props;
+const marginTop = topSpacing === "md" ? "2rem" : "3rem";
 ---
 
-<div class:list={["post-nav", `post-nav--${topSpacing}`]}>
-  <Link
-    href={`/${prev.collection}/${prev.id}`}
-    class="post-nav__card post-nav__card--prev"
-  >
-    <span class="post-nav__body">
-      <span class="post-nav__label">Prev</span>
-      <span class="post-nav__title">{prev.data.title}</span>
-    </span>
-    <svg
-      class="post-nav__arrow post-nav__arrow--left"
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-      <polyline points="12 5 19 12 12 19"></polyline>
-    </svg>
-  </Link>
-  <Link
-    href={`/${next.collection}/${next.id}`}
-    class="post-nav__card post-nav__card--next"
-  >
-    <span class="post-nav__body post-nav__body--right">
-      <span class="post-nav__label">Next</span>
-      <span class="post-nav__title">{next.data.title}</span>
-    </span>
-    <svg
-      class="post-nav__arrow"
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke-width="2.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-      <polyline points="12 5 19 12 12 19"></polyline>
-    </svg>
-  </Link>
-</div>
-
-<style>
-  .post-nav {
-    display: grid;
-    gap: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    .post-nav {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .post-nav--md {
-    margin-top: 2rem;
-  }
-
-  .post-nav--lg {
-    margin-top: 3rem;
-  }
-
-  .post-nav__card {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    border: 1px solid currentColor;
-    color: currentColor;
-    text-decoration: none;
-  }
-
-  .post-nav__card--prev .post-nav__arrow--left {
-    order: -1;
-    transform: rotate(180deg);
-  }
-
-  .post-nav__body {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .post-nav__body--right {
-    text-align: right;
-  }
-
-  .post-nav__label {
-    font-size: 0.875rem;
-    text-transform: uppercase;
-  }
-
-  .post-nav__title {
-    display: block;
-    margin-top: 0.25rem;
-  }
-
-  .post-nav__arrow {
-    flex-shrink: 0;
-    stroke: currentColor;
-  }
-</style>
+<nav aria-label="Pagination" style={`margin-top:${marginTop};`}>
+  <p>
+    Previous:
+    {" "}
+    <Link href={`/${prev.collection}/${prev.id}`}>{prev.data.title}</Link>
+  </p>
+  <p>
+    Next:
+    {" "}
+    <Link href={`/${next.collection}/${next.id}`}>{next.data.title}</Link>
+  </p>
+</nav>

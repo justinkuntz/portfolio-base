@@ -13,18 +13,9 @@ const { href, external, underline = true, class: className, ...rest } = Astro.pr
   href={href}
   target={external ? "_blank" : "_self"}
   rel={external ? "noopener noreferrer" : undefined}
-  class:list={["link", underline && "link--underline", className]}
+  class={className}
+  style={underline ? undefined : "text-decoration:none"}
   {...rest}
 >
   <slot />
 </a>
-
-<style>
-  .link {
-    color: currentColor;
-  }
-
-  .link--underline {
-    text-decoration: underline;
-  }
-</style>

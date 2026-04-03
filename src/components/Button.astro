@@ -41,19 +41,14 @@ const showSlotAsIcon = iconOnly && hasContent;
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      class:list={[
-        "btn",
-        `btn--${variant}`,
-        `btn--${size}`,
-        iconOnly && "btn--icon-only",
-        className,
-      ]}
+      class={className}
       {...rest}
     >
       {iconLeft && (
         <svg
-          class="btn__icon btn__icon--left"
           viewBox="0 0 24 24"
+          width="16"
+          height="16"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="none"
@@ -71,18 +66,19 @@ const showSlotAsIcon = iconOnly && hasContent;
         </svg>
       )}
       {showText ? (
-        <span class="btn__content">
+        <span>
           <slot />
         </span>
       ) : showSlotAsIcon ? (
-        <span class="btn__content">
+        <span>
           <slot />
         </span>
       ) : null}
       {iconRight && (
         <svg
-          class="btn__icon btn__icon--right"
           viewBox="0 0 24 24"
+          width="16"
+          height="16"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="none"
@@ -105,19 +101,14 @@ const showSlotAsIcon = iconOnly && hasContent;
   ) : (
     <button
       type={type === "submit" || type === "reset" ? type : "button"}
-      class:list={[
-        "btn",
-        `btn--${variant}`,
-        `btn--${size}`,
-        iconOnly && "btn--icon-only",
-        className,
-      ]}
+      class={className}
       {...rest}
     >
       {iconLeft && (
         <svg
-          class="btn__icon btn__icon--left"
           viewBox="0 0 24 24"
+          width="16"
+          height="16"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="none"
@@ -135,18 +126,19 @@ const showSlotAsIcon = iconOnly && hasContent;
         </svg>
       )}
       {showText ? (
-        <span class="btn__content">
+        <span>
           <slot />
         </span>
       ) : showSlotAsIcon ? (
-        <span class="btn__content">
+        <span>
           <slot />
         </span>
       ) : null}
       {iconRight && (
         <svg
-          class="btn__icon btn__icon--right"
           viewBox="0 0 24 24"
+          width="16"
+          height="16"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
           fill="none"
@@ -168,68 +160,3 @@ const showSlotAsIcon = iconOnly && hasContent;
     </button>
   )
 }
-
-<style>
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.375rem;
-    text-decoration: none;
-    border: 1px solid currentColor;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .btn--sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-  }
-
-  .btn--md {
-    padding: 0.375rem 0.75rem;
-  }
-
-  .btn--lg {
-    padding: 0.5rem 0.875rem;
-  }
-
-  .btn--primary {
-    font-weight: 600;
-  }
-
-  .btn--ghost {
-    background: transparent;
-  }
-
-  .btn--outline {
-    background: transparent;
-  }
-
-  .btn__icon {
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-  }
-
-  .btn--icon-only {
-    min-width: 2.25rem;
-    min-height: 2.25rem;
-    padding: 0.375rem;
-  }
-
-  .btn__icon--left {
-    margin-right: -0.125rem;
-  }
-
-  .btn__icon--right {
-    margin-left: -0.125rem;
-  }
-
-  .btn__content {
-    display: inline-flex;
-    align-items: center;
-  }
-</style>
