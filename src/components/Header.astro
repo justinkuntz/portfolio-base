@@ -11,56 +11,81 @@ import { SITE, LINKS } from "@consts";
   <Container size="xl">
     <div class="header-bar">
       <a href="/" class="brand-link">
-          <svg width="24" height="24" aria-hidden="true">
-            <use href="/brand.svg#brand"></use>
-          </svg>
-          <span>{SITE.NAME}</span>
+        <svg width="24" height="24" aria-hidden="true">
+          <use href="/brand.svg#brand"></use>
+        </svg>
+        <span>{SITE.NAME}</span>
       </a>
       <nav class="desktop-nav" aria-label="Primary">
-          {
-            LINKS.map((LINK) => (
-              <Button
-                href={LINK.HREF}
-                aria-current={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "page" : undefined}
-              >
-                {LINK.TEXT}
-              </Button>
-            ))
-          }
+        {
+          LINKS.map((LINK) => (
+            <Button
+              href={LINK.HREF}
+              aria-current={
+                pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
+                  ? "page"
+                  : undefined
+              }
+            >
+              {LINK.TEXT}
+            </Button>
+          ))
+        }
       </nav>
       <div class="header-actions">
-          <Button
-            href="/search"
-            iconOnly
-            aria-label={`Search blog posts and projects on ${SITE.NAME}`}
-            class="desktop-only"
+        <Button
+          href="/search"
+          iconOnly
+          aria-label={`Search blog posts and projects on ${SITE.NAME}`}
+          class="desktop-only"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor">
-              <use href="/ui.svg#search"></use>
-            </svg>
-          </Button>
-          <span class="desktop-only">
-            <ThemeToggle
-              id="header-theme-button"
-              size="md"
-            />
-          </span>
-          <Button
-            id="header-drawer-button"
-            type="button"
-            iconOnly
-            aria-controls="drawer"
-            aria-expanded="false"
-            aria-label="Open navigation menu"
-            class="mobile-only"
+            <use href="/ui.svg#search"></use>
+          </svg>
+        </Button>
+        <span class="desktop-only">
+          <ThemeToggle id="header-theme-button" size="md" />
+        </span>
+        <Button
+          id="header-drawer-button"
+          type="button"
+          iconOnly
+          aria-controls="drawer"
+          aria-expanded="false"
+          aria-label="Open navigation menu"
+          class="mobile-only"
+        >
+          <svg
+            id="drawer-open"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
           >
-            <svg id="drawer-open" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor">
-              <use href="/ui.svg#menu"></use>
-            </svg>
-            <svg id="drawer-close" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" style="display:none;">
-              <use href="/ui.svg#x"></use>
-            </svg>
-          </Button>
+            <use href="/ui.svg#menu"></use>
+          </svg>
+          <svg
+            id="drawer-close"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            style="display:none;"
+          >
+            <use href="/ui.svg#x"></use>
+          </svg>
+        </Button>
       </div>
     </div>
   </Container>
@@ -140,12 +165,14 @@ import { SITE, LINKS } from "@consts";
       isOpen ? "Close navigation menu" : "Open navigation menu",
     );
     drawer.setAttribute("aria-hidden", String(!isOpen));
-    if (openIcon instanceof HTMLElement) openIcon.style.display = isOpen ? "none" : "";
-    if (closeIcon instanceof HTMLElement) closeIcon.style.display = isOpen ? "" : "none";
+    if (openIcon instanceof HTMLElement)
+      openIcon.style.display = isOpen ? "none" : "";
+    if (closeIcon instanceof HTMLElement)
+      closeIcon.style.display = isOpen ? "" : "none";
 
     if (isOpen) {
       drawer.removeAttribute("inert");
-      const firstLink = drawer.querySelector('a, button:not([disabled])');
+      const firstLink = drawer.querySelector("a, button:not([disabled])");
       if (firstLink instanceof HTMLElement) firstLink.focus();
     } else if (options.restoreFocus) {
       drawer.setAttribute("inert", "");
@@ -172,7 +199,7 @@ import { SITE, LINKS } from "@consts";
     drawer.onclick = (event) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      if (target.closest('a[href]')) {
+      if (target.closest("a[href]")) {
         setDrawerState(false);
       }
     };
@@ -180,7 +207,10 @@ import { SITE, LINKS } from "@consts";
     if (!window.__drawerEscapeHandlerBound) {
       document.addEventListener("keydown", (event) => {
         const activeDrawer = document.getElementById("drawer");
-        if (event.key === "Escape" && activeDrawer?.classList.contains("open")) {
+        if (
+          event.key === "Escape" &&
+          activeDrawer?.classList.contains("open")
+        ) {
           setDrawerState(false);
         }
       });
@@ -190,12 +220,16 @@ import { SITE, LINKS } from "@consts";
     setDrawerState(false, { restoreFocus: false });
   }
 
-  window.__drawerEscapeHandlerBound = window.__drawerEscapeHandlerBound ?? false;
-  window.__drawerAfterSwapHandlerBound = window.__drawerAfterSwapHandlerBound ?? false;
-</script>
-<script is:inline>
+  window.__drawerEscapeHandlerBound =
+    window.__drawerEscapeHandlerBound ?? false;
+  window.__drawerAfterSwapHandlerBound =
+    window.__drawerAfterSwapHandlerBound ?? false;
+
   function bootDrawerButton() {
-    if (document.getElementById("header-drawer-button") && document.getElementById("drawer")) {
+    if (
+      document.getElementById("header-drawer-button") &&
+      document.getElementById("drawer")
+    ) {
       initializeDrawerButton();
     }
   }
@@ -206,7 +240,9 @@ import { SITE, LINKS } from "@consts";
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bootDrawerButton, { once: true });
+    document.addEventListener("DOMContentLoaded", bootDrawerButton, {
+      once: true,
+    });
   } else {
     bootDrawerButton();
   }
