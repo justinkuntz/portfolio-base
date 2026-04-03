@@ -1,43 +1,35 @@
 const codeBlocks = document.querySelectorAll('pre:has(code)');
 
-//add copy btn to every code block on the dom
+// add a plain browser button after each code block
 codeBlocks.forEach((code) => {
-  //button icon
-  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
-  use.setAttribute('href', '/copy.svg#empty');
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.classList.add('copy-svg');
-  svg.appendChild(use);
+  if (code.nextElementSibling?.matches('[data-copy-button]')) {
+    return;
+  }
 
-  //create button
   const btn = document.createElement('button');
-  btn.appendChild(svg);
-  btn.classList.add('copy-btn');
-  btn.addEventListener('click', (e) => copyCode(e));
+  btn.type = 'button';
+  btn.textContent = 'Copy';
+  btn.setAttribute('data-copy-button', '');
+  btn.addEventListener('click', () => copyCode(code, btn));
 
-  //container to fix copy button
-  const container = document.createElement('div');
-  container.classList.add('copy-cnt');
-  container.appendChild(btn);
-
-  //add to code block
-  code.classList.add('relative');
-  code.appendChild(container);
+  code.insertAdjacentElement('afterend', btn);
 });
 
 /**
-* @param {MouseEvent} event
+* @param {HTMLElement} codeElement
+* @param {HTMLButtonElement} button
 */
-function copyCode(event) {
-  let codeBlock = getChildByTagName(event.currentTarget.parentElement.parentElement, 'CODE')
-  navigator.clipboard.writeText(codeBlock.innerText)
-  const use = getChildByTagName(getChildByTagName(event.currentTarget, 'svg'), 'use');
-  use.setAttribute('href', '/copy.svg#filled')
+function copyCode(codeElement, button) {
+  const codeBlock = getChildByTagName(codeElement, 'CODE');
+  if (!codeBlock) return;
+
+  navigator.clipboard.writeText(codeBlock.innerText);
+  button.textContent = 'Copied';
   setTimeout(() => {
-    if (use) {
-      use.setAttribute('href', '/copy.svg#empty')
+    if (button.isConnected) {
+      button.textContent = 'Copy';
     }
-  }, 100);
+  }, 1000);
 }
 
 function getChildByTagName(element, tagName) {

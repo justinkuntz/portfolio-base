@@ -76,74 +76,6 @@ main {
   transform: translateY(0);
 }
 
-:where(article, .rich-text) {
-  max-width: 100%;
-}
-
-:where(article, .rich-text) > :first-child {
-  margin-top: 0;
-}
-
-:where(article, .rich-text) > :last-child {
-  margin-bottom: 0;
-}
-
-:where(article, .rich-text) h1,
-:where(article, .rich-text) h2,
-:where(article, .rich-text) h3,
-:where(article, .rich-text) h4,
-:where(article, .rich-text) h5,
-:where(article, .rich-text) h6 {
-  margin: 1.5em 0 0.5em;
-  line-height: 1.2;
-}
-
-:where(article, .rich-text) p,
-:where(article, .rich-text) ul,
-:where(article, .rich-text) ol,
-:where(article, .rich-text) blockquote,
-:where(article, .rich-text) pre,
-:where(article, .rich-text) figure {
-  max-width: 70ch;
-}
-
-:where(article, .rich-text) ul,
-:where(article, .rich-text) ol {
-  padding-left: 1.5rem;
-}
-
-:where(article, .rich-text) blockquote {
-  margin-left: 0;
-  padding-left: 1rem;
-  border-left: 3px solid currentColor;
-}
-
-:where(article, .rich-text) code {
-  font-family: ui-monospace, monospace;
-}
-
-:where(article, .rich-text) :not(pre) > code {
-  padding: 0.1em 0.3em;
-  border: 1px solid currentColor;
-}
-
-:where(article, .rich-text) pre,
-:where(article, .rich-text) pre.astro-code {
-  overflow-x: auto;
-  padding: 1rem;
-  border: 1px solid currentColor;
-  background: transparent;
-}
-
-:where(article, .rich-text) pre code,
-:where(article, .rich-text) pre.astro-code code {
-  display: block;
-  min-width: max-content;
-  background: transparent;
-  border: 0;
-  padding: 0;
-}
-
 .animate,
 .animate.show {
   opacity: 1;
@@ -157,25 +89,6 @@ html #back-to-top {
 
 html.scrolled #back-to-top {
   display: inline-flex;
-}
-
-.copy-cnt {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-}
-
-.copy-btn {
-  padding: 0.25rem;
-  border: 1px solid currentColor;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-}
-
-.copy-svg {
-  width: 1rem;
-  height: 1rem;
 }
 
 .sr-only {
