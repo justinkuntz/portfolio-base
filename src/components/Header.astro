@@ -80,23 +80,16 @@ import { SITE, LINKS } from "@consts";
 
 <style>
   .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    min-height: 4rem;
-    z-index: var(--z-fixed);
     border-bottom: 1px solid var(--surface-border);
-    background: var(--page-background);
   }
 
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
-    min-height: 4rem;
+    padding: 1rem 0;
   }
 
   .header__logo-link {

@@ -59,10 +59,6 @@ const { Content } = shouldRenderContent
 const index = items.findIndex((x) => x.id === project.id);
 const prev = items[(index - 1 + items.length) % items.length];
 const next = items[(index + 1) % items.length];
-const projectHeroLayoutClass =
-  MEDIA.projectHero.layout === "full-bleed"
-    ? "project-hero-image project-hero-image--fullbleed"
-    : "project-hero-image";
 ---
 
 <PageLayout
@@ -111,7 +107,7 @@ const projectHeroLayoutClass =
         </h2>
       </div>
     </div>
-    <div class={projectHeroLayoutClass}>
+    <div class="project-hero-image">
       <Image
         class="project-hero-image__img"
         src={project.data.heroImage}
@@ -180,20 +176,11 @@ const projectHeroLayoutClass =
 
 <style>
   .project-hero {
-    display: grid;
-    gap: 1rem;
     margin-bottom: 1.5rem;
   }
 
-  @media (min-width: 1024px) {
-    .project-hero {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
   .project-hero__title {
-    margin: 0;
-    max-width: var(--measure-title);
+    margin: 0 0 1rem;
   }
 
   .project-hero__links {
@@ -205,33 +192,23 @@ const projectHeroLayoutClass =
 
   .project-hero__desc-title {
     margin: 0;
-    max-inline-size: var(--measure-copy);
-  }
-
-  .project-hero-image {
-    margin-bottom: 1.5rem;
-  }
-
-  .project-hero-image--fullbleed {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
   }
 
   .project-hero-image__img {
     width: 100%;
     display: block;
+    margin-bottom: 1.5rem;
   }
 
   .project-article {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
     margin: 1.5rem 0;
   }
 
+  .project-article__block {
+    margin-bottom: 1.5rem;
+  }
+
   .project-article__heading {
-    text-transform: uppercase;
     margin: 0 0 0.75rem;
     padding-top: 0.75rem;
     border-top: 1px solid var(--surface-border);
@@ -266,15 +243,7 @@ const projectHeroLayoutClass =
   }
 
   .project-content :global(.project-mdx-columns) {
-    width: 100%;
-    column-gap: 1.5rem;
     margin-bottom: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .project-content :global(.project-mdx-columns) {
-      columns: 2;
-    }
   }
 
   .project-content :global(.project-mdx-body) {
@@ -286,18 +255,12 @@ const projectHeroLayoutClass =
   }
 
   .project-content :global(.project-mdx-gallery) {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
-  .project-content :global(.project-mdx-gallery__item--full) {
-    grid-column: span 2 / span 2;
+    display: block;
   }
 
   .project-content :global(.project-mdx-gallery img) {
     display: block;
     width: 100%;
-    margin: 0;
+    margin: 0 0 1rem;
   }
 </style>
