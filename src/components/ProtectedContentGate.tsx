@@ -1,6 +1,5 @@
 import { createSignal } from "solid-js";
 import { PROTECTED_PROJECTS } from "@consts";
-import styles from "./ProtectedContentGate.module.css";
 
 type Mode = "login" | "request";
 
@@ -154,14 +153,13 @@ export default function ProtectedContentGate({ slug }: Props) {
           hidden={mode() !== "login"}
           aria-hidden={mode() !== "login"}
         >
-          <form class={styles.form} onSubmit={submitLogin}>
-            <div class={styles.field}>
+          <form onSubmit={submitLogin}>
+            <div>
               <label for={`gate-email-${slug}`}>
                 {PROTECTED_PROJECTS.EMAIL_LABEL}
               </label>
               <input
                 id={`gate-email-${slug}`}
-                class={styles.input}
                 type="email"
                 name="email"
                 inputmode="email"
@@ -173,13 +171,12 @@ export default function ProtectedContentGate({ slug }: Props) {
               />
             </div>
 
-            <div class={styles.field}>
+            <div>
               <label for={`gate-password-${slug}`}>
                 {PROTECTED_PROJECTS.PASSWORD_LABEL}
               </label>
               <input
                 id={`gate-password-${slug}`}
-                class={styles.input}
                 type="password"
                 name="password"
                 autocomplete="current-password"
@@ -222,14 +219,13 @@ export default function ProtectedContentGate({ slug }: Props) {
           hidden={mode() !== "request"}
           aria-hidden={mode() !== "request"}
         >
-          <form class={styles.form} onSubmit={submitRequest}>
-            <div class={styles.field}>
+          <form onSubmit={submitRequest}>
+            <div>
               <label for={`gate-request-email-${slug}`}>
                 {PROTECTED_PROJECTS.EMAIL_LABEL}
               </label>
               <input
                 id={`gate-request-email-${slug}`}
-                class={styles.input}
                 type="email"
                 name="email"
                 inputmode="email"
@@ -241,13 +237,12 @@ export default function ProtectedContentGate({ slug }: Props) {
               />
             </div>
 
-            <div class={styles.field}>
+            <div>
               <label for={`gate-request-message-${slug}`}>
                 {PROTECTED_PROJECTS.REQUEST_MESSAGE_LABEL}
               </label>
               <textarea
                 id={`gate-request-message-${slug}`}
-                class={`${styles.input} ${styles.textarea}`}
                 name="message"
                 placeholder={PROTECTED_PROJECTS.REQUEST_MESSAGE_PLACEHOLDER}
                 value={requestMessage()}

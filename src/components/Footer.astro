@@ -6,23 +6,23 @@ import { SITE, SOCIALS } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
 ---
 
-<footer class="footer">
+<footer>
   <Container size="xl">
-    <div class="footer__top">
-      <div class="footer__back">
+    <div>
+      <div>
         <BackToTop />
       </div>
     </div>
-    <div class="footer__grid">
-      <div class="footer__copy">
+    <div>
+      <p>
         &copy; {new Date().getFullYear()}
         {SITE.NAME}. All rights reserved. <Link href="/legal/privacy"
           >Privacy Policy</Link
         >
         and
         <Link href="/legal/terms">Terms of Use.</Link>
-      </div>
-      <div class="footer__socials">
+      </p>
+      <p>
         <Button
           href="/rss.xml"
           external
@@ -30,9 +30,8 @@ import BackToTop from "@components/BackToTop.astro";
           size="md"
           iconOnly
           aria-label={`RSS feed for ${SITE.NAME}`}
-          class="footer__social-btn footer__social-btn--rss"
         >
-          <svg class="footer__social-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
             <use href="/ui.svg#rss"></use>
           </svg>
         </Button>
@@ -45,10 +44,10 @@ import BackToTop from "@components/BackToTop.astro";
               size="md"
               iconOnly
               aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
-              class="footer__social-btn"
             >
               <svg
-                class="footer__social-icon"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -57,82 +56,7 @@ import BackToTop from "@components/BackToTop.astro";
             </Button>
           ))
         }
-      </div>
+      </p>
     </div>
   </Container>
 </footer>
-
-<style>
-  .footer {
-    border-top: 1px solid currentColor;
-  }
-
-  .footer__top {
-    padding: 1rem 0;
-  }
-
-  .footer__back {
-    display: flex;
-    justify-content: flex-start;
-  }
-
-  @media (min-width: 640px) {
-    .footer__back {
-      justify-content: flex-end;
-    }
-  }
-
-  .footer__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  @media (min-width: 640px) {
-    .footer__grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .footer__copy {
-    margin: 0;
-    text-align: center;
-  }
-
-  .footer__socials {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    align-items: center;
-    order: 1;
-    justify-content: center;
-  }
-
-  @media (min-width: 640px) {
-    .footer__copy {
-      text-align: left;
-    }
-
-    .footer__socials {
-      order: 2;
-      justify-content: flex-end;
-    }
-  }
-
-  .footer :global(.footer__social-icon) {
-    width: 1rem;
-    height: 1rem;
-    fill: currentColor;
-    stroke: none;
-  }
-
-  .footer :global(.footer__social-btn--rss) {
-    display: inline-flex;
-  }
-
-  .footer :global(.footer__social-btn--rss) :global(.footer__social-icon) {
-    stroke: currentColor;
-    fill: none;
-  }
-</style>

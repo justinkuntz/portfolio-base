@@ -13,22 +13,12 @@ const { projects, layout } = Astro.props as {
   layout === "waterfall" ? (
     <AnimatedProjects projects={projects} client:visible />
   ) : (
-    <div class="homepage-projects__grid">
+    <div>
       {projects.map((entry) => (
-        <div class="homepage-projects__item">
+        <div>
           <ProjectsWaterfall entry={entry} showTags={false} />
         </div>
       ))}
     </div>
   )
 }
-
-<style>
-  .homepage-projects__grid {
-    display: block;
-  }
-
-  .homepage-projects__item {
-    margin-bottom: 1.5rem;
-  }
-</style>

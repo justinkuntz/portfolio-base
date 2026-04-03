@@ -1,9 +1,0 @@
-.gridList {
-  list-style: none;
-  padding: 0;
-  margin: 1.5rem 0 0;
-}
-
-.gridList > li + li {
-  margin-top: 1.5rem;
-}

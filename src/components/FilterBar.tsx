@@ -1,5 +1,4 @@
 import { For } from "solid-js";
-import styles from "./FilterBar.module.css";
 
 type Props = {
   tags: string[];
@@ -10,13 +9,13 @@ type Props = {
 
 export default function FilterBar(props: Props) {
   return (
-    <div class={styles.root}>
+    <div>
       <span>{props.label ?? "Filter:"}</span>
-      <ul class={styles.list}>
+      <ul>
         <For each={props.tags}>
           {(tag) => (
             <li>
-              <label class={styles.control}>
+              <label>
                 <input
                   type="checkbox"
                   checked={props.selectedTags.has(tag)}

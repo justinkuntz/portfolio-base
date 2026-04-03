@@ -2,7 +2,6 @@ import type { CollectionEntry } from "astro:content";
 import { createMemo, createSignal } from "solid-js";
 import ArrowCard from "@components/ArrowCard";
 import FilterBar from "@components/FilterBar";
-import styles from "./Blog.module.css";
 
 type Props = {
   tags: string[];
@@ -36,7 +35,7 @@ export default function Blog({ data, tags }: Props) {
         selectedTags={filter()}
         onToggleTag={toggleTag}
       />
-      <ul class={styles.gridList}>
+      <ul>
         {posts().map((post) => (
           <li>
             <ArrowCard entry={post} />

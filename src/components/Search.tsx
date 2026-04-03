@@ -2,7 +2,6 @@ import type { CollectionEntry } from "astro:content";
 import { createEffect, createSignal } from "solid-js";
 import Fuse from "fuse.js";
 import ArrowCard from "./ArrowCard";
-import styles from "./Search.module.css";
 
 type SearchEntry = CollectionEntry<"blog"> | CollectionEntry<"projects">;
 
@@ -61,7 +60,6 @@ export default function Search({ data }: Props) {
         autocomplete="off"
         spellcheck={false}
         placeholder="What are you looking for?"
-        class={styles.input}
       />
       {query().length >= 2 && (
         <div>
@@ -71,7 +69,7 @@ export default function Search({ data }: Props) {
               : `No results found for "${query()}"`}
           </p>
           {results().length >= 1 && (
-            <ul class={styles.resultsList}>
+            <ul>
               {results().map((result) => (
                 <li>
                   <ArrowCard entry={result} pill={true} />

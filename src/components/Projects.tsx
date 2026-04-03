@@ -2,7 +2,6 @@ import { createMemo, createSignal } from "solid-js";
 import FilterBar from "@components/FilterBar";
 import ProjectsWaterfall from "@components/ProjectsWaterfall";
 import type { ProjectCardEntry } from "@types";
-import styles from "./Projects.module.css";
 
 type Props = {
   tags: string[];
@@ -34,7 +33,7 @@ export default function Projects({ data, tags }: Props) {
         selectedTags={filter()}
         onToggleTag={toggleTag}
       />
-      <div class={styles.grid}>
+      <div>
         {projects().map((project) => (
           <ProjectsWaterfall entry={project} />
         ))}

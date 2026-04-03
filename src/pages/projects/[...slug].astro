@@ -76,40 +76,31 @@ const next = items[(index + 1) % items.length];
   }}
 >
   <Container size="xl">
-    <div class="project-hero">
-      <div class="project-hero__main">
-        <h1 class="project-hero__title">
-          {project.data.title}
-        </h1>
-        {
-          (project.data.demoURL || project.data.repoURL) && (
-            <nav class="project-hero__links">
-              {project.data.demoURL && (
-                <Link href={project.data.demoURL} external>
-                  {project.data.demoText}
-                </Link>
-              )}
-              {project.data.demoURL && project.data.repoURL && (
-                <span>&nbsp;/&nbsp;</span>
-              )}
-              {project.data.repoURL && (
-                <Link href={project.data.repoURL} external>
-                  {project.data.repoText}
-                </Link>
-              )}
-            </nav>
-          )
-        }
-      </div>
-      <div class="project-hero__desc">
-        <h2 class="project-hero__desc-title">
-          {project.data.description}
-        </h2>
-      </div>
-    </div>
-    <div class="project-hero-image">
+    <header>
+      <h1>{project.data.title}</h1>
+      {
+        (project.data.demoURL || project.data.repoURL) && (
+          <nav>
+            {project.data.demoURL && (
+              <Link href={project.data.demoURL} external>
+                {project.data.demoText}
+              </Link>
+            )}
+            {project.data.demoURL && project.data.repoURL && (
+              <span>&nbsp;/&nbsp;</span>
+            )}
+            {project.data.repoURL && (
+              <Link href={project.data.repoURL} external>
+                {project.data.repoText}
+              </Link>
+            )}
+          </nav>
+        )
+      }
+      <p>{project.data.description}</p>
+    </header>
+    <div>
       <Image
-        class="project-hero-image__img"
         src={project.data.heroImage}
         alt={project.data.heroImageAlt}
         widths={[...MEDIA.projectHero.widths]}
@@ -121,46 +112,40 @@ const next = items[(index + 1) % items.length];
         style={`aspect-ratio: ${MEDIA.projectHero.aspectRatio};`}
       />
     </div>
-    <article class="project-article">
+    <article>
       {
         project.data.challenge && (
-          <div class="project-article__block">
-            <h3 class="project-article__heading">Challenge</h3>
-            <p class="project-article__p">{project.data.challenge}</p>
-          </div>
+          <section>
+            <h2>Challenge</h2>
+            <p>{project.data.challenge}</p>
+          </section>
         )
       }
       {
         project.data.solution && (
-          <div class="project-article__block">
-            <h3 class="project-article__heading">Solution</h3>
-            <p class="project-article__p">{project.data.solution}</p>
-          </div>
+          <section>
+            <h2>Solution</h2>
+            <p>{project.data.solution}</p>
+          </section>
         )
       }
       {
         project.data.results && (
-          <div class="project-article__block">
-            <h3 class="project-article__heading">Results</h3>
-            <p class="project-article__p">{project.data.results}</p>
-          </div>
+          <section>
+            <h2>Results</h2>
+            <p>{project.data.results}</p>
+          </section>
         )
       }
-      <div class="project-article__block">
-        <h3 class="project-article__heading">Areas of Expertise</h3>
-        <ul class="project-article__tags">
-          {
-            project.data.tags.map((tag) => (
-              <li class="project-article__tag">{tag}</li>
-            ))
-          }
-        </ul>
-      </div>
+      <section>
+        <h2>Areas of Expertise</h2>
+        <p>{project.data.tags.join(", ")}</p>
+      </section>
     </article>
     {
       shouldRenderContent ? (
         <>
-          <article class="project-content">
+          <article>
             {Content && <Content />}
           </article>
           <PostNav prev={prev} next={next} topSpacing="md" />
@@ -173,94 +158,3 @@ const next = items[(index + 1) % items.length];
     }
   </Container>
 </PageLayout>
-
-<style>
-  .project-hero {
-    margin-bottom: 1.5rem;
-  }
-
-  .project-hero__title {
-    margin: 0 0 1rem;
-  }
-
-  .project-hero__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    margin-top: 0.75rem;
-  }
-
-  .project-hero__desc-title {
-    margin: 0;
-  }
-
-  .project-hero-image__img {
-    width: 100%;
-    display: block;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-article {
-    margin: 1.5rem 0;
-  }
-
-  .project-article__block {
-    margin-bottom: 1.5rem;
-  }
-
-  .project-article__heading {
-    margin: 0 0 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid currentColor;
-  }
-
-  .project-article__p {
-    margin: 0;
-  }
-
-  .project-article__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .project-article__tag {
-    padding: 0.125rem 0.375rem;
-    border: 1px solid currentColor;
-  }
-
-  .project-content {
-    margin-top: 2rem;
-  }
-
-  .project-content :global(.project-mdx-lead) {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    max-width: 70ch;
-  }
-
-  .project-content :global(.project-mdx-columns) {
-    margin-bottom: 1.5rem;
-  }
-
-  .project-content :global(.project-mdx-body) {
-    max-width: 65ch;
-  }
-
-  .project-content :global(.project-mdx-body--first) {
-    margin-top: 0;
-  }
-
-  .project-content :global(.project-mdx-gallery) {
-    display: block;
-  }
-
-  .project-content :global(.project-mdx-gallery img) {
-    display: block;
-    width: 100%;
-    margin: 0 0 1rem;
-  }
-</style>

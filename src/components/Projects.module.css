@@ -1,7 +1,0 @@
-.grid {
-  margin-top: 1.5rem;
-}
-
-.grid > * + * {
-  margin-top: 1.5rem;
-}
