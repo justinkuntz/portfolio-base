@@ -1,42 +1,12 @@
 .root {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: block;
   gap: 1.5rem;
-  width: 100%;
-  align-items: stretch;
 }
 
-.grid > * {
-  min-width: 0;
-  width: 100%;
-  max-width: none;
-  justify-self: stretch;
-}
-
-@media (min-width: 768px) {
-  .grid--2,
-  .grid--3,
-  .grid--4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .grid--3,
-  .grid--4 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1280px) {
-  .grid--4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.grid > * + * {
+  margin-top: 1.5rem;
 }
