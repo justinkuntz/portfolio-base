@@ -300,7 +300,7 @@ The SEO pipeline is centralized so users can configure metadata in one place and
 
 - `src/config/seo.ts` controls the global site defaults
 - `src/lib/seo.ts` resolves canonical URLs, title templates, OG/Twitter meta, and structured data
-- `src/styles/theme.css` and the active theme do not affect metadata directly, but the generated placeholder OG images use the same Grogu visual direction
+- the baseline stylesheet does not affect metadata directly, but the generated placeholder OG images use the same Grogu visual direction
 - `src/pages/og/[...slug].png.ts` generates static social preview images at build time for pages, legal docs, blog posts, and project entries
 - `generatedImage: true` in `PageLayout` SEO props opts a route into a route-specific generated OG placeholder
 - `npm run generate:placeholders` creates starter blog hero PNGs next to each blog entry
