@@ -1,11 +1,6 @@
 ---
-/**
- * Button component: primary, secondary, ghost, outline, icon-only.
- * Renders <a> when href is set, otherwise <button>.
- */
+/* Renders <a> when href is set, otherwise <button>. */
 type Props = {
-  variant?: "primary" | "secondary" | "ghost" | "outline";
-  size?: "sm" | "md" | "lg";
   href?: string;
   iconLeft?: "arrow" | "arrow-left";
   iconRight?: "arrow" | "arrow-left";
@@ -17,8 +12,6 @@ type Props = {
 };
 
 const {
-  variant = "primary",
-  size = "md",
   href,
   iconLeft,
   iconRight,

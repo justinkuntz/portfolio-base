@@ -11,7 +11,6 @@ const reasonParam = searchParams.get("reason");
 const statusCopy = (() => {
   if (statusParam === "success") {
     return {
-      tone: "success",
       text: "Transmission received. Grogu will review it between training sessions.",
     };
   }
@@ -20,7 +19,7 @@ const statusCopy = (() => {
       reasonParam === "rate-limit"
         ? "You're sending messages a bit too quickly. Please wait a moment and try again."
         : "We couldn't send your message. Please try again in a moment.";
-    return { tone: "error", text };
+    return { text };
   }
   return null;
 })();
@@ -123,7 +122,7 @@ const statusCopy = (() => {
                 By submitting you agree to receive a reply at the email address
                 you provided.
               </p>
-              <Button type="submit" variant="primary" size="lg">
+              <Button type="submit">
                 <span data-submit-text>Send transmission</span>
               </Button>
               <p
@@ -153,17 +152,15 @@ const statusCopy = (() => {
     }
   }
 
-  function setStatus(message: string, variant: string) {
+  function setStatus(message: string) {
     if (!status) return;
     status.textContent = message;
-    status.dataset.variant = variant;
     status.hidden = false;
   }
 
   function clearStatus() {
     if (!status) return;
     status.textContent = "";
-    status.removeAttribute("data-variant");
     status.hidden = true;
   }
 
@@ -177,10 +174,7 @@ const statusCopy = (() => {
     const message = (formData.get("message") || "").toString().trim();
 
     if (message.length < 20) {
-      setStatus(
-        "Please include at least 20 characters so I have context.",
-        "error",
-      );
+      setStatus("Please include at least 20 characters so I have context.");
       return;
     }
 
@@ -208,11 +202,11 @@ const statusCopy = (() => {
 
       form.reset();
       setTimestamp();
-      setStatus(payload?.message || "Thanks for reaching out!", "success");
+      setStatus(payload?.message || "Thanks for reaching out!");
     } catch (error) {
       const fallback =
         "We couldn't send your message. Please try again in a moment.";
-      setStatus(error instanceof Error ? error.message : fallback, "error");
+      setStatus(error instanceof Error ? error.message : fallback);
     } finally {
       submitButton.disabled = false;
     }

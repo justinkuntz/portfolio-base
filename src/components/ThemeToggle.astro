@@ -1,11 +1,10 @@
 ---
 type Props = {
   id?: string;
-  class?: string;
   size?: "md" | "lg";
 };
 
-const { id, class: className, size = "md" } = Astro.props;
+const { id, size = "md" } = Astro.props;
 const maskId = `${id ?? `theme-toggle-${size}`}-mask`;
 const glyphSize = size === "lg" ? 20 : 18;
 ---
@@ -13,7 +12,6 @@ const glyphSize = size === "lg" ? 20 : 18;
 <button
   id={id}
   type="button"
-  class={className}
   data-theme-toggle
   data-theme-toggle-ready="false"
   data-color-mode="light"

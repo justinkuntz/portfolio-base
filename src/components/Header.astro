@@ -21,8 +21,6 @@ import { SITE, LINKS } from "@consts";
             LINKS.map((LINK) => (
               <Button
                 href={LINK.HREF}
-                variant={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "primary" : "ghost"}
-                size="lg"
                 aria-current={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "page" : undefined}
               >
                 {LINK.TEXT}
@@ -33,8 +31,6 @@ import { SITE, LINKS } from "@consts";
       <div class="header-actions">
           <Button
             href="/search"
-            variant={pathname === "/search" || "/" + subpath?.[0] === "search" ? "primary" : "ghost"}
-            size="md"
             iconOnly
             aria-label={`Search blog posts and projects on ${SITE.NAME}`}
             class="desktop-only"
@@ -52,8 +48,6 @@ import { SITE, LINKS } from "@consts";
           <Button
             id="header-drawer-button"
             type="button"
-            variant="ghost"
-            size="md"
             iconOnly
             aria-controls="drawer"
             aria-expanded="false"

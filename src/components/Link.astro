@@ -2,11 +2,10 @@
 type Props = {
   href: string;
   external?: boolean;
-  underline?: boolean;
   class?: string;
 };
 
-const { href, external, underline = true, class: className, ...rest } = Astro.props;
+const { href, external, class: className, ...rest } = Astro.props;
 ---
 
 <a
@@ -14,7 +13,6 @@ const { href, external, underline = true, class: className, ...rest } = Astro.pr
   target={external ? "_blank" : "_self"}
   rel={external ? "noopener noreferrer" : undefined}
   class={className}
-  style={underline ? undefined : "text-decoration:none"}
   {...rest}
 >
   <slot />

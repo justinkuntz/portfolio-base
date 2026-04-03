@@ -20,8 +20,6 @@ const subpath = pathname.match(/[^/]+/g);
       LINKS.map((LINK) => (
         <Button
           href={LINK.HREF}
-          variant={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "primary" : "ghost"}
-          size="lg"
           aria-current={pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF ? "page" : undefined}
         >
           {LINK.TEXT}
@@ -32,8 +30,6 @@ const subpath = pathname.match(/[^/]+/g);
   <div>
     <Button
       href="/search"
-      variant={pathname === "/search" || "/" + subpath?.[0] === "search" ? "primary" : "ghost"}
-      size="md"
       iconOnly
       aria-label={`Search blog posts and projects on ${SITE.NAME}`}
     >
@@ -44,8 +40,6 @@ const subpath = pathname.match(/[^/]+/g);
     <Button
       href="/rss.xml"
       external
-      variant="ghost"
-      size="md"
       iconOnly
       aria-label={`RSS feed for ${SITE.NAME}`}
     >
